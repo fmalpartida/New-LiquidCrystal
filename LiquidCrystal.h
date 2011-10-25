@@ -54,6 +54,8 @@ public:
 		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
   LiquidCrystal(uint8_t rs, uint8_t enable,
 		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
+   
+  LiquidCrystal ( );
 
   void init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
 	    uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
@@ -78,29 +80,36 @@ public:
   void noAutoscroll();
 
   void createChar(uint8_t, uint8_t[]);
-  void setCursor(uint8_t, uint8_t); 
-  virtual size_t write(uint8_t);
+  void setCursor(uint8_t, uint8_t);
+   
+  size_t write(uint8_t);
   void command(uint8_t);
-  
+   
+  virtual void send(uint8_t, uint8_t);
+  virtual void write4bits(uint8_t);
+  virtual void pulseEnable();
+
   using Print::write;
+
+protected: 
+  uint8_t _numlines;
+  uint8_t _displayfunction;
+  uint8_t _displaycontrol;
+  uint8_t _displaymode;
+   
 private:
-  void send(uint8_t, uint8_t);
-  void write4bits(uint8_t);
   void write8bits(uint8_t);
-  void pulseEnable();
 
   uint8_t _rs_pin; // LOW: command.  HIGH: character.
   uint8_t _rw_pin; // LOW: write to LCD.  HIGH: read from LCD.
   uint8_t _enable_pin; // activated by a HIGH pulse.
   uint8_t _data_pins[8];
 
-  uint8_t _displayfunction;
-  uint8_t _displaycontrol;
-  uint8_t _displaymode;
 
+  uint8_t _currline;
   uint8_t _initialized;
 
-  uint8_t _numlines,_currline;
+
 };
 
 #endif

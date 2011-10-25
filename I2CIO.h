@@ -27,6 +27,7 @@
 
 #ifndef _I2CIO_H_
 #define _I2CIO_H_
+
 #include <inttypes.h>
 
 #define _I2CIO_VERSION "1.0.0"
