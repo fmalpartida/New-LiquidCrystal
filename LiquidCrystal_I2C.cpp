@@ -1,10 +1,9 @@
 #include "Arduino.h" 
-extern "C" {
-#include <inttypes.h>
-#include "LiquidCrystal_I2C.h"
-#include "I2CIO.h"
-}
 
+#include <inttypes.h>
+#include "I2CIO.h"
+#include "LiquidCrystal.h"
+#include "LiquidCrystal_I2C.h"
 
 
 // When the display powers up, it is configured as follows:
@@ -26,17 +25,16 @@ extern "C" {
 // can't assume that its in that state when a sketch starts (and the
 // LiquidCrystal constructor is called).
 
-LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows)
+LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
 {
   _Addr = lcd_Addr;
-  _cols = lcd_cols;
-  _rows = lcd_rows;
+
   _backlightval = LCD_NOBACKLIGHT;
 }
 
 int LiquidCrystal_I2C::init()
 {
-	return ( init_priv() );
+	return ( init_priv( ) );
 }
 
 int LiquidCrystal_I2C::init_priv()
@@ -48,7 +46,7 @@ int LiquidCrystal_I2C::init_priv()
    {
       _i2cio.portMode ( OUTPUT );
       _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
-      begin(_cols, _rows);
+      //begin(_cols, _rows);
       status = 1;
    }
    return ( status );
@@ -56,6 +54,11 @@ int LiquidCrystal_I2C::init_priv()
 
 void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) 
 {
+   _cols = cols;
+   _rows = lines;
+   
+   init();
+   
 	if (lines > 1) 
    {
 		_displayfunction |= LCD_2LINE;
@@ -166,9 +169,6 @@ void LiquidCrystal_I2C::backlight(void)
 	_backlightval=LCD_BACKLIGHT;
 	expanderWrite(0);
 }
-
-
-
 
 
 /************ low level data pushing commands **********/

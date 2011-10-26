@@ -44,72 +44,46 @@
 
 class LiquidCrystal : public Print {
 public:
-  LiquidCrystal(uint8_t rs, uint8_t enable,
-		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-		uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
-  LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
-		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-		uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
-  LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
-		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
-  LiquidCrystal(uint8_t rs, uint8_t enable,
-		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
    
-  LiquidCrystal ( );
-
-  void init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
-	    uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-	    uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
-    
-  virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);
-
-  void clear();
-  void home();
-
-  void noDisplay();
-  void display();
-  void noBlink();
-  void blink();
-  void noCursor();
-  void cursor();
-  void scrollDisplayLeft();
-  void scrollDisplayRight();
-  void leftToRight();
-  void rightToLeft();
-  void autoscroll();
-  void noAutoscroll();
-
-  void createChar(uint8_t, uint8_t[]);
-  void setCursor(uint8_t, uint8_t);
+   LiquidCrystal ( );
    
-  size_t write(uint8_t);
-  void command(uint8_t);
+   virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS) = 0;
    
-  virtual void send(uint8_t, uint8_t);
-  virtual void write4bits(uint8_t);
-  virtual void pulseEnable();
-
-  using Print::write;
-
+   void clear();
+   void home();
+   void noDisplay();
+   void display();
+   void noBlink();
+   void blink();
+   void noCursor();
+   void cursor();
+   void scrollDisplayLeft();
+   void scrollDisplayRight();
+   void leftToRight();
+   void rightToLeft();
+   void autoscroll();
+   void noAutoscroll();
+   
+   void createChar(uint8_t, uint8_t[]);
+   void setCursor(uint8_t, uint8_t);
+   
+   void command(uint8_t);
+   size_t write(uint8_t);
+   
+   virtual void send(uint8_t, uint8_t) = 0;
+   virtual void write4bits(uint8_t) = 0;
+   //virtual void pulseEnable() = 0;
+   
+   using Print::write;
+   
 protected: 
-  uint8_t _numlines;
-  uint8_t _displayfunction;
-  uint8_t _displaycontrol;
-  uint8_t _displaymode;
+   uint8_t _displayfunction;
+   uint8_t _displaycontrol;
+   uint8_t _displaymode;
+   uint8_t _numlines;
    
 private:
-  void write8bits(uint8_t);
-
-  uint8_t _rs_pin; // LOW: command.  HIGH: character.
-  uint8_t _rw_pin; // LOW: write to LCD.  HIGH: read from LCD.
-  uint8_t _enable_pin; // activated by a HIGH pulse.
-  uint8_t _data_pins[8];
-
-
-  uint8_t _currline;
-  uint8_t _initialized;
-
-
+   
 };
 
 #endif
