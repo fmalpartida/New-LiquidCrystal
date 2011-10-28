@@ -33,7 +33,7 @@
 #define LiquidCrystal_4bit_h
 
 #include <inttypes.h>
-#include "LiquidCrystal.h"
+#include <LiquidCrystal.h>
 
 
 class LiquidCrystal_4bit : public LiquidCrystal

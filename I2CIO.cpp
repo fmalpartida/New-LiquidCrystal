@@ -25,11 +25,10 @@
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
-#include "I2CIO.h"
 #include <inttypes.h>
 #include <Arduino.h>
 #include <Wire.h>
-
+#include <I2CIO.h>
 
 // CLASS VARIABLES
 // ---------------------------------------------------------------------------

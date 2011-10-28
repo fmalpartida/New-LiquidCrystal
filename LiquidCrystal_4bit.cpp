@@ -32,8 +32,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
-#include "Arduino.h"
-#include "LiquidCrystal_4bit.h"
+#include <Arduino.h>
+#include <LiquidCrystal_4bit.h>
 
 // When the display powers up, it is configured as follows:
 //

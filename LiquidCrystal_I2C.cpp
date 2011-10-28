@@ -29,11 +29,11 @@
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
-#include "Arduino.h" 
 #include <inttypes.h>
-#include "I2CIO.h"
-#include "LiquidCrystal.h"
-#include "LiquidCrystal_I2C.h"
+#include <Arduino.h>
+#include <I2CIO.h>
+#include <LiquidCrystal.h>
+#include <LiquidCrystal_I2C.h>
 
 
 // When the display powers up, it is configured as follows:

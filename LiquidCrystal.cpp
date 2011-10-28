@@ -37,8 +37,8 @@
 #include <string.h>
 #include <inttypes.h>
 
-#include "Arduino.h"
-#include "LiquidCrystal.h"
+#include <Arduino.h>
+#include <LiquidCrystal.h>
 
 // CLASS CONSTRUCTORS
 // ---------------------------------------------------------------------------

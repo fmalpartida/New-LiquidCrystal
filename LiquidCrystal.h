@@ -38,7 +38,7 @@
 #define LiquidCrystal_h
 
 #include <inttypes.h>
-#include "Print.h"
+#include <Print.h>
 
 
 /*!

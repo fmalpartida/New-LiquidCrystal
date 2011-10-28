@@ -31,13 +31,11 @@
 // ---------------------------------------------------------------------------
 #ifndef LiquidCrystal_I2C_h
 #define LiquidCrystal_I2C_h
-
 #include <inttypes.h>
-#include "Print.h"
-#include "LiquidCrystal.h"
+#include <Print.h>
 #include <Wire.h>
 #include <I2CIO.h>
-
+#include <LiquidCrystal.h>
 
 // flags for backlight control
 #define LCD_BACKLIGHT   0x00
