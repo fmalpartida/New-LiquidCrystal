@@ -98,7 +98,7 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    _cols = cols;
    _rows = lines;
    
-   init();
+   init();     // Initialise the I2C expander interface
    
 	if (lines > 1) 
    {
@@ -161,6 +161,25 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 }
 
 
+// User commands - users can expand this section
+//----------------------------------------------------------------------------
+
+// Turn the (optional) backlight off/on
+void LiquidCrystal_I2C::noBacklight(void) 
+{
+	_backlightval=LCD_NOBACKLIGHT;
+	expanderWrite(0);
+}
+
+void LiquidCrystal_I2C::backlight(void) 
+{
+	_backlightval=LCD_BACKLIGHT;
+	expanderWrite(0);
+}
+
+// PRIVATE METHODS
+// ---------------------------------------------------------------------------
+
 // low level data pushing commands
 //----------------------------------------------------------------------------
 
@@ -169,7 +188,7 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 void LiquidCrystal_I2C::send(uint8_t value, uint8_t mode) 
 {
    // Is it a command or data
-   // ------------------------------------------------------------------------
+   // -----------------------
    if ( mode == HIGH )
    {
       mode = Rs;
@@ -208,21 +227,6 @@ void LiquidCrystal_I2C::expanderWrite(uint8_t _data)
    _i2cio.write ( _data );
 }
 
-// User commands - users can expand this section
-//----------------------------------------------------------------------------
-
-// Turn the (optional) backlight off/on
-void LiquidCrystal_I2C::noBacklight(void) 
-{
-	_backlightval=LCD_NOBACKLIGHT;
-	expanderWrite(0);
-}
-
-void LiquidCrystal_I2C::backlight(void) 
-{
-	_backlightval=LCD_BACKLIGHT;
-	expanderWrite(0);
-}
 
 
 

@@ -44,7 +44,7 @@
 #define LCD_NOBACKLIGHT 0x80
 
 /*!
-   @note These definitions will have to be changed should the IOExpander be 
+   @warning These definitions will have to be changed should the IOExpander be 
    connected differently to this default.
 */
 

@@ -29,6 +29,7 @@
 //
 // This library is only compatible with Arduino's SDK version 1.0
 //
+// @version API 1.0.0
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
@@ -39,11 +40,17 @@
 #include "Arduino.h"
 #include "LiquidCrystal.h"
 
+// CLASS CONSTRUCTORS
+// ---------------------------------------------------------------------------
+
 // Constructor
 LiquidCrystal::LiquidCrystal () 
 {
 
 }
+
+// PUBLIC METHODS
+// ---------------------------------------------------------------------------
 
 // Common LCD Commands
 // ---------------------------------------------------------------------------
@@ -150,12 +157,12 @@ void LiquidCrystal::noAutoscroll(void)
 // Write to CGRAM of new characters
 void LiquidCrystal::createChar(uint8_t location, uint8_t charmap[]) 
 {
-   location &= 0x7;                // we only have 8 locations 0-7
+   location &= 0x7;            // we only have 8 locations 0-7
 
    command(LCD_SETCGRAMADDR | (location << 3));
    for (int i=0; i<8; i++) 
    {
-      write(charmap[i]);           // call the virtual write method
+      write(charmap[i]);      // call the virtual write method
    }
 }
 

@@ -29,6 +29,8 @@
 //
 // This library is only compatible with Arduino's SDK version 1.0
 //
+// @version API 1.0.0
+//
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
@@ -41,7 +43,8 @@
 
 /*!
     @defined 
-    @abstract   All these definitions shouldn't be used unless you are writing a driver.
+    @abstract   All these definitions shouldn't be used unless you are writing 
+    a driver.
     @discussion All these definitions are for driver implementation only and
     shouldn't be used by applications.
 */
@@ -111,8 +114,8 @@ public:
     this base class to implement the internals of how the LCD is initialized
     and configured.
     
-    @param      cols: the number of columns that the display has
-    @param      rows: the number of rows that the display has
+    @param      cols the number of columns that the display has
+    @param      rows the number of rows that the display has
     */
    virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS) = 0;
    
@@ -250,7 +253,8 @@ public:
     space. If the current text direction is left-to-right (the default), 
     the display scrolls to the left; if the current direction is right-to-left, 
     the display scrolls to the right. 
-    This has the effect of outputting each new character to the same location on the LCD.
+    This has the effect of outputting each new character to the same location on 
+    the LCD.
     
     @param      none
     */
@@ -290,8 +294,8 @@ public:
     @discussion Sets the position of the LCD cursor. Set the location at which 
     subsequent text written to the LCD will be displayed.
 
-    @param      col: LCD column
-    @param      row: LCD row - line.
+    @param      col LCD column
+    @param      row LCD row - line.
     */
    void setCursor(uint8_t col, uint8_t row);
 
@@ -305,7 +309,7 @@ public:
     This command shouldn't be used to drive the LCD, only to implement any other
     feature that is not available on this library.
     
-    @param      value: Command value to send to the LCD.
+    @param      value Command value to send to the LCD.
     */
    void command(uint8_t value);
 
@@ -318,7 +322,7 @@ public:
     This is the virtual write method, implemented in the Print class, therefore
     all Print class methods will end up calling this method.
 
-    @param      value: Value to write to the LCD.
+    @param      value Value to write to the LCD.
     */
    size_t write(uint8_t value);
    
@@ -331,8 +335,8 @@ public:
     
     Users should never call this method.
     
-    @param      value: Value to send to the LCD.
-    @result     mode: LOW - write to the LCD CGRAM, HIGH - write a command to
+    @param      value Value to send to the LCD.
+    @result     mode LOW - write to the LCD CGRAM, HIGH - write a command to
     the LCD.
     */
    virtual void send(uint8_t value, uint8_t mode) = 0;

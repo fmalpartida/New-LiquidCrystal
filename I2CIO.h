@@ -21,6 +21,7 @@
 //
 // This library is only compatible with Arduino's SDK version 1.0
 //
+// @version API 1.0.0
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------

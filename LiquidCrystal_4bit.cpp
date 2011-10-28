@@ -96,7 +96,8 @@ void LiquidCrystal_4bit::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8
    uint8_t i;
    
    // Initialize the IO pins
-   // -------------------------------------------------------------------------
+   // -----------------------
+   
    _rs_pin = rs;
    _rw_pin = rw;
    _enable_pin = enable;
@@ -111,14 +112,16 @@ void LiquidCrystal_4bit::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8
    _data_pins[7] = d7;
    
    // Initialize the IO port direction to OUTPUT
-   // -------------------------------------------------------------------------
+   // ------------------------------------------
+   
    for ( uint8_t i = 0; i < 4; i++ )
    {
       pinMode ( _data_pins[i], OUTPUT );
    }
    
    // Initialize the rest of the ports if it is an 8bit controlled LCD
-   // -------------------------------------------------------------------------
+   // ----------------------------------------------------------------
+   
    if ( !fourbitmode )
    {
       for ( uint8_t i = 4; i < 7; i++ )
@@ -158,7 +161,7 @@ void LiquidCrystal_4bit::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    _numlines = lines;
    
    // for some 1 line displays you can select a 10 pixel high font
-   // ---------------------------------------------------------------------------
+   // ------------------------------------------------------------
    if ((dotsize != 0) && (lines == 1)) 
    {
       _displayfunction |= LCD_5x10DOTS;
@@ -166,7 +169,8 @@ void LiquidCrystal_4bit::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    
    // SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
    // according to datasheet, we need at least 40ms after power rises above 2.7V
-   // before sending commands. Arduino can turn on way before 4.5V so we'll wait 50
+   // before sending commands. Arduino can turn on way before 4.5V so we'll wait 
+   // 50
    // ---------------------------------------------------------------------------
    delayMicroseconds(50000); 
    
@@ -180,7 +184,7 @@ void LiquidCrystal_4bit::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    }
    
    //put the LCD into 4 bit or 8 bit mode
-   // ---------------------------------------------------------------------------
+   // -------------------------------------
    if (! (_displayfunction & LCD_8BITMODE)) 
    {
       // this is according to the hitachi HD44780 datasheet
@@ -237,7 +241,6 @@ void LiquidCrystal_4bit::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 
 /************ low level data pushing commands **********/
 
-// write either command or data, with automatic 4/8-bit selection
 // send
 void LiquidCrystal_4bit::send(uint8_t value, uint8_t mode) 
 {

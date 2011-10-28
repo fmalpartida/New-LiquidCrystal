@@ -86,8 +86,8 @@ public:
     
     Users should never call this method.
     
-    @param      value: Value to send to the LCD.
-    @result     mode: LOW - write to the LCD CGRAM, HIGH - write a command to
+    @param      value Value to send to the LCD.
+    @result     mode LOW - write to the LCD CGRAM, HIGH - write a command to
     the LCD.
     */
    virtual void send(uint8_t value, uint8_t mode);

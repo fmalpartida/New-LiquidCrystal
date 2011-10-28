@@ -21,13 +21,12 @@
 //
 // This library is only compatible with Arduino's SDK version 1.0
 //
+// @version API 1.0.0
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
-extern "C" {
 #include "I2CIO.h"
 #include <inttypes.h>
-}
 #include <Arduino.h>
 #include <Wire.h>
 
