@@ -93,10 +93,15 @@ public:
     @abstract   LCD SHIFT REGISTER constructors.
     @discussion Defines the pin assignment that the LCD will have.
     The constructor does not initialize the LCD. Assuming 1 line 8 pixel high 
-    font
+    font.
+    
+    @param srdata   pin for shiftregister data line.
+    @param srclock  pin for shiftregister clock line.
+    @param enable   enable pin for the shiftregister.
     */
    LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, uint8_t enable );
-   
+
+
    // Set nr. of lines, assume 8 pixel high font
    LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, uint8_t enable, 
                       uint8_t lines );
@@ -111,7 +116,7 @@ public:
     @abstract   LCD initialization.
     @discussion Initializes the LCD to a given size (col, row). This methods
     initializes the LCD, therefore, it MUST be called prior to using any other
-    method from this class.
+    method from this class or parent class.
     
     @param      cols: the number of columns that the display has
     @param      rows: the number of rows that the display has

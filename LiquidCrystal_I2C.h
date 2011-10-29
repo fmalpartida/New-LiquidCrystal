@@ -88,7 +88,7 @@ public:
     @abstract   LCD initialization.
     @discussion Initializes the LCD to a given size (col, row). This methods
     initializes the LCD, therefore, it MUST be called prior to using any other
-    method from this class.
+    method from this class or parent class.
     
     @param      cols: the number of columns that the display has
     @param      rows: the number of rows that the display has
