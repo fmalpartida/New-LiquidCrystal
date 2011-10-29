@@ -32,7 +32,7 @@
 #ifndef LiquidCrystal_I2C_h
 #define LiquidCrystal_I2C_h
 #include <inttypes.h>
-#include <Print.h>HD44780
+#include <Print.h>
 #include <Wire.h>
 #include <I2CIO.h>
 #include <LCD.h>

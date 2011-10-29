@@ -134,10 +134,10 @@ public:
    
    
 private:
-   uint8_t _shadow;
-   uint8_t _dirMask;
-   uint8_t _i2cAddr;
-   bool    _initialised;
+   uint8_t _shadow;      // Shadow output
+   uint8_t _dirMask;     // Direction mask
+   uint8_t _i2cAddr;     // I2C address
+   bool    _initialised; // Initialised object
    
 };
 

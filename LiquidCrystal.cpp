@@ -114,7 +114,7 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
    // Initialize the IO port direction to OUTPUT
    // ------------------------------------------
    
-   for ( uint8_t i = 0; i < 4; i++ )
+   for ( i = 0; i < 4; i++ )
    {
       pinMode ( _data_pins[i], OUTPUT );
    }
@@ -124,7 +124,7 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
    
    if ( !fourbitmode )
    {
-      for ( uint8_t i = 4; i < 7; i++ )
+      for ( i = 4; i < 7; i++ )
       {
          pinMode ( _data_pins[i], OUTPUT );
       }
