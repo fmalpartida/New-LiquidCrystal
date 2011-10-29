@@ -32,25 +32,25 @@
 #ifndef LiquidCrystal_I2C_h
 #define LiquidCrystal_I2C_h
 #include <inttypes.h>
-#include <Print.h>
+#include <Print.h>HD44780
 #include <Wire.h>
 #include <I2CIO.h>
-#include <LiquidCrystal.h>
+#include <LCD.h>
 
 // flags for backlight control
 #define LCD_BACKLIGHT   0x00
 #define LCD_NOBACKLIGHT 0x80
 
 /*!
-   @warning These definitions will have to be changed should the IOExpander be 
-   connected differently to this default.
-*/
+ @warning These definitions will have to be changed should the IOExpander be 
+ connected differently to this default.
+ */
 
 /*!
-    @defined 
-    @abstract   Enable bit of the LCD
-    @discussion Defines the IO of the expander connected to the LCD Enable
-*/
+ @defined 
+ @abstract   Enable bit of the LCD
+ @discussion Defines the IO of the expander connected to the LCD Enable
+ */
 #define En B01000000  // Enable bit
 
 /*!
@@ -68,7 +68,7 @@
 #define Rs B00010000  // Register select bit
 
 
-class LiquidCrystal_I2C : public LiquidCrystal 
+class LiquidCrystal_I2C : public LCD 
 {
 public:
    
@@ -120,7 +120,7 @@ public:
     @param      none
     */
    void noBacklight();
-
+   
    /*!
     @function
     @abstract   Switch-on the LCD backlight.
@@ -130,8 +130,8 @@ public:
     @param      none
     */
    void backlight();
-
-
+   
+   
 private:
    
    /*!

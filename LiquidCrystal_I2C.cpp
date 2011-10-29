@@ -32,7 +32,6 @@
 #include <inttypes.h>
 #include <Arduino.h>
 #include <I2CIO.h>
-#include <LiquidCrystal.h>
 #include <LiquidCrystal_I2C.h>
 
 
@@ -60,9 +59,9 @@
 // ---------------------------------------------------------------------------
 LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
 {
-  _Addr = lcd_Addr;
-
-  _backlightval = LCD_NOBACKLIGHT;
+   _Addr = lcd_Addr;
+   
+   _backlightval = LCD_NOBACKLIGHT;
 }
 
 
@@ -105,21 +104,21 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 		_displayfunction |= LCD_2LINE;
 	}
 	_numlines = lines;
-
+   
 	// for some 1 line displays you can select a 10 pixel high font
 	if ((dotsize != 0) && (lines == 1)) {
 		_displayfunction |= LCD_5x10DOTS;
 	}
-
+   
 	// SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
 	// according to datasheet, we need at least 40ms after power rises above 2.7V
 	// before sending commands. Arduino can turn on way before 4.5V so we'll wait 50
 	delayMicroseconds(50000); 
-  
+   
 	// Now we pull both RS and R/W low to begin commands
 	expanderWrite(_backlightval);	// reset expander and turn backlight off (Bit 8 =1)
 	delay(1000);
-
+   
   	//put the LCD into 4 bit mode
 	// this is according to the hitachi HD44780 datasheet
 	// figure 24, pg 46
@@ -138,8 +137,8 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 	
 	// finally, set to 4-bit interface
 	write4bits(0x02); 
-
-
+   
+   
 	// set # lines, font size, etc.
 	command(LCD_FUNCTIONSET | _displayfunction);  
 	
@@ -157,7 +156,7 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 	command(LCD_ENTRYMODESET | _displaymode);
 	
 	home();
-  
+   
 }
 
 
@@ -193,7 +192,7 @@ void LiquidCrystal_I2C::send(uint8_t value, uint8_t mode)
    {
       mode = Rs;
    }
-
+   
 	uint8_t highnib=value>>4;
 	uint8_t lownib=value & 0x0F;
    
@@ -230,4 +229,3 @@ void LiquidCrystal_I2C::expanderWrite(uint8_t _data)
 
 
 
-	

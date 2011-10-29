@@ -1,9 +1,8 @@
 #include <Wire.h>
 #include <LiquidCrystal.h>
-#include <LiquidCrystal_4bit.h>
 
 
-LiquidCrystal_4bit lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 #define   CONTRAST_PIN   9
 #define   BACKLIGHT_PIN  7
 #define   CONTRAST       125
