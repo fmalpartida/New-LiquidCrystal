@@ -178,12 +178,17 @@ void LCD::command(uint8_t value)
 }
 
 #if (ARDUINO <  100)
-void LCD::write(uint8_t value) 
+void LCD::write(uint8_t value)
+{
+   send(value, HIGH);
+}
 #else
 size_t LCD::write(uint8_t value) 
-#endif
 {
    send(value, HIGH);
    
    return 1;           // assume OK
 }
+#endif
+
+//void LCD::send(uint8_t value, uint8_t mode) { }

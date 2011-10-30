@@ -116,7 +116,11 @@ public:
     @param      cols the number of columns that the display has
     @param      rows the number of rows that the display has
     */
+#if (ARDUINO <  100)
+   virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS) { };
+#else
    virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS) = 0;
+#endif
    
    /*!
     @function
@@ -324,7 +328,7 @@ public:
     @param      value Value to write to the LCD.
     */
 #if (ARDUINO <  100)
-   virtual oid write(uint8_t value);
+   virtual void write(uint8_t value);
 #else
    virtual size_t write(uint8_t value);
 #endif
@@ -343,9 +347,17 @@ public:
     @result     mode LOW - write to the LCD CGRAM, HIGH - write a command to
     the LCD.
     */
+#if (ARDUINO <  100)
+   virtual void send(uint8_t value, uint8_t mode) { };
+#else
    virtual void send(uint8_t value, uint8_t mode) = 0;
+#endif
    
+#if (ARDUINO <  100)
    using Print::write;
+#else
+   using Print::write;
+#endif   
    
 protected:
    // Internal LCD variables to control the LCD shared between all derived

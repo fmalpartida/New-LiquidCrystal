@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <Wire.h>
-#include <LiquidCrystal.h>
+#include <LCD.h>
 #include "thermistor.h"
 #include "analogTemp.h"
 
@@ -11,7 +11,7 @@
 #endif
 
 #ifdef _LCD_4BIT_
-#include <LiquidCrystal_4bit.h>
+#include <LiquidCrystal.h>
 #endif
 
 
@@ -57,14 +57,14 @@ LiquidCrystal_I2C lcd(0x38);  // set the LCD address to 0x20 for a 16 chars and 
 #endif
 
 #ifdef _LCD_4BIT_
-LiquidCrystal_4bit lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 const int    CONTRAST_PIN  = 9;
 const int    BACKLIGHT_PIN = 7;
 const int    CONTRAST      = 125;
 #endif
 
 
-LiquidCrystal *myLCD;
+LCD *myLCD = &lcd;
 
 static double tempFilter;
 thermistor *tempSensor;
@@ -196,7 +196,6 @@ void setup ()
    digitalWrite (13, HIGH);
 #endif
 
-   myLCD = &lcd;  
    myLCD->begin ( 16, 2 );
 
    

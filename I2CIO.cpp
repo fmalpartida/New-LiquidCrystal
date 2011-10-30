@@ -61,7 +61,12 @@ int I2CIO::begin (  uint8_t i2cAddr )
    Wire.begin ( );
       
    _initialised = Wire.requestFrom ( _i2cAddr, (uint8_t)1 );
+
+#if (ARDUINO <  100)
+   _shadow = Wire.receive ();
+#else
    _shadow = Wire.read (); // Remove the byte read don't need it.
+#endif
    
    return ( _initialised );
 }
@@ -110,7 +115,12 @@ uint8_t I2CIO::read ( void )
    if ( _initialised )
    {
       Wire.requestFrom ( _i2cAddr, (uint8_t)1 );
+#if (ARDUINO <  100)
+      retVal = ( _dirMask & Wire.receive ( ) );
+#else
       retVal = ( _dirMask & Wire.read ( ) );
+#endif      
+      
    }
    return ( retVal );
 }
@@ -127,8 +137,12 @@ int I2CIO::write ( uint8_t value )
       // outputs updating the output shadow of the device
       _shadow = ( value & ~(_dirMask) );
    
-      Wire.beginTransmission ( _i2cAddr ); 
+      Wire.beginTransmission ( _i2cAddr );
+#if (ARDUINO <  100)
+      Wire.send ( _shadow );
+#else
       Wire.write ( _shadow );
+#endif  
       status = Wire.endTransmission ();
    }
    return ( (status == 0) );
