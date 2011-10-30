@@ -37,7 +37,11 @@
 #include <string.h>
 #include <inttypes.h>
 
+#if (ARDUINO <  100)
+#include <wiring.h>
+#else
 #include <Arduino.h>
+#endif
 #include <LCD.h>
 
 // CLASS CONSTRUCTORS
@@ -173,7 +177,11 @@ void LCD::command(uint8_t value)
    send(value, LOW);
 }
 
+#if (ARDUINO <  100)
+void LCD::write(uint8_t value) 
+#else
 size_t LCD::write(uint8_t value) 
+#endif
 {
    send(value, HIGH);
    

@@ -25,8 +25,13 @@
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
-#include <inttypes.h>
+#if (ARDUINO <  100)
+#include <wiring.h>
+#else
 #include <Arduino.h>
+#endif
+
+#include <inttypes.h>
 #include <Wire.h>
 #include <I2CIO.h>
 

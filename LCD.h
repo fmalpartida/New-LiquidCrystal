@@ -324,7 +324,12 @@ public:
     
     @param      value Value to write to the LCD.
     */
-   size_t write(uint8_t value);
+#if (ARDUINO <  100)
+   virtual oid write(uint8_t value);
+#else
+   virtual size_t write(uint8_t value);
+#endif
+
    
    /*!
     @function

@@ -32,7 +32,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
+#if (ARDUINO <  100)
+#include <wiring.h>
+#else
 #include <Arduino.h>
+#endif
 #include <LiquidCrystal.h>
 
 // When the display powers up, it is configured as follows:
