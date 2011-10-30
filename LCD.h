@@ -36,7 +36,6 @@
 // ---------------------------------------------------------------------------
 #ifndef _LCD_H_
 #define _LCD_H_
-
 #include <inttypes.h>
 #include <Print.h>
 

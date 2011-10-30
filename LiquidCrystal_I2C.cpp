@@ -30,7 +30,7 @@
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
 #if (ARDUINO <  100)
-#include <wiring.h>
+#include <WProgram.h>
 #else
 #include <Arduino.h>
 #endif
