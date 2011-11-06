@@ -37,7 +37,7 @@
                 correct temperature reading from the internal temperature sensor
                 of your AVR.
 */
-#define TEMP_CAL_OFFSET 336
+#define TEMP_CAL_OFFSET 335
 
 /*!
     @defined    FILTER_ALP
@@ -60,7 +60,7 @@ LiquidCrystal_I2C lcd(0x38);  // set the LCD address to 0x20 for a 16 chars and 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 const int    CONTRAST_PIN  = 9;
 const int    BACKLIGHT_PIN = 7;
-const int    CONTRAST      = 125;
+const int    CONTRAST      = 130;
 #endif
 
 
@@ -150,7 +150,7 @@ static void drawBars ( int value, uint8_t row, uint8_t barLength, char start,
    myLCD->print (start);
 
    // Calculate the size of the bar
-   value = map ( value, -10, 45, 0, ( barLength ) * CHAR_WIDTH );
+   value = map ( value, -30, 45, 0, ( barLength ) * CHAR_WIDTH );
    numBars = value / CHAR_WIDTH;
    
    // Limit the size of the bargraph to barLength
@@ -235,5 +235,5 @@ void loop ()
   drawBars ( tempFilter, 1, 7, '-', '+' );
   Serial.println (micros() - time);
   
-  delay (1000);
+  delay (200);
 }

@@ -273,14 +273,16 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
 // pulseEnable
 void LiquidCrystal::pulseEnable(void) 
 {
+   // There is no need for the delays, since the digitalWrite operation
+   // takes longer.
    digitalWrite(_enable_pin, LOW);
-   delayMicroseconds(1);
+   //delayMicroseconds(1);
    
    digitalWrite(_enable_pin, HIGH);
-   delayMicroseconds(1);           // enable pulse must be > 450ns
+   //delayMicroseconds(1);          // enable pulse must be > 450ns
    
    digitalWrite(_enable_pin, LOW);
-   delayMicroseconds(100);         // commands need > 37us to settle
+   //delayMicroseconds(37);         // commands need > 37us to settle
 }
 
 //
@@ -302,7 +304,6 @@ void LiquidCrystal::write8bits(uint8_t value)
    for (uint8_t i = 0; i < 8; i++) 
    {
       digitalWrite(_data_pins[i], (value >> i) & 0x01);
-   }
-   
+   }   
    pulseEnable();
 }

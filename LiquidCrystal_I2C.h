@@ -33,7 +33,6 @@
 #define LiquidCrystal_I2C_h
 #include <inttypes.h>
 #include <Print.h>
-#include <Wire.h>
 #include <I2CIO.h>
 #include <LCD.h>
 
