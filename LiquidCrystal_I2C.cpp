@@ -67,8 +67,51 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
    _Addr = lcd_Addr;
    
    _backlightval = LCD_NOBACKLIGHT;
+   _En = EN;
+   _Rw = RW;
+   _Rs = RS;
+
+   // Initialise default values data[0] pin 0, data[1] pin 1, ...
+   for ( uint8_t i = 0; i < 4; i++ )
+   {
+      _data_pins[i] = ( 1 << i );
+   }
 }
 
+LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
+                                      uint8_t Rs)
+{
+   _Addr = lcd_Addr;
+   
+   _backlightval = LCD_NOBACKLIGHT;
+   _En = ( 1 << En );
+   _Rw = ( 1 << Rw );
+   _Rs = ( 1 << Rs );
+   
+   // Initialise default values data[0] pin 0, data[1] pin 1, ...
+   for ( uint8_t i = 0; i < 4; i++ )
+   {
+      _data_pins[i] = ( 1 << i );
+   }
+}
+
+LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
+                                      uint8_t Rs, uint8_t d0, uint8_t d1,
+                                      uint8_t d2, uint8_t d3 )
+{
+   _Addr = lcd_Addr;
+   
+   _backlightval = LCD_NOBACKLIGHT;
+   _En = ( 1 << En );
+   _Rw = ( 1 << Rw );
+   _Rs = ( 1 << Rs );
+   
+   // Initialise pin mapping
+   _data_pins[0] = ( 1 << d0 );
+   _data_pins[1] = ( 1 << d1 );
+   _data_pins[2] = ( 1 << d2 );
+   _data_pins[3] = ( 1 << d3 );
+}
 
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
@@ -121,7 +164,7 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 	delayMicroseconds(50000); 
    
 	// Now we pull both RS and R/W low to begin commands
-	expanderWrite(_backlightval);	// reset expander and turn backlight off (Bit 8 =1)
+	expanderWrite ( _backlightval );	// reset expander and turn backlight off (Bit 8 =1)
 	delay(1000);
    
   	//put the LCD into 4 bit mode
@@ -129,19 +172,19 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 	// figure 24, pg 46
 	
 	// we start in 8bit mode, try to set 4 bit mode
-	write4bits(0x03);
+	write4bits ( 0x03, LOW );
 	delayMicroseconds(4500); // wait min 4.1ms
 	
 	// second try
-	write4bits(0x03);
+	write4bits ( 0x03, LOW );
 	delayMicroseconds(4500); // wait min 4.1ms
 	
 	// third go!
-	write4bits(0x03); 
+	write4bits ( 0x03, LOW ); 
 	delayMicroseconds(150);
 	
 	// finally, set to 4-bit interface
-	write4bits(0x02); 
+	write4bits ( 0x02, LOW ); 
    
    
 	// set # lines, font size, etc.
@@ -191,26 +234,37 @@ void LiquidCrystal_I2C::backlight(void)
 // send - write either command or data
 void LiquidCrystal_I2C::send(uint8_t value, uint8_t mode) 
 {
-   // Is it a command or data
-   // -----------------------
-   if ( mode == HIGH )
-   {
-      mode = Rs;
-   }
    
-	uint8_t highnib=value>>4;
-	uint8_t lownib=value & 0x0F;
-   
-	write4bits((highnib)|mode);
-	write4bits((lownib)|mode);
+   write4bits( (value >> 4), mode );
+	write4bits( (value & 0x0F), mode);
 }
 
 //
 // write4bits
-void LiquidCrystal_I2C::write4bits(uint8_t value) 
+void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode ) 
 {
-	expanderWrite(value);
-	pulseEnable(value);
+   uint8_t pinMapValue = 0;
+   
+   // Map the value to LCD pin mapping
+   // --------------------------------
+   for ( uint8_t i = 0; i < 4; i++ )
+   {
+      if ( ( value & 0x1 ) == 1 )
+      {
+         pinMapValue |= _data_pins[i];
+      }
+      value = ( value >> 1 );
+   }
+   
+   // Is it a command or data
+   // -----------------------
+   if ( mode == DATA )
+   {
+      mode = _Rs;
+   }
+      
+	expanderWrite ( pinMapValue | mode );
+	pulseEnable ( pinMapValue | mode );
 }
 
 //
@@ -219,10 +273,10 @@ void LiquidCrystal_I2C::pulseEnable (uint8_t _data)
 {
    // No need to use the delay routines since the time taken to write takes
    // longer that what is needed.
-	expanderWrite (_data | En);	// En HIGH
+	expanderWrite (_data | _En);	// En HIGH
 	//delayMicroseconds(1);		   // enable pulse must be >450ns
    
-	expanderWrite(_data & ~En);   // En low
+	expanderWrite(_data & ~_En);  // En low
 	//delayMicroseconds(50);		// commands need > 37us to settle
 } 
 

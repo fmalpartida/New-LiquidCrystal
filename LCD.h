@@ -90,6 +90,15 @@
 #define LCD_5x10DOTS            0x04
 #define LCD_5x8DOTS             0x00
 
+#define LCD_4BIT                1
+#define LCD_8BIT                0
+
+// Define COMMAND and DATA LCD Rs
+// ---------------------------------------------------------------------------
+#define COMMAND                 0
+#define DATA                    1
+
+
 class LCD : public Print 
 {
 public:
@@ -113,8 +122,8 @@ public:
     this base class to implement the internals of how the LCD is initialized
     and configured.
     
-    @param      cols the number of columns that the display has
-    @param      rows the number of rows that the display has
+    @param      cols[in] the number of columns that the display has
+    @param      rows[in] the number of rows that the display has
     */
 #if (ARDUINO <  100)
    virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS) { };
@@ -285,9 +294,9 @@ public:
     determine the pixels in that row. To display a custom character on screen, 
     write()/print() its number, i.e. lcd.print (char(x)); // Where x is 0..7.
     
-    @param      location: LCD memory location of the character to create
+    @param      location[in] LCD memory location of the character to create
     (0 to 7)
-    @param      charmap: the bitmap array representing each row of the character.
+    @param      charmap[in] the bitmap array representing each row of the character.
     */
    void createChar(uint8_t location, uint8_t charmap[]);
    
@@ -297,8 +306,8 @@ public:
     @discussion Sets the position of the LCD cursor. Set the location at which 
     subsequent text written to the LCD will be displayed.
     
-    @param      col LCD column
-    @param      row LCD row - line.
+    @param      col[in] LCD column
+    @param      row[in] LCD row - line.
     */
    void setCursor(uint8_t col, uint8_t row);
    
@@ -312,7 +321,7 @@ public:
     This command shouldn't be used to drive the LCD, only to implement any other
     feature that is not available on this library.
     
-    @param      value Command value to send to the LCD.
+    @param      value[in] Command value to send to the LCD.
     */
    void command(uint8_t value);
    
@@ -325,14 +334,14 @@ public:
     This is the virtual write method, implemented in the Print class, therefore
     all Print class methods will end up calling this method.
     
-    @param      value Value to write to the LCD.
+    @param      value[in] Value to write to the LCD.
     */
 #if (ARDUINO <  100)
    virtual void write(uint8_t value);
 #else
    virtual size_t write(uint8_t value);
 #endif
-
+   
    
    /*!
     @function
@@ -343,7 +352,7 @@ public:
     
     Users should never call this method.
     
-    @param      value Value to send to the LCD.
+    @param      value[in] Value to send to the LCD.
     @result     mode LOW - write to the LCD CGRAM, HIGH - write a command to
     the LCD.
     */
@@ -363,9 +372,9 @@ protected:
    // Internal LCD variables to control the LCD shared between all derived
    // classes.
    uint8_t _displayfunction;  // LCD_5x10DOTS or LCD_5x8DOTS, LCD_4BITMODE or 
-                              // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
+   // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
    uint8_t _displaycontrol;   // LCD base control command LCD on/off, blink, cursor
-                              // all commands are "ored" to its contents.
+   // all commands are "ored" to its contents.
    uint8_t _displaymode;      // Text entry mode to the LCD
    uint8_t _numlines;         // Number of lines of the LCD, initialized with begin()
    

@@ -67,26 +67,26 @@ LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
-   init(0, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
+   init(LCD_8BIT, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
 }
 
 LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
-   init(0, rs, 255, enable, d0, d1, d2, d3, d4, d5, d6, d7);
+   init(LCD_8BIT, rs, 255, enable, d0, d1, d2, d3, d4, d5, d6, d7);
 }
 
 LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
 {
-   init(1, rs, rw, enable, d0, d1, d2, d3, 0, 0, 0, 0);
+   init(LCD_4BIT, rs, rw, enable, d0, d1, d2, d3, 0, 0, 0, 0);
 }
 
 LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
 {
-   init(1, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
+   init(LCD_4BIT, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
 }
 
 // PRIVATE METHODS
@@ -249,7 +249,7 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 // send
 void LiquidCrystal::send(uint8_t value, uint8_t mode) 
 {
-   digitalWrite(_rs_pin, mode);
+   digitalWrite( _rs_pin, mode );
    
    // if there is a RW pin indicated, set it low to Write
    // ---------------------------------------------------
@@ -264,8 +264,8 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
    } 
    else 
    {
-      write4bits(value>>4);
-      write4bits(value);
+      write4bits ( value >> 4 );
+      write4bits ( value );
    }
 }
 

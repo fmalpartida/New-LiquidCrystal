@@ -63,7 +63,6 @@ public:
    LiquidCrystal(uint8_t rs, uint8_t enable,
                  uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
    
-   
    /*!
     @function
     @abstract   LCD initialization.
@@ -71,8 +70,8 @@ public:
     initializes the LCD, therefore, it MUST be called prior to using any other
     method from this class or parent class.
     
-    @param      cols: the number of columns that the display has
-    @param      rows: the number of rows that the display has
+    @param      cols[in] the number of columns that the display has
+    @param      rows[in] the number of rows that the display has
     @param      charsize: size of the characters of the LCD: LCD_5x8DOTS or
     LCD_5x10DOTS.
     */

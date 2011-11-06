@@ -57,6 +57,7 @@ public:
     This method is the first method that should be call prior to calling any
     other method form this class. On initialization all pins are configured
     as INPUT on the device.
+    
     @param      i2cAddr: I2C Address where the device is located.
     @result     1 if the device was initialized correctly, 0 otherwise
     */   
@@ -67,18 +68,19 @@ public:
     @abstract   Sets the mode of a particular pin.
     @discussion Sets the mode of a particular pin to INPUT, OUTPUT. digitalWrite
     has no effect on pins which are not declared as output.
-    @param      pin: Pin from the I2C IO expander to be configured. Range 0..7
-    @param      dir: Pin direction (INPUT, OUTPUT).
+    
+    @param      pin[in] Pin from the I2C IO expander to be configured. Range 0..7
+    @param      dir[in] Pin direction (INPUT, OUTPUT).
     */   
    void pinMode ( uint8_t pin, uint8_t dir );
-
+   
    /*!
     @method
     @abstract   Sets all the pins of the device in a particular direction.
     @discussion This method sets all the pins of the device in a particular
     direction. This method is useful to set all the pins of the device to be
     either inputs or outputs.
-    @param      dir: Direction of all the pins of the device (INPUT, OUTPUT).
+    @param      dir[in] Direction of all the pins of the device (INPUT, OUTPUT).
     */
    void portMode ( uint8_t dir );
    
@@ -88,6 +90,7 @@ public:
     @discussion Reads from the device the status of the pins that are configured
     as INPUT. During initialization all pins are configured as INPUTs by default.
     Please refer to pinMode or portMode.
+    
     @param      none
     */   
    uint8_t read ( void );
@@ -98,7 +101,8 @@ public:
     @discussion Reads a particular pin from the device. To read a particular
     pin it has to be configured as INPUT. During initialization all pins are
     configured as INPUTs by default. Please refer to pinMode or portMode.
-    @param      pin: Pin from the port to read its status. Range (0..7)
+    
+    @param      pin[in] Pin from the port to read its status. Range (0..7)
     @result     Returns the pin status (HIGH, LOW) if the pin is configured
     as an output, reading its value will always return LOW regardless of its
     real state.
@@ -114,7 +118,8 @@ public:
     a particular pin with this method, such pin has to be configured as OUTPUT 
     using the portMode or pinMode methods. If no pins have been configured as
     OUTPUTs this method will have no effect.
-    @param      value: value to be written to the device.
+    
+    @param      value[in] value to be written to the device.
     @result     1 on success, 0 otherwise
     */   
    int write ( uint8_t value );
@@ -125,8 +130,9 @@ public:
     @discussion Write a level to the indicated pin of the device. For this 
     method to have effect, the pin has to be configured as OUTPUT using the
     pinMode or portMode methods.
-    @param      pin: device pin to change level. Range (0..7).
-    @para       level: logic level to set the pin at (HIGH, LOW).
+    
+    @param      pin[in] device pin to change level. Range (0..7).
+    @para       level[in] logic level to set the pin at (HIGH, LOW).
     @result     1 on success, 0 otherwise.
     */   
    int digitalWrite ( uint8_t pin, uint8_t level );

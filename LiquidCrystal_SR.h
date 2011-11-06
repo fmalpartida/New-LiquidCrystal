@@ -81,7 +81,7 @@
 
 // two-wire indicator constant
 // ---------------------------------------------------------------------------
-#define TWO_WIRE 204
+#define TWO_WIRE  204
 #define SR_RS_BIT 0x04
 #define SR_EN_BIT 0x80
 
@@ -95,22 +95,22 @@ public:
     The constructor does not initialize the LCD. Assuming 1 line 8 pixel high 
     font.
     
-    @param srdata   pin for shiftregister data line.
-    @param srclock  pin for shiftregister clock line.
-    @param enable   enable pin for the shiftregister.
+    @param srdata[in]   pin for shiftregister data line.
+    @param srclock[in]  pin for shiftregister clock line.
+    @param enable[in]   enable pin for the shiftregister.
     */
    LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, uint8_t enable );
-
-
+   
+   
    // Set nr. of lines, assume 8 pixel high font
    LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, uint8_t enable, 
-                      uint8_t lines );
+                     uint8_t lines );
    
    // Set nr. of lines and font
    LiquidCrystal_SR( uint8_t srdata, uint8_t srclock, uint8_t enable, 
-                     uint8_t lines, uint8_t font );
-
-      
+                    uint8_t lines, uint8_t font );
+   
+   
    /*!
     @function
     @abstract   LCD initialization.
@@ -118,9 +118,9 @@ public:
     initializes the LCD, therefore, it MUST be called prior to using any other
     method from this class or parent class.
     
-    @param      cols: the number of columns that the display has
-    @param      rows: the number of rows that the display has
-    @param      charsize: size of the characters of the LCD: LCD_5x8DOTS or
+    @param      cols[in] the number of columns that the display has
+    @param      rows[in] the number of rows that the display has
+    @param      charsize[in] size of the characters of the LCD: LCD_5x8DOTS or
     LCD_5x10DOTS.
     */
    virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);   
@@ -133,7 +133,7 @@ public:
     
     Users should never call this method.
     
-    @param      value Value to send to the LCD.
+    @param      value[in] Value to send to the LCD.
     @result     mode LOW - write to the LCD CGRAM, HIGH - write a command to
     the LCD.
     */
@@ -148,14 +148,14 @@ private:
     @discussion Initializes the LCD pin allocation and configuration.
     */
    void init ( uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, 
-               uint8_t font );
+              uint8_t font );
    /*!
     @method     
     @abstract   For sending data when initializing the display to 4-bit
     @discussion Initializes the LCD pin allocation and configuration.
     */
    void init4bits ( uint8_t );
-
+   
    uint8_t _srdata_pin;  // Serial Data pin
    uint8_t _srclock_pin; // Clock Pin
    uint8_t _enable_pin;  // Enable Pin

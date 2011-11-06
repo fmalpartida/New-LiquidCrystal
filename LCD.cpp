@@ -61,13 +61,13 @@ LCD::LCD ()
 void LCD::clear()
 {
    command(LCD_CLEARDISPLAY);  // clear display, set cursor position to zero
-   delayMicroseconds(2000);    // this command is time consuming
+   delayMicroseconds(1500);    // this command is time consuming
 }
 
 void LCD::home()
 {
    command(LCD_RETURNHOME);  // set cursor position to zero
-   delayMicroseconds(2000);  // This command is time consuming
+   delayMicroseconds(1500);  // This command is time consuming
 }
 
 void LCD::setCursor(uint8_t col, uint8_t row)
@@ -164,6 +164,7 @@ void LCD::createChar(uint8_t location, uint8_t charmap[])
    location &= 0x7;            // we only have 8 locations 0-7
    
    command(LCD_SETCGRAMADDR | (location << 3));
+   
    for (int i=0; i<8; i++) 
    {
       write(charmap[i]);      // call the virtual write method
@@ -174,21 +175,19 @@ void LCD::createChar(uint8_t location, uint8_t charmap[])
 // ---------------------------------------------------------------------------
 void LCD::command(uint8_t value) 
 {
-   send(value, LOW);
+   send(value, COMMAND);
 }
 
 #if (ARDUINO <  100)
 void LCD::write(uint8_t value)
 {
-   send(value, HIGH);
+   send(value, DATA);
 }
 #else
 size_t LCD::write(uint8_t value) 
 {
-   send(value, HIGH);
+   send(value, DATA);
    
    return 1;           // assume OK
 }
 #endif
-
-//void LCD::send(uint8_t value, uint8_t mode) { }
