@@ -248,7 +248,6 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    digitalWrite( _enable_pin, HIGH );
    delayMicroseconds(1);                 // enable pulse must be >450ns
    digitalWrite( _enable_pin, LOW );
-   
    delayMicroseconds(40);                // commands need > 37us to settle
 }
 

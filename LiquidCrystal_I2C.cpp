@@ -262,7 +262,7 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
    {
       mode = _Rs;
    }
-      
+   
 	expanderWrite ( pinMapValue | mode );
 	pulseEnable ( pinMapValue | mode );
 }
@@ -274,9 +274,8 @@ void LiquidCrystal_I2C::pulseEnable (uint8_t _data)
    // No need to use the delay routines since the time taken to write takes
    // longer that what is needed.
 	expanderWrite (_data | _En);	// En HIGH
-	//delayMicroseconds(1);		   // enable pulse must be >450ns
    
-	expanderWrite(_data & ~_En);  // En low
+	expanderWrite(_data & ~_En);  // En LOW
 	//delayMicroseconds(50);		// commands need > 37us to settle
 } 
 

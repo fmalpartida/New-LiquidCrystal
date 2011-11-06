@@ -40,26 +40,23 @@
 #endif
 #include <LiquidCrystal.h>
 
-// When the display powers up, it is configured as follows:
-//
-// 1. Display clear
-// 2. Function set: 
-//    DL = 1; 8-bit interface data 
-//    N = 0; 1-line display 
-//    F = 0; 5x8 dot character font 
-// 3. Display on/off control: 
-//    D = 0; Display off 
-//    C = 0; Cursor off 
-//    B = 0; Blinking off 
-// 4. Entry mode set: 
-//    I/D = 1; Increment by 1 
-//    S = 0; No shift 
-//
-// Note, however, that resetting the Arduino doesn't reset the LCD, so we
-// can't assume that its in that state when a sketch starts (and the
-// LiquidCrystal constructor is called).
-// A call to begin() will reinitialize the LCD.
-
+// STATIC helper routines
+// ---------------------------------------------------------------------------
+/*!
+    @function
+    @abstract   waits for a given time in microseconds (compilation dependent).
+    @discussion Waits for a given time defined in microseconds depending on
+    the FAST_MODE define. If the FAST_MODE is defined the call will return
+    inmediatelly.
+    @param      uSec[in] time in microseconds.
+    @result     None
+*/
+inline static void waitUsec ( uint16_t uSec )
+{
+#ifndef FAST_MODE
+   delayMicroseconds ( uSec );
+#endif // FAST_MODE
+}
 
 // CONSTRUCTORS
 // ---------------------------------------------------------------------------
@@ -92,6 +89,25 @@ LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
 
+// When the display powers up, it is configured as follows:
+//
+// 1. Display clear
+// 2. Function set: 
+//    DL = 1; 8-bit interface data 
+//    N = 0; 1-line display 
+//    F = 0; 5x8 dot character font 
+// 3. Display on/off control: 
+//    D = 0; Display off 
+//    C = 0; Cursor off 
+//    B = 0; Blinking off 
+// 4. Entry mode set: 
+//    I/D = 1; Increment by 1 
+//    S = 0; No shift 
+//
+// Note, however, that resetting the Arduino doesn't reset the LCD, so we
+// can't assume that its in that state when a sketch starts (and the
+// LiquidCrystal constructor is called).
+// A call to begin() will reinitialize the LCD.
 //
 // init
 void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
@@ -276,13 +292,13 @@ void LiquidCrystal::pulseEnable(void)
    // There is no need for the delays, since the digitalWrite operation
    // takes longer.
    digitalWrite(_enable_pin, LOW);
-   //delayMicroseconds(1);
+   waitUsec(1);
    
    digitalWrite(_enable_pin, HIGH);
-   //delayMicroseconds(1);          // enable pulse must be > 450ns
+   waitUsec(1);          // enable pulse must be > 450ns
    
    digitalWrite(_enable_pin, LOW);
-   //delayMicroseconds(37);         // commands need > 37us to settle
+   waitUsec(37);         // commands need > 37us to settle
 }
 
 //
@@ -293,7 +309,6 @@ void LiquidCrystal::write4bits(uint8_t value)
    {
       digitalWrite(_data_pins[i], (value >> i) & 0x01);
    }
-   
    pulseEnable();
 }
 
