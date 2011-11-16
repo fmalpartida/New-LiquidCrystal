@@ -1,8 +1,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <LCD.h>
-#include "thermistor.h"
-#include "analogTemp.h"
 
 #define _LCD_I2C_
 
@@ -37,7 +35,7 @@
                 correct temperature reading from the internal temperature sensor
                 of your AVR.
 */
-#define TEMP_CAL_OFFSET 335
+#define TEMP_CAL_OFFSET 334
 
 /*!
     @defined    FILTER_ALP
@@ -67,8 +65,6 @@ const int    CONTRAST      = 130;
 LCD *myLCD = &lcd;
 
 static double tempFilter;
-thermistor *tempSensor;
-static analogTemp myTemp; 
 
 
 /*!
@@ -83,7 +79,9 @@ const uint8_t charBitmap[][8] = {
    { 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x0 },
    { 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x0 },
    { 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x0 },
-   { 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x0 }
+   { 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x0 },
+   { 0xe, 0x11, 0x11, 0x11, 0xe, 0, 0, 0 },
+   { 0x6, 0x9, 0x9, 0x6, 0x0, 0, 0, 0}
 };
 
 /*!
@@ -150,7 +148,7 @@ static void drawBars ( int value, uint8_t row, uint8_t barLength, char start,
    myLCD->print (start);
 
    // Calculate the size of the bar
-   value = map ( value, -30, 45, 0, ( barLength ) * CHAR_WIDTH );
+   value = map ( value, -30, 50, 0, ( barLength ) * CHAR_WIDTH );
    numBars = value / CHAR_WIDTH;
    
    // Limit the size of the bargraph to barLength
@@ -197,11 +195,6 @@ void setup ()
 #endif
 
    myLCD->begin ( 16, 2 );
-
-   
-   myTemp.setCalOffset ( TEMP_CAL_OFFSET );
-   tempSensor = &myTemp;
-   tempSensor->init ();
   
    // Load custom character set into CGRAM
    for ( i = 0; i < charBitmapSize; i++ )
@@ -211,9 +204,9 @@ void setup ()
    Serial.println ( freeMemory () );
 
    myLCD->clear ();
-   myLCD->print ("Temperature:");
+   myLCD->print ("Temp:");
 
-   tempFilter = tempSensor->readTemperature (); // Initialise the temperature Filter
+   tempFilter = readTemperature (); // Initialise the temperature Filter
 
 }
 
@@ -221,19 +214,18 @@ void setup ()
 void loop ()
 {
   int temp;
-  unsigned long time, diff;
   
-  temp = tempSensor->readTemperature();
+  temp = readTemperature();
   tempFilter = ( FILTER_ALP * temp) + (( 1.0 - FILTER_ALP ) * tempFilter);
 
-  time = micros ();
-  myLCD->setCursor ( 11, 1 );
+  myLCD->setCursor ( 8, 0 );
   myLCD->print ("     ");
-  myLCD->setCursor ( 11, 1 );
-  myLCD->print ( tempFilter, 1 );  
-  myLCD->setCursor (1, 0);
-  drawBars ( tempFilter, 1, 7, '-', '+' );
-  Serial.println (micros() - time);
+  myLCD->setCursor ( 8, 0 );
+  myLCD->print ( tempFilter, 1 );
+  myLCD->setCursor ( 12, 0 );
+  myLCD->print ( "\x07" );
+  myLCD->print ("C");  
+  drawBars ( tempFilter, 1, 14, '-', '+' );
   
   delay (200);
 }

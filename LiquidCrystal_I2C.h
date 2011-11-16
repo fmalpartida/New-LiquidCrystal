@@ -92,7 +92,7 @@ public:
     the address can be configured using the on board jumpers.
     @param      En[in] LCD En (Enable) pin connected to the IO extender module
     @param      Rw[in] LCD Rw (Read/write) pin connected to the IO extender module
-    @para       Rs[in] LCD Rs (Reset) pin connected to the IO extender module
+    @param      Rs[in] LCD Rs (Reset) pin connected to the IO extender module
     */
    LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs);
    
