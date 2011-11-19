@@ -39,6 +39,15 @@
 #include <inttypes.h>
 #include <Print.h>
 
+/*!
+ @defined 
+ @abstract   Enables disables fast waits for write operations for LCD
+ @discussion If defined, the library will avoid doing un-necessary waits.
+ this can be done, because the time taken by Arduino's slow digitalWrite
+ operations. If fast digitalIO operations, comment this line out or undefine
+ the mode.
+ */
+#define FAST_MODE
 
 /*!
  @defined 
@@ -98,6 +107,13 @@
 #define COMMAND                 0
 #define DATA                    1
 
+/*!
+    @defined 
+    @abstract   Defines the duration of the home and clear commands
+    @discussion This constant defines the time it takes for the home and clear
+          commands in the LCD - Time in microseconds.
+*/
+#define HOME_CLEAR_EXEC      2000
 
 class LCD : public Print 
 {

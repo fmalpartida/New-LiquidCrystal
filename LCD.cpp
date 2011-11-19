@@ -60,21 +60,21 @@ LCD::LCD ()
 // ---------------------------------------------------------------------------
 void LCD::clear()
 {
-   command(LCD_CLEARDISPLAY);  // clear display, set cursor position to zero
-   delayMicroseconds(1700);    // this command is time consuming
+   command(LCD_CLEARDISPLAY);             // clear display, set cursor position to zero
+   delayMicroseconds(HOME_CLEAR_EXEC);    // this command is time consuming
 }
 
 void LCD::home()
 {
-   command(LCD_RETURNHOME);  // set cursor position to zero
-   delayMicroseconds(1700);  // This command is time consuming
+   command(LCD_RETURNHOME);             // set cursor position to zero
+   delayMicroseconds(HOME_CLEAR_EXEC);  // This command is time consuming
 }
 
 void LCD::setCursor(uint8_t col, uint8_t row)
 {
    int row_offsets[] = { 0x00, 0x40, 0x14, 0x54 };
    
-   if ( row > _numlines ) 
+   if ( row >= _numlines ) 
    {
       row = _numlines-1;    // rows start at 0
    }
@@ -187,7 +187,6 @@ void LCD::write(uint8_t value)
 size_t LCD::write(uint8_t value) 
 {
    send(value, DATA);
-   
-   return 1;           // assume OK
+   return 1;             // assume OK
 }
 #endif

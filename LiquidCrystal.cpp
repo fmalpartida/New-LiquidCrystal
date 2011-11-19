@@ -283,6 +283,7 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
       write4bits ( value >> 4 );
       write4bits ( value );
    }
+   waitUsec ( EXEC_TIME );
 }
 
 //
@@ -295,7 +296,6 @@ void LiquidCrystal::pulseEnable(void)
    waitUsec(1);          // enable pulse must be > 450ns
    
    digitalWrite(_enable_pin, LOW);
-   waitUsec(37);         // commands need > 37us to settle 
 }
 
 //

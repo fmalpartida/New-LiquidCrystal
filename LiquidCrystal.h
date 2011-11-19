@@ -35,15 +35,14 @@
 #include <inttypes.h>
 #include <LCD.h>
 
+
 /*!
     @defined 
-    @abstract   Enables disables fast waits for write operations for LCD
-    @discussion If defined, the library will avoid doing un-necessary waits.
-    this can be done, because the time taken by Arduino's slow digitalWrite
-    operations. If fast digitalIO operations, comment this line out or undefine
-    the mode.
+    @abstract   Command execution time on the LCD.
+    @discussion This defines how long a command takes to execute by the LCD.
+      The time is expressed in micro-seconds.
 */
-#define FAST_MODE
+#define EXEC_TIME 37
 
 class LiquidCrystal : public LCD
 {

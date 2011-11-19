@@ -337,19 +337,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00283"></a>00283       write4bits ( value &gt;&gt; 4 );
 <a name="l00284"></a>00284       write4bits ( value );
 <a name="l00285"></a>00285    }
-<a name="l00286"></a>00286 }
-<a name="l00287"></a>00287 
-<a name="l00288"></a>00288 <span class="comment">//</span>
-<a name="l00289"></a>00289 <span class="comment">// pulseEnable</span>
-<a name="l00290"></a>00290 <span class="keywordtype">void</span> LiquidCrystal::pulseEnable(<span class="keywordtype">void</span>) 
-<a name="l00291"></a>00291 {
-<a name="l00292"></a>00292    <span class="comment">// There is no need for the delays, since the digitalWrite operation</span>
-<a name="l00293"></a>00293    <span class="comment">// takes longer.</span>
-<a name="l00294"></a>00294    digitalWrite(_enable_pin, HIGH);
-<a name="l00295"></a>00295    <a class="code" href="_liquid_crystal_8cpp.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>(1);          <span class="comment">// enable pulse must be &gt; 450ns</span>
-<a name="l00296"></a>00296    
-<a name="l00297"></a>00297    digitalWrite(_enable_pin, LOW);
-<a name="l00298"></a>00298    <a class="code" href="_liquid_crystal_8cpp.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>(37);         <span class="comment">// commands need &gt; 37us to settle </span>
+<a name="l00286"></a>00286    <a class="code" href="_liquid_crystal_8cpp.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> ( <a class="code" href="_liquid_crystal_8h.html#adebff0f00a59c9f9863bc196938d5726">EXEC_TIME</a> );
+<a name="l00287"></a>00287 }
+<a name="l00288"></a>00288 
+<a name="l00289"></a>00289 <span class="comment">//</span>
+<a name="l00290"></a>00290 <span class="comment">// pulseEnable</span>
+<a name="l00291"></a>00291 <span class="keywordtype">void</span> LiquidCrystal::pulseEnable(<span class="keywordtype">void</span>) 
+<a name="l00292"></a>00292 {
+<a name="l00293"></a>00293    <span class="comment">// There is no need for the delays, since the digitalWrite operation</span>
+<a name="l00294"></a>00294    <span class="comment">// takes longer.</span>
+<a name="l00295"></a>00295    digitalWrite(_enable_pin, HIGH);
+<a name="l00296"></a>00296    <a class="code" href="_liquid_crystal_8cpp.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>(1);          <span class="comment">// enable pulse must be &gt; 450ns</span>
+<a name="l00297"></a>00297    
+<a name="l00298"></a>00298    digitalWrite(_enable_pin, LOW);
 <a name="l00299"></a>00299 }
 <a name="l00300"></a>00300 
 <a name="l00301"></a>00301 <span class="comment">//</span>
@@ -389,7 +389,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Nov 19 2011 12:23:20 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Nov 19 2011 20:59:21 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
