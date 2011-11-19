@@ -291,14 +291,11 @@ void LiquidCrystal::pulseEnable(void)
 {
    // There is no need for the delays, since the digitalWrite operation
    // takes longer.
-   digitalWrite(_enable_pin, LOW);
-   waitUsec(1);
-   
    digitalWrite(_enable_pin, HIGH);
    waitUsec(1);          // enable pulse must be > 450ns
    
    digitalWrite(_enable_pin, LOW);
-   waitUsec(37);         // commands need > 37us to settle
+   waitUsec(37);         // commands need > 37us to settle 
 }
 
 //

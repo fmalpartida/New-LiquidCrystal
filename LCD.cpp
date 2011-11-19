@@ -61,13 +61,13 @@ LCD::LCD ()
 void LCD::clear()
 {
    command(LCD_CLEARDISPLAY);  // clear display, set cursor position to zero
-   delayMicroseconds(1500);    // this command is time consuming
+   delayMicroseconds(1700);    // this command is time consuming
 }
 
 void LCD::home()
 {
    command(LCD_RETURNHOME);  // set cursor position to zero
-   delayMicroseconds(1500);  // This command is time consuming
+   delayMicroseconds(1700);  // This command is time consuming
 }
 
 void LCD::setCursor(uint8_t col, uint8_t row)
