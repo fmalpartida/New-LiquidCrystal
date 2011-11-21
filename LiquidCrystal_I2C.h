@@ -201,8 +201,6 @@ private:
    void expanderWrite(uint8_t);
    
    uint8_t _Addr;           // I2C Address of the IO expander
-   uint8_t _cols;           // Number of columns of the LCD
-   uint8_t _rows;           // Number of rows of the LCD
    uint8_t _backlightval;   // Backlight shadow value
    I2CIO   _i2cio;          // I2CIO PCF8574* expansion module driver I2CLCDextraIO
    uint8_t _En;             // LCD expander word for enable pin

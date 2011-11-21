@@ -180,6 +180,7 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
       _displayfunction |= LCD_2LINE;
    }
    _numlines = lines;
+   _cols = cols;
    
    // for some 1 line displays you can select a 10 pixel high font
    // ------------------------------------------------------------
@@ -283,7 +284,7 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
       write4bits ( value >> 4 );
       write4bits ( value );
    }
-   waitUsec ( EXEC_TIME );
+   waitUsec ( EXEC_TIME ); // wait for the command to execute by the LCD
 }
 
 //
@@ -292,9 +293,8 @@ void LiquidCrystal::pulseEnable(void)
 {
    // There is no need for the delays, since the digitalWrite operation
    // takes longer.
-   digitalWrite(_enable_pin, HIGH);
-   waitUsec(1);          // enable pulse must be > 450ns
-   
+   digitalWrite(_enable_pin, HIGH);   
+   waitUsec(1);          // enable pulse must be > 450ns   
    digitalWrite(_enable_pin, LOW);
 }
 

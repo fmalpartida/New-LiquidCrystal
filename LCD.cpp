@@ -46,7 +46,6 @@
 
 // CLASS CONSTRUCTORS
 // ---------------------------------------------------------------------------
-
 // Constructor
 LCD::LCD () 
 {
@@ -72,14 +71,25 @@ void LCD::home()
 
 void LCD::setCursor(uint8_t col, uint8_t row)
 {
-   int row_offsets[] = { 0x00, 0x40, 0x14, 0x54 };
+   int row_offsetsDef[]   = { 0x00, 0x40, 0x14, 0x54 }; // For regular LCDs
+   int row_offsetsLarge[] = { 0x00, 0x40, 0x10, 0x50 }; // For 16x4 LCDs
    
    if ( row >= _numlines ) 
    {
       row = _numlines-1;    // rows start at 0
    }
    
-   command(LCD_SETDDRAMADDR | (col + row_offsets[row]));
+   // 16x4 LCDs have special memory map layout
+   // ----------------------------------------
+   if ( _cols == 16 && _numlines == 4 )
+   {
+      command(LCD_SETDDRAMADDR | (col + row_offsetsLarge[row]));
+   }
+   else 
+   {
+      command(LCD_SETDDRAMADDR | (col + row_offsetsDef[row]));
+   }
+
 }
 
 // Turn the display on/off

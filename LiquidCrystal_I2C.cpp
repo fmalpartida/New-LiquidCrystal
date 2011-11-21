@@ -70,7 +70,7 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
    _En = EN;
    _Rw = RW;
    _Rs = RS;
-
+   
    // Initialise default values data[0] pin 0, data[1] pin 1, ...
    for ( uint8_t i = 0; i < 4; i++ )
    {
@@ -79,7 +79,7 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
 }
 
 LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
-                                      uint8_t Rs)
+                                     uint8_t Rs)
 {
    _Addr = lcd_Addr;
    
@@ -96,8 +96,8 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
 }
 
 LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
-                                      uint8_t Rs, uint8_t d0, uint8_t d1,
-                                      uint8_t d2, uint8_t d3 )
+                                     uint8_t Rs, uint8_t d0, uint8_t d1,
+                                     uint8_t d2, uint8_t d3 )
 {
    _Addr = lcd_Addr;
    
@@ -125,7 +125,7 @@ int LiquidCrystal_I2C::init()
    // initialize the backpack IO expander
    // and display functions.
    // ------------------------------------------------------------------------
-	if ( _i2cio.begin ( _Addr ) == 1 )
+   if ( _i2cio.begin ( _Addr ) == 1 )
    {
       _i2cio.portMode ( OUTPUT );  // Set the entire IO extender to OUTPUT
       _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
@@ -142,68 +142,67 @@ int LiquidCrystal_I2C::init()
 // begin
 void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) 
 {
-   _cols = cols;
-   _rows = lines;
    
    init();     // Initialise the I2C expander interface
    
-	if (lines > 1) 
+   if (lines > 1) 
    {
-		_displayfunction |= LCD_2LINE;
-	}
-	_numlines = lines;
+      _displayfunction |= LCD_2LINE;
+   }
+   _numlines = lines;
+   _cols = cols;
    
-	// for some 1 line displays you can select a 10 pixel high font
-	if ((dotsize != 0) && (lines == 1)) {
-		_displayfunction |= LCD_5x10DOTS;
-	}
+   // for some 1 line displays you can select a 10 pixel high font
+   if ((dotsize != 0) && (lines == 1)) {
+      _displayfunction |= LCD_5x10DOTS;
+   }
    
-	// SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
-	// according to datasheet, we need at least 40ms after power rises above 2.7V
-	// before sending commands. Arduino can turn on way before 4.5V so we'll wait 50
-	delayMicroseconds(50000); 
+   // SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
+   // according to datasheet, we need at least 40ms after power rises above 2.7V
+   // before sending commands. Arduino can turn on way before 4.5V so we'll wait 50
+   delayMicroseconds(50000); 
    
-	// Now we pull both RS and R/W low to begin commands
-	expanderWrite ( _backlightval );	// reset expander and turn backlight off (Bit 8 =1)
-	delay(1000);
+   // Now we pull both RS and R/W low to begin commands
+   expanderWrite ( _backlightval );   // reset expander and turn backlight off (Bit 8 =1)
+   delay(1000);
    
-  	//put the LCD into 4 bit mode
-	// this is according to the hitachi HD44780 datasheet
-	// figure 24, pg 46
-	
-	// we start in 8bit mode, try to set 4 bit mode
-	write4bits ( 0x03, LOW );
-	delayMicroseconds(4500); // wait min 4.1ms
-	
-	// second try
-	write4bits ( 0x03, LOW );
-	delayMicroseconds(4500); // wait min 4.1ms
-	
-	// third go!
-	write4bits ( 0x03, LOW ); 
-	delayMicroseconds(150);
-	
-	// finally, set to 4-bit interface
-	write4bits ( 0x02, LOW ); 
+     //put the LCD into 4 bit mode
+   // this is according to the hitachi HD44780 datasheet
+   // figure 24, pg 46
+   
+   // we start in 8bit mode, try to set 4 bit mode
+   write4bits ( 0x03, LOW );
+   delayMicroseconds(4500); // wait min 4.1ms
+   
+   // second try
+   write4bits ( 0x03, LOW );
+   delayMicroseconds(4500); // wait min 4.1ms
+   
+   // third go!
+   write4bits ( 0x03, LOW ); 
+   delayMicroseconds(150);
+   
+   // finally, set to 4-bit interface
+   write4bits ( 0x02, LOW ); 
    
    
-	// set # lines, font size, etc.
-	command(LCD_FUNCTIONSET | _displayfunction);  
-	
-	// turn the display on with no cursor or blinking default
-	_displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
-	display();
-	
-	// clear it off
-	clear();
-	
-	// Initialize to default text direction (for roman languages)
-	_displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
-	
-	// set the entry mode
-	command(LCD_ENTRYMODESET | _displaymode);
-	
-	home();
+   // set # lines, font size, etc.
+   command(LCD_FUNCTIONSET | _displayfunction);  
+   
+   // turn the display on with no cursor or blinking default
+   _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
+   display();
+   
+   // clear it off
+   clear();
+   
+   // Initialize to default text direction (for roman languages)
+   _displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
+   
+   // set the entry mode
+   command(LCD_ENTRYMODESET | _displaymode);
+   
+   home();
    
 }
 
@@ -214,14 +213,14 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 // Turn the (optional) backlight off/on
 void LiquidCrystal_I2C::noBacklight(void) 
 {
-	_backlightval=LCD_NOBACKLIGHT;
-	expanderWrite(0);
+   _backlightval=LCD_NOBACKLIGHT;
+   expanderWrite(0);
 }
 
 void LiquidCrystal_I2C::backlight(void) 
 {
-	_backlightval=LCD_BACKLIGHT;
-	expanderWrite(0);
+   _backlightval=LCD_BACKLIGHT;
+   expanderWrite(0);
 }
 
 // PRIVATE METHODS
@@ -234,9 +233,11 @@ void LiquidCrystal_I2C::backlight(void)
 // send - write either command or data
 void LiquidCrystal_I2C::send(uint8_t value, uint8_t mode) 
 {
-   
+   // No need to use the delay routines since the time taken to write takes
+   // longer that what is needed both for toggling and enable pin an to execute
+   // the command.
    write4bits( (value >> 4), mode );
-	write4bits( (value & 0x0F), mode);
+   write4bits( (value & 0x0F), mode);
 }
 
 //
@@ -263,19 +264,16 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
       mode = _Rs;
    }
    
-	expanderWrite ( pinMapValue | mode );
-	pulseEnable ( pinMapValue | mode );
+   expanderWrite ( pinMapValue | mode );
+   pulseEnable ( pinMapValue | mode );
 }
 
 //
 // write4bits
 void LiquidCrystal_I2C::pulseEnable (uint8_t _data)
 {
-   // No need to use the delay routines since the time taken to write takes
-   // longer that what is needed.
-	expanderWrite (_data | _En);	// En HIGH
-   
-	expanderWrite(_data & ~_En);  // En LOW
+   expanderWrite (_data | _En);   // En HIGH
+   expanderWrite(_data & ~_En);  // En LOW
 } 
 
 //

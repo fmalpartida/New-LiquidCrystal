@@ -393,6 +393,7 @@ protected:
    // all commands are "ored" to its contents.
    uint8_t _displaymode;      // Text entry mode to the LCD
    uint8_t _numlines;         // Number of lines of the LCD, initialized with begin()
+   uint8_t _cols;             // Number of columns in the LCD
    
 private:
    

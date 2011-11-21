@@ -171,6 +171,7 @@ void LiquidCrystal_SR::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    }
 
    _numlines = lines;
+   _cols = cols;
    
    // for some 1 line displays you can select a 10 pixel high font
    // ------------------------------------------------------------
