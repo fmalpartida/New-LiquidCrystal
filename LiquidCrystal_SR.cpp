@@ -119,6 +119,8 @@ inline static void waitUsec ( uint16_t uSec )
 #ifndef FAST_MODE
    delayMicroseconds ( uSec );
 #endif // FAST_MODE
+}
+
 
 // CONSTRUCTORS
 // ---------------------------------------------------------------------------

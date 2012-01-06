@@ -26,7 +26,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#define _LCD_4BIT_
+#define _LCD_I2C_
 
 #ifdef _LCD_I2C_
 #include <LiquidCrystal_I2C.h>
