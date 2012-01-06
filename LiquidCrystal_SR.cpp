@@ -103,6 +103,22 @@
 // LiquidCrystal constructor is called).
 // A call to begin() will reinitialize the LCD.
 
+// STATIC helper routines
+// ---------------------------------------------------------------------------
+/*!
+ @function
+ @abstract   waits for a given time in microseconds (compilation dependent).
+ @discussion Waits for a given time defined in microseconds depending on
+ the FAST_MODE define. If the FAST_MODE is defined the call will return
+ inmediatelly.
+ @param      uSec[in] time in microseconds.
+ @result     None
+ */
+inline static void waitUsec ( uint16_t uSec )
+{
+#ifndef FAST_MODE
+   delayMicroseconds ( uSec );
+#endif // FAST_MODE
 
 // CONSTRUCTORS
 // ---------------------------------------------------------------------------
@@ -235,7 +251,7 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    shiftOut ( _srdata_pin, _srclock_pin, MSBFIRST, val1 );
    
    digitalWrite( _enable_pin, HIGH );
-   delayMicroseconds(1);                 // enable pulse must be >450ns
+   waitUsec( 1 );                 // enable pulse must be >450ns
    digitalWrite( _enable_pin, LOW );
 
    // clear shiftregister
@@ -247,9 +263,9 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    shiftOut ( _srdata_pin, _srclock_pin, MSBFIRST, val2 );
    
    digitalWrite( _enable_pin, HIGH );
-   delayMicroseconds(1);                 // enable pulse must be >450ns
+   waitUsec( 1 );                 // enable pulse must be >450ns
    digitalWrite( _enable_pin, LOW );
-   delayMicroseconds(40);                // commands need > 37us to settle
+   waitUsec( 40 );                // commands need > 37us to settle
 }
 
 //
@@ -270,10 +286,10 @@ void LiquidCrystal_SR::init4bits(uint8_t value)
    shiftOut ( _srdata_pin, _srclock_pin, MSBFIRST, val1 );
    
    digitalWrite( _enable_pin, HIGH );
-   delayMicroseconds(1);                 // enable pulse must be >450ns
+   waitUsec( 1 );                 // enable pulse must be >450ns
    digitalWrite( _enable_pin, LOW );
    
-   delayMicroseconds(40);               // commands need > 37us to settle
+   waitUsec( 40 );               // commands need > 37us to settle
 }
 
 

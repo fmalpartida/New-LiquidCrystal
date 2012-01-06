@@ -232,12 +232,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00393"></a>00393    <span class="comment">// all commands are &quot;ored&quot; to its contents.</span>
 <a name="l00394"></a><a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">00394</a>    uint8_t <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>;      <span class="comment">// Text entry mode to the LCD</span>
 <a name="l00395"></a><a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">00395</a>    uint8_t <a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">_numlines</a>;         <span class="comment">// Number of lines of the LCD, initialized with begin()</span>
-<a name="l00396"></a>00396    
-<a name="l00397"></a>00397 <span class="keyword">private</span>:
-<a name="l00398"></a>00398    
-<a name="l00399"></a>00399 };
-<a name="l00400"></a>00400 
-<a name="l00401"></a>00401 <span class="preprocessor">#endif</span>
+<a name="l00396"></a><a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">00396</a>    uint8_t <a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">_cols</a>;             <span class="comment">// Number of columns in the LCD</span>
+<a name="l00397"></a>00397    
+<a name="l00398"></a>00398 <span class="keyword">private</span>:
+<a name="l00399"></a>00399    
+<a name="l00400"></a>00400 };
+<a name="l00401"></a>00401 
+<a name="l00402"></a>00402 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -254,7 +255,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Nov 19 2011 20:59:21 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jan 6 2012 14:21:03 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

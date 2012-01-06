@@ -234,121 +234,121 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00180"></a>00180       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> |= <a class="code" href="_l_c_d_8h.html#a7987e93538df2819583ba43b81ddbb25">LCD_2LINE</a>;
 <a name="l00181"></a>00181    }
 <a name="l00182"></a>00182    <a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">_numlines</a> = lines;
-<a name="l00183"></a>00183    
-<a name="l00184"></a>00184    <span class="comment">// for some 1 line displays you can select a 10 pixel high font</span>
-<a name="l00185"></a>00185    <span class="comment">// ------------------------------------------------------------</span>
-<a name="l00186"></a>00186    <span class="keywordflow">if</span> ((dotsize != 0) &amp;&amp; (lines == 1)) 
-<a name="l00187"></a>00187    {
-<a name="l00188"></a>00188       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> |= <a class="code" href="_l_c_d_8h.html#abb3210156d88d3fe18c9352eb161fe42">LCD_5x10DOTS</a>;
-<a name="l00189"></a>00189    }
-<a name="l00190"></a>00190    
-<a name="l00191"></a>00191    <span class="comment">// SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!</span>
-<a name="l00192"></a>00192    <span class="comment">// according to datasheet, we need at least 40ms after power rises above 2.7V</span>
-<a name="l00193"></a>00193    <span class="comment">// before sending commands. Arduino can turn on way before 4.5V so we&#39;ll wait </span>
-<a name="l00194"></a>00194    <span class="comment">// 50</span>
-<a name="l00195"></a>00195    <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00196"></a>00196    delayMicroseconds(50000); 
-<a name="l00197"></a>00197    
-<a name="l00198"></a>00198    <span class="comment">// Now we pull both RS and R/W low to begin commands</span>
-<a name="l00199"></a>00199    digitalWrite(_rs_pin, LOW);
-<a name="l00200"></a>00200    digitalWrite(_enable_pin, LOW);
-<a name="l00201"></a>00201    
-<a name="l00202"></a>00202    <span class="keywordflow">if</span> (_rw_pin != 255) 
-<a name="l00203"></a>00203    { 
-<a name="l00204"></a>00204       digitalWrite(_rw_pin, LOW);
-<a name="l00205"></a>00205    }
-<a name="l00206"></a>00206    
-<a name="l00207"></a>00207    <span class="comment">//put the LCD into 4 bit or 8 bit mode</span>
-<a name="l00208"></a>00208    <span class="comment">// -------------------------------------</span>
-<a name="l00209"></a>00209    <span class="keywordflow">if</span> (! (<a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> &amp; <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>)) 
-<a name="l00210"></a>00210    {
-<a name="l00211"></a>00211       <span class="comment">// this is according to the hitachi HD44780 datasheet</span>
-<a name="l00212"></a>00212       <span class="comment">// figure 24, pg 46</span>
-<a name="l00213"></a>00213       
-<a name="l00214"></a>00214       <span class="comment">// we start in 8bit mode, try to set 4 bit mode</span>
-<a name="l00215"></a>00215       write4bits(0x03);
-<a name="l00216"></a>00216       delayMicroseconds(4500); <span class="comment">// wait min 4.1ms</span>
-<a name="l00217"></a>00217       
-<a name="l00218"></a>00218       <span class="comment">// second try</span>
-<a name="l00219"></a>00219       write4bits(0x03);
-<a name="l00220"></a>00220       delayMicroseconds(4500); <span class="comment">// wait min 4.1ms</span>
-<a name="l00221"></a>00221       
-<a name="l00222"></a>00222       <span class="comment">// third go!</span>
-<a name="l00223"></a>00223       write4bits(0x03); 
-<a name="l00224"></a>00224       delayMicroseconds(150);
-<a name="l00225"></a>00225       
-<a name="l00226"></a>00226       <span class="comment">// finally, set to 4-bit interface</span>
-<a name="l00227"></a>00227       write4bits(0x02); 
-<a name="l00228"></a>00228    } 
-<a name="l00229"></a>00229    <span class="keywordflow">else</span> 
-<a name="l00230"></a>00230    {
-<a name="l00231"></a>00231       <span class="comment">// this is according to the hitachi HD44780 datasheet</span>
-<a name="l00232"></a>00232       <span class="comment">// page 45 figure 23</span>
-<a name="l00233"></a>00233       
-<a name="l00234"></a>00234       <span class="comment">// Send function set command sequence</span>
-<a name="l00235"></a>00235       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
-<a name="l00236"></a>00236       delayMicroseconds(4500);  <span class="comment">// wait more than 4.1ms</span>
-<a name="l00237"></a>00237       
-<a name="l00238"></a>00238       <span class="comment">// second try</span>
-<a name="l00239"></a>00239       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
-<a name="l00240"></a>00240       delayMicroseconds(150);
-<a name="l00241"></a>00241       
-<a name="l00242"></a>00242       <span class="comment">// third go</span>
-<a name="l00243"></a>00243       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
-<a name="l00244"></a>00244    }
-<a name="l00245"></a>00245    
-<a name="l00246"></a>00246    <span class="comment">// finally, set # lines, font size, etc.</span>
-<a name="l00247"></a>00247    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);  
-<a name="l00248"></a>00248    
-<a name="l00249"></a>00249    <span class="comment">// turn the display on with no cursor or blinking default</span>
-<a name="l00250"></a>00250    <a class="code" href="class_l_c_d.html#ae47a0e2eff74431a39774b788d5761f4">_displaycontrol</a> = <a class="code" href="_l_c_d_8h.html#a76236ae8317b34bbc98ea56bc0a2639c">LCD_DISPLAYON</a> | <a class="code" href="_l_c_d_8h.html#a32b194a3adaa0a0bb69acee2e6a754fa">LCD_CURSOROFF</a> | <a class="code" href="_l_c_d_8h.html#a4b28243034cec656b0ed490ba6979752">LCD_BLINKOFF</a>;  
-<a name="l00251"></a>00251    <a class="code" href="class_l_c_d.html#a5b07cf05e8e5e7c53654f5ca0cf58b89">display</a>();
-<a name="l00252"></a>00252    
-<a name="l00253"></a>00253    <span class="comment">// clear the LCD</span>
-<a name="l00254"></a>00254    <a class="code" href="class_l_c_d.html#afa699e0beeeee03cce8cef87eba81c4a">clear</a>();
-<a name="l00255"></a>00255    
-<a name="l00256"></a>00256    <span class="comment">// Initialize to default text direction (for romance languages)</span>
-<a name="l00257"></a>00257    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> = <a class="code" href="_l_c_d_8h.html#ae7c6309fce6200bd7526d090a4a84dd0">LCD_ENTRYLEFT</a> | <a class="code" href="_l_c_d_8h.html#a049ee97e98d04788c1da9a55590fbe42">LCD_ENTRYSHIFTDECREMENT</a>;
-<a name="l00258"></a>00258    <span class="comment">// set the entry mode</span>
-<a name="l00259"></a>00259    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
-<a name="l00260"></a>00260    
-<a name="l00261"></a>00261 }
-<a name="l00262"></a>00262 
-<a name="l00263"></a>00263 <span class="comment">/************ low level data pushing commands **********/</span>
-<a name="l00264"></a>00264 
-<a name="l00265"></a>00265 <span class="comment">// send</span>
-<a name="l00266"></a><a class="code" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">00266</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">LiquidCrystal::send</a>(uint8_t value, uint8_t mode) 
-<a name="l00267"></a>00267 {
-<a name="l00268"></a>00268    digitalWrite( _rs_pin, mode );
-<a name="l00269"></a>00269    
-<a name="l00270"></a>00270    <span class="comment">// if there is a RW pin indicated, set it low to Write</span>
-<a name="l00271"></a>00271    <span class="comment">// ---------------------------------------------------</span>
-<a name="l00272"></a>00272    <span class="keywordflow">if</span> (_rw_pin != 255) 
-<a name="l00273"></a>00273    { 
-<a name="l00274"></a>00274       digitalWrite(_rw_pin, LOW);
-<a name="l00275"></a>00275    }
-<a name="l00276"></a>00276    
-<a name="l00277"></a>00277    <span class="keywordflow">if</span> (<a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> &amp; <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>)
-<a name="l00278"></a>00278    {
-<a name="l00279"></a>00279       write8bits(value); 
-<a name="l00280"></a>00280    } 
-<a name="l00281"></a>00281    <span class="keywordflow">else</span> 
-<a name="l00282"></a>00282    {
-<a name="l00283"></a>00283       write4bits ( value &gt;&gt; 4 );
-<a name="l00284"></a>00284       write4bits ( value );
-<a name="l00285"></a>00285    }
-<a name="l00286"></a>00286    <a class="code" href="_liquid_crystal_8cpp.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> ( <a class="code" href="_liquid_crystal_8h.html#adebff0f00a59c9f9863bc196938d5726">EXEC_TIME</a> );
-<a name="l00287"></a>00287 }
-<a name="l00288"></a>00288 
-<a name="l00289"></a>00289 <span class="comment">//</span>
-<a name="l00290"></a>00290 <span class="comment">// pulseEnable</span>
-<a name="l00291"></a>00291 <span class="keywordtype">void</span> LiquidCrystal::pulseEnable(<span class="keywordtype">void</span>) 
-<a name="l00292"></a>00292 {
-<a name="l00293"></a>00293    <span class="comment">// There is no need for the delays, since the digitalWrite operation</span>
-<a name="l00294"></a>00294    <span class="comment">// takes longer.</span>
-<a name="l00295"></a>00295    digitalWrite(_enable_pin, HIGH);
-<a name="l00296"></a>00296    <a class="code" href="_liquid_crystal_8cpp.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>(1);          <span class="comment">// enable pulse must be &gt; 450ns</span>
-<a name="l00297"></a>00297    
+<a name="l00183"></a>00183    <a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">_cols</a> = cols;
+<a name="l00184"></a>00184    
+<a name="l00185"></a>00185    <span class="comment">// for some 1 line displays you can select a 10 pixel high font</span>
+<a name="l00186"></a>00186    <span class="comment">// ------------------------------------------------------------</span>
+<a name="l00187"></a>00187    <span class="keywordflow">if</span> ((dotsize != 0) &amp;&amp; (lines == 1)) 
+<a name="l00188"></a>00188    {
+<a name="l00189"></a>00189       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> |= <a class="code" href="_l_c_d_8h.html#abb3210156d88d3fe18c9352eb161fe42">LCD_5x10DOTS</a>;
+<a name="l00190"></a>00190    }
+<a name="l00191"></a>00191    
+<a name="l00192"></a>00192    <span class="comment">// SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!</span>
+<a name="l00193"></a>00193    <span class="comment">// according to datasheet, we need at least 40ms after power rises above 2.7V</span>
+<a name="l00194"></a>00194    <span class="comment">// before sending commands. Arduino can turn on way before 4.5V so we&#39;ll wait </span>
+<a name="l00195"></a>00195    <span class="comment">// 50</span>
+<a name="l00196"></a>00196    <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00197"></a>00197    delayMicroseconds(50000); 
+<a name="l00198"></a>00198    
+<a name="l00199"></a>00199    <span class="comment">// Now we pull both RS and R/W low to begin commands</span>
+<a name="l00200"></a>00200    digitalWrite(_rs_pin, LOW);
+<a name="l00201"></a>00201    digitalWrite(_enable_pin, LOW);
+<a name="l00202"></a>00202    
+<a name="l00203"></a>00203    <span class="keywordflow">if</span> (_rw_pin != 255) 
+<a name="l00204"></a>00204    { 
+<a name="l00205"></a>00205       digitalWrite(_rw_pin, LOW);
+<a name="l00206"></a>00206    }
+<a name="l00207"></a>00207    
+<a name="l00208"></a>00208    <span class="comment">//put the LCD into 4 bit or 8 bit mode</span>
+<a name="l00209"></a>00209    <span class="comment">// -------------------------------------</span>
+<a name="l00210"></a>00210    <span class="keywordflow">if</span> (! (<a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> &amp; <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>)) 
+<a name="l00211"></a>00211    {
+<a name="l00212"></a>00212       <span class="comment">// this is according to the hitachi HD44780 datasheet</span>
+<a name="l00213"></a>00213       <span class="comment">// figure 24, pg 46</span>
+<a name="l00214"></a>00214       
+<a name="l00215"></a>00215       <span class="comment">// we start in 8bit mode, try to set 4 bit mode</span>
+<a name="l00216"></a>00216       write4bits(0x03);
+<a name="l00217"></a>00217       delayMicroseconds(4500); <span class="comment">// wait min 4.1ms</span>
+<a name="l00218"></a>00218       
+<a name="l00219"></a>00219       <span class="comment">// second try</span>
+<a name="l00220"></a>00220       write4bits(0x03);
+<a name="l00221"></a>00221       delayMicroseconds(4500); <span class="comment">// wait min 4.1ms</span>
+<a name="l00222"></a>00222       
+<a name="l00223"></a>00223       <span class="comment">// third go!</span>
+<a name="l00224"></a>00224       write4bits(0x03); 
+<a name="l00225"></a>00225       delayMicroseconds(150);
+<a name="l00226"></a>00226       
+<a name="l00227"></a>00227       <span class="comment">// finally, set to 4-bit interface</span>
+<a name="l00228"></a>00228       write4bits(0x02); 
+<a name="l00229"></a>00229    } 
+<a name="l00230"></a>00230    <span class="keywordflow">else</span> 
+<a name="l00231"></a>00231    {
+<a name="l00232"></a>00232       <span class="comment">// this is according to the hitachi HD44780 datasheet</span>
+<a name="l00233"></a>00233       <span class="comment">// page 45 figure 23</span>
+<a name="l00234"></a>00234       
+<a name="l00235"></a>00235       <span class="comment">// Send function set command sequence</span>
+<a name="l00236"></a>00236       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
+<a name="l00237"></a>00237       delayMicroseconds(4500);  <span class="comment">// wait more than 4.1ms</span>
+<a name="l00238"></a>00238       
+<a name="l00239"></a>00239       <span class="comment">// second try</span>
+<a name="l00240"></a>00240       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
+<a name="l00241"></a>00241       delayMicroseconds(150);
+<a name="l00242"></a>00242       
+<a name="l00243"></a>00243       <span class="comment">// third go</span>
+<a name="l00244"></a>00244       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
+<a name="l00245"></a>00245    }
+<a name="l00246"></a>00246    
+<a name="l00247"></a>00247    <span class="comment">// finally, set # lines, font size, etc.</span>
+<a name="l00248"></a>00248    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);  
+<a name="l00249"></a>00249    
+<a name="l00250"></a>00250    <span class="comment">// turn the display on with no cursor or blinking default</span>
+<a name="l00251"></a>00251    <a class="code" href="class_l_c_d.html#ae47a0e2eff74431a39774b788d5761f4">_displaycontrol</a> = <a class="code" href="_l_c_d_8h.html#a76236ae8317b34bbc98ea56bc0a2639c">LCD_DISPLAYON</a> | <a class="code" href="_l_c_d_8h.html#a32b194a3adaa0a0bb69acee2e6a754fa">LCD_CURSOROFF</a> | <a class="code" href="_l_c_d_8h.html#a4b28243034cec656b0ed490ba6979752">LCD_BLINKOFF</a>;  
+<a name="l00252"></a>00252    <a class="code" href="class_l_c_d.html#a5b07cf05e8e5e7c53654f5ca0cf58b89">display</a>();
+<a name="l00253"></a>00253    
+<a name="l00254"></a>00254    <span class="comment">// clear the LCD</span>
+<a name="l00255"></a>00255    <a class="code" href="class_l_c_d.html#afa699e0beeeee03cce8cef87eba81c4a">clear</a>();
+<a name="l00256"></a>00256    
+<a name="l00257"></a>00257    <span class="comment">// Initialize to default text direction (for romance languages)</span>
+<a name="l00258"></a>00258    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> = <a class="code" href="_l_c_d_8h.html#ae7c6309fce6200bd7526d090a4a84dd0">LCD_ENTRYLEFT</a> | <a class="code" href="_l_c_d_8h.html#a049ee97e98d04788c1da9a55590fbe42">LCD_ENTRYSHIFTDECREMENT</a>;
+<a name="l00259"></a>00259    <span class="comment">// set the entry mode</span>
+<a name="l00260"></a>00260    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
+<a name="l00261"></a>00261    
+<a name="l00262"></a>00262 }
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264 <span class="comment">/************ low level data pushing commands **********/</span>
+<a name="l00265"></a>00265 
+<a name="l00266"></a>00266 <span class="comment">// send</span>
+<a name="l00267"></a><a class="code" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">00267</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">LiquidCrystal::send</a>(uint8_t value, uint8_t mode) 
+<a name="l00268"></a>00268 {
+<a name="l00269"></a>00269    digitalWrite( _rs_pin, mode );
+<a name="l00270"></a>00270    
+<a name="l00271"></a>00271    <span class="comment">// if there is a RW pin indicated, set it low to Write</span>
+<a name="l00272"></a>00272    <span class="comment">// ---------------------------------------------------</span>
+<a name="l00273"></a>00273    <span class="keywordflow">if</span> (_rw_pin != 255) 
+<a name="l00274"></a>00274    { 
+<a name="l00275"></a>00275       digitalWrite(_rw_pin, LOW);
+<a name="l00276"></a>00276    }
+<a name="l00277"></a>00277    
+<a name="l00278"></a>00278    <span class="keywordflow">if</span> (<a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> &amp; <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>)
+<a name="l00279"></a>00279    {
+<a name="l00280"></a>00280       write8bits(value); 
+<a name="l00281"></a>00281    } 
+<a name="l00282"></a>00282    <span class="keywordflow">else</span> 
+<a name="l00283"></a>00283    {
+<a name="l00284"></a>00284       write4bits ( value &gt;&gt; 4 );
+<a name="l00285"></a>00285       write4bits ( value );
+<a name="l00286"></a>00286    }
+<a name="l00287"></a>00287    <a class="code" href="_liquid_crystal_8cpp.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> ( <a class="code" href="_liquid_crystal_8h.html#adebff0f00a59c9f9863bc196938d5726">EXEC_TIME</a> ); <span class="comment">// wait for the command to execute by the LCD</span>
+<a name="l00288"></a>00288 }
+<a name="l00289"></a>00289 
+<a name="l00290"></a>00290 <span class="comment">//</span>
+<a name="l00291"></a>00291 <span class="comment">// pulseEnable</span>
+<a name="l00292"></a>00292 <span class="keywordtype">void</span> LiquidCrystal::pulseEnable(<span class="keywordtype">void</span>) 
+<a name="l00293"></a>00293 {
+<a name="l00294"></a>00294    <span class="comment">// There is no need for the delays, since the digitalWrite operation</span>
+<a name="l00295"></a>00295    <span class="comment">// takes longer.</span>
+<a name="l00296"></a>00296    digitalWrite(_enable_pin, HIGH);   
+<a name="l00297"></a>00297    <a class="code" href="_liquid_crystal_8cpp.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>(1);          <span class="comment">// enable pulse must be &gt; 450ns   </span>
 <a name="l00298"></a>00298    digitalWrite(_enable_pin, LOW);
 <a name="l00299"></a>00299 }
 <a name="l00300"></a>00300 
@@ -389,7 +389,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Nov 19 2011 20:59:21 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jan 6 2012 14:21:03 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

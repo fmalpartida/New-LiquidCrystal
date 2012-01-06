@@ -166,7 +166,7 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    expanderWrite ( _backlightval );   // reset expander and turn backlight off (Bit 8 =1)
    delay(1000);
    
-     //put the LCD into 4 bit mode
+   //put the LCD into 4 bit mode
    // this is according to the hitachi HD44780 datasheet
    // figure 24, pg 46
    
@@ -273,7 +273,7 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
 void LiquidCrystal_I2C::pulseEnable (uint8_t _data)
 {
    expanderWrite (_data | _En);   // En HIGH
-   expanderWrite(_data & ~_En);  // En LOW
+   expanderWrite(_data & ~_En);   // En LOW
 } 
 
 //

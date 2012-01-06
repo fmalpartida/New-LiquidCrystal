@@ -1,3 +1,25 @@
+// ---------------------------------------------------------------------------
+// Created by Francisco Malpartida on 1/1/12.
+// Copyright 2011 - Under creative commons license:
+//        Attribution-NonCommercial-ShareAlike CC BY-NC-SA
+//
+// This software is furnished "as is", without technical support, and with no 
+// warranty, express or implied, as to its usefulness for any purpose.
+//
+// Thread Safe: No
+// Extendable: Yes
+//
+// @file i2CLCDextraIO.pde
+// Temperature logging to demonstrate the I2CLCDextraIO library.
+// 
+// @brief This application is a demostration file for the I2CLCDextraIO library
+// that reads a temperature from the internal ATMEGA328p temperature sensor
+// and displays it on the LCD. The application also demonstrates some of the
+// methods of the library, such as loading custom characters to the LCD,
+// moving around the LCD, and writing to it.
+//
+// @author F. Malpartida
+// ---------------------------------------------------------------------------
 #include <Arduino.h>
 #include <Wire.h>
 #include <LCD.h>
@@ -13,8 +35,6 @@
 #endif
 
 
-// ???:fmalpartida:20110821 
-
 /*!
     @defined    CHAR_WIDTH
     @abstract   Character witdth of the display, expressed in pixeles per character.
@@ -22,11 +42,11 @@
 #define CHAR_WIDTH  5
 
 /*!
-    @defined    LDR_PIN
-    @abstract   Light Detection Resistor Analog pin.
-    @discussion Define the Analog channel that will be used to read a LDR.
+    @defined    BACKLIGHT_PIN
+    @abstract   LCD backlight pin definition.
+    @discussion AVR pin used for the backlight illumintation of the LCD.
 */
-#define LDR_PIN          7
+#define BACKLIGHT_PIN          12
 
 /*!
     @defined    TEMP_CAL_OFFSET
@@ -57,7 +77,6 @@ LiquidCrystal_I2C lcd(0x38);  // set the LCD address to 0x20 for a 16 chars and 
 #ifdef _LCD_4BIT_
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 const int    CONTRAST_PIN  = 9;
-const int    BACKLIGHT_PIN = 7;
 const int    CONTRAST      = 65;
 #endif
 
@@ -184,15 +203,9 @@ void setup ()
 #ifdef _LCD_4BIT_
   pinMode(CONTRAST_PIN, OUTPUT);
   pinMode(BACKLIGHT_PIN, OUTPUT);
-
+#endif
   digitalWrite(BACKLIGHT_PIN, HIGH);
   analogWrite (CONTRAST_PIN, CONTRAST);
-#endif
-
-#ifdef _LCD_I2C_
-   pinMode ( 13, OUTPUT );
-   digitalWrite (13, HIGH);
-#endif
 
    myLCD->begin ( 16, 2 );
   
