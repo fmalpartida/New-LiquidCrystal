@@ -33,8 +33,8 @@
 #define LiquidCrystal_I2C_h
 #include <inttypes.h>
 #include <Print.h>
-#include <I2CIO.h>
-#include <LCD.h>
+#include "I2CIO.h"
+#include "LCD.h"
 
 // flags for backlight control
 #define LCD_BACKLIGHT   0x00
