@@ -38,7 +38,7 @@
 #else
 #include <Arduino.h>
 #endif
-#include <LiquidCrystal.h>
+#include "LiquidCrystal.h"
 
 // STATIC helper routines
 // ---------------------------------------------------------------------------

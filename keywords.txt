@@ -6,6 +6,7 @@
 # Datatypes (KEYWORD1)
 ###########################################
 
+LiquidCrystal_SR	 KEYWORD1
 LiquidCrystal_I2C    KEYWORD1
 LiquidCrystal        KEYWORD1
 LCD                  KEYWORD1
