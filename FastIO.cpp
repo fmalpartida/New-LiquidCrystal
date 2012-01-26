@@ -1,3 +1,13 @@
+// ---------------------------------------------------------------------------
+// Created by Florian Fida on 20/01/12
+// Copyright 2012 - Under creative commons license 3.0:
+//        Attribution-ShareAlike CC BY-SA
+//        http://creativecommons.org/licenses/by-sa/3.0/
+//
+// This software is furnished "as is", without technical support, and with no
+// warranty, express or implied, as to its usefulness for any purpose.
+// ---------------------------------------------------------------------------
+
 #if (ARDUINO <  100)
 #include <WProgram.h>
 #else
