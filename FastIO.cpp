@@ -6,9 +6,9 @@
 #include "FastIO.h"
 #include <util/delay.h>
 
-fio_register fio_pinToOutputRegister(uint8_t pin){
+fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state){
 	pinMode(pin, OUTPUT);
-	digitalWrite(pin, LOW); // also turns off pwm timer
+	if(initial_state != SKIP) digitalWrite(pin, initial_state); // also turns off pwm timer
 #ifdef FIO_FALLBACK
 	//  just wasting memory if not using fast io...
 	return 0;
@@ -66,7 +66,8 @@ void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clock
 	for(int8_t i = 7; i>-1; --i){
 		fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << i)));
 		fio_digitalWrite_HIGH(clockRegister, clockBit);
-		fio_digitalWrite_LOW(clockRegister, clockBit);
+		// Switching is a little bit faster
+		fio_digitalWrite_SWITCH(clockRegister,clockBit);
 	}
 
 	// # enable interrupts
@@ -74,17 +75,22 @@ void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clock
 }
 
 void fio_shiftOut(fio_register dataRegister, uint8_t dataBit, fio_register clockRegister, uint8_t clockBit){
+	// shift out 0x0 (0b00000000) fast
 	fio_digitalWrite_LOW(dataRegister, dataBit);
 	for(uint8_t i = 0; i<8; ++i){
-			fio_digitalWrite_HIGH(clockRegister, clockBit);
-			fio_digitalWrite_LOW(clockRegister, clockBit);
+		fio_digitalWrite_HIGH(clockRegister, clockBit);
+		fio_digitalWrite_SWITCH(clockRegister,clockBit);
 	}
 }
 
 void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit){
 	// Make sure that capacitors are charged
+	// 300us is an educated guess...
 	fio_digitalWrite(shift1Register,shift1Bit,HIGH);
 	delayMicroseconds(300);
+}
+void fio_shiftOut1_init(uint8_t pin){
+	fio_shiftOut1_init(fio_pinToOutputRegister(pin,HIGH),fio_pinToBit(pin));
 }
 void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value){
 
@@ -93,14 +99,16 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 	oldSREG = SREG;
 	cli();
 
+	//unsigned int msLOW, msHIGH;
 
 	// note: profiling showed that shift out takes 18us longer than the sum of needed delays
 
 	// iterate but ignore last byte (must be LOW)
 	for(int8_t i = 7; i>0; --i){
-		fio_digitalWrite_LOW(shift1Register,shift1Bit);
+
 		if(LOW==!!(value & (1 << i))){
 			// LOW = 0 Bit
+			fio_digitalWrite_LOW(shift1Register,shift1Bit);
 			// hold pin LOW for 15us
 			delayMicroseconds(14);
 			fio_digitalWrite_HIGH(shift1Register,shift1Bit);
@@ -108,6 +116,7 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 			delayMicroseconds(29);
 		}else{
 			// HIGH = 1 Bit
+			fio_digitalWrite_LOW(shift1Register,shift1Bit);
 			//hold pin LOW for 1us - did that already
 			fio_digitalWrite_HIGH(shift1Register,shift1Bit);
 			//hold pin HIGH for 15us
@@ -123,5 +132,8 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 	// enable interrupts
 	SREG = oldSREG;
 
+}
+void fio_shiftOut1(uint8_t pin, uint8_t value){
+	fio_shiftOut1(fio_pinToOutputRegister(pin, SKIP),fio_pinToBit(pin),value);
 }
 

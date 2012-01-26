@@ -9,6 +9,7 @@
 #endif
 
 typedef uint8_t fio_bit;
+#define SKIP 0x23
 
 #ifndef FALLBACK
 typedef volatile uint8_t * fio_register;
@@ -24,7 +25,7 @@ typedef uint8_t fio_register;
  @param  pin[in] Number of a digital pin
  @result  Register
  */
-fio_register fio_pinToOutputRegister(uint8_t pin);
+fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state = LOW);
 
 /*!
  @function
@@ -57,12 +58,14 @@ fio_bit fio_pinToBit(uint8_t pin);
 // __attribute__ ((always_inline)) /* let the optimizer decide that for now */
 void fio_digitalWrite(fio_register pinRegister, fio_bit pinBit,uint8_t value);
 
-// todo: how do i get te compiler to use these when value is known at compile time?
 #ifndef FIO_FALLBACK
 #define fio_digitalWrite_LOW(reg,bit) *reg &= ~bit
+#define fio_digitalWrite_SWITCH(reg,bit) *reg ^= bit
 #define fio_digitalWrite_HIGH(reg,bit) *reg |= bit
 #else
+// reg -> dummy, bit -> pin
 #define fio_digitalWrite_HIGH(reg,bit) digitalWrite(bit,HIGH)
+#define fio_digitalWrite_SWITCH(reg,bit) digitalWrite(bit, !digitalRead(bit))
 #define fio_digitalWrite_LOW(reg,bit) digitalWrite(bit,LOW)
 #endif
 
@@ -112,11 +115,26 @@ void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clock
 void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value);
 /*!
  * @method
+ * @abstract one wire shift out
+ * @discussion protocol needs initialisation (fio_shiftOut1_init)
+ * @param pin[in] digital pin
+ * @param value[in] value to shift out, last byte is ignored and always shifted out LOW
+ */
+void fio_shiftOut1(uint8_t pin, uint8_t value);
+/*!
+ * @method
  * @abstract initializes one wire shift out protocol
  * @discussion Puts pin to HIGH state and delays until Capacitors are charged.
  * @param shift1Register[in] pins register
  * @param shift1Bit[in] pins bit
  */
 void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit);
+/*!
+ * @method
+ * @abstract initializes one wire shift out protocol
+ * @discussion Puts pin to HIGH state and delays until Capacitors are charged.
+ * @param pin[in] digital pin
+ */
+void fio_shiftOut1_init(uint8_t pin);
 
 #endif // FAST_IO_H
