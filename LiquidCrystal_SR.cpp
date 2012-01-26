@@ -256,9 +256,9 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    
    fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1);
    
-   fio_digitalWrite(_srEnableRegister, _srEnableBit, HIGH);
+   fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
    waitUsec( 1 );                 // enable pulse must be >450ns
-   fio_digitalWrite(_srEnableRegister, _srEnableBit, LOW);
+   fio_digitalWrite_SWITCH(_srEnableRegister, _srEnableBit);
 
    // clear shiftregister
    // ---------------------------
@@ -268,9 +268,9 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    }
    fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val2);
    
-   fio_digitalWrite(_srEnableRegister, _srEnableBit, HIGH);
+   fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
    waitUsec( 1 );                 // enable pulse must be >450ns
-   fio_digitalWrite(_srEnableRegister, _srEnableBit, LOW);
+   fio_digitalWrite_SWITCH(_srEnableRegister, _srEnableBit);
    waitUsec( 40 );                // commands need > 37us to settle
 }
 
