@@ -134,8 +134,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00071"></a>00071 
 <a name="l00072"></a><a class="code" href="class_l_c_d.html#a48220450fd152b25994eb7d0ba340e8d">00072</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a48220450fd152b25994eb7d0ba340e8d">LCD::setCursor</a>(uint8_t col, uint8_t row)
 <a name="l00073"></a>00073 {
-<a name="l00074"></a>00074    <span class="keywordtype">int</span> row_offsetsDef[]   = { 0x00, 0x40, 0x14, 0x54 }; <span class="comment">// For regular LCDs</span>
-<a name="l00075"></a>00075    <span class="keywordtype">int</span> row_offsetsLarge[] = { 0x00, 0x40, 0x10, 0x50 }; <span class="comment">// For 16x4 LCDs</span>
+<a name="l00074"></a>00074    <span class="keyword">const</span> byte row_offsetsDef[]   = { 0x00, 0x40, 0x14, 0x54 }; <span class="comment">// For regular LCDs</span>
+<a name="l00075"></a>00075    <span class="keyword">const</span> byte row_offsetsLarge[] = { 0x00, 0x40, 0x10, 0x50 }; <span class="comment">// For 16x4 LCDs</span>
 <a name="l00076"></a>00076    
 <a name="l00077"></a>00077    <span class="keywordflow">if</span> ( row &gt;= <a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">_numlines</a> ) 
 <a name="l00078"></a>00078    {
@@ -279,7 +279,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jan 6 2012 14:21:03 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 18:37:31 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
