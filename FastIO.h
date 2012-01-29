@@ -18,7 +18,6 @@
 #include <pins_arduino.h> // pleasing sanguino core
 #include <inttypes.h>
 #include <util/delay.h>
-#include "delay_x.h"
 
 #ifndef __AVR__
 #define FIO_FALLBACK
