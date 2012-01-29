@@ -20,7 +20,7 @@
 //
 // @file LiquidCrystal_SR_LCD3.h
 //  Connects an LCD using 3 pins from the Arduino, via an 8-bit 
-// ShiftRegister (SR from now on).
+//  ShiftRegister (SR from now on).
 // 
 // @brief 
 // This is a port of the ShiftRegLCD library from raron and ported to the
