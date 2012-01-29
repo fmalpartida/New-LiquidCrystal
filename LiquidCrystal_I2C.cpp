@@ -35,8 +35,8 @@
 #include <Arduino.h>
 #endif
 #include <inttypes.h>
-#include <I2CIO.h>
-#include <LiquidCrystal_I2C.h>
+#include "I2CIO.h"
+#include "LiquidCrystal_I2C.h"
 
 
 
