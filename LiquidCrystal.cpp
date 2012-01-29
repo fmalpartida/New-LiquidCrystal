@@ -38,7 +38,7 @@
 #else
 #include <Arduino.h>
 #endif
-#include <LiquidCrystal.h>
+#include "LiquidCrystal.h"
 
 // STATIC helper functions
 // ---------------------------------------------------------------------------
@@ -100,42 +100,37 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
                          uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                          uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
-   uint8_t i;
    
    // Initialize the IO pins
    // -----------------------
    
    _rs_pin = rs;
    _rw_pin = rw;
-   _enable_pin = enable;
+
+   _enable_bit = fio_pinToBit(enable);
+   _enable_register = fio_pinToInputRegister(enable);
    
-   _data_pins[0] = d0;
-   _data_pins[1] = d1;
-   _data_pins[2] = d2;
-   _data_pins[3] = d3; 
-   _data_pins[4] = d4;
-   _data_pins[5] = d5;
-   _data_pins[6] = d6;
-   _data_pins[7] = d7;
+   // Initialize data pins for FastIO
+   _data_bits[0] = fio_pinToBit(d0);
+   _data_bits[1] = fio_pinToBit(d1);
+   _data_bits[2] = fio_pinToBit(d2);
+   _data_bits[3] = fio_pinToBit(d3);
+   _data_registers[0] = fio_pinToOutputRegister(d0);
+   _data_registers[1] = fio_pinToOutputRegister(d1);
+   _data_registers[2] = fio_pinToOutputRegister(d2);
+   _data_registers[3] = fio_pinToOutputRegister(d3);
    
-   // Initialize the IO port direction to OUTPUT
-   // ------------------------------------------
-   
-   for ( i = 0; i < 4; i++ )
-   {
-      pinMode ( _data_pins[i], OUTPUT );
+   if(!fourbitmode){
+	   _data_bits[4] = fio_pinToBit(d4);
+	   _data_bits[5] = fio_pinToBit(d5);
+	   _data_bits[6] = fio_pinToBit(d6);
+	   _data_bits[7] = fio_pinToBit(d7);
+	   _data_registers[4] = fio_pinToOutputRegister(d4);
+	   _data_registers[5] = fio_pinToOutputRegister(d5);
+	   _data_registers[6] = fio_pinToOutputRegister(d6);
+	   _data_registers[7] = fio_pinToOutputRegister(d7);
    }
-   
-   // Initialize the rest of the ports if it is an 8bit controlled LCD
-   // ----------------------------------------------------------------
-   
-   if ( !fourbitmode )
-   {
-      for ( i = 4; i < 8; i++ )
-      {
-         pinMode ( _data_pins[i], OUTPUT );
-      }
-   }
+
    pinMode(_rs_pin, OUTPUT);
    
    // we can save 1 pin by not using RW. Indicate by passing 255 instead of pin#
@@ -143,8 +138,6 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
    { 
       pinMode(_rw_pin, OUTPUT);
    }
-   
-   pinMode(_enable_pin, OUTPUT);
    
    // Initialise displaymode functions to defaults: LCD_1LINE and LCD_5x8DOTS
    // -------------------------------------------------------------------------
@@ -184,7 +177,7 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    
    // Now we pull both RS and R/W low to begin commands
    digitalWrite(_rs_pin, LOW);
-   digitalWrite(_enable_pin, LOW);
+   fio_digitalWrite_LOW(_enable_register,_enable_bit);
    
    if (_rw_pin != 255) 
    { 
@@ -199,19 +192,19 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
       // figure 24, pg 46
       
       // we start in 8bit mode, try to set 4 bit mode
-      write4bits(0x03);
+      writeNbits(4,0x03);
       delayMicroseconds(4500); // wait min 4.1ms
       
       // second try
-      write4bits(0x03);
+      writeNbits(4,0x03);
       delayMicroseconds(4500); // wait min 4.1ms
       
       // third go!
-      write4bits(0x03); 
+      writeNbits(4,0x03);
       delayMicroseconds(150);
       
       // finally, set to 4-bit interface
-      write4bits(0x02); 
+      writeNbits(4,0x02);
    } 
    else 
    {
@@ -263,12 +256,12 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
    
    if (_displayfunction & LCD_8BITMODE)
    {
-      write8bits(value); 
+      writeNbits(8, value);
    } 
    else 
    {
-      write4bits ( value >> 4 );
-      write4bits ( value );
+      writeNbits (4, value >> 4);
+      writeNbits (4, value);
    }
    waitUsec ( EXEC_TIME ); // wait for the command to execute by the LCD
 }
@@ -279,29 +272,16 @@ void LiquidCrystal::pulseEnable(void)
 {
    // There is no need for the delays, since the digitalWrite operation
    // takes longer.
-   digitalWrite(_enable_pin, HIGH);   
+   fio_digitalWrite_HIGH(_enable_register, _enable_bit);
    waitUsec(1);          // enable pulse must be > 450ns   
-   digitalWrite(_enable_pin, LOW);
+   fio_digitalWrite_SWITCH(_enable_register, _enable_bit);
+   waitUsec(40);   // commands need > 37us to settle
 }
 
 //
-// write4bits
-void LiquidCrystal::write4bits(uint8_t value) 
-{
-   for (uint8_t i = 0; i < 4; i++) 
-   {
-      digitalWrite(_data_pins[i], (value >> i) & 0x01);
-   }
-   pulseEnable();
-}
-
-//
-// write8bits
-void LiquidCrystal::write8bits(uint8_t value) 
-{
-   for (uint8_t i = 0; i < 8; i++) 
-   {
-      digitalWrite(_data_pins[i], (value >> i) & 0x01);
-   }   
-   pulseEnable();
+// writeNbits
+void LiquidCrystal::writeNbits(uint8_t bits, uint8_t value){
+	for(uint8_t i = 0; i < bits; ++i){
+		fio_digitalWrite(_data_registers[i], _data_bits[i], (value >> i) & 0x01);
+	}
 }

@@ -42,7 +42,7 @@
 #else
 #include <Arduino.h>
 #endif
-#include <LCD.h>
+#include "LCD.h"
 
 // CLASS CONSTRUCTORS
 // ---------------------------------------------------------------------------
