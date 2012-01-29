@@ -15,6 +15,12 @@
 #ifndef FAST_IO_H
 #define FAST_IO_H
 
+#if (ARDUINO <  100)
+#include <WProgram.h>
+#else
+#include <Arduino.h>
+#endif
+
 #include <pins_arduino.h> // pleasing sanguino core
 #include <inttypes.h>
 #include <util/delay.h>
@@ -104,8 +110,9 @@ int fio_digitalRead(fio_register pinRegister, fio_bit pinBit);
  @param dataBit[in] Bit of data pin - Pin if fast digital write is disabled
  @param clockRegister[in] Register of data pin - ignored if fast digital write is disabled
  @param clockBit[in] Bit of data pin - Pin if fast digital write is disabled
+ @param bitOrder[in] bit order
  */
-void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, fio_bit clockBit, uint8_t value);
+void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, fio_bit clockBit, uint8_t value, uint8_t bitOrder);
 
 /*!
  @method

@@ -221,6 +221,7 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    // ----------------------------------------------
    if ( _two_wire ) 
    {
+	   // clear fast
 	   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
    }
    
@@ -230,16 +231,16 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    val1 = mode | SR_EN_BIT | ((value >> 1) & 0x78); // upper nibble
    val2 = mode | SR_EN_BIT | ((value << 3) & 0x78); // lower nibble
    
-   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1);
+   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1, MSBFIRST);
    
    // LCD ENABLE PULSE
-   fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
    //
    // While this library is written with a shift register without an output
    // latch in mind, it can work in 3-wire mode with a shiftregister with a
    // latch. The shiftregister latch pin (STR, RCL or similar) is then
    // connected to the LCD enable pin. The LCD is (very likely) slower
    // to read the Enable pulse, and then reads the new contents of the SR.
+   fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
    waitUsec( 1 );                 // enable pulse must be >450ns
    fio_digitalWrite_SWITCH(_srEnableRegister, _srEnableBit);
 
@@ -247,9 +248,10 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    // ---------------------------
    if ( _two_wire ) 
    {
+	   // Clear fast
 	   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
    }
-   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val2);
+   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val2, MSBFIRST);
    
    // LCD ENABLE PULSE, se above comment
    fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
@@ -268,6 +270,7 @@ void LiquidCrystal_SR::write4bits(uint8_t value)
    // --------------------------
    if ( _two_wire ) 
    {
+	   // clear fast
 	   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
    }
    fio_digitalWrite(_srEnableRegister, _srEnableBit, LOW);
@@ -275,17 +278,18 @@ void LiquidCrystal_SR::write4bits(uint8_t value)
    // Discard lower nibble
    // and format it for shiftregister output wiring to the LCD
    val1 = SR_EN_BIT | ((value >> 1) & 0x78);
-   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1);
+   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1, MSBFIRST);
 
    // LCD ENABLE PULSE
    //
-   
-   fio_digitalWrite(_srEnableRegister, _srEnableBit, HIGH);
    // While this library is written with a shift register without an output
    // latch in mind, it can work in 3-wire mode with a shiftregister with a
    // latch. The shiftregister latch pin (STR, RCL or similar) is then
    // connected to the LCD enable pin. The LCD is (very likely) slower
    // to read the Enable pulse, and then reads the new contents of the SR.
+   
+   fio_digitalWrite(_srEnableRegister, _srEnableBit, HIGH);
+
    waitUsec( 1 );                 // enable pulse must be >450ns
    fio_digitalWrite(_srEnableRegister, _srEnableBit, LOW);
    

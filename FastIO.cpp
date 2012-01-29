@@ -12,11 +12,6 @@
 // TODO:
 //  support chipkit (https://github.com/chipKIT32/chipKIT32-MAX/blob/master/hardware/pic32/cores/pic32/wiring_digital.c)
 
-#if (ARDUINO <  100)
-#include <WProgram.h>
-#else
-#include <Arduino.h>
-#endif
 #include "FastIO.h"
 
 fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state){
@@ -71,13 +66,19 @@ int fio_digitalRead(fio_register pinRegister, uint8_t pinBit){
 #endif
 }
 
-void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, fio_bit clockBit, uint8_t value){
+void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, fio_bit clockBit, uint8_t value, uint8_t bitOrder){
 	// # disable interrupts
 	// uint8_t oldSREG = SREG;
 	// cli();
 
-	for(int8_t i = 7; i>-1; --i){
-		fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << i)));
+	int8_t i;
+
+	for(i = 0; i < 8; i++){
+		if (bitOrder == LSBFIRST){
+			fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << i)));
+		}else{
+			fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << (7 - i))));
+		}
 		fio_digitalWrite_HIGH(clockRegister, clockBit);
 		// Switching is a little bit faster
 		fio_digitalWrite_SWITCH(clockRegister,clockBit);
@@ -88,7 +89,7 @@ void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clock
 }
 
 void fio_shiftOut(fio_register dataRegister, uint8_t dataBit, fio_register clockRegister, uint8_t clockBit){
-	// shift out 0x0 (0b00000000) fast
+	// shift out 0x0 (B00000000) fast
 	fio_digitalWrite_LOW(dataRegister, dataBit);
 	for(uint8_t i = 0; i<8; ++i){
 		fio_digitalWrite_HIGH(clockRegister, clockBit);
