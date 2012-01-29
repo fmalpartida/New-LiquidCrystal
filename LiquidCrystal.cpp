@@ -120,7 +120,9 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
    
    _rs_pin = rs;
    _rw_pin = rw;
-   _enable_pin = enable;
+
+   _enable_bit = fio_pinToBit(enable);
+   _enable_register = fio_pinToInputRegister(enable);
    
    // Initialize data pins for FastIO
    _data_bits[0] = fio_pinToBit(d0);
@@ -150,8 +152,6 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
    { 
       pinMode(_rw_pin, OUTPUT);
    }
-   
-   pinMode(_enable_pin, OUTPUT);
    
    // Initialise displaymode functions to defaults: LCD_1LINE and LCD_5x8DOTS
    // -------------------------------------------------------------------------
@@ -191,7 +191,7 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    
    // Now we pull both RS and R/W low to begin commands
    digitalWrite(_rs_pin, LOW);
-   digitalWrite(_enable_pin, LOW);
+   fio_digitalWrite_LOW(_enable_register,_enable_bit);
    
    if (_rw_pin != 255) 
    { 
@@ -286,9 +286,9 @@ void LiquidCrystal::pulseEnable(void)
 {
    // There is no need for the delays, since the digitalWrite operation
    // takes longer.
-   digitalWrite(_enable_pin, HIGH);   
+   fio_digitalWrite_HIGH(_enable_register, _enable_bit);
    waitUsec(1);          // enable pulse must be > 450ns   
-   digitalWrite(_enable_pin, LOW);
+   fio_digitalWrite_SWITCH(_enable_register, _enable_bit);
    waitUsec(40);   // commands need > 37us to settle
 }
 
