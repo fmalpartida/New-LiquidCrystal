@@ -34,6 +34,7 @@
 
 #include <inttypes.h>
 #include "LCD.h"
+#include "FastIO.h"
 
 
 /*!
@@ -113,17 +114,10 @@ private:
    
    /*!
     @method     
-    @abstract   Writes an 8 bit value to the LCD.
-    @discussion Writes 8 bits to the LCD control data lines.
+    @abstract   Writes an 8 or 4 bit value to the LCD.
+    @discussion Writes 8 or 4 bits to the LCD control data lines.
     */
-   void write8bits(uint8_t value);
-   
-   /*!
-    @method     
-    @abstract   Writes an 4 bit value to the LCD.
-    @discussion Writes 4 bits (the least significant) to the LCD control data lines.
-    */   
-   void write4bits(uint8_t value);
+   void writeNbits(uint8_t bits, uint8_t value);
    
    /*!
     @method     
@@ -136,7 +130,9 @@ private:
    uint8_t _rs_pin;       // LOW: command.  HIGH: character.
    uint8_t _rw_pin;       // LOW: write to LCD.  HIGH: read from LCD.
    uint8_t _enable_pin;   // activated by a HIGH pulse.
-   uint8_t _data_pins[8]; // Data pins.
+
+   fio_bit _data_bits[8];
+   fio_register _data_registers[8];
 };
 
 #endif
