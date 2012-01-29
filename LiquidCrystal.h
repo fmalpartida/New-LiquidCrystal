@@ -129,8 +129,12 @@ private:
    
    uint8_t _rs_pin;       // LOW: command.  HIGH: character.
    uint8_t _rw_pin;       // LOW: write to LCD.  HIGH: read from LCD.
-   uint8_t _enable_pin;   // activated by a HIGH pulse.
 
+   // Enable pin - activated by a HIGH pulse.
+   fio_bit _enable_bit;
+   fio_register _enable_register;
+
+   // data pins
    fio_bit _data_bits[8];
    fio_register _data_registers[8];
 };
