@@ -71,8 +71,8 @@ void LCD::home()
 
 void LCD::setCursor(uint8_t col, uint8_t row)
 {
-   int row_offsetsDef[]   = { 0x00, 0x40, 0x14, 0x54 }; // For regular LCDs
-   int row_offsetsLarge[] = { 0x00, 0x40, 0x10, 0x50 }; // For 16x4 LCDs
+   const byte row_offsetsDef[]   = { 0x00, 0x40, 0x14, 0x54 }; // For regular LCDs
+   const byte row_offsetsLarge[] = { 0x00, 0x40, 0x10, 0x50 }; // For 16x4 LCDs
    
    if ( row >= _numlines ) 
    {

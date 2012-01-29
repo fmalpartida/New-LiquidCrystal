@@ -50,6 +50,23 @@
 #define FAST_MODE
 
 /*!
+ @function
+ @abstract   waits for a given time in microseconds (compilation dependent).
+ @discussion Waits for a given time defined in microseconds depending on
+ the FAST_MODE define. If the FAST_MODE is defined the call will return
+ inmediatelly.
+ @param      uSec[in] time in microseconds.
+ @result     None
+ */
+inline static void waitUsec ( uint16_t uSec )
+{
+#ifndef FAST_MODE
+   delayMicroseconds ( uSec );
+#endif // FAST_MODE
+}
+
+
+/*!
  @defined 
  @abstract   All these definitions shouldn't be used unless you are writing 
  a driver.
