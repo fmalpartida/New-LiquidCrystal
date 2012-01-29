@@ -7,6 +7,10 @@
 // This software is furnished "as is", without technical support, and with no
 // warranty, express or implied, as to its usefulness for any purpose.
 // ---------------------------------------------------------------------------
+// fio_shiftOut1 functions are based on Shif1 protocol developed by Roman Black (http://www.romanblack.com/shift1.htm)
+//
+// TODO:
+//  support chipkit (https://github.com/chipKIT32/chipKIT32-MAX/blob/master/hardware/pic32/cores/pic32/wiring_digital.c)
 
 #if (ARDUINO <  100)
 #include <WProgram.h>
@@ -14,7 +18,6 @@
 #include <Arduino.h>
 #endif
 #include "FastIO.h"
-#include <util/delay.h>
 
 fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state){
 	pinMode(pin, OUTPUT);
