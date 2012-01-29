@@ -178,17 +178,17 @@ void LiquidCrystal_SR::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    // 50
    // ---------------------------------------------------------------------------
    delayMicroseconds(50000);
-   init4bits(LCD_FUNCTIONSET | LCD_8BITMODE);
+   write4bits(LCD_FUNCTIONSET | LCD_8BITMODE);
    delayMicroseconds(4500);  // wait more than 4.1ms
    
    // Second try
-   init4bits(LCD_FUNCTIONSET | LCD_8BITMODE);
+   write4bits(LCD_FUNCTIONSET | LCD_8BITMODE);
    delayMicroseconds(150);
    // Third go
-   init4bits(LCD_FUNCTIONSET | LCD_8BITMODE);
+   write4bits(LCD_FUNCTIONSET | LCD_8BITMODE);
    
    // And finally, set to 4-bit interface
-   init4bits(LCD_FUNCTIONSET | LCD_4BITMODE);
+   write4bits(LCD_FUNCTIONSET | LCD_4BITMODE);
    
    // Set # lines, font size, etc.
    command(LCD_FUNCTIONSET | _displayfunction);
@@ -255,8 +255,8 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
 }
 
 //
-// init4bits
-void LiquidCrystal_SR::init4bits(uint8_t value) 
+// write4bits
+void LiquidCrystal_SR::write4bits(uint8_t value) 
 {
    uint8_t val1;
    

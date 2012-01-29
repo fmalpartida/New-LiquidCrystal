@@ -156,7 +156,7 @@ private:
     @abstract   For sending data when initializing the display to 4-bit
     @discussion Initializes the LCD pin allocation and configuration.
     */
-   void init4bits ( uint8_t );
+   void write4bits ( uint8_t );
    
    uint8_t _srdata_pin;  // Serial Data pin
    uint8_t _srclock_pin; // Clock Pin
