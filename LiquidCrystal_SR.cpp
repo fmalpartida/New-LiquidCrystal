@@ -242,7 +242,7 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    // to read the Enable pulse, and then reads the new contents of the SR.
    fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
    waitUsec( 1 );                 // enable pulse must be >450ns
-   fio_digitalWrite_SWITCH(_srEnableRegister, _srEnableBit);
+   fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit,LOW);
 
    // clear shiftregister
    // ---------------------------
@@ -254,9 +254,9 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val2, MSBFIRST);
    
    // LCD ENABLE PULSE, se above comment
-   fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
+   fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit,HIGH);
    waitUsec( 1 );                 // enable pulse must be >450ns
-   fio_digitalWrite_SWITCH(_srEnableRegister, _srEnableBit);
+   fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit,LOW);
    waitUsec( 40 );                // commands need > 37us to settle
 }
 

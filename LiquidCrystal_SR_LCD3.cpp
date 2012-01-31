@@ -268,6 +268,6 @@ void LiquidCrystal_SR_LCD3::_pushOut(uint8_t nibble)
    // Make new data active.
    fio_digitalWrite_HIGH(_strobe_register, _strobe_bit);
    waitUsec( 1 ); // strobe pulse must be >450ns (old code had 10ms)
-   fio_digitalWrite_SWITCH(_strobe_register, _strobe_bit);
+   fio_digitalWrite_SWITCHTO(_strobe_register, _strobe_bit,LOW);
    waitUsec( 40 ); // commands need > 37us to settle
 }

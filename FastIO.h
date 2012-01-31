@@ -79,15 +79,23 @@ fio_bit fio_pinToBit(uint8_t pin);
 // __attribute__ ((always_inline)) /* let the optimizer decide that for now */
 void fio_digitalWrite(fio_register pinRegister, fio_bit pinBit,uint8_t value);
 
+/**
+ * This is where the magic happens that makes things fast.
+ * Implemented as preprocessor directives to force inlining
+ * SWITCH is fast for FIO but probably slow for FIO_FALLBACK so SWITCHTO is recommended if the value is known.
+ */
+
 #ifndef FIO_FALLBACK
 #define fio_digitalWrite_LOW(reg,bit) *reg &= ~bit
-#define fio_digitalWrite_SWITCH(reg,bit) *reg ^= bit
 #define fio_digitalWrite_HIGH(reg,bit) *reg |= bit
+#define fio_digitalWrite_SWITCH(reg,bit) *reg ^= bit
+#define fio_digitalWrite_SWITCHTO(reg,bit,val) fio_digitalWrite_SWITCH(reg,bit)
 #else
-// reg -> dummy, bit -> pin
+// reg -> dummy NULL, bit -> pin
 #define fio_digitalWrite_HIGH(reg,bit) digitalWrite(bit,HIGH)
-#define fio_digitalWrite_SWITCH(reg,bit) digitalWrite(bit, !digitalRead(bit))
 #define fio_digitalWrite_LOW(reg,bit) digitalWrite(bit,LOW)
+#define fio_digitalWrite_SWITCH(reg,bit) digitalWrite(bit, !digitalRead(bit))
+#define fio_digitalWrite_SWITCHTO(reg,bit,val) digitalWrite(bit,val);
 #endif
 
 /*!
