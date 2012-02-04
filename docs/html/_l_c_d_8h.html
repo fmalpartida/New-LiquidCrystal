@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoGoogle.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.1.1</span></div>
+   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.1.7</span></div>
    <div id="projectbrief">LCD Library - LCD control class hierarchy library. Drop in replacement for the LiquidCrystal Library.</div>
   </td>
  </tr>
@@ -78,7 +78,6 @@ Classes</h2></td></tr>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ab0d87e07831e7e4943caef187872123e">COMMAND</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>&#160;&#160;&#160;1</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ac707c9605a0b9ca67aa757ad23377feb">FAST_MODE</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ad25b138788d83e67f840588754e2df2f">HOME_CLEAR_EXEC</a>&#160;&#160;&#160;2000</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a8c85cf88d8af66a47c42249d81c94641">LCD_1LINE</a>&#160;&#160;&#160;0x00</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a7987e93538df2819583ba43b81ddbb25">LCD_2LINE</a>&#160;&#160;&#160;0x08</td></tr>
@@ -142,22 +141,6 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00125">125</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac707c9605a0b9ca67aa757ad23377feb"></a><!-- doxytag: member="LCD.h::FAST_MODE" ref="ac707c9605a0b9ca67aa757ad23377feb" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define FAST_MODE</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Enables disables fast waits for write operations for <a class="el" href="class_l_c_d.html">LCD</a>  If defined, the library will avoid doing un-necessary waits. this can be done, because the time taken by Arduino's slow digitalWrite operations. If fast digitalIO operations, comment this line out or undefine the mode. </p>
-
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00050">50</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -643,6 +626,7 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Enables disables fast waits for write operations for <a class="el" href="class_l_c_d.html">LCD</a>  If defined, the library will avoid doing un-necessary waits. this can be done, because the time taken by Arduino's slow digitalWrite operations. If fast digitalIO operations, comment this line out or undefine the mode.</p>
 <p>waits for a given time in microseconds (compilation dependent).  Waits for a given time defined in microseconds depending on the FAST_MODE define. If the FAST_MODE is defined the call will return inmediatelly. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -671,7 +655,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 18:37:31 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 4 2012 15:11:14 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
