@@ -198,7 +198,6 @@ void setup ()
    
    Serial.begin ( 57600 );
    analogReference ( INTERNAL );
-   pinMode ( LDR_PIN, INPUT );
    
 #ifdef _LCD_4BIT_
   pinMode(CONTRAST_PIN, OUTPUT);

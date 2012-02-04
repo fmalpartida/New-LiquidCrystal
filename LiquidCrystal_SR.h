@@ -103,16 +103,6 @@ public:
     */
    LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, uint8_t enable );
    
-   
-   // Set nr. of lines, assume 8 pixel high font
-   LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, uint8_t enable, 
-                     uint8_t lines );
-   
-   // Set nr. of lines and font
-   LiquidCrystal_SR( uint8_t srdata, uint8_t srclock, uint8_t enable, 
-                    uint8_t lines, uint8_t font );
-   
-   
    /*!
     @function
     @abstract   LCD initialization.

@@ -199,19 +199,19 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
       // figure 24, pg 46
       
       // we start in 8bit mode, try to set 4 bit mode
-      write4bits(0x03);
+      writeNbits(0x03, 4);
       delayMicroseconds(4500); // wait min 4.1ms
       
       // second try
-      write4bits(0x03);
+      writeNbits(0x03, 4);
       delayMicroseconds(4500); // wait min 4.1ms
       
       // third go!
-      write4bits(0x03); 
+      writeNbits(0x03, 4); 
       delayMicroseconds(150);
       
       // finally, set to 4-bit interface
-      write4bits(0x02); 
+      writeNbits(0x02, 4); 
    } 
    else 
    {
@@ -263,12 +263,12 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
    
    if (_displayfunction & LCD_8BITMODE)
    {
-      write8bits(value); 
+      writeNbits(value, 8); 
    } 
    else 
    {
-      write4bits ( value >> 4 );
-      write4bits ( value );
+      writeNbits ( value >> 4, 4 );
+      writeNbits ( value, 4 );
    }
    waitUsec ( EXEC_TIME ); // wait for the command to execute by the LCD
 }
@@ -282,26 +282,16 @@ void LiquidCrystal::pulseEnable(void)
    digitalWrite(_enable_pin, HIGH);   
    waitUsec(1);          // enable pulse must be > 450ns   
    digitalWrite(_enable_pin, LOW);
+   waitUsec(20);
 }
 
 //
 // write4bits
-void LiquidCrystal::write4bits(uint8_t value) 
+void LiquidCrystal::writeNbits(uint8_t value, uint8_t numBits) 
 {
-   for (uint8_t i = 0; i < 4; i++) 
+   for (uint8_t i = 0; i < numBits; i++) 
    {
       digitalWrite(_data_pins[i], (value >> i) & 0x01);
    }
-   pulseEnable();
-}
-
-//
-// write8bits
-void LiquidCrystal::write8bits(uint8_t value) 
-{
-   for (uint8_t i = 0; i < 8; i++) 
-   {
-      digitalWrite(_data_pins[i], (value >> i) & 0x01);
-   }   
    pulseEnable();
 }

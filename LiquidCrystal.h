@@ -113,17 +113,11 @@ private:
    
    /*!
     @method     
-    @abstract   Writes an 8 bit value to the LCD.
-    @discussion Writes 8 bits to the LCD control data lines.
-    */
-   void write8bits(uint8_t value);
-   
-   /*!
-    @method     
-    @abstract   Writes an 4 bit value to the LCD.
-    @discussion Writes 4 bits (the least significant) to the LCD control data lines.
+    @abstract   Writes numBits bits from value value to the LCD.
+    @discussion Writes numBists bits (the least significant) to the LCD control 
+    data lines.
     */   
-   void write4bits(uint8_t value);
+   void writeNbits(uint8_t value, uint8_t numBits);
    
    /*!
     @method     
