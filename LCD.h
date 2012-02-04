@@ -36,8 +36,16 @@
 // ---------------------------------------------------------------------------
 #ifndef _LCD_H_
 #define _LCD_H_
+
+#if (ARDUINO <  100)
+#include <WProgram.h>
+#else
+#include <Arduino.h>
+#endif
+
 #include <inttypes.h>
 #include <Print.h>
+
 
 /*!
  @defined 
