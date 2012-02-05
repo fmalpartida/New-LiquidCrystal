@@ -10,7 +10,8 @@
 #define _LIQUIDCRYSTAL_SR_LCD3_
 
 #include <inttypes.h>
-#include <LCD.h>
+#include "LCD.h"
+#include "FastIO.h"
 
 
 class LiquidCrystal_SR_LCD3 : public LCD
@@ -75,10 +76,18 @@ private:
     */
    void write4bits ( uint8_t );
    void _pushOut ( uint8_t );
+
+   // Serial Data pin
+   fio_bit _srdata_bit;
+   fio_register _srdata_register;
+
+   // Clock Pin
+   fio_bit _srclock_bit;
+   fio_register _srclock_register;
    
-   uint8_t _srdata_pin;  // Serial Data pin
-   uint8_t _srclock_pin; // Clock Pin
-   uint8_t _strobe_pin;  // Enable Pin
+   // Enable Pin
+   fio_bit _strobe_bit;
+   fio_register _strobe_register;
 };
 
 #endif

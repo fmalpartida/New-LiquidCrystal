@@ -78,7 +78,8 @@
 #define _LIQUIDCRYSTAL_SR_
 
 #include <inttypes.h>
-#include <LCD.h>
+#include "LCD.h"
+#include "FastIO.h"
 
 
 // two-wire indicator constant
@@ -152,6 +153,14 @@ private:
    uint8_t _srclock_pin; // Clock Pin
    uint8_t _enable_pin;  // Enable Pin
    uint8_t _two_wire;    // two wire mode
+
+   fio_register _srDataRegister; // Serial Data pin
+   fio_bit _srDataBit;
+   fio_register _srClockRegister; // Clock Pin
+   fio_bit _srClockBit;
+   fio_register _srEnableRegister; // Enable Pin
+   fio_bit _srEnableBit;
+
 };
 
 #endif

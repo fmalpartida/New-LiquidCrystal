@@ -40,6 +40,10 @@
 #include <LiquidCrystal_SR.h>
 #endif
 
+#ifdef _LCD_SRLCD3_
+#include <LiquidCrystal_SR_LCD3.h>
+#endif
+
 // C runtime variables
 // -------------------
 extern unsigned int __bss_end;
@@ -96,8 +100,14 @@ const int    CONTRAST      = 120;
 #endif
 
 #ifdef _LCD_SR_
-const int    CONTRAST_PIN  = 2; // not connected
+const int    CONTRAST_PIN  = 0; // not connected
 const int    BACKLIGHT_PIN = 0; // none
+const int    CONTRAST      = 0;
+#endif
+
+#ifdef _LCD_SRLCD3_
+const int    CONTRAST_PIN  = 0; // none
+const int    BACKLIGHT_PIN = 5;
 const int    CONTRAST      = 0;
 #endif
 
@@ -147,6 +157,10 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 #ifdef _LCD_SR_
 LiquidCrystal_SR lcd(8,7,TWO_WIRE);
+#endif
+
+#ifdef _LCD_SRLCD3_
+LiquidCrystal_SR_LCD3 lcd(3, 4, 2);
 #endif
 
 // benchMarks definitions
@@ -212,8 +226,10 @@ static void LCDSetup ( uint8_t contrasPin, uint8_t backlight, uint8_t cols, uint
       analogWrite ( contrasPin, CONTRAST );
    }
    // Setup backlight pin
-   pinMode(backlight, OUTPUT);
-   digitalWrite(backlight, HIGH);
+   if ( backlight != 0 ){
+     pinMode(backlight, OUTPUT);
+     digitalWrite(backlight, HIGH);
+   }
    
    lcd.begin ( cols, rows );
    lcd.clear ( );
