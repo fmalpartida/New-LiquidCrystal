@@ -78,8 +78,8 @@
 #define _LIQUIDCRYSTAL_SR_
 
 #include <inttypes.h>
-#include "LCD.h"
-#include "FastIO.h"
+#include <LCD.h>
+#include <FastIO.h>
 
 
 // two-wire indicator constant

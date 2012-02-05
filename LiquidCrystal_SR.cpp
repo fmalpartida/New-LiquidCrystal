@@ -84,9 +84,9 @@
 #else
 #include <Arduino.h>
 #endif
-#include "LiquidCrystal_SR.h"
+#include <LiquidCrystal_SR.h>
 
-#include "FastIO.h"
+#include <FastIO.h>
 
 // When the display powers up, it is configured as follows:
 //
