@@ -13,7 +13,7 @@
 //  support chipkit (https://github.com/chipKIT32/chipKIT32-MAX/blob/master/hardware/pic32/cores/pic32/wiring_digital.c)
 // maybe improve fio_digitalRead
 
-#include "FastIO.h"
+#include <FastIO.h>
 
 fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state){
 	pinMode(pin, OUTPUT);

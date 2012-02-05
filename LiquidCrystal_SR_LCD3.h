@@ -10,8 +10,8 @@
 #define _LIQUIDCRYSTAL_SR_LCD3_
 
 #include <inttypes.h>
-#include "LCD.h"
-#include "FastIO.h"
+#include <LCD.h>
+#include <FastIO.h>
 
 
 class LiquidCrystal_SR_LCD3 : public LCD

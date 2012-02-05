@@ -33,8 +33,8 @@
 #define LiquidCrystal_4bit_h
 
 #include <inttypes.h>
-#include "LCD.h"
-#include "FastIO.h"
+#include <LCD.h>
+#include <FastIO.h>
 
 
 /*!
