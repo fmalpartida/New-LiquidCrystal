@@ -142,7 +142,7 @@ void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clock
  * @param shift1Bit[in] pins bit
  * @param value[in] value to shift out, last byte is ignored and always shifted out LOW
  */
-void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value);
+void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, boolean noLatch = false);
 /*!
  * @method
  * @abstract one wire shift out
@@ -150,7 +150,7 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
  * @param pin[in] digital pin
  * @param value[in] value to shift out, last byte is ignored and always shifted out LOW
  */
-void fio_shiftOut1(uint8_t pin, uint8_t value);
+void fio_shiftOut1(uint8_t pin, uint8_t value, boolean noLatch = false);
 /*!
  * @method
  * @abstract initializes one wire shift out protocol
