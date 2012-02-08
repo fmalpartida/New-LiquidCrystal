@@ -168,60 +168,6 @@ void LiquidCrystal_SR_LCD3::init( uint8_t srdata, uint8_t srclock, uint8_t strob
 // PUBLIC METHODS
 // ---------------------------------------------------------------------------
 
-//
-// begin
-void LiquidCrystal_SR_LCD3::begin( uint8_t cols, uint8_t lines, uint8_t dotsize ) 
-{
-   if (lines > 1) 
-   {
-      _displayfunction |= LCD_2LINE;
-   }
-   
-   _numlines = lines;
-   _cols = cols;
-   
-   // for some 1 line displays you can select a 10 pixel high font
-   // ------------------------------------------------------------
-   if ((dotsize != 0) && (lines == 1)) 
-   {
-      _displayfunction |= LCD_5x10DOTS;
-   }
-   
-   // SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
-   // according to datasheet, we need at least 40ms after power rises above 2.7V
-   // before sending commands. Arduino can turn on way before 4.5V so we'll wait 
-   // 50
-   // ---------------------------------------------------------------------------
-   delayMicroseconds(50000);
-   
-   // This init is copied verbatim from the spec sheet.
-   // 8 bit codes are shifted to 4 bit
-   write4bits((LCD_FUNCTIONSET | LCD_8BITMODE) >> 4);
-   delayMicroseconds(4500);  // wait more than 4.1ms
-   
-   // Second try
-   write4bits((LCD_FUNCTIONSET | LCD_8BITMODE) >> 4);
-   delayMicroseconds(150);
-   // Third go
-   write4bits((LCD_FUNCTIONSET | LCD_8BITMODE) >> 4);
-   
-   // And finally, set to 4-bit interface
-   write4bits((LCD_FUNCTIONSET | LCD_4BITMODE) >> 4);
-   
-   // Set # lines, font size, etc.
-   command(LCD_FUNCTIONSET | _displayfunction);
-   // Turn the display on with no cursor or blinking default
-   _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
-   display();
-   // Clear it off
-   clear();
-   // Initialize to default text direction (for romance languages)
-   _displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
-   // set the entry mode
-   command(LCD_ENTRYMODESET | _displaymode);
-   home();
-   
-}
 
 /************ low level data pushing commands **********/
 

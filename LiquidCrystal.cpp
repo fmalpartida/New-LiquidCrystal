@@ -75,26 +75,7 @@ LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
 
-// When the display powers up, it is configured as follows:
-//
-// 1. Display clear
-// 2. Function set: 
-//    DL = 1; 8-bit interface data 
-//    N = 0; 1-line display 
-//    F = 0; 5x8 dot character font 
-// 3. Display on/off control: 
-//    D = 0; Display off 
-//    C = 0; Cursor off 
-//    B = 0; Blinking off 
-// 4. Entry mode set: 
-//    I/D = 1; Increment by 1 
-//    S = 0; No shift 
-//
-// Note, however, that resetting the Arduino doesn't reset the LCD, so we
-// can't assume that its in that state when a sketch starts (and the
-// LiquidCrystal constructor is called).
-// A call to begin() will reinitialize the LCD.
-//
+
 // init
 void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
                          uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
@@ -152,35 +133,6 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
       _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
    else 
       _displayfunction = LCD_8BITMODE | LCD_1LINE | LCD_5x8DOTS;
-}
-
-// PUBLIC METHODS
-// ---------------------------------------------------------------------------
-
-//
-// begin
-void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) 
-{
-   if (lines > 1) 
-   {
-      _displayfunction |= LCD_2LINE;
-   }
-   _numlines = lines;
-   _cols = cols;
-   
-   // for some 1 line displays you can select a 10 pixel high font
-   // ------------------------------------------------------------
-   if ((dotsize != 0) && (lines == 1)) 
-   {
-      _displayfunction |= LCD_5x10DOTS;
-   }
-   
-   // SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
-   // according to datasheet, we need at least 40ms after power rises above 2.7V
-   // before sending commands. Arduino can turn on way before 4.5V so we'll wait 
-   // 50
-   // ---------------------------------------------------------------------------
-   delayMicroseconds(50000); 
    
    // Now we pull both RS and R/W low to begin commands
    digitalWrite(_rs_pin, LOW);
@@ -190,62 +142,10 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    { 
       digitalWrite(_rw_pin, LOW);
    }
-   
-   //put the LCD into 4 bit or 8 bit mode
-   // -------------------------------------
-   if (! (_displayfunction & LCD_8BITMODE)) 
-   {
-      // this is according to the hitachi HD44780 datasheet
-      // figure 24, pg 46
-      
-      // we start in 8bit mode, try to set 4 bit mode
-      writeNbits(0x03, 4);
-      delayMicroseconds(4500); // wait min 4.1ms
-      
-      // second try
-      writeNbits(0x03, 4);
-      delayMicroseconds(4500); // wait min 4.1ms
-      
-      // third go!
-      writeNbits(0x03, 4); 
-      delayMicroseconds(150);
-      
-      // finally, set to 4-bit interface
-      writeNbits(0x02, 4); 
-   } 
-   else 
-   {
-      // this is according to the hitachi HD44780 datasheet
-      // page 45 figure 23
-      
-      // Send function set command sequence
-      command(LCD_FUNCTIONSET | _displayfunction);
-      delayMicroseconds(4500);  // wait more than 4.1ms
-      
-      // second try
-      command(LCD_FUNCTIONSET | _displayfunction);
-      delayMicroseconds(150);
-      
-      // third go
-      command(LCD_FUNCTIONSET | _displayfunction);
-   }
-   
-   // finally, set # lines, font size, etc.
-   command(LCD_FUNCTIONSET | _displayfunction);  
-   
-   // turn the display on with no cursor or blinking default
-   _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;  
-   display();
-   
-   // clear the LCD
-   clear();
-   
-   // Initialize to default text direction (for romance languages)
-   _displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
-   // set the entry mode
-   command(LCD_ENTRYMODESET | _displaymode);
-   
 }
+
+// PUBLIC METHODS
+// ---------------------------------------------------------------------------
 
 /************ low level data pushing commands **********/
 

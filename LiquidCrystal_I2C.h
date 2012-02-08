@@ -118,10 +118,14 @@ public:
    
    /*!
     @function
-    @abstract   LCD initialization.
+    @abstract   LCD initialization and associated HW.
     @discussion Initializes the LCD to a given size (col, row). This methods
     initializes the LCD, therefore, it MUST be called prior to using any other
     method from this class or parent class.
+    
+    The begin method can be overloaded if necessary to initialize any HW that 
+    is implemented by a library and can't be done during construction, here
+    we use the Wire class.
     
     @param      cols[in] the number of columns that the display has
     @param      rows[in] the number of rows that the display has

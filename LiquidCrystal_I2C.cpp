@@ -144,66 +144,7 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 {
    
    init();     // Initialise the I2C expander interface
-   
-   if (lines > 1) 
-   {
-      _displayfunction |= LCD_2LINE;
-   }
-   _numlines = lines;
-   _cols = cols;
-   
-   // for some 1 line displays you can select a 10 pixel high font
-   if ((dotsize != 0) && (lines == 1)) {
-      _displayfunction |= LCD_5x10DOTS;
-   }
-   
-   // SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!
-   // according to datasheet, we need at least 40ms after power rises above 2.7V
-   // before sending commands. Arduino can turn on way before 4.5V so we'll wait 50
-   delayMicroseconds(50000); 
-   
-   // Now we pull both RS and R/W low to begin commands
-   expanderWrite ( _backlightval );   // reset expander and turn backlight off (Bit 8 =1)
-   delay(1000);
-   
-   //put the LCD into 4 bit mode
-   // this is according to the hitachi HD44780 datasheet
-   // figure 24, pg 46
-   
-   // we start in 8bit mode, try to set 4 bit mode
-   write4bits ( 0x03, LOW );
-   delayMicroseconds(4500); // wait min 4.1ms
-   
-   // second try
-   write4bits ( 0x03, LOW );
-   delayMicroseconds(4500); // wait min 4.1ms
-   
-   // third go!
-   write4bits ( 0x03, LOW ); 
-   delayMicroseconds(150);
-   
-   // finally, set to 4-bit interface
-   write4bits ( 0x02, LOW ); 
-   
-   
-   // set # lines, font size, etc.
-   command(LCD_FUNCTIONSET | _displayfunction);  
-   
-   // turn the display on with no cursor or blinking default
-   _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
-   display();
-   
-   // clear it off
-   clear();
-   
-   // Initialize to default text direction (for roman languages)
-   _displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
-   
-   // set the entry mode
-   command(LCD_ENTRYMODESET | _displaymode);
-   
-   home();
-   
+   LCD::begin ( cols, lines, dotsize );   
 }
 
 
