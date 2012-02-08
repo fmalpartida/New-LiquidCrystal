@@ -74,20 +74,6 @@ public:
    
    /*!
     @function
-    @abstract   LCD initialization.
-    @discussion Initializes the LCD to a given size (col, row). This methods
-    initializes the LCD, therefore, it MUST be called prior to using any other
-    method from this class or parent class.
-    
-    @param      cols[in] the number of columns that the display has
-    @param      rows[in] the number of rows that the display has
-    @param      charsize: size of the characters of the LCD: LCD_5x8DOTS or
-    LCD_5x10DOTS.
-    */
-   virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);   
-   
-   /*!
-    @function
     @abstract   Send a particular value to the LCD.
     @discussion Sends a particular value to the LCD for writing to the LCD or
     as an LCD command.
@@ -105,7 +91,7 @@ private:
    
    /*!
     @method     
-    @abstract   Initializes the LCD pin allocation
+    @abstract   Initializes the LCD pin allocation and associated HW
     @discussion Initializes the LCD pin allocation and configuration.
     */
    void init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
