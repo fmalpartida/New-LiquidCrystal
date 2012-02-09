@@ -182,7 +182,6 @@ void LiquidCrystal::pulseEnable(void)
    digitalWrite(_enable_pin, HIGH);   
    waitUsec(1);          // enable pulse must be > 450ns   
    digitalWrite(_enable_pin, LOW);
-   waitUsec(20);
 }
 
 //

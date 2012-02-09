@@ -272,10 +272,12 @@ void LCD::createChar(uint8_t location, uint8_t charmap[])
    location &= 0x7;            // we only have 8 locations 0-7
    
    command(LCD_SETCGRAMADDR | (location << 3));
+   delayMicroseconds(30);
    
    for (int i=0; i<8; i++) 
    {
       write(charmap[i]);      // call the virtual write method
+      delayMicroseconds(30);
    }
 }
 
