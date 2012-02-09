@@ -55,7 +55,7 @@
  operations. If fast digitalIO operations, comment this line out or undefine
  the mode.
  */
-//#define FAST_MODE
+#define FAST_MODE
 
 /*!
  @function
