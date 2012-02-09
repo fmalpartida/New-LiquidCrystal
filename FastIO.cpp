@@ -114,6 +114,7 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 	 * 	http://pastebin.com/raw.php?i=2hnC9v2Z
 	 * 	http://pastebin.com/raw.php?i=bGg4DhXQ
 	 * 	http://pastebin.com/raw.php?i=tg1ZFiM5
+	 *  http://pastebin.com/raw.php?i=93ExPDD3 - cascading
 	 * tested with:
 	 * 	TPIC6595N - seems to work fine (circuit: http://www.3guys1laser.com/arduino-one-wire-shift-register-prototype)
 	 * 	7HC595N
