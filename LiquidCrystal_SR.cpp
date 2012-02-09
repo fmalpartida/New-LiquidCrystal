@@ -58,7 +58,7 @@
 //             Fixed timing to datasheet safe. Fixed keyword highlights.
 // 2009.07.28  Mircho / raron - a new modification to the schematics, and a
 //             more streamlined interface
-// 2009.07.27  Thanks to an excellent suggestion from mircho at the Arduiono 
+// 2009.07.27  Thanks to an excellent suggestion from mircho at the Arduino
 //             playgrond forum, the number of wires now required is only two!
 // 2009.07.25  raron - Fixed comments. I really messed up the comments before 
 //             posting this, so I had to fix it.
