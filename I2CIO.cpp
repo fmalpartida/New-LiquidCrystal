@@ -33,7 +33,8 @@
 
 #include <inttypes.h>
 #include <../Wire/Wire.h>
-#include <I2CIO.h>
+
+#include "I2CIO.h"
 
 // CLASS VARIABLES
 // ---------------------------------------------------------------------------
