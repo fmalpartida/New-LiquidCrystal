@@ -40,12 +40,22 @@
 #include <inttypes.h>
 #include <util/delay.h>
 
+/*!
+ @defined 
+ @abstract   Enables IO digitalRead/digitalWrite fall back for non-AVR
+             architectures.
+ */
 #ifndef __AVR__
 #define FIO_FALLBACK
 #endif
 
 // PUBLIC CONSTANTS DEFINITIONS
 // ---------------------------------------------------------------------------
+/*!
+ @defined 
+ @abstract   Skip setting IO outputs during IO configuration or when getting
+             the output register associated to an IO pin.k
+ */
 #define SKIP 0x23
 
 // PUBLIC TYPE DEFINITIONS
@@ -53,7 +63,7 @@
 typedef uint8_t fio_bit;
 
 
-#ifndef FALLBACK
+#ifndef FIO_FALLBACK
 typedef volatile uint8_t * fio_register;
 #else
 // remove volatile to give optimizer a chance
