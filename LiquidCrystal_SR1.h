@@ -20,7 +20,7 @@ class LiquidCrystal_SR1 : public LCD
 public:
    /*!
     @method     
-    @abstract   LCD SHIFT REGISTER constructors.
+    @abstract   LCD SHIFT REGISTER constructor.
     @discussion Defines the pin assignment that the LCD will have.
     The constructor does not initialize the LCD. Assuming 1 line 8 pixel high 
     font.
@@ -45,11 +45,15 @@ public:
    
    
 private:
+   /*!
+    * @method
+    * @abstract takes care of the 1 wire shift out process
+    */
+   void shiftIt(uint8_t val,uint8_t enableBit);
 
    // signal pin
    fio_register _srSignalRegister;
    fio_bit  _srSignalBit;
-
 };
 
 #endif
