@@ -26,7 +26,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#define _LCD_I2C_
+#define _LCD_SR1_
 
 #ifdef _LCD_I2C_
 #include <LiquidCrystal_I2C.h>
@@ -42,6 +42,10 @@
 
 #ifdef _LCD_SRLCD3_
 #include <LiquidCrystal_SR_LCD3.h>
+#endif
+
+#ifdef _LCD_SR1_
+#include <LiquidCrystal_SR1.h>
 #endif
 
 // C runtime variables
@@ -105,6 +109,12 @@ const int    BACKLIGHT_PIN = 0; // none
 const int    CONTRAST      = 0;
 #endif
 
+#ifdef _LCD_SR1_
+const int    CONTRAST_PIN  = 0; // not connected
+const int    BACKLIGHT_PIN = 0; // none
+const int    CONTRAST      = 0;
+#endif
+
 #ifdef _LCD_SRLCD3_
 const int    CONTRAST_PIN  = 0; // none
 const int    BACKLIGHT_PIN = 5;
@@ -157,6 +167,10 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 #ifdef _LCD_SR_
 LiquidCrystal_SR lcd(8,7,TWO_WIRE);
+#endif
+
+#ifdef _LCD_SR1_
+LiquidCrystal_SR1 lcd(2);
 #endif
 
 #ifdef _LCD_SRLCD3_

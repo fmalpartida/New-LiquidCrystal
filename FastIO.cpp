@@ -20,7 +20,7 @@
 //
 // @version API 1.0.0
 //
-// @author Florial Fida - 
+// @author Florian Fida -
 //
 // @todo:
 //  support chipkit:
@@ -28,7 +28,7 @@
 //   cores/pic32/wiring_digital.c)
 // ---------------------------------------------------------------------------
 
-#include <FastIO.h>
+#include "FastIO.h"
 
 fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state)
 {
@@ -201,10 +201,10 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 		// send last bit (=LOW) and Latch command
 		fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
 		// Hold pin low for 200us
-		delayMicroseconds(199);
+		delayMicroseconds(210);
 		fio_digitalWrite_HIGH(shift1Register,shift1Bit);
 		// Hold pin high for 300us and leave it that way - using explicit HIGH here, just in case.
-		delayMicroseconds(299);
+		delayMicroseconds(300);
 	}
 
 	// enable interrupts
