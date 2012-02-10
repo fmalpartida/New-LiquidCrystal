@@ -9,7 +9,7 @@
 // Thread Safe: No
 // Extendable: Yes
 //
-// @file LCD.h
+// @file LCD.cpp
 // This file implements a basic liquid crystal library that comes as standard
 // in the Arduino SDK.
 // 
@@ -17,7 +17,7 @@
 // This is a basic implementation of the HD44780 library of the
 // Arduino SDK. This library is a refactored version of the one supplied
 // in the Arduino SDK in such a way that it simplifies its extension
-// to support other mechanism to communicate to LCDs such as I2C, Serial.
+// to support other mechanism to communicate to LCDs such as I2C, Serial, SR, ...
 // The original library has been reworked in such a way that this will be
 // the base class implementing all generic methods to command an LCD based
 // on the Hitachi HD44780 and compatible chipsets.
@@ -26,8 +26,6 @@
 // it has been extended to drive 4 and 8 bit mode control, LCDs and I2C extension
 // backpacks such as the I2CLCDextraIO using the PCF8574* I2C IO Expander ASIC.
 //
-//
-// This library is only compatible with Arduino's SDK version 1.0
 //
 // @version API 1.0.0
 //
