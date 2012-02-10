@@ -73,20 +73,16 @@ void LiquidCrystal_SR1::send(uint8_t value, uint8_t mode)
 //	val1 |= SR_EN_BIT; // Enable high
 	fio_shiftOut1(_srSignalRegister,_srSignalBit,val1);
 	waitUsec(1);
-//	delay(1);
 
 	val1 &= ~SR_EN_BIT; // Enable low
 	fio_shiftOut1(_srSignalRegister,_srSignalBit,val1);
 	waitUsec(40);
-	delay(1);
 
 //	val2 |= SR_EN_BIT; // Enable high
 	fio_shiftOut1(_srSignalRegister,_srSignalBit,val2);
 	waitUsec(1);
-//	delay(1);
 
 	val2 &= ~SR_EN_BIT; // Enable low
 	fio_shiftOut1(_srSignalRegister,_srSignalBit,val2);
 	waitUsec(40);
-	delay(1);
 }
