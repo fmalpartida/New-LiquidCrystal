@@ -17,9 +17,8 @@
 
 // two-wire indicator constant
 // ---------------------------------------------------------------------------
-#define TWO_WIRE  204
 #define SR_RS_BIT 0x04
-#define SR_EN_BIT 0x80
+#define SR_EN_BIT 0x02
 
 class LiquidCrystal_SR1 : public LCD
 {
@@ -35,7 +34,7 @@ public:
     @param srclock[in]  pin for shiftregister clock line.
     @param enable[in]   enable pin for the shiftregister.
     */
-   LiquidCrystal_SR1 ( uint8_t srdata, uint8_t srclock, uint8_t enable );
+   LiquidCrystal_SR1 ( uint8_t srsig );
    
    /*!
     @function
@@ -59,24 +58,17 @@ private:
     @abstract   Initializes the LCD pin allocation
     @discussion Initializes the LCD pin allocation and configuration.
     */
-   void init ( uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, 
-              uint8_t font );
+   void init ( uint8_t srsig );
    /*!
     @method     
     @abstract   For sending data when initializing the display to 4-bit
     @discussion Initializes the LCD pin allocation and configuration.
     */
-   void write4bits ( uint8_t );
-   
-   uint8_t _enable_pin;  // Enable Pin
-   uint8_t _two_wire;    // two wire mode
+   //void write4bits ( uint8_t );
 
-   fio_register _srDataRegister; // Serial Data pin
-   fio_bit _srDataBit;
-   fio_register _srClockRegister; // Clock Pin
-   fio_bit _srClockBit;
-   fio_register _srEnableRegister; // Enable Pin
-   fio_bit _srEnableBit;
+   // signal pin
+   fio_register _srSignalRegister;
+   fio_bit  _srSignalBit;
 
 };
 
