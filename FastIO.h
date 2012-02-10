@@ -7,11 +7,26 @@
 // This software is furnished "as is", without technical support, and with no
 // warranty, express or implied, as to its usefulness for any purpose.
 // ---------------------------------------------------------------------------
-// fio_shiftOut1 functions are based on Shif1 protocol developed by Roman Black (http://www.romanblack.com/shift1.htm)
+// fio_shiftOut1 functions are based on Shif1 protocol developed by Roman Black 
+// (http://www.romanblack.com/shift1.htm)
 //
-// TODO:
-//  support chipkit (https://github.com/chipKIT32/chipKIT32-MAX/blob/master/hardware/pic32/cores/pic32/wiring_digital.c)
-
+// Thread Safe: No
+// Extendable: Yes
+//
+// @file FastIO.h
+// This file implements basic fast IO routines.
+// 
+// @brief 
+//
+// @version API 1.0.0
+//
+// @author Florial Fida - 
+//
+// @todo:
+//  support chipkit:
+// (https://github.com/chipKIT32/chipKIT32-MAX/blob/master/hardware/pic32/
+//   cores/pic32/wiring_digital.c)
+// ---------------------------------------------------------------------------
 #ifndef FAST_IO_H
 #define FAST_IO_H
 
@@ -29,8 +44,14 @@
 #define FIO_FALLBACK
 #endif
 
-typedef uint8_t fio_bit;
+// PUBLIC CONSTANTS DEFINITIONS
+// ---------------------------------------------------------------------------
 #define SKIP 0x23
+
+// PUBLIC TYPE DEFINITIONS
+// ---------------------------------------------------------------------------
+typedef uint8_t fio_bit;
+
 
 #ifndef FALLBACK
 typedef volatile uint8_t * fio_register;
@@ -77,7 +98,7 @@ fio_bit fio_pinToBit(uint8_t pin);
  @param value[in] desired output
  */
 // __attribute__ ((always_inline)) /* let the optimizer decide that for now */
-void fio_digitalWrite(fio_register pinRegister, fio_bit pinBit,uint8_t value);
+void fio_digitalWrite(fio_register pinRegister, fio_bit pinBit, uint8_t value);
 
 /**
  * This is where the magic happens that makes things fast.
@@ -120,7 +141,8 @@ int fio_digitalRead(fio_register pinRegister, fio_bit pinBit);
  @param clockBit[in] Bit of data pin - Pin if fast digital write is disabled
  @param bitOrder[in] bit order
  */
-void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, fio_bit clockBit, uint8_t value, uint8_t bitOrder);
+void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, 
+                  fio_bit clockBit, uint8_t value, uint8_t bitOrder);
 
 /*!
  @method
