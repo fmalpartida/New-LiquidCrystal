@@ -14,8 +14,7 @@
 #include "LCD.h"
 #include "FastIO.h"
 
-
-class LiquidCrystal_SR1 : public LCD
+class LiquidCrystal_SR1: public LCD
 {
 public:
    /*!
@@ -27,8 +26,8 @@ public:
     
     @param srsig[in]   pin for shiftregister signal line.
     */
-   LiquidCrystal_SR1 ( uint8_t srsig );
-   
+   LiquidCrystal_SR1(uint8_t srsig);
+
    /*!
     @function
     @abstract   Send a particular value to the LCD.
@@ -42,18 +41,17 @@ public:
     the LCD.
     */
    virtual void send(uint8_t value, uint8_t mode);
-   
-   
+
 private:
    /*!
     * @method
     * @abstract takes care of the 1 wire shift out process
     */
-   void shiftIt(uint8_t val,uint8_t enableBit);
+   void shiftIt(uint8_t val, uint8_t enableBit);
 
    // signal pin
    fio_register _srSignalRegister;
-   fio_bit  _srSignalBit;
+   fio_bit _srSignalBit;
 };
 
 #endif
