@@ -87,9 +87,12 @@ void fio_digitalWrite(fio_register pinRegister, uint8_t pinBit, uint8_t value)
 int fio_digitalRead(fio_register pinRegister, uint8_t pinBit)
 {
 #ifdef FIO_FALLBACK
-	return digitalRead(pinBit);
+	return digitalRead (pinBit);
 #else
-	if (*pinRegister & pinBit) return HIGH;
+	if (*pinRegister & pinBit)
+   {
+      return HIGH;
+   }
 	return LOW;
 #endif
 }
@@ -152,9 +155,10 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 	 * 	http://pastebin.com/raw.php?i=2hnC9v2Z
 	 * 	http://pastebin.com/raw.php?i=bGg4DhXQ
 	 * 	http://pastebin.com/raw.php?i=tg1ZFiM5
-	 *  http://pastebin.com/raw.php?i=93ExPDD3 - cascading
+	 *    http://pastebin.com/raw.php?i=93ExPDD3 - cascading
 	 * tested with:
-	 * 	TPIC6595N - seems to work fine (circuit: http://www.3guys1laser.com/arduino-one-wire-shift-register-prototype)
+	 * 	TPIC6595N - seems to work fine (circuit: http://www.3guys1laser.com/
+    *                   arduino-one-wire-shift-register-prototype)
 	 * 	7HC595N
 	 */
 	// disable interrupts since timing is going to be critical
