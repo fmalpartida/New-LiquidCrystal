@@ -20,7 +20,7 @@
 //
 // @version API 1.0.0
 //
-// @author Florial Fida - 
+// @author Florian Fida -
 //
 // @todo:
 //  support chipkit:
