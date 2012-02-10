@@ -66,27 +66,27 @@ void LiquidCrystal_SR1::send(uint8_t value, uint8_t mode)
 	val1 = mode | SR_EN_BIT | ((value >> 1) & 0x78); // upper nibble
 	val2 = mode | SR_EN_BIT | ((value << 3) & 0x78); // lower nibble
 
-	//val1 &= ~SR_EN_BIT; // Enable low
-	fio_shiftOut1(_srSignalRegister,_srSignalBit,val1);
-//	waitUsec(40);
-//
-//	val1 |= SR_EN_BIT; // Enable high
-//	fio_shiftOut1(_srSignalRegister,_srSignalBit,val1);
-//	waitUsec(1);
-//
-//	val1 &= ~SR_EN_BIT; // Enable low
-//	fio_shiftOut1(_srSignalRegister,_srSignalBit,val1);
-//	waitUsec(40);
+	// unused outputs to high (faster)
+	val1 |= SR_UNUSED_BITS;
+	val2 |= SR_UNUSED_BITS;
 
-//	val2 &= ~SR_EN_BIT; // Enable low
-	fio_shiftOut1(_srSignalRegister,_srSignalBit,val2);
-//	waitUsec(40);
-//
+//	val1 |= SR_EN_BIT; // Enable high
+	fio_shiftOut1(_srSignalRegister,_srSignalBit,val1);
+	waitUsec(1);
+//	delay(1);
+
+	val1 &= ~SR_EN_BIT; // Enable low
+	fio_shiftOut1(_srSignalRegister,_srSignalBit,val1);
+	waitUsec(40);
+	delay(1);
+
 //	val2 |= SR_EN_BIT; // Enable high
-//	fio_shiftOut1(_srSignalRegister,_srSignalBit,val2);
-//	waitUsec(1);
-//
-//	val2 &= ~SR_EN_BIT; // Enable low
-//	fio_shiftOut1(_srSignalRegister,_srSignalBit,val2);
-//	waitUsec(40);
+	fio_shiftOut1(_srSignalRegister,_srSignalBit,val2);
+	waitUsec(1);
+//	delay(1);
+
+	val2 &= ~SR_EN_BIT; // Enable low
+	fio_shiftOut1(_srSignalRegister,_srSignalBit,val2);
+	waitUsec(40);
+	delay(1);
 }
