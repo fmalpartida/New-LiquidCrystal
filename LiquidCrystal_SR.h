@@ -135,8 +135,6 @@ private:
     */
    void write4bits ( uint8_t );
    
-   uint8_t _srdata_pin;  // Serial Data pin
-   uint8_t _srclock_pin; // Clock Pin
    uint8_t _enable_pin;  // Enable Pin
    uint8_t _two_wire;    // two wire mode
 

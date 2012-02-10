@@ -28,7 +28,7 @@
 //   cores/pic32/wiring_digital.c)
 // ---------------------------------------------------------------------------
 
-#include <FastIO.h>
+#include "FastIO.h"
 
 fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state)
 {
