@@ -32,7 +32,7 @@
 #endif
 
 #include <inttypes.h>
-#include <../Wire/Wire.h>
+#include "../Wire/Wire.h"
 
 #include "I2CIO.h"
 
