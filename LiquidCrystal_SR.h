@@ -128,13 +128,13 @@ private:
     */
    void init ( uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, 
               uint8_t font );
-   /*!
-    @method     
-    @abstract   For sending data when initializing the display to 4-bit
-    @discussion Initializes the LCD pin allocation and configuration.
-    */
-   void write4bits ( uint8_t );
    
+   /*!
+    * @method
+    * @abstract takes care of shifting and the enable pulse
+    */
+   void shiftIt (uint8_t val);
+
    uint8_t _enable_pin;  // Enable Pin
    uint8_t _two_wire;    // two wire mode
 
