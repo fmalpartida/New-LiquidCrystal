@@ -9,7 +9,7 @@
 // Thread Safe: No
 // Extendable: Yes
 //
-// @file HD44780.h
+// @file LCD.h
 // This file implements a basic liquid crystal library that comes as standard
 // in the Arduino SDK.
 // 
