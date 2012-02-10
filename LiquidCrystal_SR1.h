@@ -15,12 +15,6 @@
 #include "FastIO.h"
 
 
-// two-wire indicator constant
-// ---------------------------------------------------------------------------
-#define SR_RS_BIT 0x04
-#define SR_EN_BIT 0x80
-#define SR_UNUSED_BITS 0x02
-
 class LiquidCrystal_SR1 : public LCD
 {
 public:
@@ -31,9 +25,7 @@ public:
     The constructor does not initialize the LCD. Assuming 1 line 8 pixel high 
     font.
     
-    @param srdata[in]   pin for shiftregister data line.
-    @param srclock[in]  pin for shiftregister clock line.
-    @param enable[in]   enable pin for the shiftregister.
+    @param srsig[in]   pin for shiftregister signal line.
     */
    LiquidCrystal_SR1 ( uint8_t srsig );
    
@@ -53,19 +45,6 @@ public:
    
    
 private:
-   
-   /*!
-    @method     
-    @abstract   Initializes the LCD pin allocation
-    @discussion Initializes the LCD pin allocation and configuration.
-    */
-   void init ( uint8_t srsig );
-   /*!
-    @method     
-    @abstract   For sending data when initializing the display to 4-bit
-    @discussion Initializes the LCD pin allocation and configuration.
-    */
-   //void write4bits ( uint8_t );
 
    // signal pin
    fio_register _srSignalRegister;
