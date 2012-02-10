@@ -98,7 +98,7 @@ fio_bit fio_pinToBit(uint8_t pin);
  @param value[in] desired output
  */
 // __attribute__ ((always_inline)) /* let the optimizer decide that for now */
-void fio_digitalWrite(fio_register pinRegister, fio_bit pinBit, uint8_t value);
+void fio_digitalWrite ( fio_register pinRegister, fio_bit pinBit, uint8_t value );
 
 /**
  * This is where the magic happens that makes things fast.
@@ -128,7 +128,7 @@ void fio_digitalWrite(fio_register pinRegister, fio_bit pinBit, uint8_t value);
  @param pinBit[in] Bit - Pin if fast io is disabled
  @result Value read from pin
  */
-int fio_digitalRead(fio_register pinRegister, fio_bit pinBit);
+int fio_digitalRead ( fio_register pinRegister, fio_bit pinBit );
 
 /*!
  @method
@@ -141,8 +141,8 @@ int fio_digitalRead(fio_register pinRegister, fio_bit pinBit);
  @param clockBit[in] Bit of data pin - Pin if fast digital write is disabled
  @param bitOrder[in] bit order
  */
-void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, 
-                  fio_bit clockBit, uint8_t value, uint8_t bitOrder);
+void fio_shiftOut( fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, 
+                   fio_bit clockBit, uint8_t value, uint8_t bitOrder );
 
 /*!
  @method
