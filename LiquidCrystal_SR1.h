@@ -17,9 +17,9 @@
 
 // two-wire indicator constant
 // ---------------------------------------------------------------------------
-#define SR_RS_BIT 0x04
-#define SR_EN_BIT 0x80
-#define SR_UNUSED_BITS 0x02
+#define SR_RS_BIT B00000100
+#define SR_EN_BIT B00001000
+#define SR_UNUSED_BITS B00000011
 
 class LiquidCrystal_SR1 : public LCD
 {

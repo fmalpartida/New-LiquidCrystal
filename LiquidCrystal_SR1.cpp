@@ -63,12 +63,12 @@ void LiquidCrystal_SR1::send(uint8_t value, uint8_t mode)
 	// Divide byte in two nibbles (val1 and val2), include the RS signal
 	// and format it for shiftregister output wiring to the LCD
 	mode = mode ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
-	val1 = mode | SR_EN_BIT | ((value >> 1) & 0x78); // upper nibble
-	val2 = mode | SR_EN_BIT | ((value << 3) & 0x78); // lower nibble
+	val1 = mode | SR_EN_BIT | (value & 0xF0); // upper nibble
+	val2 = mode | SR_EN_BIT | ((value << 4) & 0xF0); // lower nibble
 
 	// unused outputs to high (faster)
-	val1 |= SR_UNUSED_BITS;
-	val2 |= SR_UNUSED_BITS;
+	//val1 |= SR_UNUSED_BITS;
+	//val2 |= SR_UNUSED_BITS;
 
 //	val1 |= SR_EN_BIT; // Enable high
 	fio_shiftOut1(_srSignalRegister,_srSignalBit,val1);
