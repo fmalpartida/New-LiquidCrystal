@@ -87,7 +87,7 @@ Inheritance diagram for LCD:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">autoscroll</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a541bfac06ec95dcb6460d14906f50925">begin</a> (uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a3f587d1cbb2d59765ef60a5216b56fea">begin</a> (uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a878b36878fa8287093964eba83aace77">blink</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#afa699e0beeeee03cce8cef87eba81c4a">clear</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a> (uint8_t value)</td></tr>
@@ -117,7 +117,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00143">143</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00140">140</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a00bb2db1390721abc7b24ac4b8c276c8"></a><!-- doxytag: member="LCD::LCD" ref="a00bb2db1390721abc7b24ac4b8c276c8" args="()" -->
 <div class="memitem">
@@ -134,7 +134,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p><a class="el" href="class_liquid_crystal.html">LiquidCrystal</a> abstract constructor.  <a class="el" href="class_liquid_crystal.html">LiquidCrystal</a> class abstract constructor needed to create the base abstract class. </p>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00050">50</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00048">48</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -161,16 +161,16 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00158">158</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00254">254</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a541bfac06ec95dcb6460d14906f50925"></a><!-- doxytag: member="LCD::begin" ref="a541bfac06ec95dcb6460d14906f50925" args="(uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)" -->
+<a class="anchor" id="a3f587d1cbb2d59765ef60a5216b56fea"></a><!-- doxytag: member="LCD::begin" ref="a3f587d1cbb2d59765ef60a5216b56fea" args="(uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void LCD::begin </td>
+          <td class="memname">void LCD::begin </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>cols</em>, </td>
@@ -190,7 +190,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [inline, virtual]</code></td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -205,9 +205,9 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_liquid_crystal.html#adb5f37d69809ed7c0772c74a4adff19b">LiquidCrystal</a>, <a class="el" href="class_liquid_crystal___i2_c.html#aeee2ada537f0cfbfda8613324b57c4a6">LiquidCrystal_I2C</a>, <a class="el" href="class_liquid_crystal___s_r.html#a6fa1502e910d7e70f7a598d26963a001">LiquidCrystal_SR</a>, and <a class="el" href="class_liquid_crystal___s_r___l_c_d3.html#aea1edf1b429c560541e5ec3182cbf5a0">LiquidCrystal_SR_LCD3</a>.</p>
+<p>Reimplemented in <a class="el" href="class_liquid_crystal___i2_c.html#aeee2ada537f0cfbfda8613324b57c4a6">LiquidCrystal_I2C</a>.</p>
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00170">170</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00075">75</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -232,7 +232,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00127">127</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00223">223</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -258,7 +258,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00060">60</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00156">156</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -285,7 +285,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00186">186</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00284">284</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,7 +323,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00172">172</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00268">268</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -348,7 +348,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00114">114</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00210">210</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -373,7 +373,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00102">102</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00198">198</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -399,7 +399,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00066">66</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00162">162</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +426,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00144">144</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00240">240</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -452,7 +452,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00165">165</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00261">261</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -477,7 +477,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00121">121</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00217">217</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -502,7 +502,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00109">109</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00205">205</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -527,7 +527,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00096">96</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00192">192</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -554,7 +554,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00151">151</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00247">247</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -580,7 +580,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00134">134</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00230">230</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -606,7 +606,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00139">139</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00235">235</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -646,7 +646,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">LiquidCrystal</a>, <a class="el" href="class_liquid_crystal___i2_c.html#a8bf1fab7efe13e8b17b96c42d1f810b4">LiquidCrystal_I2C</a>, <a class="el" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">LiquidCrystal_SR</a>, and <a class="el" href="class_liquid_crystal___s_r___l_c_d3.html#a01e75d76d80e218a5bdc28f8ce22b0e4">LiquidCrystal_SR_LCD3</a>.</p>
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00401">401</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00394">394</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -683,7 +683,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00072">72</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00168">168</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -710,7 +710,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00192">192</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00290">290</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +726,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00421">421</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00414">414</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -741,7 +741,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00417">417</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00410">410</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -756,7 +756,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00415">415</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00408">408</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -771,7 +771,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00419">419</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00412">412</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -786,7 +786,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00420">420</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00413">413</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -809,7 +809,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 5 2012 12:37:33 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 12 2012 21:39:44 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
