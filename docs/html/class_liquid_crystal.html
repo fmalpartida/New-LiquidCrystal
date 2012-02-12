@@ -82,7 +82,6 @@ Inheritance diagram for LiquidCrystal:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#adb5f37d69809ed7c0772c74a4adff19b">begin</a> (uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal</a> (uint8_t rs, uint8_t enable, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#a30e3d865c4b4a003a36cb45903f93644">LiquidCrystal</a> (uint8_t rs, uint8_t rw, uint8_t enable, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#a23124e6dd5ac4a9b6147629b96e91953">LiquidCrystal</a> (uint8_t rs, uint8_t enable, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)</td></tr>
@@ -91,7 +90,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_liquid_crystal_8h_source.html#l00048">48</a> of file <a class="el" href="_liquid_crystal_8h_source.html">LiquidCrystal.h</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal_8h_source.html#l00049">49</a> of file <a class="el" href="_liquid_crystal_8h_source.html">LiquidCrystal.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a49d2bd8d26031a1c83bcbd73978a1686"></a><!-- doxytag: member="LiquidCrystal::LiquidCrystal" ref="a49d2bd8d26031a1c83bcbd73978a1686" args="(uint8_t rs, uint8_t enable, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)" -->
 <div class="memitem">
@@ -368,52 +367,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="adb5f37d69809ed7c0772c74a4adff19b"></a><!-- doxytag: member="LiquidCrystal::begin" ref="adb5f37d69809ed7c0772c74a4adff19b" args="(uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void LiquidCrystal::begin </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>cols</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>rows</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>charsize</em> = <code>LCD_5x8DOTS</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p><a class="el" href="class_l_c_d.html">LCD</a> initialization.  Initializes the <a class="el" href="class_l_c_d.html">LCD</a> to a given size (col, row). This methods initializes the <a class="el" href="class_l_c_d.html">LCD</a>, therefore, it MUST be called prior to using any other method from this class or parent class.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cols[in]</td><td>the number of columns that the display has </td></tr>
-    <tr><td class="paramname">rows[in]</td><td>the number of rows that the display has </td></tr>
-    <tr><td class="paramname">charsize,:</td><td>size of the characters of the <a class="el" href="class_l_c_d.html">LCD</a>: LCD_5x8DOTS or LCD_5x10DOTS. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="class_l_c_d.html#a541bfac06ec95dcb6460d14906f50925">LCD</a>.</p>
-
-<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00162">162</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a56142f8b3753bedd133e4139e5eb5089"></a><!-- doxytag: member="LiquidCrystal::send" ref="a56142f8b3753bedd133e4139e5eb5089" args="(uint8_t value, uint8_t mode)" -->
 <div class="memitem">
 <div class="memproto">
@@ -450,7 +403,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00253">253</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00153">153</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
 
 </div>
 </div>
@@ -473,7 +426,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 5 2012 12:37:33 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 12 2012 21:39:44 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
