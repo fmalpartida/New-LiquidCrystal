@@ -27,8 +27,6 @@
 // backpacks such as the I2CLCDextraIO using the PCF8574* I2C IO Expander ASIC.
 //
 //
-// This library is only compatible with Arduino's SDK version 1.0
-//
 // @version API 1.0.0
 //
 // @author F. Malpartida - fmalpartida@gmail.com
