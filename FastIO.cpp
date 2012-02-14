@@ -163,10 +163,10 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 			// LOW = 0 Bit
 			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
 			// hold pin LOW for ... (was 15us)
-			delayMicroseconds(10);
+			delayMicroseconds(6);
 			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
 			// hold pin HIGH for ... (was 30us)
-			delayMicroseconds(20);
+			delayMicroseconds(10);
 		}
       else
       {
@@ -175,7 +175,7 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 			//hold pin LOW for 1us - done! :)
 			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
 			//hold pin HIGH for ... (was 15us)
-			delayMicroseconds(10);
+			delayMicroseconds(6);
 		}
 		if(!noLatch && i==1)
       {
@@ -191,7 +191,7 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 		delayMicroseconds(96);
 		fio_digitalWrite_HIGH(shift1Register,shift1Bit);
 		// Hold pin high for ... (was 300us) and leave it that way - using explicit HIGH here, just in case.
-		delayMicroseconds(137);
+		delayMicroseconds(110);
 	}
 
 	// enable interrupts
