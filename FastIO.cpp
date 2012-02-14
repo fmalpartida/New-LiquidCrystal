@@ -148,19 +148,6 @@ void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit)
 }
 void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, boolean noLatch)
 {
-	/*
-	 * this function are based on Shif1 protocol developed by Roman Black (http://www.romanblack.com/shift1.htm)
-	 *
-	 * test sketches:
-	 * 	http://pastebin.com/raw.php?i=2hnC9v2Z
-	 * 	http://pastebin.com/raw.php?i=bGg4DhXQ
-	 * 	http://pastebin.com/raw.php?i=tg1ZFiM5
-	 *    http://pastebin.com/raw.php?i=93ExPDD3 - cascading
-	 * tested with:
-	 * 	TPIC6595N - seems to work fine (circuit: http://www.3guys1laser.com/
-    *                   arduino-one-wire-shift-register-prototype)
-	 * 	7HC595N
-	 */
 	// disable interrupts since timing is going to be critical
 	uint8_t oldSREG;
 	oldSREG = SREG;
@@ -175,11 +162,11 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
       {
 			// LOW = 0 Bit
 			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
-			// hold pin LOW for 15us
-			delayMicroseconds(15);
+			// hold pin LOW for ... (was 15us)
+			delayMicroseconds(10);
 			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
-			// hold pin HIGH for 30us
-			delayMicroseconds(30);
+			// hold pin HIGH for ... (was 30us)
+			delayMicroseconds(20);
 		}
       else
       {
@@ -187,8 +174,8 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
 			//hold pin LOW for 1us - done! :)
 			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
-			//hold pin HIGH for 15us
-			delayMicroseconds(15);
+			//hold pin HIGH for ... (was 15us)
+			delayMicroseconds(10);
 		}
 		if(!noLatch && i==1)
       {
@@ -200,11 +187,11 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
    {
 		// send last bit (=LOW) and Latch command
 		fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
-		// Hold pin low for 200us
-		delayMicroseconds(210);
+		// Hold pin low for ... (was 200us)
+		delayMicroseconds(96);
 		fio_digitalWrite_HIGH(shift1Register,shift1Bit);
-		// Hold pin high for 300us and leave it that way - using explicit HIGH here, just in case.
-		delayMicroseconds(300);
+		// Hold pin high for ... (was 300us) and leave it that way - using explicit HIGH here, just in case.
+		delayMicroseconds(137);
 	}
 
 	// enable interrupts
@@ -214,4 +201,69 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 void fio_shiftOut1(uint8_t pin, uint8_t value, boolean noLatch)
 {
 	fio_shiftOut1(fio_pinToOutputRegister(pin, SKIP),fio_pinToBit(pin),value, noLatch);
+}
+
+void fio_shiftOut1_rb(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, boolean noLatch)
+{
+   /*
+    * this function are based on Shif1 protocol developed by Roman Black (http://www.romanblack.com/shift1.htm)
+    *
+    * test sketches:
+    *    http://pastebin.com/raw.php?i=2hnC9v2Z
+    *    http://pastebin.com/raw.php?i=bGg4DhXQ
+    *    http://pastebin.com/raw.php?i=tg1ZFiM5
+    *    http://pastebin.com/raw.php?i=93ExPDD3 - cascading
+    * tested with:
+    *    TPIC6595N - seems to work fine (circuit: http://www.3guys1laser.com/
+    *                   arduino-one-wire-shift-register-prototype)
+    *    7HC595N
+    */
+   // disable interrupts since timing is going to be critical
+   uint8_t oldSREG;
+   oldSREG = SREG;
+   cli();
+
+   // iterate but ignore last bit (is it correct now?)
+   for(int8_t i = 7; i>=0; --i)
+   {
+
+      // assume that pin is HIGH (smokin' pot all day... :) - requires initialization
+      if(LOW==!!(value & (1 << i)))
+      {
+         // LOW = 0 Bit
+         fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+         // hold pin LOW for 15us
+         delayMicroseconds(15);
+         fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
+         // hold pin HIGH for 30us
+         delayMicroseconds(30);
+      }
+      else
+      {
+         // HIGH = 1 Bit
+         fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+         //hold pin LOW for 1us - done! :)
+         fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
+         //hold pin HIGH for 15us
+         delayMicroseconds(15);
+      }
+      if(!noLatch && i==1)
+      {
+         break;
+      }
+   }
+
+   if(!noLatch)
+   {
+      // send last bit (=LOW) and Latch command
+      fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+      // Hold pin low for 200us
+      delayMicroseconds(210);
+      fio_digitalWrite_HIGH(shift1Register,shift1Bit);
+      // Hold pin high for 300us and leave it that way - using explicit HIGH here, just in case.
+      delayMicroseconds(300);
+   }
+
+   // enable interrupts
+   SREG = oldSREG;
 }

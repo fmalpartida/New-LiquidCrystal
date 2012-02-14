@@ -453,6 +453,8 @@ void loop ()
          Serial.println (i);
    }
    
+   float fAllWrites=0;
+   
    for ( i = 0; i < NUM_BENCHMARKS; i++ )
    {   
       Serial.print ( F("benchmark") );
@@ -463,7 +465,8 @@ void loop ()
       Serial.print ( F(" write: ") );
       Serial.print ( myBenchMarks[i].benchTime / myBenchMarks[i].numWrites );
       Serial.println ( F(" us") ); 
-      
+      fAllWrites += myBenchMarks[i].benchTime / (float)myBenchMarks[i].numWrites;
    }
-}
-
+   Serial.print( F("avg. write: ") );
+   Serial.println( fAllWrites / (float)NUM_BENCHMARKS );
+ }

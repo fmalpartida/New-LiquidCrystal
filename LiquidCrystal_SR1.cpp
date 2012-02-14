@@ -58,12 +58,12 @@ void LiquidCrystal_SR1::send(uint8_t value, uint8_t mode)
    //trying to be compatible to Roman Black's circuit - not working, but why?
    val = mode | (value /* & 0xF0 */);// upper nibble
    val |= SR_UNUSED_BITS;// unused outputs to high (faster)
-   shiftIt(val,SR_SREN_BIT);
+   shiftIt_rb(val,SR_SREN_BIT);
 
    val = mode | SR_SREN_BIT | ((value << 4) /* & 0xF0 */);// lower nibble
    val |= SR_UNUSED_BITS;// unused outputs to high (faster)
-   shiftIt(val,SR_SREN_BIT);
-#else
+   shiftIt_rb(val,SR_SREN_BIT);
+#endif
    //using different outputs on the shift register seems to make it work...
    val = mode | ((value >> 1) /* & 0x78 */); // upper nibble
    val |= SR_UNUSED_BITS; // unused outputs to high (faster)
@@ -72,8 +72,6 @@ void LiquidCrystal_SR1::send(uint8_t value, uint8_t mode)
    val = mode | ((value << 3) /* & 0x78 */); // lower nibble
    val |= SR_UNUSED_BITS; // unused outputs to high (faster)
    shiftIt(val, SR_EN_BIT);
-#endif
-
 }
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
