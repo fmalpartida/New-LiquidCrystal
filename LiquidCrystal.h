@@ -24,9 +24,6 @@
 // to the original functionality of the Arduino LiquidCrystal library.
 //
 //
-// This library is only compatible with Arduino's SDK version 1.0
-//
-//
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
 #ifndef LiquidCrystal_4bit_h

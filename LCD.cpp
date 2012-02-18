@@ -27,7 +27,7 @@
 // backpacks such as the I2CLCDextraIO using the PCF8574* I2C IO Expander ASIC.
 //
 //
-// @version API 1.0.0
+// @version API 1.1.0
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
