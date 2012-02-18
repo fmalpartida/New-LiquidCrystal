@@ -38,6 +38,8 @@
 #include "I2CIO.h"
 #include "LiquidCrystal_I2C.h"
 
+// CONSTANT  definitions
+// ---------------------------------------------------------------------------
 
 // flags for backlight control
 #define LCD_NOBACKLIGHT 0x00
@@ -103,6 +105,42 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
    _data_pins[3] = ( 1 << d3 );
 }
 
+// PUBLIC METHODS
+// ---------------------------------------------------------------------------
+
+//
+// begin
+void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) 
+{
+   
+   init();     // Initialise the I2C expander interface
+   LCD::begin ( cols, lines, dotsize );   
+}
+
+
+// User commands - users can expand this section
+//----------------------------------------------------------------------------
+
+// Turn the (optional) backlight off/on
+void LiquidCrystal_I2C::setBacklight( uint8_t mode ) 
+{
+   if ( mode == HIGH )
+   {
+      _backlightMask = _backlightPin & LCD_BACKLIGHT;
+      
+   }
+   else 
+   {
+      _backlightMask = _backlightPin & LCD_NOBACKLIGHT;
+   }
+   _i2cio.write( _backlightMask );
+}
+
+void LiquidCrystal_I2C::setBacklightPin ( uint8_t pin )
+{
+   _backlightPin = ( 1 << pin );
+}
+
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
 
@@ -124,43 +162,6 @@ int LiquidCrystal_I2C::init()
    }
    return ( status );
 }
-
-
-// PUBLIC METHODS
-// ---------------------------------------------------------------------------
-
-//
-// begin
-void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) 
-{
-   
-   init();     // Initialise the I2C expander interface
-   LCD::begin ( cols, lines, dotsize );   
-}
-
-
-// User commands - users can expand this section
-//----------------------------------------------------------------------------
-
-// Turn the (optional) backlight off/on
-void LiquidCrystal_I2C::setBacklight( uint8_t mode ) 
-{
-
-   if ( mode == HIGH )
-   {
-      _backlightMask = _backlightPin & LCD_BACKLIGHT;
-
-   }
-   else 
-   {
-      _backlightMask = _backlightPin & LCD_NOBACKLIGHT;
-   }
-   _i2cio.write( _backlightMask );
-
-}
-
-// PRIVATE METHODS
-// ---------------------------------------------------------------------------
 
 // low level data pushing commands
 //----------------------------------------------------------------------------

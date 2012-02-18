@@ -171,3 +171,12 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    shiftIt(mode | SR_EN_BIT | ((value >> 1) & 0x78)); // upper nibble
    shiftIt(mode | SR_EN_BIT | ((value << 3) & 0x78)); // lower nibble
 }
+
+//
+// setBacklight
+void LiquidCrystal_SR::setBacklight ( uint8_t mode ) 
+{ }
+
+
+void LiquidCrystal_SR::setBacklightPin ( uint8_t pin )
+{ }

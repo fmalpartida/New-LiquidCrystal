@@ -147,11 +147,22 @@ public:
     @function
     @abstract   Switch-off the LCD backlight.
     @discussion Switch-off the LCD backlight, this method is not supported by
-    the I2CLCDextraIO, it needs an extra IO pin to drive the LCD backlight
+    the I2CLCDextraIO, it needs an extra IO pin to drive the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin.
     
     @param      mode: backlight mode (HIGH|LOW)
     */
    void setBacklight ( uint8_t mode );
+   
+   /*!
+    @function
+    @abstract   Sets the pin to control the backlight.
+    @discussion Sets the pin in the device to control the backlight.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   void setBacklightPin ( uint8_t pin );
    
    
 private:
