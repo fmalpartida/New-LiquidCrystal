@@ -122,6 +122,8 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 //----------------------------------------------------------------------------
 
 // Turn the (optional) backlight off/on
+//
+// setBacklight
 void LiquidCrystal_I2C::setBacklight( uint8_t mode ) 
 {
    if ( mode == HIGH )
@@ -136,6 +138,8 @@ void LiquidCrystal_I2C::setBacklight( uint8_t mode )
    _i2cio.write( _backlightMask );
 }
 
+//
+// setBacklightPin
 void LiquidCrystal_I2C::setBacklightPin ( uint8_t pin )
 {
    _backlightPin = ( 1 << pin );
