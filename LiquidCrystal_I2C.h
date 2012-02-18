@@ -37,15 +37,9 @@
 #include "I2CIO.h"
 #include "LCD.h"
 
-// flags for backlight control
-#define LCD_BACKLIGHT   0x00
-#define LCD_NOBACKLIGHT 0x80
-
-/*!
- @warning These definitions will have to be changed should the IOExpander be 
- connected differently to this default.
- */
-
+// Default library configuration parameters used by class constructor with
+// only the I2C address field.
+// ---------------------------------------------------------------------------
 /*!
  @defined 
  @abstract   Enable bit of the LCD
@@ -155,19 +149,9 @@ public:
     @discussion Switch-off the LCD backlight, this method is not supported by
     the I2CLCDextraIO, it needs an extra IO pin to drive the LCD backlight
     
-    @param      none
+    @param      mode: backlight mode (HIGH|LOW)
     */
-   void noBacklight();
-   
-   /*!
-    @function
-    @abstract   Switch-on the LCD backlight.
-    @discussion Switch-on the LCD backlight, this method is not supported by
-    the I2CLCDextraIO, it needs an extra IO pin to drive the LCD backlight
-    
-    @param      none
-    */
-   void backlight();
+   void setBacklight ( uint8_t mode );
    
    
 private:
@@ -197,21 +181,15 @@ private:
     */
    void pulseEnable(uint8_t);
    
-   /*!
-    @method     
-    @abstract   Writes to the expansion module.
-    @discussion Writes a byte to the IO expansion module. This will be applied
-    to all its outputs.
-    */ 
-   void expanderWrite(uint8_t);
    
-   uint8_t _Addr;           // I2C Address of the IO expander
-   uint8_t _backlightval;   // Backlight shadow value
-   I2CIO   _i2cio;          // I2CIO PCF8574* expansion module driver I2CLCDextraIO
-   uint8_t _En;             // LCD expander word for enable pin
-   uint8_t _Rw;             // LCD expander word for R/W pin
-   uint8_t _Rs;             // LCD expander word for Register Select pin
-   uint8_t _data_pins[4];   // LCD data lines
+   uint8_t _Addr;             // I2C Address of the IO expander
+   uint8_t _backlightPin;     // Backlight IO pin
+   uint8_t _backlightMask;    // Backlight status mask
+   I2CIO   _i2cio;            // I2CIO PCF8574* expansion module driver I2CLCDextraIO
+   uint8_t _En;               // LCD expander word for enable pin
+   uint8_t _Rw;               // LCD expander word for R/W pin
+   uint8_t _Rs;               // LCD expander word for Register Select pin
+   uint8_t _data_pins[4];     // LCD data lines
    
 };
 

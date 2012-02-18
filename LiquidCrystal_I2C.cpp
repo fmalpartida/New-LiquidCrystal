@@ -39,13 +39,20 @@
 #include "LiquidCrystal_I2C.h"
 
 
+// flags for backlight control
+#define LCD_NOBACKLIGHT 0x00
+#define LCD_BACKLIGHT   0xFF
+
+
 // CONSTRUCTORS
 // ---------------------------------------------------------------------------
 LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
 {
    _Addr = lcd_Addr;
    
-   _backlightval = LCD_NOBACKLIGHT;
+   _backlightPin  = 0x0;
+   _backlightMask = LCD_NOBACKLIGHT;
+   
    _En = EN;
    _Rw = RW;
    _Rs = RS;
@@ -58,11 +65,13 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
 }
 
 LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
-                                     uint8_t Rs)
+                                      uint8_t Rs)
 {
    _Addr = lcd_Addr;
    
-   _backlightval = LCD_NOBACKLIGHT;
+   _backlightPin  = 0;
+   _backlightMask = LCD_NOBACKLIGHT;
+   
    _En = ( 1 << En );
    _Rw = ( 1 << Rw );
    _Rs = ( 1 << Rs );
@@ -80,7 +89,9 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
 {
    _Addr = lcd_Addr;
    
-   _backlightval = LCD_NOBACKLIGHT;
+   _backlightPin  = 0;
+   _backlightMask = LCD_NOBACKLIGHT;
+
    _En = ( 1 << En );
    _Rw = ( 1 << Rw );
    _Rs = ( 1 << Rs );
@@ -109,6 +120,7 @@ int LiquidCrystal_I2C::init()
       _i2cio.portMode ( OUTPUT );  // Set the entire IO extender to OUTPUT
       _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
       status = 1;
+      _i2cio.write(0);  // Set the entire port to LOW
    }
    return ( status );
 }
@@ -131,16 +143,20 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 //----------------------------------------------------------------------------
 
 // Turn the (optional) backlight off/on
-void LiquidCrystal_I2C::noBacklight(void) 
+void LiquidCrystal_I2C::setBacklight( uint8_t mode ) 
 {
-   _backlightval=LCD_NOBACKLIGHT;
-   expanderWrite(0);
-}
 
-void LiquidCrystal_I2C::backlight(void) 
-{
-   _backlightval=LCD_BACKLIGHT;
-   expanderWrite(0);
+   if ( mode == HIGH )
+   {
+      _backlightMask = _backlightPin & LCD_BACKLIGHT;
+
+   }
+   else 
+   {
+      _backlightMask = _backlightPin & LCD_NOBACKLIGHT;
+   }
+   _i2cio.write( _backlightMask );
+
 }
 
 // PRIVATE METHODS
@@ -184,25 +200,15 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
       mode = _Rs;
    }
    
-   expanderWrite ( pinMapValue | mode );
-   pulseEnable ( pinMapValue | mode );
+   pinMapValue |= mode | _backlightMask;
+   _i2cio.write ( pinMapValue );
+   pulseEnable ( pinMapValue );
 }
 
 //
 // write4bits
 void LiquidCrystal_I2C::pulseEnable (uint8_t _data)
 {
-   expanderWrite (_data | _En);   // En HIGH
-   expanderWrite(_data & ~_En);   // En LOW
-} 
-
-//
-// expanderWrite
-void LiquidCrystal_I2C::expanderWrite(uint8_t _data)
-{                                        
-   _i2cio.write ( _data );
+   _i2cio.write (_data | _En);   // En HIGH
+   _i2cio.write (_data & ~_En);  // En LOW
 }
-
-
-
-
