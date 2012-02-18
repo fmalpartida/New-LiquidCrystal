@@ -130,11 +130,11 @@ inline static void waitUsec ( uint16_t uSec )
 #define DATA                    1
 
 /*!
-    @defined 
-    @abstract   Defines the duration of the home and clear commands
-    @discussion This constant defines the time it takes for the home and clear
-          commands in the LCD - Time in microseconds.
-*/
+ @defined 
+ @abstract   Defines the duration of the home and clear commands
+ @discussion This constant defines the time it takes for the home and clear
+ commands in the LCD - Time in microseconds.
+ */
 #define HOME_CLEAR_EXEC      2000
 
 class LCD : public Print 
@@ -164,7 +164,7 @@ public:
     @param      rows[in] the number of rows that the display has
     */
    virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);
-  
+   
    /*!
     @function
     @abstract   Clears the LCD.
@@ -344,7 +344,7 @@ public:
     @param      row[in] LCD row - line.
     */
    void setCursor(uint8_t col, uint8_t row);
-   
+
    
    /*!
     @function
@@ -358,6 +358,33 @@ public:
     @param      value[in] Command value to send to the LCD.
     */
    void command(uint8_t value);
+   
+   //
+   // virtual class methods
+   // --------------------------------------------------------------------------
+   /*!
+    @function
+    @abstract   Switch-on/off the LCD backlight.
+    @discussion Switch-on/off the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin. This method is device dependent
+    and can be programmed on each subclass. An empty function call is provided
+    that does nothing.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   virtual void setBacklight ( uint8_t mode ) { };
+   
+   /*!
+    @function
+    @abstract   Sets the pin to control the backlight.
+    @discussion Sets the pin in the device to control the backlight.
+    This method is device dependent and can be programmed on each subclass. An 
+    empty function call is providedthat does nothing.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   virtual void setBacklightPin ( uint8_t pin ) { };
    
    /*!
     @function

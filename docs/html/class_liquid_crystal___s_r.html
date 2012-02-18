@@ -84,6 +84,8 @@ Inheritance diagram for LiquidCrystal_SR:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">LiquidCrystal_SR</a> (uint8_t srdata, uint8_t srclock, uint8_t enable)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">send</a> (uint8_t value, uint8_t mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">setBacklight</a> (uint8_t mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">setBacklightPin</a> (uint8_t pin)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
@@ -174,6 +176,63 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad9f3e3f36257984c23fb508973e14535"></a><!-- doxytag: member="LiquidCrystal_SR::setBacklight" ref="ad9f3e3f36257984c23fb508973e14535" args="(uint8_t mode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LiquidCrystal_SR::setBacklight </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight. The setBacklightPin has to be called before setting the backlight for this method to work. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">setBacklightPin</a>.</dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">LCD</a>.</p>
+
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00177">177</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3025b6e19c6b9c28991b13fa16ef58c9"></a><!-- doxytag: member="LiquidCrystal_SR::setBacklightPin" ref="a3025b6e19c6b9c28991b13fa16ef58c9" args="(uint8_t pin)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LiquidCrystal_SR::setBacklightPin </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the pin to control the backlight.  Sets the pin in the device to control the backlight.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a2871297d458e3384538008541192af27">LCD</a>.</p>
+
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00181">181</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/fmalpartida/development/ardWorkspace/LiquidCrystal_I2C/LiquiCrystal_I2C/<a class="el" href="_liquid_crystal___s_r_8h_source.html">LiquidCrystal_SR.h</a></li>
 <li>/Users/fmalpartida/development/ardWorkspace/LiquidCrystal_I2C/LiquiCrystal_I2C/<a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a></li>
@@ -193,7 +252,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 12 2012 21:39:44 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 18 2012 21:46:46 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
