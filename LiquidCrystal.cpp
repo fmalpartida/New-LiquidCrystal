@@ -107,6 +107,24 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
    waitUsec ( EXEC_TIME ); // wait for the command to execute by the LCD
 }
 
+//
+// setBackligh
+void LiquidCrystal::setBacklight ( uint8_t mode )
+{
+   if ( _backlightPin != LCD_NOBACKLIGHT )
+   {
+      digitalWrite ( _backlightPin, mode );
+   }
+}
+
+//
+// setBacklightPin
+void LiquidCrystal::setBacklightPin ( uint8_t pin )
+{
+   pinMode ( pin, OUTPUT ); // Difine the backlight pin as output
+   _backlightPin = pin;
+}
+
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
 
@@ -181,6 +199,7 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
    // Initialise the backlight pin no nothing
    _backlightPin = LCD_NOBACKLIGHT;
 }
+
 //
 // pulseEnable
 void LiquidCrystal::pulseEnable(void) 
@@ -203,20 +222,4 @@ void LiquidCrystal::writeNbits(uint8_t value, uint8_t numBits)
    pulseEnable();
 }
 
-//
-// setBackligh
-void LiquidCrystal::setBacklight ( uint8_t mode )
-{
-   if ( _backlightPin != LCD_NOBACKLIGHT )
-   {
-      digitalWrite ( _backlightPin, mode );
-   }
-}
 
-//
-// setBacklightPin
-void LiquidCrystal::setBacklightPin ( uint8_t pin )
-{
-   pinMode ( pin, OUTPUT ); // Difine the backlight pin as output
-   _backlightPin = pin;
-}
