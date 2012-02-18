@@ -217,5 +217,6 @@ void LiquidCrystal::setBacklight ( uint8_t mode )
 // setBacklightPin
 void LiquidCrystal::setBacklightPin ( uint8_t pin )
 {
+   pinMode ( pin, OUTPUT ); // Difine the backlight pin as output
    _backlightPin = pin;
 }
