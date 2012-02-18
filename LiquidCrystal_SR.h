@@ -120,9 +120,8 @@ public:
    
    /*!
     @function
-    @abstract   Switch-off the LCD backlight.
-    @discussion Switch-off the LCD backlight, this method is not supported by
-    the I2CLCDextraIO, it needs an extra IO pin to drive the LCD backlight.
+    @abstract   Switch-on/off the LCD backlight.
+    @discussion Switch-on/off the LCD backlight.
     The setBacklightPin has to be called before setting the backlight for
     this method to work. @see setBacklightPin.
     

@@ -87,6 +87,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#a23124e6dd5ac4a9b6147629b96e91953">LiquidCrystal</a> (uint8_t rs, uint8_t enable, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#a0a0a8dfa7a2e775a031fd65f5c6366ec">LiquidCrystal</a> (uint8_t rs, uint8_t rw, uint8_t enable, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">send</a> (uint8_t value, uint8_t mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#a170c6ed996f3e84bf63dcd5cb1471428">setBacklight</a> (uint8_t mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal.html#aa78ed97905615b34e685170c086e3d9d">setBacklightPin</a> (uint8_t pin)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
@@ -166,7 +168,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>8 bit <a class="el" href="class_l_c_d.html">LCD</a> constructors.  Defines the pin assignment that the <a class="el" href="class_l_c_d.html">LCD</a> will have. The constructor does not initialize the <a class="el" href="class_l_c_d.html">LCD</a>. </p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00056">56</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00060">60</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
 
 </div>
 </div>
@@ -249,7 +251,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00049">49</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00053">53</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
 
 </div>
 </div>
@@ -309,7 +311,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>4 bit <a class="el" href="class_l_c_d.html">LCD</a> constructors.  Defines the pin assignment that the <a class="el" href="class_l_c_d.html">LCD</a> will have. The constructor does not initialize the <a class="el" href="class_l_c_d.html">LCD</a>. </p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00063">63</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00067">67</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
 
 </div>
 </div>
@@ -362,7 +364,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00069">69</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00073">73</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
 
 </div>
 </div>
@@ -403,7 +405,64 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00153">153</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00087">87</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a170c6ed996f3e84bf63dcd5cb1471428"></a><!-- doxytag: member="LiquidCrystal::setBacklight" ref="a170c6ed996f3e84bf63dcd5cb1471428" args="(uint8_t mode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LiquidCrystal::setBacklight </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight. The setBacklightPin has to be called before setting the backlight for this method to work. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_liquid_crystal.html#aa78ed97905615b34e685170c086e3d9d">setBacklightPin</a>.</dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">LCD</a>.</p>
+
+<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00112">112</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa78ed97905615b34e685170c086e3d9d"></a><!-- doxytag: member="LiquidCrystal::setBacklightPin" ref="aa78ed97905615b34e685170c086e3d9d" args="(uint8_t pin)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LiquidCrystal::setBacklightPin </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the pin to control the backlight.  Sets the pin in the device to control the backlight.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a2871297d458e3384538008541192af27">LCD</a>.</p>
+
+<p>Definition at line <a class="el" href="_liquid_crystal_8cpp_source.html#l00122">122</a> of file <a class="el" href="_liquid_crystal_8cpp_source.html">LiquidCrystal.cpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +485,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 12 2012 21:39:44 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 18 2012 21:46:46 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
