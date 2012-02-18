@@ -69,8 +69,6 @@
 //             on the "official" LiquidCrystal library.
 //
 //
-// This library is only compatible with Arduino's SDK version 1.0
-//
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
