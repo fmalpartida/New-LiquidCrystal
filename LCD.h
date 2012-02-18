@@ -44,7 +44,6 @@
 #include <inttypes.h>
 #include <Print.h>
 
-
 /*!
  @defined 
  @abstract   Enables disables fast waits for write operations for LCD
