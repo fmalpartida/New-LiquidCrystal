@@ -2,7 +2,7 @@
 // Created by Francisco Malpartida on 20/08/11.
 // Copyright 2011 - Under creative commons license 3.0:
 //        Attribution-ShareAlike CC BY-SA
-//LiquidCrystal
+//
 // This software is furnished "as is", without technical support, and with no 
 // warranty, express or implied, as to its usefulness for any purpose.
 //
@@ -38,7 +38,11 @@
 #else
 #include <Arduino.h>
 #endif
-#include "LiquidCrystal.h"
+#include <LiquidCrystal.h>
+
+// CONSTANT  definitions
+// ---------------------------------------------------------------------------
+#define LCD_NOBACKLIGHT 0xFF
 
 // STATIC helper functions
 // ---------------------------------------------------------------------------
@@ -70,6 +74,37 @@ LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
 {
    init(LCD_4BIT, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
+}
+
+
+
+// PUBLIC METHODS
+// ---------------------------------------------------------------------------
+
+/************ low level data pushing commands **********/
+
+// send
+void LiquidCrystal::send(uint8_t value, uint8_t mode) 
+{
+   digitalWrite( _rs_pin, mode );
+   
+   // if there is a RW pin indicated, set it low to Write
+   // ---------------------------------------------------
+   if (_rw_pin != 255) 
+   { 
+      digitalWrite(_rw_pin, LOW);
+   }
+   
+   if (_displayfunction & LCD_8BITMODE)
+   {
+      writeNbits(value, 8); 
+   } 
+   else 
+   {
+      writeNbits ( value >> 4, 4 );
+      writeNbits ( value, 4 );
+   }
+   waitUsec ( EXEC_TIME ); // wait for the command to execute by the LCD
 }
 
 // PRIVATE METHODS
@@ -142,37 +177,10 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
    { 
       digitalWrite(_rw_pin, LOW);
    }
-}
-
-// PUBLIC METHODS
-// ---------------------------------------------------------------------------
-
-/************ low level data pushing commands **********/
-
-// send
-void LiquidCrystal::send(uint8_t value, uint8_t mode) 
-{
-   digitalWrite( _rs_pin, mode );
    
-   // if there is a RW pin indicated, set it low to Write
-   // ---------------------------------------------------
-   if (_rw_pin != 255) 
-   { 
-      digitalWrite(_rw_pin, LOW);
-   }
-   
-   if (_displayfunction & LCD_8BITMODE)
-   {
-      writeNbits(value, 8); 
-   } 
-   else 
-   {
-      writeNbits ( value >> 4, 4 );
-      writeNbits ( value, 4 );
-   }
-   waitUsec ( EXEC_TIME ); // wait for the command to execute by the LCD
+   // Initialise the backlight pin no nothing
+   _backlightPin = LCD_NOBACKLIGHT;
 }
-
 //
 // pulseEnable
 void LiquidCrystal::pulseEnable(void) 
@@ -193,4 +201,21 @@ void LiquidCrystal::writeNbits(uint8_t value, uint8_t numBits)
       digitalWrite(_data_pins[i], (value >> i) & 0x01);
    }
    pulseEnable();
+}
+
+//
+// setBackligh
+void LiquidCrystal::setBacklight ( uint8_t mode )
+{
+   if ( _backlightPin != LCD_NOBACKLIGHT )
+   {
+      digitalWrite ( _backlightPin, mode );
+   }
+}
+
+//
+// setBacklightPin
+void LiquidCrystal::setBacklightPin ( uint8_t pin )
+{
+   _backlightPin = pin;
 }
