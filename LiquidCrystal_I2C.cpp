@@ -211,7 +211,7 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
 }
 
 //
-// write4bits
+// pulseEnable
 void LiquidCrystal_I2C::pulseEnable (uint8_t _data)
 {
    _i2cio.write (_data | _En);   // En HIGH
