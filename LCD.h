@@ -39,6 +39,12 @@
 #include <inttypes.h>
 #include <Print.h>
 
+#if (ARDUINO <  100)
+#include <WProgram.h>
+#else
+#include <Arduino.h>
+#endif
+
 /*!
  @defined 
  @abstract   Enables disables fast waits for write operations for LCD
