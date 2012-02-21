@@ -293,6 +293,23 @@ public:
    
    /*!
     @function
+    @abstract   Moves the cursor one space to the left.
+    @discussion 
+    @param      none
+    */   
+   void moveCursorLeft();
+
+   
+   /*!
+    @function
+    @abstract   Moves the cursor one space to the right.
+    
+    @param      none
+    */
+   void moveCursorRight();
+   
+   /*!
+    @function
     @abstract   Turns on automatic scrolling of the LCD.
     @discussion Turns on automatic scrolling of the LCD. This causes each 
     character output to the display to push previous characters over by one 
@@ -433,9 +450,9 @@ protected:
    // Internal LCD variables to control the LCD shared between all derived
    // classes.
    uint8_t _displayfunction;  // LCD_5x10DOTS or LCD_5x8DOTS, LCD_4BITMODE or 
-   // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
+                              // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
    uint8_t _displaycontrol;   // LCD base control command LCD on/off, blink, cursor
-   // all commands are "ored" to its contents.
+                              // all commands are "ored" to its contents.
    uint8_t _displaymode;      // Text entry mode to the LCD
    uint8_t _numlines;         // Number of lines of the LCD, initialized with begin()
    uint8_t _cols;             // Number of columns in the LCD
