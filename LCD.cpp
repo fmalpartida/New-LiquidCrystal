@@ -232,7 +232,8 @@ void LCD::scrollDisplayLeft(void)
    command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVELEFT);
 }
 
-void LCD::scrollDisplayRight(void) {
+void LCD::scrollDisplayRight(void) 
+{
    command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVERIGHT);
 }
 
@@ -249,6 +250,19 @@ void LCD::rightToLeft(void)
    _displaymode &= ~LCD_ENTRYLEFT;
    command(LCD_ENTRYMODESET | _displaymode);
 }
+
+// This method moves the cursor one space to the right
+void LCD::moveCursorRight(void)
+{
+   command(LCD_CURSORSHIFT | LCD_CURSORMOVE | LCD_MOVERIGHT);
+}
+
+// This method moves the cursor one space to the left
+void LCD::moveCursorLeft(void)
+{
+   command(LCD_CURSORSHIFT | LCD_CURSORMOVE | LCD_MOVELEFT);
+}
+
 
 // This will 'right justify' text from the cursor
 void LCD::autoscroll(void) 
