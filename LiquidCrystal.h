@@ -24,9 +24,6 @@
 // to the original functionality of the Arduino LiquidCrystal library.
 //
 //
-// This library is only compatible with Arduino's SDK version 1.0
-//
-//
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
 #ifndef LiquidCrystal_4bit_h
@@ -87,6 +84,26 @@ public:
     */
    virtual void send(uint8_t value, uint8_t mode);
    
+   /*!
+    @function
+    @abstract   Switch-on/off the LCD backlight.
+    @discussion Switch-on/off the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   void setBacklight ( uint8_t mode );
+   
+   /*!
+    @function
+    @abstract   Sets the pin to control the backlight.
+    @discussion Sets the pin in the device to control the backlight.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   void setBacklightPin ( uint8_t pin );
+   
    
 private:
    
@@ -119,6 +136,7 @@ private:
    uint8_t _rw_pin;       // LOW: write to LCD.  HIGH: read from LCD.
    uint8_t _enable_pin;   // activated by a HIGH pulse.
    uint8_t _data_pins[8]; // Data pins.
+   uint8_t _backlightPin; // Pin associated to control the LCD backlight
 };
 
 #endif

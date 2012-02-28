@@ -47,7 +47,7 @@
 //
 //
 // History
-// 2012.01.16  flo - faster digitalWrite/shiftOut
+// 2012.01.16  Florian Fida - faster digitalWrite/shiftOut
 // 2011.10.29  fmalpartida - adaption of the library to the LCD class hierarchy.
 // 2011.07.02  Fixed a minor flaw in setCursor function. No functional change, 
 //             just a bit more memory efficient.
@@ -70,9 +70,6 @@
 //             on the "official" LiquidCrystal library.
 //
 //
-// This library is only compatible with Arduino's SDK version 1.0
-//
-//
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
 #include <stdio.h>
@@ -84,7 +81,7 @@
 #else
 #include <Arduino.h>
 #endif
-#include <LiquidCrystal_SR.h>
+#include "LiquidCrystal_SR.h"
 
 #include "FastIO.h"
 
@@ -104,11 +101,10 @@ LiquidCrystal_SR::LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock,
 
 //
 // init
-void LiquidCrystal_SR::init( uint8_t srdata, uint8_t srclock, uint8_t enable, 
-                             uint8_t lines, uint8_t font )
+void LiquidCrystal_SR::init(uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, uint8_t font)
 {
    // Initialise private variables
-   _two_wire    = 0;
+   _two_wire = 0;
 
    _srDataRegister = fio_pinToOutputRegister(srdata);
    _srDataBit = fio_pinToBit(srdata);
@@ -117,7 +113,7 @@ void LiquidCrystal_SR::init( uint8_t srdata, uint8_t srclock, uint8_t enable,
 
    if (enable == TWO_WIRE)
    {
-      _two_wire   = 1;
+      _two_wire = 1;
       _srEnableRegister = _srDataRegister;
       _srEnableBit = _srDataBit;
    }
@@ -133,33 +129,16 @@ void LiquidCrystal_SR::init( uint8_t srdata, uint8_t srclock, uint8_t enable,
    _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x10DOTS;
 }
 
-// PUBLIC METHODS
-// ---------------------------------------------------------------------------
-
-
-/************ low level data pushing commands **********/
-
-// send
-void LiquidCrystal_SR::send(uint8_t value, uint8_t mode) 
+// shiftIt
+void LiquidCrystal_SR::shiftIt(uint8_t val)
 {
-   uint8_t val1, val2;
-   
-   // If _two_wire - clear the shiftregister first.
-   // ----------------------------------------------
-   if ( _two_wire ) 
+   if (_two_wire)
    {
-	   // clear fast
-	   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
+      // Clear to get Enable LOW
+      fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
    }
-   
-   // Divide byte in two nibbles (val1 and val2), include the RS signal
-   // and format it for shiftregister output wiring to the LCD
-   mode = mode ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
-   val1 = mode | SR_EN_BIT | ((value >> 1) & 0x78); // upper nibble
-   val2 = mode | SR_EN_BIT | ((value << 3) & 0x78); // lower nibble
-   
-   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1, MSBFIRST);
-   
+   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val, MSBFIRST);
+
    // LCD ENABLE PULSE
    //
    // While this library is written with a shift register without an output
@@ -168,57 +147,32 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    // connected to the LCD enable pin. The LCD is (very likely) slower
    // to read the Enable pulse, and then reads the new contents of the SR.
    fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
-   waitUsec( 1 );                 // enable pulse must be >450ns
-   fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit,LOW);
+   waitUsec (1);         // enable pulse must be >450ns               
+   fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit, LOW);
+   waitUsec ( 37 );      // commands need > 37us to settle
+}
 
-   // clear shiftregister
-   // ---------------------------
-   if ( _two_wire ) 
-   {
-	   // Clear fast
-	   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
-   }
-   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val2, MSBFIRST);
-   
-   // LCD ENABLE PULSE, se above comment
-   fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit,HIGH);
-   waitUsec( 1 );                 // enable pulse must be >450ns
-   fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit,LOW);
-   waitUsec( 40 );                // commands need > 37us to settle
+// PUBLIC METHODS
+// ---------------------------------------------------------------------------
+
+
+/************ low level data pushing commands **********/
+
+// send
+void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
+{
+   // Divide byte in two nibbles include the RS signal
+   // and format it for shiftregister output wiring to the LCD
+   mode = mode ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
+   shiftIt(mode | SR_EN_BIT | ((value >> 1) & 0x78)); // upper nibble
+   shiftIt(mode | SR_EN_BIT | ((value << 3) & 0x78)); // lower nibble
 }
 
 //
-// write4bits
-void LiquidCrystal_SR::write4bits(uint8_t value) 
-{
-   uint8_t val1;
-   
-   // clear shiftregister
-   // --------------------------
-   if ( _two_wire ) 
-   {
-	   // clear fast
-	   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
-   }
-   fio_digitalWrite(_srEnableRegister, _srEnableBit, LOW);
+// setBacklight
+void LiquidCrystal_SR::setBacklight ( uint8_t mode ) 
+{ }
 
-   // Discard lower nibble
-   // and format it for shiftregister output wiring to the LCD
-   val1 = SR_EN_BIT | ((value >> 1) & 0x78);
-   fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1, MSBFIRST);
 
-   // LCD ENABLE PULSE
-   //
-   // While this library is written with a shift register without an output
-   // latch in mind, it can work in 3-wire mode with a shiftregister with a
-   // latch. The shiftregister latch pin (STR, RCL or similar) is then
-   // connected to the LCD enable pin. The LCD is (very likely) slower
-   // to read the Enable pulse, and then reads the new contents of the SR.
-   
-   fio_digitalWrite(_srEnableRegister, _srEnableBit, HIGH);
-
-   waitUsec( 1 );                 // enable pulse must be >450ns
-   fio_digitalWrite(_srEnableRegister, _srEnableBit, LOW);
-   
-   waitUsec( 40 );               // commands need > 37us to settle
-}
+void LiquidCrystal_SR::setBacklightPin ( uint8_t pin )
+{ }
