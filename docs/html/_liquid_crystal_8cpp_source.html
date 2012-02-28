@@ -65,7 +65,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00002"></a>00002 <span class="comment">// Created by Francisco Malpartida on 20/08/11.</span>
 <a name="l00003"></a>00003 <span class="comment">// Copyright 2011 - Under creative commons license 3.0:</span>
 <a name="l00004"></a>00004 <span class="comment">//        Attribution-ShareAlike CC BY-SA</span>
-<a name="l00005"></a>00005 <span class="comment">//LiquidCrystal</span>
+<a name="l00005"></a>00005 <span class="comment">//</span>
 <a name="l00006"></a>00006 <span class="comment">// This software is furnished &quot;as is&quot;, without technical support, and with no </span>
 <a name="l00007"></a>00007 <span class="comment">// warranty, express or implied, as to its usefulness for any purpose.</span>
 <a name="l00008"></a>00008 <span class="comment">//</span>
@@ -87,277 +87,202 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00024"></a>00024 <span class="comment">// to the original functionality of the Arduino LiquidCrystal library.</span>
 <a name="l00025"></a>00025 <span class="comment">//</span>
 <a name="l00026"></a>00026 <span class="comment">//</span>
-<a name="l00027"></a>00027 <span class="comment">// This library is only compatible with Arduino&#39;s SDK version 1.0</span>
-<a name="l00028"></a>00028 <span class="comment">//</span>
-<a name="l00029"></a>00029 <span class="comment">//</span>
-<a name="l00030"></a>00030 <span class="comment">// @author F. Malpartida - fmalpartida@gmail.com</span>
-<a name="l00031"></a>00031 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00032"></a>00032 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
-<a name="l00033"></a>00033 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00034"></a>00034 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
-<a name="l00037"></a>00037 <span class="preprocessor"></span><span class="preprocessor">#include &lt;WProgram.h&gt;</span>
-<a name="l00038"></a>00038 <span class="preprocessor">#else</span>
-<a name="l00039"></a>00039 <span class="preprocessor"></span><span class="preprocessor">#include &lt;Arduino.h&gt;</span>
-<a name="l00040"></a>00040 <span class="preprocessor">#endif</span>
-<a name="l00041"></a>00041 <span class="preprocessor"></span><span class="preprocessor">#include &lt;<a class="code" href="_liquid_crystal_8h.html">LiquidCrystal.h</a>&gt;</span>
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="comment">// STATIC helper functions</span>
-<a name="l00044"></a>00044 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00045"></a>00045 
+<a name="l00027"></a>00027 <span class="comment">// @author F. Malpartida - fmalpartida@gmail.com</span>
+<a name="l00028"></a>00028 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00029"></a>00029 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00030"></a>00030 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00031"></a>00031 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
+<a name="l00034"></a>00034 <span class="preprocessor"></span><span class="preprocessor">#include &lt;WProgram.h&gt;</span>
+<a name="l00035"></a>00035 <span class="preprocessor">#else</span>
+<a name="l00036"></a>00036 <span class="preprocessor"></span><span class="preprocessor">#include &lt;Arduino.h&gt;</span>
+<a name="l00037"></a>00037 <span class="preprocessor">#endif</span>
+<a name="l00038"></a>00038 <span class="preprocessor"></span><span class="preprocessor">#include &lt;<a class="code" href="_liquid_crystal_8h.html">LiquidCrystal.h</a>&gt;</span>
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 <span class="comment">// CONSTANT  definitions</span>
+<a name="l00041"></a>00041 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00042"></a><a class="code" href="_liquid_crystal_8cpp.html#a65fa786d6e31fe8b1aa51784a9736581">00042</a> <span class="preprocessor">#define LCD_NOBACKLIGHT 0xFF</span>
+<a name="l00043"></a>00043 <span class="preprocessor"></span>
+<a name="l00044"></a>00044 <span class="comment">// STATIC helper functions</span>
+<a name="l00045"></a>00045 <span class="comment">// ---------------------------------------------------------------------------</span>
 <a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="comment">// CONSTRUCTORS</span>
-<a name="l00048"></a>00048 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00049"></a><a class="code" href="class_liquid_crystal.html#a30e3d865c4b4a003a36cb45903f93644">00049</a> <a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal::LiquidCrystal</a>(uint8_t rs, uint8_t rw, uint8_t enable,
-<a name="l00050"></a>00050                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-<a name="l00051"></a>00051                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
-<a name="l00052"></a>00052 {
-<a name="l00053"></a>00053    init(<a class="code" href="_l_c_d_8h.html#a57d84af8cf61ceee4eb91db77889f071">LCD_8BIT</a>, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
-<a name="l00054"></a>00054 }
-<a name="l00055"></a>00055 
-<a name="l00056"></a><a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">00056</a> <a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal::LiquidCrystal</a>(uint8_t rs, uint8_t enable,
-<a name="l00057"></a>00057                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-<a name="l00058"></a>00058                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
-<a name="l00059"></a>00059 {
-<a name="l00060"></a>00060    init(<a class="code" href="_l_c_d_8h.html#a57d84af8cf61ceee4eb91db77889f071">LCD_8BIT</a>, rs, 255, enable, d0, d1, d2, d3, d4, d5, d6, d7);
-<a name="l00061"></a>00061 }
-<a name="l00062"></a>00062 
-<a name="l00063"></a><a class="code" href="class_liquid_crystal.html#a0a0a8dfa7a2e775a031fd65f5c6366ec">00063</a> <a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal::LiquidCrystal</a>(uint8_t rs, uint8_t rw, uint8_t enable,
-<a name="l00064"></a>00064                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
-<a name="l00065"></a>00065 {
-<a name="l00066"></a>00066    init(<a class="code" href="_l_c_d_8h.html#a31e1c14e8c2845dec3301f0ebd36b43c">LCD_4BIT</a>, rs, rw, enable, d0, d1, d2, d3, 0, 0, 0, 0);
-<a name="l00067"></a>00067 }
-<a name="l00068"></a>00068 
-<a name="l00069"></a><a class="code" href="class_liquid_crystal.html#a23124e6dd5ac4a9b6147629b96e91953">00069</a> <a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal::LiquidCrystal</a>(uint8_t rs,  uint8_t enable,
-<a name="l00070"></a>00070                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
-<a name="l00071"></a>00071 {
-<a name="l00072"></a>00072    init(<a class="code" href="_l_c_d_8h.html#a31e1c14e8c2845dec3301f0ebd36b43c">LCD_4BIT</a>, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
-<a name="l00073"></a>00073 }
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075 <span class="comment">// PRIVATE METHODS</span>
-<a name="l00076"></a>00076 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048 <span class="comment">// CONSTRUCTORS</span>
+<a name="l00049"></a>00049 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00050"></a><a class="code" href="class_liquid_crystal.html#a30e3d865c4b4a003a36cb45903f93644">00050</a> <a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal::LiquidCrystal</a>(uint8_t rs, uint8_t rw, uint8_t enable,
+<a name="l00051"></a>00051                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+<a name="l00052"></a>00052                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
+<a name="l00053"></a>00053 {
+<a name="l00054"></a>00054    init(<a class="code" href="_l_c_d_8h.html#a57d84af8cf61ceee4eb91db77889f071">LCD_8BIT</a>, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
+<a name="l00055"></a>00055 }
+<a name="l00056"></a>00056 
+<a name="l00057"></a><a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">00057</a> <a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal::LiquidCrystal</a>(uint8_t rs, uint8_t enable,
+<a name="l00058"></a>00058                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+<a name="l00059"></a>00059                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
+<a name="l00060"></a>00060 {
+<a name="l00061"></a>00061    init(<a class="code" href="_l_c_d_8h.html#a57d84af8cf61ceee4eb91db77889f071">LCD_8BIT</a>, rs, 255, enable, d0, d1, d2, d3, d4, d5, d6, d7);
+<a name="l00062"></a>00062 }
+<a name="l00063"></a>00063 
+<a name="l00064"></a><a class="code" href="class_liquid_crystal.html#a0a0a8dfa7a2e775a031fd65f5c6366ec">00064</a> <a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal::LiquidCrystal</a>(uint8_t rs, uint8_t rw, uint8_t enable,
+<a name="l00065"></a>00065                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
+<a name="l00066"></a>00066 {
+<a name="l00067"></a>00067    init(<a class="code" href="_l_c_d_8h.html#a31e1c14e8c2845dec3301f0ebd36b43c">LCD_4BIT</a>, rs, rw, enable, d0, d1, d2, d3, 0, 0, 0, 0);
+<a name="l00068"></a>00068 }
+<a name="l00069"></a>00069 
+<a name="l00070"></a><a class="code" href="class_liquid_crystal.html#a23124e6dd5ac4a9b6147629b96e91953">00070</a> <a class="code" href="class_liquid_crystal.html#a49d2bd8d26031a1c83bcbd73978a1686">LiquidCrystal::LiquidCrystal</a>(uint8_t rs,  uint8_t enable,
+<a name="l00071"></a>00071                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
+<a name="l00072"></a>00072 {
+<a name="l00073"></a>00073    init(<a class="code" href="_l_c_d_8h.html#a31e1c14e8c2845dec3301f0ebd36b43c">LCD_4BIT</a>, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
+<a name="l00074"></a>00074 }
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 
 <a name="l00077"></a>00077 
-<a name="l00078"></a>00078 <span class="comment">// When the display powers up, it is configured as follows:</span>
-<a name="l00079"></a>00079 <span class="comment">//</span>
-<a name="l00080"></a>00080 <span class="comment">// 1. Display clear</span>
-<a name="l00081"></a>00081 <span class="comment">// 2. Function set: </span>
-<a name="l00082"></a>00082 <span class="comment">//    DL = 1; 8-bit interface data </span>
-<a name="l00083"></a>00083 <span class="comment">//    N = 0; 1-line display </span>
-<a name="l00084"></a>00084 <span class="comment">//    F = 0; 5x8 dot character font </span>
-<a name="l00085"></a>00085 <span class="comment">// 3. Display on/off control: </span>
-<a name="l00086"></a>00086 <span class="comment">//    D = 0; Display off </span>
-<a name="l00087"></a>00087 <span class="comment">//    C = 0; Cursor off </span>
-<a name="l00088"></a>00088 <span class="comment">//    B = 0; Blinking off </span>
-<a name="l00089"></a>00089 <span class="comment">// 4. Entry mode set: </span>
-<a name="l00090"></a>00090 <span class="comment">//    I/D = 1; Increment by 1 </span>
-<a name="l00091"></a>00091 <span class="comment">//    S = 0; No shift </span>
-<a name="l00092"></a>00092 <span class="comment">//</span>
-<a name="l00093"></a>00093 <span class="comment">// Note, however, that resetting the Arduino doesn&#39;t reset the LCD, so we</span>
-<a name="l00094"></a>00094 <span class="comment">// can&#39;t assume that its in that state when a sketch starts (and the</span>
-<a name="l00095"></a>00095 <span class="comment">// LiquidCrystal constructor is called).</span>
-<a name="l00096"></a>00096 <span class="comment">// A call to begin() will reinitialize the LCD.</span>
-<a name="l00097"></a>00097 <span class="comment">//</span>
-<a name="l00098"></a>00098 <span class="comment">// init</span>
-<a name="l00099"></a>00099 <span class="keywordtype">void</span> LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
-<a name="l00100"></a>00100                          uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-<a name="l00101"></a>00101                          uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
-<a name="l00102"></a>00102 {
-<a name="l00103"></a>00103    uint8_t i;
-<a name="l00104"></a>00104    
-<a name="l00105"></a>00105    <span class="comment">// Initialize the IO pins</span>
-<a name="l00106"></a>00106    <span class="comment">// -----------------------</span>
-<a name="l00107"></a>00107    
-<a name="l00108"></a>00108    _rs_pin = rs;
-<a name="l00109"></a>00109    _rw_pin = rw;
-<a name="l00110"></a>00110    _enable_pin = enable;
-<a name="l00111"></a>00111    
-<a name="l00112"></a>00112    _data_pins[0] = d0;
-<a name="l00113"></a>00113    _data_pins[1] = d1;
-<a name="l00114"></a>00114    _data_pins[2] = d2;
-<a name="l00115"></a>00115    _data_pins[3] = d3; 
-<a name="l00116"></a>00116    _data_pins[4] = d4;
-<a name="l00117"></a>00117    _data_pins[5] = d5;
-<a name="l00118"></a>00118    _data_pins[6] = d6;
-<a name="l00119"></a>00119    _data_pins[7] = d7;
-<a name="l00120"></a>00120    
-<a name="l00121"></a>00121    <span class="comment">// Initialize the IO port direction to OUTPUT</span>
-<a name="l00122"></a>00122    <span class="comment">// ------------------------------------------</span>
-<a name="l00123"></a>00123    
-<a name="l00124"></a>00124    <span class="keywordflow">for</span> ( i = 0; i &lt; 4; i++ )
-<a name="l00125"></a>00125    {
-<a name="l00126"></a>00126       pinMode ( _data_pins[i], OUTPUT );
-<a name="l00127"></a>00127    }
-<a name="l00128"></a>00128    
-<a name="l00129"></a>00129    <span class="comment">// Initialize the rest of the ports if it is an 8bit controlled LCD</span>
-<a name="l00130"></a>00130    <span class="comment">// ----------------------------------------------------------------</span>
-<a name="l00131"></a>00131    
-<a name="l00132"></a>00132    <span class="keywordflow">if</span> ( !fourbitmode )
-<a name="l00133"></a>00133    {
-<a name="l00134"></a>00134       <span class="keywordflow">for</span> ( i = 4; i &lt; 8; i++ )
-<a name="l00135"></a>00135       {
-<a name="l00136"></a>00136          pinMode ( _data_pins[i], OUTPUT );
-<a name="l00137"></a>00137       }
-<a name="l00138"></a>00138    }
-<a name="l00139"></a>00139    pinMode(_rs_pin, OUTPUT);
-<a name="l00140"></a>00140    
-<a name="l00141"></a>00141    <span class="comment">// we can save 1 pin by not using RW. Indicate by passing 255 instead of pin#</span>
-<a name="l00142"></a>00142    <span class="keywordflow">if</span> (_rw_pin != 255) 
-<a name="l00143"></a>00143    { 
-<a name="l00144"></a>00144       pinMode(_rw_pin, OUTPUT);
-<a name="l00145"></a>00145    }
-<a name="l00146"></a>00146    
-<a name="l00147"></a>00147    pinMode(_enable_pin, OUTPUT);
-<a name="l00148"></a>00148    
-<a name="l00149"></a>00149    <span class="comment">// Initialise displaymode functions to defaults: LCD_1LINE and LCD_5x8DOTS</span>
-<a name="l00150"></a>00150    <span class="comment">// -------------------------------------------------------------------------</span>
-<a name="l00151"></a>00151    <span class="keywordflow">if</span> (fourbitmode)
-<a name="l00152"></a>00152       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> = <a class="code" href="_l_c_d_8h.html#ab8c35d355d2372090c7a347e961c9224">LCD_4BITMODE</a> | <a class="code" href="_l_c_d_8h.html#a8c85cf88d8af66a47c42249d81c94641">LCD_1LINE</a> | <a class="code" href="_l_c_d_8h.html#a9ef57e724c1b846dae0f531aff6fb464">LCD_5x8DOTS</a>;
-<a name="l00153"></a>00153    <span class="keywordflow">else</span> 
-<a name="l00154"></a>00154       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> = <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a> | <a class="code" href="_l_c_d_8h.html#a8c85cf88d8af66a47c42249d81c94641">LCD_1LINE</a> | <a class="code" href="_l_c_d_8h.html#a9ef57e724c1b846dae0f531aff6fb464">LCD_5x8DOTS</a>;
-<a name="l00155"></a>00155 }
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157 <span class="comment">// PUBLIC METHODS</span>
-<a name="l00158"></a>00158 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 <span class="comment">//</span>
-<a name="l00161"></a>00161 <span class="comment">// begin</span>
-<a name="l00162"></a><a class="code" href="class_liquid_crystal.html#adb5f37d69809ed7c0772c74a4adff19b">00162</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal.html#adb5f37d69809ed7c0772c74a4adff19b">LiquidCrystal::begin</a>(uint8_t cols, uint8_t lines, uint8_t dotsize) 
-<a name="l00163"></a>00163 {
-<a name="l00164"></a>00164    <span class="keywordflow">if</span> (lines &gt; 1) 
-<a name="l00165"></a>00165    {
-<a name="l00166"></a>00166       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> |= <a class="code" href="_l_c_d_8h.html#a7987e93538df2819583ba43b81ddbb25">LCD_2LINE</a>;
-<a name="l00167"></a>00167    }
-<a name="l00168"></a>00168    <a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">_numlines</a> = lines;
-<a name="l00169"></a>00169    <a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">_cols</a> = cols;
-<a name="l00170"></a>00170    
-<a name="l00171"></a>00171    <span class="comment">// for some 1 line displays you can select a 10 pixel high font</span>
-<a name="l00172"></a>00172    <span class="comment">// ------------------------------------------------------------</span>
-<a name="l00173"></a>00173    <span class="keywordflow">if</span> ((dotsize != 0) &amp;&amp; (lines == 1)) 
-<a name="l00174"></a>00174    {
-<a name="l00175"></a>00175       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> |= <a class="code" href="_l_c_d_8h.html#abb3210156d88d3fe18c9352eb161fe42">LCD_5x10DOTS</a>;
+<a name="l00078"></a>00078 <span class="comment">// PUBLIC METHODS</span>
+<a name="l00079"></a>00079 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081 <span class="comment">/************ low level data pushing commands **********/</span>
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <span class="comment">// send</span>
+<a name="l00084"></a><a class="code" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">00084</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">LiquidCrystal::send</a>(uint8_t value, uint8_t mode) 
+<a name="l00085"></a>00085 {
+<a name="l00086"></a>00086    digitalWrite( _rs_pin, mode );
+<a name="l00087"></a>00087    
+<a name="l00088"></a>00088    <span class="comment">// if there is a RW pin indicated, set it low to Write</span>
+<a name="l00089"></a>00089    <span class="comment">// ---------------------------------------------------</span>
+<a name="l00090"></a>00090    <span class="keywordflow">if</span> (_rw_pin != 255) 
+<a name="l00091"></a>00091    { 
+<a name="l00092"></a>00092       digitalWrite(_rw_pin, LOW);
+<a name="l00093"></a>00093    }
+<a name="l00094"></a>00094    
+<a name="l00095"></a>00095    <span class="keywordflow">if</span> (<a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> &amp; <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>)
+<a name="l00096"></a>00096    {
+<a name="l00097"></a>00097       writeNbits(value, 8); 
+<a name="l00098"></a>00098    } 
+<a name="l00099"></a>00099    <span class="keywordflow">else</span> 
+<a name="l00100"></a>00100    {
+<a name="l00101"></a>00101       writeNbits ( value &gt;&gt; 4, 4 );
+<a name="l00102"></a>00102       writeNbits ( value, 4 );
+<a name="l00103"></a>00103    }
+<a name="l00104"></a>00104    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> ( <a class="code" href="_liquid_crystal_8h.html#adebff0f00a59c9f9863bc196938d5726">EXEC_TIME</a> ); <span class="comment">// wait for the command to execute by the LCD</span>
+<a name="l00105"></a>00105 }
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 <span class="comment">//</span>
+<a name="l00108"></a>00108 <span class="comment">// setBackligh</span>
+<a name="l00109"></a><a class="code" href="class_liquid_crystal.html#a170c6ed996f3e84bf63dcd5cb1471428">00109</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal.html#a170c6ed996f3e84bf63dcd5cb1471428">LiquidCrystal::setBacklight</a> ( uint8_t mode )
+<a name="l00110"></a>00110 {
+<a name="l00111"></a>00111    <span class="keywordflow">if</span> ( _backlightPin != <a class="code" href="_liquid_crystal_8cpp.html#a65fa786d6e31fe8b1aa51784a9736581">LCD_NOBACKLIGHT</a> )
+<a name="l00112"></a>00112    {
+<a name="l00113"></a>00113       digitalWrite ( _backlightPin, mode );
+<a name="l00114"></a>00114    }
+<a name="l00115"></a>00115 }
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117 <span class="comment">//</span>
+<a name="l00118"></a>00118 <span class="comment">// setBacklightPin</span>
+<a name="l00119"></a><a class="code" href="class_liquid_crystal.html#aa78ed97905615b34e685170c086e3d9d">00119</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal.html#aa78ed97905615b34e685170c086e3d9d">LiquidCrystal::setBacklightPin</a> ( uint8_t pin )
+<a name="l00120"></a>00120 {
+<a name="l00121"></a>00121    pinMode ( pin, OUTPUT ); <span class="comment">// Difine the backlight pin as output</span>
+<a name="l00122"></a>00122    _backlightPin = pin;
+<a name="l00123"></a>00123 }
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125 <span class="comment">// PRIVATE METHODS</span>
+<a name="l00126"></a>00126 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129 <span class="comment">// init</span>
+<a name="l00130"></a>00130 <span class="keywordtype">void</span> LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
+<a name="l00131"></a>00131                          uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+<a name="l00132"></a>00132                          uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
+<a name="l00133"></a>00133 {
+<a name="l00134"></a>00134    uint8_t i;
+<a name="l00135"></a>00135    
+<a name="l00136"></a>00136    <span class="comment">// Initialize the IO pins</span>
+<a name="l00137"></a>00137    <span class="comment">// -----------------------</span>
+<a name="l00138"></a>00138    
+<a name="l00139"></a>00139    _rs_pin = rs;
+<a name="l00140"></a>00140    _rw_pin = rw;
+<a name="l00141"></a>00141    _enable_pin = enable;
+<a name="l00142"></a>00142    
+<a name="l00143"></a>00143    _data_pins[0] = d0;
+<a name="l00144"></a>00144    _data_pins[1] = d1;
+<a name="l00145"></a>00145    _data_pins[2] = d2;
+<a name="l00146"></a>00146    _data_pins[3] = d3; 
+<a name="l00147"></a>00147    _data_pins[4] = d4;
+<a name="l00148"></a>00148    _data_pins[5] = d5;
+<a name="l00149"></a>00149    _data_pins[6] = d6;
+<a name="l00150"></a>00150    _data_pins[7] = d7;
+<a name="l00151"></a>00151    
+<a name="l00152"></a>00152    <span class="comment">// Initialize the IO port direction to OUTPUT</span>
+<a name="l00153"></a>00153    <span class="comment">// ------------------------------------------</span>
+<a name="l00154"></a>00154    
+<a name="l00155"></a>00155    <span class="keywordflow">for</span> ( i = 0; i &lt; 4; i++ )
+<a name="l00156"></a>00156    {
+<a name="l00157"></a>00157       pinMode ( _data_pins[i], OUTPUT );
+<a name="l00158"></a>00158    }
+<a name="l00159"></a>00159    
+<a name="l00160"></a>00160    <span class="comment">// Initialize the rest of the ports if it is an 8bit controlled LCD</span>
+<a name="l00161"></a>00161    <span class="comment">// ----------------------------------------------------------------</span>
+<a name="l00162"></a>00162    
+<a name="l00163"></a>00163    <span class="keywordflow">if</span> ( !fourbitmode )
+<a name="l00164"></a>00164    {
+<a name="l00165"></a>00165       <span class="keywordflow">for</span> ( i = 4; i &lt; 8; i++ )
+<a name="l00166"></a>00166       {
+<a name="l00167"></a>00167          pinMode ( _data_pins[i], OUTPUT );
+<a name="l00168"></a>00168       }
+<a name="l00169"></a>00169    }
+<a name="l00170"></a>00170    pinMode(_rs_pin, OUTPUT);
+<a name="l00171"></a>00171    
+<a name="l00172"></a>00172    <span class="comment">// we can save 1 pin by not using RW. Indicate by passing 255 instead of pin#</span>
+<a name="l00173"></a>00173    <span class="keywordflow">if</span> (_rw_pin != 255) 
+<a name="l00174"></a>00174    { 
+<a name="l00175"></a>00175       pinMode(_rw_pin, OUTPUT);
 <a name="l00176"></a>00176    }
 <a name="l00177"></a>00177    
-<a name="l00178"></a>00178    <span class="comment">// SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!</span>
-<a name="l00179"></a>00179    <span class="comment">// according to datasheet, we need at least 40ms after power rises above 2.7V</span>
-<a name="l00180"></a>00180    <span class="comment">// before sending commands. Arduino can turn on way before 4.5V so we&#39;ll wait </span>
-<a name="l00181"></a>00181    <span class="comment">// 50</span>
-<a name="l00182"></a>00182    <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00183"></a>00183    delayMicroseconds(50000); 
-<a name="l00184"></a>00184    
-<a name="l00185"></a>00185    <span class="comment">// Now we pull both RS and R/W low to begin commands</span>
-<a name="l00186"></a>00186    digitalWrite(_rs_pin, LOW);
-<a name="l00187"></a>00187    digitalWrite(_enable_pin, LOW);
-<a name="l00188"></a>00188    
-<a name="l00189"></a>00189    <span class="keywordflow">if</span> (_rw_pin != 255) 
-<a name="l00190"></a>00190    { 
-<a name="l00191"></a>00191       digitalWrite(_rw_pin, LOW);
-<a name="l00192"></a>00192    }
-<a name="l00193"></a>00193    
-<a name="l00194"></a>00194    <span class="comment">//put the LCD into 4 bit or 8 bit mode</span>
-<a name="l00195"></a>00195    <span class="comment">// -------------------------------------</span>
-<a name="l00196"></a>00196    <span class="keywordflow">if</span> (! (<a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> &amp; <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>)) 
-<a name="l00197"></a>00197    {
-<a name="l00198"></a>00198       <span class="comment">// this is according to the hitachi HD44780 datasheet</span>
-<a name="l00199"></a>00199       <span class="comment">// figure 24, pg 46</span>
-<a name="l00200"></a>00200       
-<a name="l00201"></a>00201       <span class="comment">// we start in 8bit mode, try to set 4 bit mode</span>
-<a name="l00202"></a>00202       writeNbits(0x03, 4);
-<a name="l00203"></a>00203       delayMicroseconds(4500); <span class="comment">// wait min 4.1ms</span>
-<a name="l00204"></a>00204       
-<a name="l00205"></a>00205       <span class="comment">// second try</span>
-<a name="l00206"></a>00206       writeNbits(0x03, 4);
-<a name="l00207"></a>00207       delayMicroseconds(4500); <span class="comment">// wait min 4.1ms</span>
-<a name="l00208"></a>00208       
-<a name="l00209"></a>00209       <span class="comment">// third go!</span>
-<a name="l00210"></a>00210       writeNbits(0x03, 4); 
-<a name="l00211"></a>00211       delayMicroseconds(150);
-<a name="l00212"></a>00212       
-<a name="l00213"></a>00213       <span class="comment">// finally, set to 4-bit interface</span>
-<a name="l00214"></a>00214       writeNbits(0x02, 4); 
-<a name="l00215"></a>00215    } 
-<a name="l00216"></a>00216    <span class="keywordflow">else</span> 
-<a name="l00217"></a>00217    {
-<a name="l00218"></a>00218       <span class="comment">// this is according to the hitachi HD44780 datasheet</span>
-<a name="l00219"></a>00219       <span class="comment">// page 45 figure 23</span>
-<a name="l00220"></a>00220       
-<a name="l00221"></a>00221       <span class="comment">// Send function set command sequence</span>
-<a name="l00222"></a>00222       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
-<a name="l00223"></a>00223       delayMicroseconds(4500);  <span class="comment">// wait more than 4.1ms</span>
-<a name="l00224"></a>00224       
-<a name="l00225"></a>00225       <span class="comment">// second try</span>
-<a name="l00226"></a>00226       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
-<a name="l00227"></a>00227       delayMicroseconds(150);
-<a name="l00228"></a>00228       
-<a name="l00229"></a>00229       <span class="comment">// third go</span>
-<a name="l00230"></a>00230       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
-<a name="l00231"></a>00231    }
-<a name="l00232"></a>00232    
-<a name="l00233"></a>00233    <span class="comment">// finally, set # lines, font size, etc.</span>
-<a name="l00234"></a>00234    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);  
-<a name="l00235"></a>00235    
-<a name="l00236"></a>00236    <span class="comment">// turn the display on with no cursor or blinking default</span>
-<a name="l00237"></a>00237    <a class="code" href="class_l_c_d.html#ae47a0e2eff74431a39774b788d5761f4">_displaycontrol</a> = <a class="code" href="_l_c_d_8h.html#a76236ae8317b34bbc98ea56bc0a2639c">LCD_DISPLAYON</a> | <a class="code" href="_l_c_d_8h.html#a32b194a3adaa0a0bb69acee2e6a754fa">LCD_CURSOROFF</a> | <a class="code" href="_l_c_d_8h.html#a4b28243034cec656b0ed490ba6979752">LCD_BLINKOFF</a>;  
-<a name="l00238"></a>00238    <a class="code" href="class_l_c_d.html#a5b07cf05e8e5e7c53654f5ca0cf58b89">display</a>();
-<a name="l00239"></a>00239    
-<a name="l00240"></a>00240    <span class="comment">// clear the LCD</span>
-<a name="l00241"></a>00241    <a class="code" href="class_l_c_d.html#afa699e0beeeee03cce8cef87eba81c4a">clear</a>();
-<a name="l00242"></a>00242    
-<a name="l00243"></a>00243    <span class="comment">// Initialize to default text direction (for romance languages)</span>
-<a name="l00244"></a>00244    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> = <a class="code" href="_l_c_d_8h.html#ae7c6309fce6200bd7526d090a4a84dd0">LCD_ENTRYLEFT</a> | <a class="code" href="_l_c_d_8h.html#a049ee97e98d04788c1da9a55590fbe42">LCD_ENTRYSHIFTDECREMENT</a>;
-<a name="l00245"></a>00245    <span class="comment">// set the entry mode</span>
-<a name="l00246"></a>00246    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
-<a name="l00247"></a>00247    
-<a name="l00248"></a>00248 }
-<a name="l00249"></a>00249 
-<a name="l00250"></a>00250 <span class="comment">/************ low level data pushing commands **********/</span>
-<a name="l00251"></a>00251 
-<a name="l00252"></a>00252 <span class="comment">// send</span>
-<a name="l00253"></a><a class="code" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">00253</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">LiquidCrystal::send</a>(uint8_t value, uint8_t mode) 
-<a name="l00254"></a>00254 {
-<a name="l00255"></a>00255    digitalWrite( _rs_pin, mode );
-<a name="l00256"></a>00256    
-<a name="l00257"></a>00257    <span class="comment">// if there is a RW pin indicated, set it low to Write</span>
-<a name="l00258"></a>00258    <span class="comment">// ---------------------------------------------------</span>
-<a name="l00259"></a>00259    <span class="keywordflow">if</span> (_rw_pin != 255) 
-<a name="l00260"></a>00260    { 
-<a name="l00261"></a>00261       digitalWrite(_rw_pin, LOW);
-<a name="l00262"></a>00262    }
-<a name="l00263"></a>00263    
-<a name="l00264"></a>00264    <span class="keywordflow">if</span> (<a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> &amp; <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>)
-<a name="l00265"></a>00265    {
-<a name="l00266"></a>00266       writeNbits(value, 8); 
-<a name="l00267"></a>00267    } 
-<a name="l00268"></a>00268    <span class="keywordflow">else</span> 
-<a name="l00269"></a>00269    {
-<a name="l00270"></a>00270       writeNbits ( value &gt;&gt; 4, 4 );
-<a name="l00271"></a>00271       writeNbits ( value, 4 );
-<a name="l00272"></a>00272    }
-<a name="l00273"></a>00273    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> ( <a class="code" href="_liquid_crystal_8h.html#adebff0f00a59c9f9863bc196938d5726">EXEC_TIME</a> ); <span class="comment">// wait for the command to execute by the LCD</span>
-<a name="l00274"></a>00274 }
-<a name="l00275"></a>00275 
-<a name="l00276"></a>00276 <span class="comment">//</span>
-<a name="l00277"></a>00277 <span class="comment">// pulseEnable</span>
-<a name="l00278"></a>00278 <span class="keywordtype">void</span> LiquidCrystal::pulseEnable(<span class="keywordtype">void</span>) 
-<a name="l00279"></a>00279 {
-<a name="l00280"></a>00280    <span class="comment">// There is no need for the delays, since the digitalWrite operation</span>
-<a name="l00281"></a>00281    <span class="comment">// takes longer.</span>
-<a name="l00282"></a>00282    digitalWrite(_enable_pin, HIGH);   
-<a name="l00283"></a>00283    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>(1);          <span class="comment">// enable pulse must be &gt; 450ns   </span>
-<a name="l00284"></a>00284    digitalWrite(_enable_pin, LOW);
-<a name="l00285"></a>00285    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>(20);
-<a name="l00286"></a>00286 }
-<a name="l00287"></a>00287 
-<a name="l00288"></a>00288 <span class="comment">//</span>
-<a name="l00289"></a>00289 <span class="comment">// write4bits</span>
-<a name="l00290"></a>00290 <span class="keywordtype">void</span> LiquidCrystal::writeNbits(uint8_t value, uint8_t numBits) 
-<a name="l00291"></a>00291 {
-<a name="l00292"></a>00292    <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; numBits; i++) 
-<a name="l00293"></a>00293    {
-<a name="l00294"></a>00294       digitalWrite(_data_pins[i], (value &gt;&gt; i) &amp; 0x01);
-<a name="l00295"></a>00295    }
-<a name="l00296"></a>00296    pulseEnable();
-<a name="l00297"></a>00297 }
+<a name="l00178"></a>00178    pinMode(_enable_pin, OUTPUT);
+<a name="l00179"></a>00179    
+<a name="l00180"></a>00180    <span class="comment">// Initialise displaymode functions to defaults: LCD_1LINE and LCD_5x8DOTS</span>
+<a name="l00181"></a>00181    <span class="comment">// -------------------------------------------------------------------------</span>
+<a name="l00182"></a>00182    <span class="keywordflow">if</span> (fourbitmode)
+<a name="l00183"></a>00183       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> = <a class="code" href="_l_c_d_8h.html#ab8c35d355d2372090c7a347e961c9224">LCD_4BITMODE</a> | <a class="code" href="_l_c_d_8h.html#a8c85cf88d8af66a47c42249d81c94641">LCD_1LINE</a> | <a class="code" href="_l_c_d_8h.html#a9ef57e724c1b846dae0f531aff6fb464">LCD_5x8DOTS</a>;
+<a name="l00184"></a>00184    <span class="keywordflow">else</span> 
+<a name="l00185"></a>00185       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> = <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a> | <a class="code" href="_l_c_d_8h.html#a8c85cf88d8af66a47c42249d81c94641">LCD_1LINE</a> | <a class="code" href="_l_c_d_8h.html#a9ef57e724c1b846dae0f531aff6fb464">LCD_5x8DOTS</a>;
+<a name="l00186"></a>00186    
+<a name="l00187"></a>00187    <span class="comment">// Now we pull both RS and R/W low to begin commands</span>
+<a name="l00188"></a>00188    digitalWrite(_rs_pin, LOW);
+<a name="l00189"></a>00189    digitalWrite(_enable_pin, LOW);
+<a name="l00190"></a>00190    
+<a name="l00191"></a>00191    <span class="keywordflow">if</span> (_rw_pin != 255) 
+<a name="l00192"></a>00192    { 
+<a name="l00193"></a>00193       digitalWrite(_rw_pin, LOW);
+<a name="l00194"></a>00194    }
+<a name="l00195"></a>00195    
+<a name="l00196"></a>00196    <span class="comment">// Initialise the backlight pin no nothing</span>
+<a name="l00197"></a>00197    _backlightPin = <a class="code" href="_liquid_crystal_8cpp.html#a65fa786d6e31fe8b1aa51784a9736581">LCD_NOBACKLIGHT</a>;
+<a name="l00198"></a>00198 }
+<a name="l00199"></a>00199 
+<a name="l00200"></a>00200 <span class="comment">//</span>
+<a name="l00201"></a>00201 <span class="comment">// pulseEnable</span>
+<a name="l00202"></a>00202 <span class="keywordtype">void</span> LiquidCrystal::pulseEnable(<span class="keywordtype">void</span>) 
+<a name="l00203"></a>00203 {
+<a name="l00204"></a>00204    <span class="comment">// There is no need for the delays, since the digitalWrite operation</span>
+<a name="l00205"></a>00205    <span class="comment">// takes longer.</span>
+<a name="l00206"></a>00206    digitalWrite(_enable_pin, HIGH);   
+<a name="l00207"></a>00207    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>(1);          <span class="comment">// enable pulse must be &gt; 450ns   </span>
+<a name="l00208"></a>00208    digitalWrite(_enable_pin, LOW);
+<a name="l00209"></a>00209 }
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211 <span class="comment">//</span>
+<a name="l00212"></a>00212 <span class="comment">// write4bits</span>
+<a name="l00213"></a>00213 <span class="keywordtype">void</span> LiquidCrystal::writeNbits(uint8_t value, uint8_t numBits) 
+<a name="l00214"></a>00214 {
+<a name="l00215"></a>00215    <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; numBits; i++) 
+<a name="l00216"></a>00216    {
+<a name="l00217"></a>00217       digitalWrite(_data_pins[i], (value &gt;&gt; i) &amp; 0x01);
+<a name="l00218"></a>00218    }
+<a name="l00219"></a>00219    pulseEnable();
+<a name="l00220"></a>00220 }
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222 
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -374,7 +299,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 5 2012 12:37:32 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Feb 28 2012 19:52:02 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

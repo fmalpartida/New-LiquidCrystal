@@ -76,9 +76,10 @@ LiquidCrystal_I2C lcd(0x38);  // set the LCD address to 0x20 for a 16 chars and 
 
 #ifdef _LCD_4BIT_
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+#endif
 const int    CONTRAST_PIN  = 9;
 const int    CONTRAST      = 65;
-#endif
+
 
 
 LCD *myLCD = &lcd;

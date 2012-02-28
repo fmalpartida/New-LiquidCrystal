@@ -9,7 +9,7 @@
 // Thread Safe: No
 // Extendable: Yes
 //
-// @file HD44780.h
+// @file LCD.cpp
 // This file implements a basic liquid crystal library that comes as standard
 // in the Arduino SDK.
 // 
@@ -17,7 +17,7 @@
 // This is a basic implementation of the HD44780 library of the
 // Arduino SDK. This library is a refactored version of the one supplied
 // in the Arduino SDK in such a way that it simplifies its extension
-// to support other mechanism to communicate to LCDs such as I2C, Serial.
+// to support other mechanism to communicate to LCDs such as I2C, Serial, SR, ...
 // The original library has been reworked in such a way that this will be
 // the base class implementing all generic methods to command an LCD based
 // on the Hitachi HD44780 and compatible chipsets.
@@ -93,7 +93,7 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    // before sending commands. Arduino can turn on way before 4.5V so we'll wait 
    // 50
    // ---------------------------------------------------------------------------
-   delayMicroseconds(50000); 
+   delayMicroseconds(100000); 
       
    //put the LCD into 4 bit or 8 bit mode
    // -------------------------------------
@@ -232,7 +232,8 @@ void LCD::scrollDisplayLeft(void)
    command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVELEFT);
 }
 
-void LCD::scrollDisplayRight(void) {
+void LCD::scrollDisplayRight(void) 
+{
    command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVERIGHT);
 }
 
@@ -249,6 +250,19 @@ void LCD::rightToLeft(void)
    _displaymode &= ~LCD_ENTRYLEFT;
    command(LCD_ENTRYMODESET | _displaymode);
 }
+
+// This method moves the cursor one space to the right
+void LCD::moveCursorRight(void)
+{
+   command(LCD_CURSORSHIFT | LCD_CURSORMOVE | LCD_MOVERIGHT);
+}
+
+// This method moves the cursor one space to the left
+void LCD::moveCursorLeft(void)
+{
+   command(LCD_CURSORSHIFT | LCD_CURSORMOVE | LCD_MOVELEFT);
+}
+
 
 // This will 'right justify' text from the cursor
 void LCD::autoscroll(void) 
@@ -275,7 +289,7 @@ void LCD::createChar(uint8_t location, uint8_t charmap[])
    for (int i=0; i<8; i++) 
    {
       write(charmap[i]);      // call the virtual write method
-      delayMicroseconds(30);
+      delayMicroseconds(40);
    }
 }
 

@@ -19,8 +19,6 @@
 // read and write uint8_t operations and basic pin level routines to set or read
 // a particular IO port.
 //
-// This library is only compatible with Arduino's SDK version 1.0
-//
 // @version API 1.0.0
 //
 // @author F. Malpartida - fmalpartida@gmail.com

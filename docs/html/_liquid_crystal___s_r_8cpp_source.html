@@ -110,7 +110,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00047"></a>00047 <span class="comment">//</span>
 <a name="l00048"></a>00048 <span class="comment">//</span>
 <a name="l00049"></a>00049 <span class="comment">// History</span>
-<a name="l00050"></a>00050 <span class="comment">// 2012.01.16  flo - faster digitalWrite/shiftOut</span>
+<a name="l00050"></a>00050 <span class="comment">// 2012.01.16  Florian Fida - faster digitalWrite/shiftOut</span>
 <a name="l00051"></a>00051 <span class="comment">// 2011.10.29  fmalpartida - adaption of the library to the LCD class hierarchy.</span>
 <a name="l00052"></a>00052 <span class="comment">// 2011.07.02  Fixed a minor flaw in setCursor function. No functional change, </span>
 <a name="l00053"></a>00053 <span class="comment">//             just a bit more memory efficient.</span>
@@ -121,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00058"></a>00058 <span class="comment">//             Fixed timing to datasheet safe. Fixed keyword highlights.</span>
 <a name="l00059"></a>00059 <span class="comment">// 2009.07.28  Mircho / raron - a new modification to the schematics, and a</span>
 <a name="l00060"></a>00060 <span class="comment">//             more streamlined interface</span>
-<a name="l00061"></a>00061 <span class="comment">// 2009.07.27  Thanks to an excellent suggestion from mircho at the Arduiono </span>
+<a name="l00061"></a>00061 <span class="comment">// 2009.07.27  Thanks to an excellent suggestion from mircho at the Arduino</span>
 <a name="l00062"></a>00062 <span class="comment">//             playgrond forum, the number of wires now required is only two!</span>
 <a name="l00063"></a>00063 <span class="comment">// 2009.07.25  raron - Fixed comments. I really messed up the comments before </span>
 <a name="l00064"></a>00064 <span class="comment">//             posting this, so I had to fix it.</span>
@@ -133,231 +133,112 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00070"></a>00070 <span class="comment">//             on the &quot;official&quot; LiquidCrystal library.</span>
 <a name="l00071"></a>00071 <span class="comment">//</span>
 <a name="l00072"></a>00072 <span class="comment">//</span>
-<a name="l00073"></a>00073 <span class="comment">// This library is only compatible with Arduino&#39;s SDK version 1.0</span>
-<a name="l00074"></a>00074 <span class="comment">//</span>
-<a name="l00075"></a>00075 <span class="comment">//</span>
-<a name="l00076"></a>00076 <span class="comment">// @author F. Malpartida - fmalpartida@gmail.com</span>
-<a name="l00077"></a>00077 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00078"></a>00078 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
-<a name="l00079"></a>00079 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00080"></a>00080 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
-<a name="l00083"></a>00083 <span class="preprocessor"></span><span class="preprocessor">#include &lt;WProgram.h&gt;</span>
-<a name="l00084"></a>00084 <span class="preprocessor">#else</span>
-<a name="l00085"></a>00085 <span class="preprocessor"></span><span class="preprocessor">#include &lt;Arduino.h&gt;</span>
-<a name="l00086"></a>00086 <span class="preprocessor">#endif</span>
-<a name="l00087"></a>00087 <span class="preprocessor"></span><span class="preprocessor">#include &lt;<a class="code" href="_liquid_crystal___s_r_8h.html">LiquidCrystal_SR.h</a>&gt;</span>
+<a name="l00073"></a>00073 <span class="comment">// @author F. Malpartida - fmalpartida@gmail.com</span>
+<a name="l00074"></a>00074 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00075"></a>00075 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00076"></a>00076 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00077"></a>00077 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span><span class="preprocessor">#include &lt;WProgram.h&gt;</span>
+<a name="l00081"></a>00081 <span class="preprocessor">#else</span>
+<a name="l00082"></a>00082 <span class="preprocessor"></span><span class="preprocessor">#include &lt;Arduino.h&gt;</span>
+<a name="l00083"></a>00083 <span class="preprocessor">#endif</span>
+<a name="l00084"></a>00084 <span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="_liquid_crystal___s_r_8h.html">LiquidCrystal_SR.h</a>&quot;</span>
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 <span class="preprocessor">#include &quot;<a class="code" href="_fast_i_o_8h.html">FastIO.h</a>&quot;</span>
+<a name="l00087"></a>00087 
 <a name="l00088"></a>00088 
-<a name="l00089"></a>00089 <span class="preprocessor">#include &lt;<a class="code" href="_fast_i_o_8h.html">FastIO.h</a>&gt;</span>
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="comment">// When the display powers up, it is configured as follows:</span>
-<a name="l00092"></a>00092 <span class="comment">//</span>
-<a name="l00093"></a>00093 <span class="comment">// 1. Display clear</span>
-<a name="l00094"></a>00094 <span class="comment">// 2. Function set: </span>
-<a name="l00095"></a>00095 <span class="comment">//    DL = 1; 8-bit interface data </span>
-<a name="l00096"></a>00096 <span class="comment">//    N = 0; 1-line display </span>
-<a name="l00097"></a>00097 <span class="comment">//    F = 0; 5x8 dot character font </span>
-<a name="l00098"></a>00098 <span class="comment">// 3. Display on/off control: </span>
-<a name="l00099"></a>00099 <span class="comment">//    D = 0; Display off </span>
-<a name="l00100"></a>00100 <span class="comment">//    C = 0; Cursor off </span>
-<a name="l00101"></a>00101 <span class="comment">//    B = 0; Blinking off </span>
-<a name="l00102"></a>00102 <span class="comment">// 4. Entry mode set: </span>
-<a name="l00103"></a>00103 <span class="comment">//    I/D = 1; Increment by 1 </span>
-<a name="l00104"></a>00104 <span class="comment">//    S = 0; No shift </span>
-<a name="l00105"></a>00105 <span class="comment">//</span>
-<a name="l00106"></a>00106 <span class="comment">// Note, however, that resetting the Arduino doesn&#39;t reset the LCD, so we</span>
-<a name="l00107"></a>00107 <span class="comment">// can&#39;t assume that its in that state when a sketch starts (and the</span>
-<a name="l00108"></a>00108 <span class="comment">// LiquidCrystal constructor is called).</span>
-<a name="l00109"></a>00109 <span class="comment">// A call to begin() will reinitialize the LCD.</span>
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111 <span class="comment">// STATIC helper functions</span>
-<a name="l00112"></a>00112 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00089"></a>00089 <span class="comment">// CONSTRUCTORS</span>
+<a name="l00090"></a>00090 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00091"></a>00091 <span class="comment">// Assuming 1 line 8 pixel high font</span>
+<a name="l00092"></a><a class="code" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">00092</a> <a class="code" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">LiquidCrystal_SR::LiquidCrystal_SR</a> ( uint8_t srdata, uint8_t srclock, 
+<a name="l00093"></a>00093                                      uint8_t enable ) 
+<a name="l00094"></a>00094 {
+<a name="l00095"></a>00095         init ( srdata, srclock, enable, 1, 0 );
+<a name="l00096"></a>00096 }
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 <span class="comment">// PRIVATE METHODS</span>
+<a name="l00100"></a>00100 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102 <span class="comment">//</span>
+<a name="l00103"></a>00103 <span class="comment">// init</span>
+<a name="l00104"></a>00104 <span class="keywordtype">void</span> LiquidCrystal_SR::init(uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, uint8_t font)
+<a name="l00105"></a>00105 {
+<a name="l00106"></a>00106    <span class="comment">// Initialise private variables</span>
+<a name="l00107"></a>00107    _two_wire = 0;
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109    _srDataRegister = <a class="code" href="_fast_i_o_8cpp.html#a04210cc785c3b4a11c86f794949c327f">fio_pinToOutputRegister</a>(srdata);
+<a name="l00110"></a>00110    _srDataBit = <a class="code" href="_fast_i_o_8cpp.html#abe64155b836ffa8a137eb17d17995f84">fio_pinToBit</a>(srdata);
+<a name="l00111"></a>00111    _srClockRegister = <a class="code" href="_fast_i_o_8cpp.html#a04210cc785c3b4a11c86f794949c327f">fio_pinToOutputRegister</a>(srclock);
+<a name="l00112"></a>00112    _srClockBit = <a class="code" href="_fast_i_o_8cpp.html#abe64155b836ffa8a137eb17d17995f84">fio_pinToBit</a>(srclock);
 <a name="l00113"></a>00113 
-<a name="l00114"></a>00114 
-<a name="l00115"></a>00115 <span class="comment">// CONSTRUCTORS</span>
-<a name="l00116"></a>00116 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00117"></a>00117 <span class="comment">// Assuming 1 line 8 pixel high font</span>
-<a name="l00118"></a><a class="code" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">00118</a> <a class="code" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">LiquidCrystal_SR::LiquidCrystal_SR</a> ( uint8_t srdata, uint8_t srclock, 
-<a name="l00119"></a>00119                                      uint8_t enable ) 
-<a name="l00120"></a>00120 {
-<a name="l00121"></a>00121         init ( srdata, srclock, enable, 1, 0 );
-<a name="l00122"></a>00122 }
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124 
+<a name="l00114"></a>00114    <span class="keywordflow">if</span> (enable == <a class="code" href="_liquid_crystal___s_r_8h.html#a40fb1f76bc5f8ca9e6534b47bd6da27c">TWO_WIRE</a>)
+<a name="l00115"></a>00115    {
+<a name="l00116"></a>00116       _two_wire = 1;
+<a name="l00117"></a>00117       _srEnableRegister = _srDataRegister;
+<a name="l00118"></a>00118       _srEnableBit = _srDataBit;
+<a name="l00119"></a>00119    }
+<a name="l00120"></a>00120    <span class="keywordflow">else</span>
+<a name="l00121"></a>00121    {
+<a name="l00122"></a>00122       _srEnableRegister = <a class="code" href="_fast_i_o_8cpp.html#a04210cc785c3b4a11c86f794949c327f">fio_pinToOutputRegister</a>(enable);
+<a name="l00123"></a>00123       _srEnableBit = <a class="code" href="_fast_i_o_8cpp.html#abe64155b836ffa8a137eb17d17995f84">fio_pinToBit</a>(enable);
+<a name="l00124"></a>00124    }
 <a name="l00125"></a>00125 
-<a name="l00126"></a>00126 <span class="comment">// PRIVATE METHODS</span>
-<a name="l00127"></a>00127 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00126"></a>00126    <span class="comment">// Configure control pins as outputs</span>
+<a name="l00127"></a>00127    <span class="comment">// ------------------------------------------------------------------------</span>
 <a name="l00128"></a>00128 
-<a name="l00129"></a>00129 <span class="comment">//</span>
-<a name="l00130"></a>00130 <span class="comment">// init</span>
-<a name="l00131"></a>00131 <span class="keywordtype">void</span> LiquidCrystal_SR::init( uint8_t srdata, uint8_t srclock, uint8_t enable, 
-<a name="l00132"></a>00132                              uint8_t lines, uint8_t font )
-<a name="l00133"></a>00133 {
-<a name="l00134"></a>00134    <span class="comment">// Initialise private variables</span>
-<a name="l00135"></a>00135    _two_wire    = 0;
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137    _srDataRegister = <a class="code" href="_fast_i_o_8cpp.html#a04210cc785c3b4a11c86f794949c327f">fio_pinToOutputRegister</a>(srdata);
-<a name="l00138"></a>00138    _srDataBit = <a class="code" href="_fast_i_o_8cpp.html#abe64155b836ffa8a137eb17d17995f84">fio_pinToBit</a>(srdata);
-<a name="l00139"></a>00139    _srClockRegister = <a class="code" href="_fast_i_o_8cpp.html#a04210cc785c3b4a11c86f794949c327f">fio_pinToOutputRegister</a>(srclock);
-<a name="l00140"></a>00140    _srClockBit = <a class="code" href="_fast_i_o_8cpp.html#abe64155b836ffa8a137eb17d17995f84">fio_pinToBit</a>(srclock);
+<a name="l00129"></a>00129    <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> = <a class="code" href="_l_c_d_8h.html#ab8c35d355d2372090c7a347e961c9224">LCD_4BITMODE</a> | <a class="code" href="_l_c_d_8h.html#a8c85cf88d8af66a47c42249d81c94641">LCD_1LINE</a> | <a class="code" href="_l_c_d_8h.html#abb3210156d88d3fe18c9352eb161fe42">LCD_5x10DOTS</a>;
+<a name="l00130"></a>00130 }
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132 <span class="comment">// shiftIt</span>
+<a name="l00133"></a>00133 <span class="keywordtype">void</span> LiquidCrystal_SR::shiftIt(uint8_t val)
+<a name="l00134"></a>00134 {
+<a name="l00135"></a>00135    <span class="keywordflow">if</span> (_two_wire)
+<a name="l00136"></a>00136    {
+<a name="l00137"></a>00137       <span class="comment">// Clear to get Enable LOW</span>
+<a name="l00138"></a>00138       <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
+<a name="l00139"></a>00139    }
+<a name="l00140"></a>00140    <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val, MSBFIRST);
 <a name="l00141"></a>00141 
-<a name="l00142"></a>00142    <span class="keywordflow">if</span> (enable == <a class="code" href="_liquid_crystal___s_r_8h.html#a40fb1f76bc5f8ca9e6534b47bd6da27c">TWO_WIRE</a>){
-<a name="l00143"></a>00143       _two_wire   = 1;
-<a name="l00144"></a>00144       _srEnableRegister = _srDataRegister;
-<a name="l00145"></a>00145       _srEnableBit = _srDataBit;
-<a name="l00146"></a>00146    }<span class="keywordflow">else</span>{
-<a name="l00147"></a>00147       _srEnableRegister = <a class="code" href="_fast_i_o_8cpp.html#a04210cc785c3b4a11c86f794949c327f">fio_pinToOutputRegister</a>(enable);
-<a name="l00148"></a>00148       _srEnableBit = <a class="code" href="_fast_i_o_8cpp.html#abe64155b836ffa8a137eb17d17995f84">fio_pinToBit</a>(enable);
-<a name="l00149"></a>00149    }
-<a name="l00150"></a>00150 
-<a name="l00151"></a>00151    <span class="comment">// Configure control pins as outputs</span>
-<a name="l00152"></a>00152    <span class="comment">// ------------------------------------------------------------------------</span>
-<a name="l00153"></a>00153 
-<a name="l00154"></a>00154    <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> = <a class="code" href="_l_c_d_8h.html#ab8c35d355d2372090c7a347e961c9224">LCD_4BITMODE</a> | <a class="code" href="_l_c_d_8h.html#a8c85cf88d8af66a47c42249d81c94641">LCD_1LINE</a> | <a class="code" href="_l_c_d_8h.html#abb3210156d88d3fe18c9352eb161fe42">LCD_5x10DOTS</a>;
-<a name="l00155"></a>00155 }
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157 <span class="comment">// PUBLIC METHODS</span>
-<a name="l00158"></a>00158 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 <span class="comment">//</span>
-<a name="l00161"></a>00161 <span class="comment">// begin</span>
-<a name="l00162"></a><a class="code" href="class_liquid_crystal___s_r.html#a6fa1502e910d7e70f7a598d26963a001">00162</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#a6fa1502e910d7e70f7a598d26963a001">LiquidCrystal_SR::begin</a>(uint8_t cols, uint8_t lines, uint8_t dotsize) 
+<a name="l00142"></a>00142    <span class="comment">// LCD ENABLE PULSE</span>
+<a name="l00143"></a>00143    <span class="comment">//</span>
+<a name="l00144"></a>00144    <span class="comment">// While this library is written with a shift register without an output</span>
+<a name="l00145"></a>00145    <span class="comment">// latch in mind, it can work in 3-wire mode with a shiftregister with a</span>
+<a name="l00146"></a>00146    <span class="comment">// latch. The shiftregister latch pin (STR, RCL or similar) is then</span>
+<a name="l00147"></a>00147    <span class="comment">// connected to the LCD enable pin. The LCD is (very likely) slower</span>
+<a name="l00148"></a>00148    <span class="comment">// to read the Enable pulse, and then reads the new contents of the SR.</span>
+<a name="l00149"></a>00149    <a class="code" href="_fast_i_o_8h.html#a89e1c62276052100c62b6c82a2e95622">fio_digitalWrite_HIGH</a>(_srEnableRegister, _srEnableBit);
+<a name="l00150"></a>00150    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> (1);         <span class="comment">// enable pulse must be &gt;450ns               </span>
+<a name="l00151"></a>00151    <a class="code" href="_fast_i_o_8h.html#accae9687fdfc5f3492fb6344d62eb190">fio_digitalWrite_SWITCHTO</a>(_srEnableRegister, _srEnableBit, LOW);
+<a name="l00152"></a>00152    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> ( 37 );      <span class="comment">// commands need &gt; 37us to settle</span>
+<a name="l00153"></a>00153 }
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155 <span class="comment">// PUBLIC METHODS</span>
+<a name="l00156"></a>00156 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159 <span class="comment">/************ low level data pushing commands **********/</span>
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161 <span class="comment">// send</span>
+<a name="l00162"></a><a class="code" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">00162</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">LiquidCrystal_SR::send</a>(uint8_t value, uint8_t mode)
 <a name="l00163"></a>00163 {
-<a name="l00164"></a>00164    
-<a name="l00165"></a>00165    <span class="keywordflow">if</span> (lines &gt; 1) 
-<a name="l00166"></a>00166    {
-<a name="l00167"></a>00167       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> |= <a class="code" href="_l_c_d_8h.html#a7987e93538df2819583ba43b81ddbb25">LCD_2LINE</a>;
-<a name="l00168"></a>00168    }
-<a name="l00169"></a>00169 
-<a name="l00170"></a>00170    <a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">_numlines</a> = lines;
-<a name="l00171"></a>00171    <a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">_cols</a> = cols;
-<a name="l00172"></a>00172    
-<a name="l00173"></a>00173    <span class="comment">// for some 1 line displays you can select a 10 pixel high font</span>
-<a name="l00174"></a>00174    <span class="comment">// ------------------------------------------------------------</span>
-<a name="l00175"></a>00175    <span class="keywordflow">if</span> ((dotsize != 0) &amp;&amp; (lines == 1)) 
-<a name="l00176"></a>00176    {
-<a name="l00177"></a>00177       <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> |= <a class="code" href="_l_c_d_8h.html#abb3210156d88d3fe18c9352eb161fe42">LCD_5x10DOTS</a>;
-<a name="l00178"></a>00178    }
-<a name="l00179"></a>00179    
-<a name="l00180"></a>00180    <span class="comment">// SEE PAGE 45/46 FOR INITIALIZATION SPECIFICATION!</span>
-<a name="l00181"></a>00181    <span class="comment">// according to datasheet, we need at least 40ms after power rises above 2.7V</span>
-<a name="l00182"></a>00182    <span class="comment">// before sending commands. Arduino can turn on way before 4.5V so we&#39;ll wait </span>
-<a name="l00183"></a>00183    <span class="comment">// 50</span>
-<a name="l00184"></a>00184    <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00185"></a>00185    delayMicroseconds(50000);
-<a name="l00186"></a>00186    write4bits(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>);
-<a name="l00187"></a>00187    delayMicroseconds(4500);  <span class="comment">// wait more than 4.1ms</span>
-<a name="l00188"></a>00188    
-<a name="l00189"></a>00189    <span class="comment">// Second try</span>
-<a name="l00190"></a>00190    write4bits(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>);
-<a name="l00191"></a>00191    delayMicroseconds(150);
-<a name="l00192"></a>00192    <span class="comment">// Third go</span>
-<a name="l00193"></a>00193    write4bits(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>);
-<a name="l00194"></a>00194    
-<a name="l00195"></a>00195    <span class="comment">// And finally, set to 4-bit interface</span>
-<a name="l00196"></a>00196    write4bits(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="_l_c_d_8h.html#ab8c35d355d2372090c7a347e961c9224">LCD_4BITMODE</a>);
-<a name="l00197"></a>00197    
-<a name="l00198"></a>00198    <span class="comment">// Set # lines, font size, etc.</span>
-<a name="l00199"></a>00199    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aaef882ae70d1f485cd132815d9716111">LCD_FUNCTIONSET</a> | <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>);
-<a name="l00200"></a>00200    <span class="comment">// Turn the display on with no cursor or blinking default</span>
-<a name="l00201"></a>00201    <a class="code" href="class_l_c_d.html#ae47a0e2eff74431a39774b788d5761f4">_displaycontrol</a> = <a class="code" href="_l_c_d_8h.html#a76236ae8317b34bbc98ea56bc0a2639c">LCD_DISPLAYON</a> | <a class="code" href="_l_c_d_8h.html#a32b194a3adaa0a0bb69acee2e6a754fa">LCD_CURSOROFF</a> | <a class="code" href="_l_c_d_8h.html#a4b28243034cec656b0ed490ba6979752">LCD_BLINKOFF</a>;
-<a name="l00202"></a>00202    <a class="code" href="class_l_c_d.html#a5b07cf05e8e5e7c53654f5ca0cf58b89">display</a>();
-<a name="l00203"></a>00203    <span class="comment">// Clear it off</span>
-<a name="l00204"></a>00204    <a class="code" href="class_l_c_d.html#afa699e0beeeee03cce8cef87eba81c4a">clear</a>();
-<a name="l00205"></a>00205    <span class="comment">// Initialize to default text direction (for romance languages)</span>
-<a name="l00206"></a>00206    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> = <a class="code" href="_l_c_d_8h.html#ae7c6309fce6200bd7526d090a4a84dd0">LCD_ENTRYLEFT</a> | <a class="code" href="_l_c_d_8h.html#a049ee97e98d04788c1da9a55590fbe42">LCD_ENTRYSHIFTDECREMENT</a>;
-<a name="l00207"></a>00207    <span class="comment">// set the entry mode</span>
-<a name="l00208"></a>00208    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
-<a name="l00209"></a>00209    <a class="code" href="class_l_c_d.html#aee45ad37f09312f5d9982257e2d37e68">home</a>();
-<a name="l00210"></a>00210    
-<a name="l00211"></a>00211 }
-<a name="l00212"></a>00212 
-<a name="l00213"></a>00213 <span class="comment">/************ low level data pushing commands **********/</span>
-<a name="l00214"></a>00214 
-<a name="l00215"></a>00215 <span class="comment">// send</span>
-<a name="l00216"></a><a class="code" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">00216</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">LiquidCrystal_SR::send</a>(uint8_t value, uint8_t mode) 
-<a name="l00217"></a>00217 {
-<a name="l00218"></a>00218    uint8_t val1, val2;
-<a name="l00219"></a>00219    
-<a name="l00220"></a>00220    <span class="comment">// If _two_wire - clear the shiftregister first.</span>
-<a name="l00221"></a>00221    <span class="comment">// ----------------------------------------------</span>
-<a name="l00222"></a>00222    <span class="keywordflow">if</span> ( _two_wire ) 
-<a name="l00223"></a>00223    {
-<a name="l00224"></a>00224            <span class="comment">// clear fast</span>
-<a name="l00225"></a>00225            <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
-<a name="l00226"></a>00226    }
-<a name="l00227"></a>00227    
-<a name="l00228"></a>00228    <span class="comment">// Divide byte in two nibbles (val1 and val2), include the RS signal</span>
-<a name="l00229"></a>00229    <span class="comment">// and format it for shiftregister output wiring to the LCD</span>
-<a name="l00230"></a>00230    mode = mode ? <a class="code" href="_liquid_crystal___s_r_8h.html#afdaa2bbb2cc185700864ac8d7a570ced">SR_RS_BIT</a> : 0; <span class="comment">// RS bit; LOW: command.  HIGH: character.</span>
-<a name="l00231"></a>00231    val1 = mode | <a class="code" href="_liquid_crystal___s_r_8h.html#a0075b041d82abb47f279dce482e7b087">SR_EN_BIT</a> | ((value &gt;&gt; 1) &amp; 0x78); <span class="comment">// upper nibble</span>
-<a name="l00232"></a>00232    val2 = mode | <a class="code" href="_liquid_crystal___s_r_8h.html#a0075b041d82abb47f279dce482e7b087">SR_EN_BIT</a> | ((value &lt;&lt; 3) &amp; 0x78); <span class="comment">// lower nibble</span>
-<a name="l00233"></a>00233    
-<a name="l00234"></a>00234    <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1, MSBFIRST);
-<a name="l00235"></a>00235    
-<a name="l00236"></a>00236    <span class="comment">// LCD ENABLE PULSE</span>
-<a name="l00237"></a>00237    <span class="comment">//</span>
-<a name="l00238"></a>00238    <span class="comment">// While this library is written with a shift register without an output</span>
-<a name="l00239"></a>00239    <span class="comment">// latch in mind, it can work in 3-wire mode with a shiftregister with a</span>
-<a name="l00240"></a>00240    <span class="comment">// latch. The shiftregister latch pin (STR, RCL or similar) is then</span>
-<a name="l00241"></a>00241    <span class="comment">// connected to the LCD enable pin. The LCD is (very likely) slower</span>
-<a name="l00242"></a>00242    <span class="comment">// to read the Enable pulse, and then reads the new contents of the SR.</span>
-<a name="l00243"></a>00243    <a class="code" href="_fast_i_o_8h.html#a89e1c62276052100c62b6c82a2e95622">fio_digitalWrite_HIGH</a>(_srEnableRegister, _srEnableBit);
-<a name="l00244"></a>00244    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>( 1 );                 <span class="comment">// enable pulse must be &gt;450ns</span>
-<a name="l00245"></a>00245    <a class="code" href="_fast_i_o_8h.html#accae9687fdfc5f3492fb6344d62eb190">fio_digitalWrite_SWITCHTO</a>(_srEnableRegister, _srEnableBit,LOW);
-<a name="l00246"></a>00246 
-<a name="l00247"></a>00247    <span class="comment">// clear shiftregister</span>
-<a name="l00248"></a>00248    <span class="comment">// ---------------------------</span>
-<a name="l00249"></a>00249    <span class="keywordflow">if</span> ( _two_wire ) 
-<a name="l00250"></a>00250    {
-<a name="l00251"></a>00251            <span class="comment">// Clear fast</span>
-<a name="l00252"></a>00252            <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
-<a name="l00253"></a>00253    }
-<a name="l00254"></a>00254    <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val2, MSBFIRST);
-<a name="l00255"></a>00255    
-<a name="l00256"></a>00256    <span class="comment">// LCD ENABLE PULSE, se above comment</span>
-<a name="l00257"></a>00257    <a class="code" href="_fast_i_o_8h.html#accae9687fdfc5f3492fb6344d62eb190">fio_digitalWrite_SWITCHTO</a>(_srEnableRegister, _srEnableBit,HIGH);
-<a name="l00258"></a>00258    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>( 1 );                 <span class="comment">// enable pulse must be &gt;450ns</span>
-<a name="l00259"></a>00259    <a class="code" href="_fast_i_o_8h.html#accae9687fdfc5f3492fb6344d62eb190">fio_digitalWrite_SWITCHTO</a>(_srEnableRegister, _srEnableBit,LOW);
-<a name="l00260"></a>00260    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>( 40 );                <span class="comment">// commands need &gt; 37us to settle</span>
-<a name="l00261"></a>00261 }
-<a name="l00262"></a>00262 
-<a name="l00263"></a>00263 <span class="comment">//</span>
-<a name="l00264"></a>00264 <span class="comment">// write4bits</span>
-<a name="l00265"></a>00265 <span class="keywordtype">void</span> LiquidCrystal_SR::write4bits(uint8_t value) 
-<a name="l00266"></a>00266 {
-<a name="l00267"></a>00267    uint8_t val1;
-<a name="l00268"></a>00268    
-<a name="l00269"></a>00269    <span class="comment">// clear shiftregister</span>
-<a name="l00270"></a>00270    <span class="comment">// --------------------------</span>
-<a name="l00271"></a>00271    <span class="keywordflow">if</span> ( _two_wire ) 
-<a name="l00272"></a>00272    {
-<a name="l00273"></a>00273            <span class="comment">// clear fast</span>
-<a name="l00274"></a>00274            <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
-<a name="l00275"></a>00275    }
-<a name="l00276"></a>00276    <a class="code" href="_fast_i_o_8cpp.html#a19962d1b3fc351693779f633a36105a8">fio_digitalWrite</a>(_srEnableRegister, _srEnableBit, LOW);
-<a name="l00277"></a>00277 
-<a name="l00278"></a>00278    <span class="comment">// Discard lower nibble</span>
-<a name="l00279"></a>00279    <span class="comment">// and format it for shiftregister output wiring to the LCD</span>
-<a name="l00280"></a>00280    val1 = <a class="code" href="_liquid_crystal___s_r_8h.html#a0075b041d82abb47f279dce482e7b087">SR_EN_BIT</a> | ((value &gt;&gt; 1) &amp; 0x78);
-<a name="l00281"></a>00281    <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val1, MSBFIRST);
-<a name="l00282"></a>00282 
-<a name="l00283"></a>00283    <span class="comment">// LCD ENABLE PULSE</span>
-<a name="l00284"></a>00284    <span class="comment">//</span>
-<a name="l00285"></a>00285    <span class="comment">// While this library is written with a shift register without an output</span>
-<a name="l00286"></a>00286    <span class="comment">// latch in mind, it can work in 3-wire mode with a shiftregister with a</span>
-<a name="l00287"></a>00287    <span class="comment">// latch. The shiftregister latch pin (STR, RCL or similar) is then</span>
-<a name="l00288"></a>00288    <span class="comment">// connected to the LCD enable pin. The LCD is (very likely) slower</span>
-<a name="l00289"></a>00289    <span class="comment">// to read the Enable pulse, and then reads the new contents of the SR.</span>
-<a name="l00290"></a>00290    
-<a name="l00291"></a>00291    <a class="code" href="_fast_i_o_8cpp.html#a19962d1b3fc351693779f633a36105a8">fio_digitalWrite</a>(_srEnableRegister, _srEnableBit, HIGH);
-<a name="l00292"></a>00292 
-<a name="l00293"></a>00293    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>( 1 );                 <span class="comment">// enable pulse must be &gt;450ns</span>
-<a name="l00294"></a>00294    <a class="code" href="_fast_i_o_8cpp.html#a19962d1b3fc351693779f633a36105a8">fio_digitalWrite</a>(_srEnableRegister, _srEnableBit, LOW);
-<a name="l00295"></a>00295    
-<a name="l00296"></a>00296    <a class="code" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a>( 40 );               <span class="comment">// commands need &gt; 37us to settle</span>
-<a name="l00297"></a>00297 }
+<a name="l00164"></a>00164    <span class="comment">// Divide byte in two nibbles include the RS signal</span>
+<a name="l00165"></a>00165    <span class="comment">// and format it for shiftregister output wiring to the LCD</span>
+<a name="l00166"></a>00166    mode = mode ? <a class="code" href="_liquid_crystal___s_r_8h.html#afdaa2bbb2cc185700864ac8d7a570ced">SR_RS_BIT</a> : 0; <span class="comment">// RS bit; LOW: command.  HIGH: character.</span>
+<a name="l00167"></a>00167    shiftIt(mode | <a class="code" href="_liquid_crystal___s_r_8h.html#a0075b041d82abb47f279dce482e7b087">SR_EN_BIT</a> | ((value &gt;&gt; 1) &amp; 0x78)); <span class="comment">// upper nibble</span>
+<a name="l00168"></a>00168    shiftIt(mode | <a class="code" href="_liquid_crystal___s_r_8h.html#a0075b041d82abb47f279dce482e7b087">SR_EN_BIT</a> | ((value &lt;&lt; 3) &amp; 0x78)); <span class="comment">// lower nibble</span>
+<a name="l00169"></a>00169 }
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171 <span class="comment">//</span>
+<a name="l00172"></a>00172 <span class="comment">// setBacklight</span>
+<a name="l00173"></a><a class="code" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">00173</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">LiquidCrystal_SR::setBacklight</a> ( uint8_t mode ) 
+<a name="l00174"></a>00174 { }
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176 
+<a name="l00177"></a><a class="code" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">00177</a> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">LiquidCrystal_SR::setBacklightPin</a> ( uint8_t pin )
+<a name="l00178"></a>00178 { }
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -374,7 +255,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 5 2012 12:37:32 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Feb 28 2012 19:52:02 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
