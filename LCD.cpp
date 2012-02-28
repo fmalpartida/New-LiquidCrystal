@@ -289,7 +289,7 @@ void LCD::createChar(uint8_t location, uint8_t charmap[])
    for (int i=0; i<8; i++) 
    {
       write(charmap[i]);      // call the virtual write method
-      delayMicroseconds(30);
+      delayMicroseconds(40);
    }
 }
 

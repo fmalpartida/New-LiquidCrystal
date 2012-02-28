@@ -34,6 +34,10 @@
 #include <LiquidCrystal.h>
 #endif
 
+#ifdef _LCD_SR_
+#include <LiquidCrystal_SR.h>
+#endif
+
 
 /*!
     @defined    CHAR_WIDTH
@@ -109,6 +113,13 @@ LiquidCrystal_I2C lcd(0x38);
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 const int    CONTRAST_PIN  = 9;
 const int    CONTRAST      = 65;
+#endif
+
+#ifdef _LCD_SR_
+LiquidCrystal_SR lcd(3,2,TWO_WIRE);
+//                   | |
+//                   | \-- Clock Pin
+//                   \---- Data/Enable Pin
 #endif
 
 // LCD reference variable
@@ -255,7 +266,7 @@ static void initHW ( void )
    
    pinMode ( STATUS_PIN, OUTPUT );
 
-   myLCD->begin ( 16, 2 );
+   myLCD->begin ( 20, 4 );
    // Load custom character set into CGRAM
    // --------------------------------------------------------------------
    for ( i = 0; i < charBitmapSize; i++ )

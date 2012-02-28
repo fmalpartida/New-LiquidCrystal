@@ -146,11 +146,10 @@ void LiquidCrystal_SR::shiftIt(uint8_t val)
    // latch. The shiftregister latch pin (STR, RCL or similar) is then
    // connected to the LCD enable pin. The LCD is (very likely) slower
    // to read the Enable pulse, and then reads the new contents of the SR.
-
    fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
-   waitUsec(1);                 // enable pulse must be >450ns
+   waitUsec (1);         // enable pulse must be >450ns               
    fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit, LOW);
-   waitUsec(40);                // commands need > 37us to settle
+   waitUsec ( 37 );      // commands need > 37us to settle
 }
 
 // PUBLIC METHODS
