@@ -82,13 +82,14 @@ Inheritance diagram for LiquidCrystal_SR:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a6fa1502e910d7e70f7a598d26963a001">begin</a> (uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">LiquidCrystal_SR</a> (uint8_t srdata, uint8_t srclock, uint8_t enable)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">send</a> (uint8_t value, uint8_t mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">setBacklight</a> (uint8_t mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">setBacklightPin</a> (uint8_t pin)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8h_source.html#l00091">91</a> of file <a class="el" href="_liquid_crystal___s_r_8h_source.html">LiquidCrystal_SR.h</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8h_source.html#l00089">89</a> of file <a class="el" href="_liquid_crystal___s_r_8h_source.html">LiquidCrystal_SR.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a40bca9b97ad5c1e938c7dee1fd0850f2"></a><!-- doxytag: member="LiquidCrystal_SR::LiquidCrystal_SR" ref="a40bca9b97ad5c1e938c7dee1fd0850f2" args="(uint8_t srdata, uint8_t srclock, uint8_t enable)" -->
 <div class="memitem">
@@ -130,57 +131,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00118">118</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00092">92</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a6fa1502e910d7e70f7a598d26963a001"></a><!-- doxytag: member="LiquidCrystal_SR::begin" ref="a6fa1502e910d7e70f7a598d26963a001" args="(uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void LiquidCrystal_SR::begin </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>cols</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>rows</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>charsize</em> = <code>LCD_5x8DOTS</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p><a class="el" href="class_l_c_d.html">LCD</a> initialization.  Initializes the <a class="el" href="class_l_c_d.html">LCD</a> to a given size (col, row). This methods initializes the <a class="el" href="class_l_c_d.html">LCD</a>, therefore, it MUST be called prior to using any other method from this class or parent class.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cols[in]</td><td>the number of columns that the display has </td></tr>
-    <tr><td class="paramname">rows[in]</td><td>the number of rows that the display has </td></tr>
-    <tr><td class="paramname">charsize[in]</td><td>size of the characters of the <a class="el" href="class_l_c_d.html">LCD</a>: LCD_5x8DOTS or LCD_5x10DOTS. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="class_l_c_d.html#a541bfac06ec95dcb6460d14906f50925">LCD</a>.</p>
-
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00162">162</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a03821351a32db07cb7e42c8c11ce8d47"></a><!-- doxytag: member="LiquidCrystal_SR::send" ref="a03821351a32db07cb7e42c8c11ce8d47" args="(uint8_t value, uint8_t mode)" -->
 <div class="memitem">
 <div class="memproto">
@@ -217,7 +172,64 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00216">216</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00163">163</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad9f3e3f36257984c23fb508973e14535"></a><!-- doxytag: member="LiquidCrystal_SR::setBacklight" ref="ad9f3e3f36257984c23fb508973e14535" args="(uint8_t mode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LiquidCrystal_SR::setBacklight </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight. The setBacklightPin has to be called before setting the backlight for this method to work. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">setBacklightPin</a>.</dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">LCD</a>.</p>
+
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00174">174</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3025b6e19c6b9c28991b13fa16ef58c9"></a><!-- doxytag: member="LiquidCrystal_SR::setBacklightPin" ref="a3025b6e19c6b9c28991b13fa16ef58c9" args="(uint8_t pin)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LiquidCrystal_SR::setBacklightPin </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the pin to control the backlight.  Sets the pin in the device to control the backlight.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a2871297d458e3384538008541192af27">LCD</a>.</p>
+
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00178">178</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
 
 </div>
 </div>
@@ -240,7 +252,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 5 2012 12:37:33 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 18 2012 22:11:26 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

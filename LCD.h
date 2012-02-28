@@ -9,7 +9,7 @@
 // Thread Safe: No
 // Extendable: Yes
 //
-// @file LiquidCrystal.h
+// @file LCD.h
 // This file implements a basic liquid crystal library that comes as standard
 // in the Arduino SDK.
 // 
@@ -17,7 +17,7 @@
 // This is a basic implementation of the LiquidCrystal library of the
 // Arduino SDK. This library is a refactored version of the one supplied
 // in the Arduino SDK in such a way that it simplifies its extension
-// to support other mechanism to communicate to LCDs such as I2C, Serial.
+// to support other mechanism to communicate to LCDs such as I2C, Serial, SR, 
 // The original library has been reworked in such a way that this will be
 // the base class implementing all generic methods to command an LCD based
 // on the Hitachi HD44780 and compatible chipsets.
@@ -25,7 +25,6 @@
 // This base class is a pure abstract class and needs to be extended. As reference,
 // it has been extended to drive 4 and 8 bit mode control, LCDs and I2C extension
 // backpacks such as the I2CLCDextraIO using the PCF8574* I2C IO Expander ASIC.
-//
 //
 // @version API 1.1.0
 //
@@ -43,6 +42,7 @@
 
 #include <inttypes.h>
 #include <Print.h>
+
 
 /*!
  @defined 
@@ -130,11 +130,11 @@ inline static void waitUsec ( uint16_t uSec )
 #define DATA                    1
 
 /*!
-    @defined 
-    @abstract   Defines the duration of the home and clear commands
-    @discussion This constant defines the time it takes for the home and clear
-          commands in the LCD - Time in microseconds.
-*/
+ @defined 
+ @abstract   Defines the duration of the home and clear commands
+ @discussion This constant defines the time it takes for the home and clear
+ commands in the LCD - Time in microseconds.
+ */
 #define HOME_CLEAR_EXEC      2000
 
 class LCD : public Print 
@@ -164,7 +164,7 @@ public:
     @param      rows[in] the number of rows that the display has
     */
    virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);
-  
+   
    /*!
     @function
     @abstract   Clears the LCD.
@@ -293,6 +293,23 @@ public:
    
    /*!
     @function
+    @abstract   Moves the cursor one space to the left.
+    @discussion 
+    @param      none
+    */   
+   void moveCursorLeft();
+
+   
+   /*!
+    @function
+    @abstract   Moves the cursor one space to the right.
+    
+    @param      none
+    */
+   void moveCursorRight();
+   
+   /*!
+    @function
     @abstract   Turns on automatic scrolling of the LCD.
     @discussion Turns on automatic scrolling of the LCD. This causes each 
     character output to the display to push previous characters over by one 
@@ -344,7 +361,7 @@ public:
     @param      row[in] LCD row - line.
     */
    void setCursor(uint8_t col, uint8_t row);
-   
+
    
    /*!
     @function
@@ -358,6 +375,33 @@ public:
     @param      value[in] Command value to send to the LCD.
     */
    void command(uint8_t value);
+   
+   //
+   // virtual class methods
+   // --------------------------------------------------------------------------
+   /*!
+    @function
+    @abstract   Switch-on/off the LCD backlight.
+    @discussion Switch-on/off the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin. This method is device dependent
+    and can be programmed on each subclass. An empty function call is provided
+    that does nothing.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   virtual void setBacklight ( uint8_t mode ) { };
+   
+   /*!
+    @function
+    @abstract   Sets the pin to control the backlight.
+    @discussion Sets the pin in the device to control the backlight.
+    This method is device dependent and can be programmed on each subclass. An 
+    empty function call is provided that does nothing.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   virtual void setBacklightPin ( uint8_t pin ) { };
    
    /*!
     @function
@@ -406,9 +450,9 @@ protected:
    // Internal LCD variables to control the LCD shared between all derived
    // classes.
    uint8_t _displayfunction;  // LCD_5x10DOTS or LCD_5x8DOTS, LCD_4BITMODE or 
-   // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
+                              // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
    uint8_t _displaycontrol;   // LCD base control command LCD on/off, blink, cursor
-   // all commands are "ored" to its contents.
+                              // all commands are "ored" to its contents.
    uint8_t _displaymode;      // Text entry mode to the LCD
    uint8_t _numlines;         // Number of lines of the LCD, initialized with begin()
    uint8_t _cols;             // Number of columns in the LCD

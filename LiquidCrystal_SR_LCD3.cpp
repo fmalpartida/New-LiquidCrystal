@@ -19,8 +19,11 @@
 // Extendable: Yes
 //
 // @file LiquidCrystal_SR_LCD3.h
+//
 //  Connects an LCD using 3 pins from the Arduino, via an 8-bit 
 //  ShiftRegister (SR from now on).
+//  The original port source for this module is https://github.com/marcmerlin/NewLiquidCrystal
+//  The 'FastIO' merge has madethis code 4 times faster.
 // 
 // @brief 
 // This is a port of the ShiftRegLCD library from raron and ported to the
@@ -46,7 +49,6 @@
 // Shiftregister connection description:
 // MC14094 input:  Arduino digital pin 2=Clock, pin 3=Data, pin 4=Strobe
 // MC14094 output: Q8=DB4, Q7=DB5, Q6=DB6, Q5=DB7, Q4=E, Q3=RW, Q2=RS, Q1=None
-// http://www.ee.mut.ac.th/datasheet/MC14094.pdf
 //
 //   +--------------------------------------------+
 //   |    Arduino (ATMega 168 or 328)             |
@@ -86,6 +88,11 @@
 // - The pinout used here is same saner (the 4 bits for the LCD are all in one 
 //   nibble of the shift register, not spread across 2 like in the
 //   LiquidCrystal_SR pinout)
+//
+// Note however that LiquidCrystal_SR while a bit more complex wiring and code
+// wise, supports non latching shift registers and it a few percent faster than
+// this code since it can address the LCD enable pin without having to send 
+// a pulse through the shift register like the LCD3Wires setup requires.
 //  
 // This code makes sure to properly follow the specifications when talking
 // to the LCD while using minimal delays (it's faster than the LCD3wire and aiko

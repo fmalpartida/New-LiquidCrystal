@@ -82,17 +82,17 @@ Inheritance diagram for LiquidCrystal_I2C:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#a9f296e0d26f8b6a4509d8d4b9d738c03">backlight</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#aeee2ada537f0cfbfda8613324b57c4a6">begin</a> (uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#aac537d195557e0b8afac1a71441a484c">LiquidCrystal_I2C</a> (uint8_t lcd_Addr)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#a517f8847ebf09f0eacfb9c7232975fce">LiquidCrystal_I2C</a> (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#ac235f66c3d56320fca89545d0176caf5">LiquidCrystal_I2C</a> (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#a576f1f5813f55f34333d6d7e9fe53ad3">noBacklight</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#a8bf1fab7efe13e8b17b96c42d1f810b4">send</a> (uint8_t value, uint8_t mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#a2f248fc841812e850f29114667f41440">setBacklight</a> (uint8_t mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___i2_c.html#a715027a10c1141fe5442fe58cb3a405a">setBacklightPin</a> (uint8_t pin)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8h_source.html#l00070">70</a> of file <a class="el" href="_liquid_crystal___i2_c_8h_source.html">LiquidCrystal_I2C.h</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8h_source.html#l00062">62</a> of file <a class="el" href="_liquid_crystal___i2_c_8h_source.html">LiquidCrystal_I2C.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aac537d195557e0b8afac1a71441a484c"></a><!-- doxytag: member="LiquidCrystal_I2C::LiquidCrystal_I2C" ref="aac537d195557e0b8afac1a71441a484c" args="(uint8_t lcd_Addr)" -->
 <div class="memitem">
@@ -116,7 +116,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00065">65</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00049">49</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
 
 </div>
 </div>
@@ -167,7 +167,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00081">81</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00067">67</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
 
 </div>
 </div>
@@ -246,37 +246,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00098">98</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00086">86</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a9f296e0d26f8b6a4509d8d4b9d738c03"></a><!-- doxytag: member="LiquidCrystal_I2C::backlight" ref="a9f296e0d26f8b6a4509d8d4b9d738c03" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void LiquidCrystal_I2C::backlight </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Switch-on the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-on the <a class="el" href="class_l_c_d.html">LCD</a> backlight, this method is not supported by the I2CLCDextraIO, it needs an extra IO pin to drive the <a class="el" href="class_l_c_d.html">LCD</a> backlight</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00220">220</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="aeee2ada537f0cfbfda8613324b57c4a6"></a><!-- doxytag: member="LiquidCrystal_I2C::begin" ref="aeee2ada537f0cfbfda8613324b57c4a6" args="(uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)" -->
 <div class="memitem">
 <div class="memproto">
@@ -307,7 +281,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p><a class="el" href="class_l_c_d.html">LCD</a> initialization.  Initializes the <a class="el" href="class_l_c_d.html">LCD</a> to a given size (col, row). This methods initializes the <a class="el" href="class_l_c_d.html">LCD</a>, therefore, it MUST be called prior to using any other method from this class or parent class.</p>
+<p><a class="el" href="class_l_c_d.html">LCD</a> initialization and associated HW.  Initializes the <a class="el" href="class_l_c_d.html">LCD</a> to a given size (col, row). This methods initializes the <a class="el" href="class_l_c_d.html">LCD</a>, therefore, it MUST be called prior to using any other method from this class or parent class.</p>
+<p>The begin method can be overloaded if necessary to initialize any HW that is implemented by a library and can't be done during construction, here we use the Wire class.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">cols[in]</td><td>the number of columns that the display has </td></tr>
@@ -317,35 +292,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_l_c_d.html#a541bfac06ec95dcb6460d14906f50925">LCD</a>.</p>
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a3f587d1cbb2d59765ef60a5216b56fea">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00143">143</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a576f1f5813f55f34333d6d7e9fe53ad3"></a><!-- doxytag: member="LiquidCrystal_I2C::noBacklight" ref="a576f1f5813f55f34333d6d7e9fe53ad3" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void LiquidCrystal_I2C::noBacklight </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Switch-off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-off the <a class="el" href="class_l_c_d.html">LCD</a> backlight, this method is not supported by the I2CLCDextraIO, it needs an extra IO pin to drive the <a class="el" href="class_l_c_d.html">LCD</a> backlight</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00214">214</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00111">111</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
 
 </div>
 </div>
@@ -385,7 +334,64 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00234">234</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00173">173</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2f248fc841812e850f29114667f41440"></a><!-- doxytag: member="LiquidCrystal_I2C::setBacklight" ref="a2f248fc841812e850f29114667f41440" args="(uint8_t mode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LiquidCrystal_I2C::setBacklight </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight. The setBacklightPin has to be called before setting the backlight for this method to work. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_liquid_crystal___i2_c.html#a715027a10c1141fe5442fe58cb3a405a">setBacklightPin</a>.</dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">LCD</a>.</p>
+
+<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00125">125</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a715027a10c1141fe5442fe58cb3a405a"></a><!-- doxytag: member="LiquidCrystal_I2C::setBacklightPin" ref="a715027a10c1141fe5442fe58cb3a405a" args="(uint8_t pin)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LiquidCrystal_I2C::setBacklightPin </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the pin to control the backlight.  Sets the pin in the device to control the backlight.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a2871297d458e3384538008541192af27">LCD</a>.</p>
+
+<p>Definition at line <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html#l00141">141</a> of file <a class="el" href="_liquid_crystal___i2_c_8cpp_source.html">LiquidCrystal_I2C.cpp</a>.</p>
 
 </div>
 </div>
@@ -408,7 +414,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 5 2012 12:37:33 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 18 2012 22:11:26 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
