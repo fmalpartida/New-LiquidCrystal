@@ -6,10 +6,11 @@
 # Datatypes (KEYWORD1)
 ###########################################
 
-LiquidCrystal_SR	 KEYWORD1
-LiquidCrystal_I2C    KEYWORD1
-LiquidCrystal        KEYWORD1
-LCD                  KEYWORD1
+LiquidCrystal_SR        KEYWORD1
+LiquidCrystal_I2C    	KEYWORD1
+LiquidCrystal_SR_LCD3	KEYWORD1
+LiquidCrystal        	KEYWORD1
+LCD                  	KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)
@@ -25,9 +26,11 @@ blink                KEYWORD2
 noCursor             KEYWORD2
 cursor               KEYWORD2
 scrollDisplayLeft    KEYWORD2
-scrollDisplayRight	KEYWORD2
+scrollDisplayRight   KEYWORD2
 leftToRight          KEYWORD2
 rightToLeft          KEYWORD2
+moveCursorLeft       KEYWORD2
+moveCursorRight      KEYWORD2
 autoscroll           KEYWORD2
 noAutoscroll         KEYWORD2
 createChar           KEYWORD2

@@ -3,7 +3,7 @@
 // Copyright 2011 - Under creative commons license 3.0:
 //        Attribution-ShareAlike CC BY-SA
 //
-// This module is by Marc MERLIN <marc_soft<at>merlins.org>
+// This module is a port by Marc MERLIN <marc_soft<at>merlins.org>
 // See .cpp file for hardware details.
 // ---------------------------------------------------------------------------
 #ifndef _LIQUIDCRYSTAL_SR_LCD3_

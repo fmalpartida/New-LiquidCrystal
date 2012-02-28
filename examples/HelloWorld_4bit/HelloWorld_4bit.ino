@@ -5,7 +5,7 @@
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 #define   CONTRAST_PIN   9
 #define   BACKLIGHT_PIN  7
-#define   CONTRAST       100
+#define   CONTRAST       110
 
 // Creat a set of new characters
 byte smiley[8] = {
@@ -47,10 +47,10 @@ void setup()
 
   // Switch on the backlight and LCD contrast levels
   pinMode(CONTRAST_PIN, OUTPUT);
-  pinMode(BACKLIGHT_PIN, OUTPUT);
+  analogWrite ( CONTRAST_PIN, CONTRAST );
 
-  digitalWrite(BACKLIGHT_PIN, HIGH);
-  analogWrite (CONTRAST_PIN, CONTRAST);
+  lcd.setBacklightPin ( BACKLIGHT_PIN );
+  lcd.setBacklight ( HIGH );
     
   lcd.begin(16,2);               // initialize the lcd 
 

@@ -69,8 +69,6 @@
 //             on the "official" LiquidCrystal library.
 //
 //
-// This library is only compatible with Arduino's SDK version 1.0
-//
 //
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
@@ -118,6 +116,27 @@ public:
     */
    virtual void send(uint8_t value, uint8_t mode);
    
+   /*!
+    @function
+    @abstract   Switch-on/off the LCD backlight.
+    @discussion Switch-on/off the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   void setBacklight ( uint8_t mode );
+   
+   /*!
+    @function
+    @abstract   Sets the pin to control the backlight.
+    @discussion Sets the pin in the device to control the backlight.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   void setBacklightPin ( uint8_t pin );
+   
+   
    
 private:
    
@@ -128,15 +147,13 @@ private:
     */
    void init ( uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, 
               uint8_t font );
-   /*!
-    @method     
-    @abstract   For sending data when initializing the display to 4-bit
-    @discussion Initializes the LCD pin allocation and configuration.
-    */
-   void write4bits ( uint8_t );
    
-   uint8_t _srdata_pin;  // Serial Data pin
-   uint8_t _srclock_pin; // Clock Pin
+   /*!
+    * @method
+    * @abstract takes care of shifting and the enable pulse
+    */
+   void shiftIt (uint8_t val);
+
    uint8_t _enable_pin;  // Enable Pin
    uint8_t _two_wire;    // two wire mode
 
