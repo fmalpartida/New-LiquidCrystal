@@ -202,59 +202,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00280"></a>00280    
 <a name="l00292"></a>00292    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#ac014830eadc26bfd86308ea8734f4428">rightToLeft</a>();
 <a name="l00293"></a>00293    
-<a name="l00307"></a>00307    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">autoscroll</a>();
-<a name="l00308"></a>00308    
-<a name="l00317"></a>00317    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a96035dde40efbf73390e00b5beb00231">noAutoscroll</a>();
-<a name="l00318"></a>00318    
-<a name="l00335"></a>00335    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a91cba8f93c692abcddf8bc3de58d2d3a">createChar</a>(uint8_t location, uint8_t charmap[]);
-<a name="l00336"></a>00336    
-<a name="l00346"></a>00346    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a48220450fd152b25994eb7d0ba340e8d">setCursor</a>(uint8_t col, uint8_t row);
-<a name="l00347"></a>00347 
-<a name="l00348"></a>00348    
-<a name="l00360"></a>00360    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(uint8_t value);
-<a name="l00361"></a>00361    
-<a name="l00362"></a>00362    <span class="comment">//</span>
-<a name="l00363"></a>00363    <span class="comment">// virtual class methods</span>
-<a name="l00364"></a>00364    <span class="comment">// --------------------------------------------------------------------------</span>
-<a name="l00376"></a><a class="code" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">00376</a> <span class="comment"></span>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">setBacklight</a> ( uint8_t mode ) { };
-<a name="l00377"></a>00377    
-<a name="l00387"></a><a class="code" href="class_l_c_d.html#a2871297d458e3384538008541192af27">00387</a>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2871297d458e3384538008541192af27">setBacklightPin</a> ( uint8_t pin ) { };
-<a name="l00388"></a>00388    
-<a name="l00400"></a>00400 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
-<a name="l00401"></a>00401 <span class="preprocessor"></span>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">write</a>(uint8_t value);
-<a name="l00402"></a>00402 <span class="preprocessor">#else</span>
-<a name="l00403"></a>00403 <span class="preprocessor"></span>   <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">write</a>(uint8_t value);
-<a name="l00404"></a>00404 <span class="preprocessor">#endif</span>
-<a name="l00405"></a>00405 <span class="preprocessor"></span>   
-<a name="l00406"></a>00406    
-<a name="l00420"></a>00420 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
-<a name="l00421"></a><a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">00421</a> <span class="preprocessor"></span>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(uint8_t value, uint8_t mode) { };
-<a name="l00422"></a>00422 <span class="preprocessor">#else</span>
-<a name="l00423"></a>00423 <span class="preprocessor"></span>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(uint8_t value, uint8_t mode) = 0;
-<a name="l00424"></a>00424 <span class="preprocessor">#endif</span>
-<a name="l00425"></a>00425 <span class="preprocessor"></span>   
-<a name="l00426"></a>00426 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
-<a name="l00427"></a>00427 <span class="preprocessor"></span>   <span class="keyword">using</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">Print::write</a>;
-<a name="l00428"></a>00428 <span class="preprocessor">#else</span>
-<a name="l00429"></a>00429 <span class="preprocessor"></span>   <span class="keyword">using</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">Print::write</a>;
-<a name="l00430"></a>00430 <span class="preprocessor">#endif   </span>
-<a name="l00431"></a>00431 <span class="preprocessor"></span>   
-<a name="l00432"></a>00432 <span class="keyword">protected</span>:
-<a name="l00433"></a>00433    <span class="comment">// Internal LCD variables to control the LCD shared between all derived</span>
-<a name="l00434"></a>00434    <span class="comment">// classes.</span>
-<a name="l00435"></a><a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">00435</a>    uint8_t <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>;  <span class="comment">// LCD_5x10DOTS or LCD_5x8DOTS, LCD_4BITMODE or </span>
-<a name="l00436"></a>00436    <span class="comment">// LCD_8BITMODE, LCD_1LINE or LCD_2LINE</span>
-<a name="l00437"></a><a class="code" href="class_l_c_d.html#ae47a0e2eff74431a39774b788d5761f4">00437</a>    uint8_t <a class="code" href="class_l_c_d.html#ae47a0e2eff74431a39774b788d5761f4">_displaycontrol</a>;   <span class="comment">// LCD base control command LCD on/off, blink, cursor</span>
-<a name="l00438"></a>00438    <span class="comment">// all commands are &quot;ored&quot; to its contents.</span>
-<a name="l00439"></a><a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">00439</a>    uint8_t <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>;      <span class="comment">// Text entry mode to the LCD</span>
-<a name="l00440"></a><a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">00440</a>    uint8_t <a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">_numlines</a>;         <span class="comment">// Number of lines of the LCD, initialized with begin()</span>
-<a name="l00441"></a><a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">00441</a>    uint8_t <a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">_cols</a>;             <span class="comment">// Number of columns in the LCD</span>
-<a name="l00442"></a>00442    
-<a name="l00443"></a>00443 <span class="keyword">private</span>:
-<a name="l00444"></a>00444    
-<a name="l00445"></a>00445 };
-<a name="l00446"></a>00446 
-<a name="l00447"></a>00447 <span class="preprocessor">#endif</span>
+<a name="l00300"></a>00300    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#aad2abc99d1aca5403873579d9d72c2d4">moveCursorLeft</a>();
+<a name="l00301"></a>00301 
+<a name="l00302"></a>00302    
+<a name="l00309"></a>00309    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a09eec0c712e54b066f5894635c1fe75c">moveCursorRight</a>();
+<a name="l00310"></a>00310    
+<a name="l00324"></a>00324    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">autoscroll</a>();
+<a name="l00325"></a>00325    
+<a name="l00334"></a>00334    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a96035dde40efbf73390e00b5beb00231">noAutoscroll</a>();
+<a name="l00335"></a>00335    
+<a name="l00352"></a>00352    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a91cba8f93c692abcddf8bc3de58d2d3a">createChar</a>(uint8_t location, uint8_t charmap[]);
+<a name="l00353"></a>00353    
+<a name="l00363"></a>00363    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a48220450fd152b25994eb7d0ba340e8d">setCursor</a>(uint8_t col, uint8_t row);
+<a name="l00364"></a>00364 
+<a name="l00365"></a>00365    
+<a name="l00377"></a>00377    <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(uint8_t value);
+<a name="l00378"></a>00378    
+<a name="l00379"></a>00379    <span class="comment">//</span>
+<a name="l00380"></a>00380    <span class="comment">// virtual class methods</span>
+<a name="l00381"></a>00381    <span class="comment">// --------------------------------------------------------------------------</span>
+<a name="l00393"></a><a class="code" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">00393</a> <span class="comment"></span>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">setBacklight</a> ( uint8_t mode ) { };
+<a name="l00394"></a>00394    
+<a name="l00404"></a><a class="code" href="class_l_c_d.html#a2871297d458e3384538008541192af27">00404</a>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2871297d458e3384538008541192af27">setBacklightPin</a> ( uint8_t pin ) { };
+<a name="l00405"></a>00405    
+<a name="l00417"></a>00417 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
+<a name="l00418"></a>00418 <span class="preprocessor"></span>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">write</a>(uint8_t value);
+<a name="l00419"></a>00419 <span class="preprocessor">#else</span>
+<a name="l00420"></a>00420 <span class="preprocessor"></span>   <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">write</a>(uint8_t value);
+<a name="l00421"></a>00421 <span class="preprocessor">#endif</span>
+<a name="l00422"></a>00422 <span class="preprocessor"></span>   
+<a name="l00423"></a>00423    
+<a name="l00437"></a>00437 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
+<a name="l00438"></a><a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">00438</a> <span class="preprocessor"></span>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(uint8_t value, uint8_t mode) { };
+<a name="l00439"></a>00439 <span class="preprocessor">#else</span>
+<a name="l00440"></a>00440 <span class="preprocessor"></span>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(uint8_t value, uint8_t mode) = 0;
+<a name="l00441"></a>00441 <span class="preprocessor">#endif</span>
+<a name="l00442"></a>00442 <span class="preprocessor"></span>   
+<a name="l00443"></a>00443 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
+<a name="l00444"></a>00444 <span class="preprocessor"></span>   <span class="keyword">using</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">Print::write</a>;
+<a name="l00445"></a>00445 <span class="preprocessor">#else</span>
+<a name="l00446"></a>00446 <span class="preprocessor"></span>   <span class="keyword">using</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">Print::write</a>;
+<a name="l00447"></a>00447 <span class="preprocessor">#endif   </span>
+<a name="l00448"></a>00448 <span class="preprocessor"></span>   
+<a name="l00449"></a>00449 <span class="keyword">protected</span>:
+<a name="l00450"></a>00450    <span class="comment">// Internal LCD variables to control the LCD shared between all derived</span>
+<a name="l00451"></a>00451    <span class="comment">// classes.</span>
+<a name="l00452"></a><a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">00452</a>    uint8_t <a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a>;  <span class="comment">// LCD_5x10DOTS or LCD_5x8DOTS, LCD_4BITMODE or </span>
+<a name="l00453"></a>00453                               <span class="comment">// LCD_8BITMODE, LCD_1LINE or LCD_2LINE</span>
+<a name="l00454"></a><a class="code" href="class_l_c_d.html#ae47a0e2eff74431a39774b788d5761f4">00454</a>    uint8_t <a class="code" href="class_l_c_d.html#ae47a0e2eff74431a39774b788d5761f4">_displaycontrol</a>;   <span class="comment">// LCD base control command LCD on/off, blink, cursor</span>
+<a name="l00455"></a>00455                               <span class="comment">// all commands are &quot;ored&quot; to its contents.</span>
+<a name="l00456"></a><a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">00456</a>    uint8_t <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>;      <span class="comment">// Text entry mode to the LCD</span>
+<a name="l00457"></a><a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">00457</a>    uint8_t <a class="code" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">_numlines</a>;         <span class="comment">// Number of lines of the LCD, initialized with begin()</span>
+<a name="l00458"></a><a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">00458</a>    uint8_t <a class="code" href="class_l_c_d.html#a88b16ea0e5c7d1cabc5007d48bcbd2b0">_cols</a>;             <span class="comment">// Number of columns in the LCD</span>
+<a name="l00459"></a>00459    
+<a name="l00460"></a>00460 <span class="keyword">private</span>:
+<a name="l00461"></a>00461    
+<a name="l00462"></a>00462 };
+<a name="l00463"></a>00463 
+<a name="l00464"></a>00464 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -271,7 +276,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 18 2012 22:11:26 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Feb 28 2012 19:52:02 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

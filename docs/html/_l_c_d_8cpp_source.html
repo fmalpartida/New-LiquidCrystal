@@ -295,72 +295,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00232"></a>00232    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a61f16a2b7550e4700f7898a7587c5594">LCD_CURSORSHIFT</a> | <a class="code" href="_l_c_d_8h.html#ab2f7b67abfac33f610acfd5d7a971f40">LCD_DISPLAYMOVE</a> | <a class="code" href="_l_c_d_8h.html#aafb86adb0dfca1e65d65b2cd1946a009">LCD_MOVELEFT</a>);
 <a name="l00233"></a>00233 }
 <a name="l00234"></a>00234 
-<a name="l00235"></a><a class="code" href="class_l_c_d.html#abfc44b294772f09020bfa32af8a79571">00235</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#abfc44b294772f09020bfa32af8a79571">LCD::scrollDisplayRight</a>(<span class="keywordtype">void</span>) {
-<a name="l00236"></a>00236    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a61f16a2b7550e4700f7898a7587c5594">LCD_CURSORSHIFT</a> | <a class="code" href="_l_c_d_8h.html#ab2f7b67abfac33f610acfd5d7a971f40">LCD_DISPLAYMOVE</a> | <a class="code" href="_l_c_d_8h.html#acf5999180233790bb2c9902efde58f7f">LCD_MOVERIGHT</a>);
-<a name="l00237"></a>00237 }
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239 <span class="comment">// This is for text that flows Left to Right</span>
-<a name="l00240"></a><a class="code" href="class_l_c_d.html#a238e9f6476dc7df64af04eb6c87f6ac7">00240</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a238e9f6476dc7df64af04eb6c87f6ac7">LCD::leftToRight</a>(<span class="keywordtype">void</span>) 
-<a name="l00241"></a>00241 {
-<a name="l00242"></a>00242    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> |= <a class="code" href="_l_c_d_8h.html#ae7c6309fce6200bd7526d090a4a84dd0">LCD_ENTRYLEFT</a>;
-<a name="l00243"></a>00243    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
-<a name="l00244"></a>00244 }
-<a name="l00245"></a>00245 
-<a name="l00246"></a>00246 <span class="comment">// This is for text that flows Right to Left</span>
-<a name="l00247"></a><a class="code" href="class_l_c_d.html#ac014830eadc26bfd86308ea8734f4428">00247</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#ac014830eadc26bfd86308ea8734f4428">LCD::rightToLeft</a>(<span class="keywordtype">void</span>) 
-<a name="l00248"></a>00248 {
-<a name="l00249"></a>00249    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> &amp;= ~<a class="code" href="_l_c_d_8h.html#ae7c6309fce6200bd7526d090a4a84dd0">LCD_ENTRYLEFT</a>;
-<a name="l00250"></a>00250    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
-<a name="l00251"></a>00251 }
-<a name="l00252"></a>00252 
-<a name="l00253"></a>00253 <span class="comment">// This will &#39;right justify&#39; text from the cursor</span>
-<a name="l00254"></a><a class="code" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">00254</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">LCD::autoscroll</a>(<span class="keywordtype">void</span>) 
-<a name="l00255"></a>00255 {
-<a name="l00256"></a>00256    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> |= <a class="code" href="_l_c_d_8h.html#aa2cf1d0f4a319e53c009cffe1184466c">LCD_ENTRYSHIFTINCREMENT</a>;
-<a name="l00257"></a>00257    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
+<a name="l00235"></a><a class="code" href="class_l_c_d.html#abfc44b294772f09020bfa32af8a79571">00235</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#abfc44b294772f09020bfa32af8a79571">LCD::scrollDisplayRight</a>(<span class="keywordtype">void</span>) 
+<a name="l00236"></a>00236 {
+<a name="l00237"></a>00237    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a61f16a2b7550e4700f7898a7587c5594">LCD_CURSORSHIFT</a> | <a class="code" href="_l_c_d_8h.html#ab2f7b67abfac33f610acfd5d7a971f40">LCD_DISPLAYMOVE</a> | <a class="code" href="_l_c_d_8h.html#acf5999180233790bb2c9902efde58f7f">LCD_MOVERIGHT</a>);
+<a name="l00238"></a>00238 }
+<a name="l00239"></a>00239 
+<a name="l00240"></a>00240 <span class="comment">// This is for text that flows Left to Right</span>
+<a name="l00241"></a><a class="code" href="class_l_c_d.html#a238e9f6476dc7df64af04eb6c87f6ac7">00241</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a238e9f6476dc7df64af04eb6c87f6ac7">LCD::leftToRight</a>(<span class="keywordtype">void</span>) 
+<a name="l00242"></a>00242 {
+<a name="l00243"></a>00243    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> |= <a class="code" href="_l_c_d_8h.html#ae7c6309fce6200bd7526d090a4a84dd0">LCD_ENTRYLEFT</a>;
+<a name="l00244"></a>00244    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
+<a name="l00245"></a>00245 }
+<a name="l00246"></a>00246 
+<a name="l00247"></a>00247 <span class="comment">// This is for text that flows Right to Left</span>
+<a name="l00248"></a><a class="code" href="class_l_c_d.html#ac014830eadc26bfd86308ea8734f4428">00248</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#ac014830eadc26bfd86308ea8734f4428">LCD::rightToLeft</a>(<span class="keywordtype">void</span>) 
+<a name="l00249"></a>00249 {
+<a name="l00250"></a>00250    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> &amp;= ~<a class="code" href="_l_c_d_8h.html#ae7c6309fce6200bd7526d090a4a84dd0">LCD_ENTRYLEFT</a>;
+<a name="l00251"></a>00251    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
+<a name="l00252"></a>00252 }
+<a name="l00253"></a>00253 
+<a name="l00254"></a>00254 <span class="comment">// This method moves the cursor one space to the right</span>
+<a name="l00255"></a><a class="code" href="class_l_c_d.html#a09eec0c712e54b066f5894635c1fe75c">00255</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a09eec0c712e54b066f5894635c1fe75c">LCD::moveCursorRight</a>(<span class="keywordtype">void</span>)
+<a name="l00256"></a>00256 {
+<a name="l00257"></a>00257    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a61f16a2b7550e4700f7898a7587c5594">LCD_CURSORSHIFT</a> | <a class="code" href="_l_c_d_8h.html#ac21f0302ac4136775877d5f4759e4f74">LCD_CURSORMOVE</a> | <a class="code" href="_l_c_d_8h.html#acf5999180233790bb2c9902efde58f7f">LCD_MOVERIGHT</a>);
 <a name="l00258"></a>00258 }
 <a name="l00259"></a>00259 
-<a name="l00260"></a>00260 <span class="comment">// This will &#39;left justify&#39; text from the cursor</span>
-<a name="l00261"></a><a class="code" href="class_l_c_d.html#a96035dde40efbf73390e00b5beb00231">00261</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a96035dde40efbf73390e00b5beb00231">LCD::noAutoscroll</a>(<span class="keywordtype">void</span>) 
+<a name="l00260"></a>00260 <span class="comment">// This method moves the cursor one space to the left</span>
+<a name="l00261"></a><a class="code" href="class_l_c_d.html#aad2abc99d1aca5403873579d9d72c2d4">00261</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#aad2abc99d1aca5403873579d9d72c2d4">LCD::moveCursorLeft</a>(<span class="keywordtype">void</span>)
 <a name="l00262"></a>00262 {
-<a name="l00263"></a>00263    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> &amp;= ~<a class="code" href="_l_c_d_8h.html#aa2cf1d0f4a319e53c009cffe1184466c">LCD_ENTRYSHIFTINCREMENT</a>;
-<a name="l00264"></a>00264    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
-<a name="l00265"></a>00265 }
+<a name="l00263"></a>00263    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a61f16a2b7550e4700f7898a7587c5594">LCD_CURSORSHIFT</a> | <a class="code" href="_l_c_d_8h.html#ac21f0302ac4136775877d5f4759e4f74">LCD_CURSORMOVE</a> | <a class="code" href="_l_c_d_8h.html#aafb86adb0dfca1e65d65b2cd1946a009">LCD_MOVELEFT</a>);
+<a name="l00264"></a>00264 }
+<a name="l00265"></a>00265 
 <a name="l00266"></a>00266 
-<a name="l00267"></a>00267 <span class="comment">// Write to CGRAM of new characters</span>
-<a name="l00268"></a><a class="code" href="class_l_c_d.html#a91cba8f93c692abcddf8bc3de58d2d3a">00268</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a91cba8f93c692abcddf8bc3de58d2d3a">LCD::createChar</a>(uint8_t location, uint8_t charmap[]) 
+<a name="l00267"></a>00267 <span class="comment">// This will &#39;right justify&#39; text from the cursor</span>
+<a name="l00268"></a><a class="code" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">00268</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">LCD::autoscroll</a>(<span class="keywordtype">void</span>) 
 <a name="l00269"></a>00269 {
-<a name="l00270"></a>00270    location &amp;= 0x7;            <span class="comment">// we only have 8 locations 0-7</span>
-<a name="l00271"></a>00271    
-<a name="l00272"></a>00272    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aae6ea856879c11dee58493184582a52f">LCD_SETCGRAMADDR</a> | (location &lt;&lt; 3));
-<a name="l00273"></a>00273    delayMicroseconds(30);
-<a name="l00274"></a>00274    
-<a name="l00275"></a>00275    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;8; i++) 
-<a name="l00276"></a>00276    {
-<a name="l00277"></a>00277       <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">write</a>(charmap[i]);      <span class="comment">// call the virtual write method</span>
-<a name="l00278"></a>00278       delayMicroseconds(30);
-<a name="l00279"></a>00279    }
-<a name="l00280"></a>00280 }
-<a name="l00281"></a>00281 
-<a name="l00282"></a>00282 <span class="comment">// General LCD commands - generic methods used by the rest of the commands</span>
-<a name="l00283"></a>00283 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00284"></a><a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">00284</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">LCD::command</a>(uint8_t value) 
-<a name="l00285"></a>00285 {
-<a name="l00286"></a>00286    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#ab0d87e07831e7e4943caef187872123e">COMMAND</a>);
-<a name="l00287"></a>00287 }
-<a name="l00288"></a>00288 
-<a name="l00289"></a>00289 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
-<a name="l00290"></a><a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">00290</a> <span class="preprocessor"></span><span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">LCD::write</a>(uint8_t value)
-<a name="l00291"></a>00291 {
-<a name="l00292"></a>00292    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>);
-<a name="l00293"></a>00293 }
-<a name="l00294"></a>00294 <span class="preprocessor">#else</span>
-<a name="l00295"></a>00295 <span class="preprocessor"></span><span class="keywordtype">size_t</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">LCD::write</a>(uint8_t value) 
-<a name="l00296"></a>00296 {
-<a name="l00297"></a>00297    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>);
-<a name="l00298"></a>00298    <span class="keywordflow">return</span> 1;             <span class="comment">// assume OK</span>
-<a name="l00299"></a>00299 }
-<a name="l00300"></a>00300 <span class="preprocessor">#endif</span>
+<a name="l00270"></a>00270    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> |= <a class="code" href="_l_c_d_8h.html#aa2cf1d0f4a319e53c009cffe1184466c">LCD_ENTRYSHIFTINCREMENT</a>;
+<a name="l00271"></a>00271    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
+<a name="l00272"></a>00272 }
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274 <span class="comment">// This will &#39;left justify&#39; text from the cursor</span>
+<a name="l00275"></a><a class="code" href="class_l_c_d.html#a96035dde40efbf73390e00b5beb00231">00275</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a96035dde40efbf73390e00b5beb00231">LCD::noAutoscroll</a>(<span class="keywordtype">void</span>) 
+<a name="l00276"></a>00276 {
+<a name="l00277"></a>00277    <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a> &amp;= ~<a class="code" href="_l_c_d_8h.html#aa2cf1d0f4a319e53c009cffe1184466c">LCD_ENTRYSHIFTINCREMENT</a>;
+<a name="l00278"></a>00278    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a5597e1d5819ea2f0734ad4313abf6703">LCD_ENTRYMODESET</a> | <a class="code" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a>);
+<a name="l00279"></a>00279 }
+<a name="l00280"></a>00280 
+<a name="l00281"></a>00281 <span class="comment">// Write to CGRAM of new characters</span>
+<a name="l00282"></a><a class="code" href="class_l_c_d.html#a91cba8f93c692abcddf8bc3de58d2d3a">00282</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a91cba8f93c692abcddf8bc3de58d2d3a">LCD::createChar</a>(uint8_t location, uint8_t charmap[]) 
+<a name="l00283"></a>00283 {
+<a name="l00284"></a>00284    location &amp;= 0x7;            <span class="comment">// we only have 8 locations 0-7</span>
+<a name="l00285"></a>00285    
+<a name="l00286"></a>00286    <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#aae6ea856879c11dee58493184582a52f">LCD_SETCGRAMADDR</a> | (location &lt;&lt; 3));
+<a name="l00287"></a>00287    delayMicroseconds(30);
+<a name="l00288"></a>00288    
+<a name="l00289"></a>00289    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;8; i++) 
+<a name="l00290"></a>00290    {
+<a name="l00291"></a>00291       <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">write</a>(charmap[i]);      <span class="comment">// call the virtual write method</span>
+<a name="l00292"></a>00292       delayMicroseconds(40);
+<a name="l00293"></a>00293    }
+<a name="l00294"></a>00294 }
+<a name="l00295"></a>00295 
+<a name="l00296"></a>00296 <span class="comment">// General LCD commands - generic methods used by the rest of the commands</span>
+<a name="l00297"></a>00297 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00298"></a><a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">00298</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">LCD::command</a>(uint8_t value) 
+<a name="l00299"></a>00299 {
+<a name="l00300"></a>00300    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#ab0d87e07831e7e4943caef187872123e">COMMAND</a>);
+<a name="l00301"></a>00301 }
+<a name="l00302"></a>00302 
+<a name="l00303"></a>00303 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
+<a name="l00304"></a><a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">00304</a> <span class="preprocessor"></span><span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">LCD::write</a>(uint8_t value)
+<a name="l00305"></a>00305 {
+<a name="l00306"></a>00306    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>);
+<a name="l00307"></a>00307 }
+<a name="l00308"></a>00308 <span class="preprocessor">#else</span>
+<a name="l00309"></a>00309 <span class="preprocessor"></span><span class="keywordtype">size_t</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">LCD::write</a>(uint8_t value) 
+<a name="l00310"></a>00310 {
+<a name="l00311"></a>00311    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>);
+<a name="l00312"></a>00312    <span class="keywordflow">return</span> 1;             <span class="comment">// assume OK</span>
+<a name="l00313"></a>00313 }
+<a name="l00314"></a>00314 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -377,7 +391,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 18 2012 22:11:26 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Feb 28 2012 19:52:02 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
