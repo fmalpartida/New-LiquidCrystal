@@ -38,7 +38,6 @@
 
 #include <pins_arduino.h> // pleasing sanguino core
 #include <inttypes.h>
-#include <util/delay.h>
 
 
 /*!
@@ -50,6 +49,8 @@
 #define FIO_FALLBACK
 #define ATOMIC_BLOCK
 #define ATOMIC_RESTORESTATE
+#else
+#include <util/atomic.h> // for critical section management
 #endif
 
 // PUBLIC CONSTANTS DEFINITIONS
