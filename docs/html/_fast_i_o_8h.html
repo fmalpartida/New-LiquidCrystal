@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoGoogle.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.0</span></div>
+   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.1</span></div>
    <div id="projectbrief">LCD Library - LCD control class hierarchy library. Drop in replacement for the LiquidCrystal Library.</div>
   </td>
  </tr>
@@ -75,6 +75,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fast_i_o_8h.html#ad2374bbbb11bdb9abeeec0db769afd30">ATOMIC_BLOCK</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fast_i_o_8h.html#a362c18b15a09703e42e1c246c47420ef">ATOMIC_RESTORESTATE</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fast_i_o_8h.html#a89e1c62276052100c62b6c82a2e95622">fio_digitalWrite_HIGH</a>(reg, bit)&#160;&#160;&#160;digitalWrite(bit,HIGH)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fast_i_o_8h.html#ac8f00a1bccb98109531b88fbb6e91478">fio_digitalWrite_LOW</a>(reg, bit)&#160;&#160;&#160;digitalWrite(bit,LOW)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fast_i_o_8h.html#a6d1dffed7f0c8f28f6c88146315f7832">fio_digitalWrite_SWITCH</a>(reg, bit)&#160;&#160;&#160;digitalWrite(bit, !digitalRead(bit))</td></tr>
@@ -100,6 +102,36 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fast_i_o_8h.html#ae4b2e099f8ade9ee674d1565669e870a">fio_shiftOut1_init</a> (uint8_t pin)</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="ad2374bbbb11bdb9abeeec0db769afd30"></a><!-- doxytag: member="FastIO.h::ATOMIC_BLOCK" ref="ad2374bbbb11bdb9abeeec0db769afd30" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ATOMIC_BLOCK</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00055">55</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a362c18b15a09703e42e1c246c47420ef"></a><!-- doxytag: member="FastIO.h::ATOMIC_RESTORESTATE" ref="a362c18b15a09703e42e1c246c47420ef" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ATOMIC_RESTORESTATE</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00056">56</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a89e1c62276052100c62b6c82a2e95622"></a><!-- doxytag: member="FastIO.h::fio_digitalWrite_HIGH" ref="a89e1c62276052100c62b6c82a2e95622" args="(reg, bit)" -->
 <div class="memitem">
 <div class="memproto">
@@ -126,7 +158,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 <p>This is where the magic happens that makes things fast. Implemented as preprocessor directives to force inlining SWITCH is fast for FIO but probably slow for FIO_FALLBACK so SWITCHTO is recommended if the value is known. </p>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00126">126</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00138">138</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
 
 </div>
 </div>
@@ -155,7 +187,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00127">127</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00139">139</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
 
 </div>
 </div>
@@ -184,7 +216,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00128">128</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00140">140</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +251,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00129">129</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00141">141</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
 
 </div>
 </div>
@@ -235,7 +267,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 <p>Enables IO digitalRead/digitalWrite fall back for non-AVR architectures. </p>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00049">49</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00054">54</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
 
 </div>
 </div>
@@ -251,7 +283,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 <p>Skip setting IO outputs during IO configuration or when getting the output register associated to an IO pin.k </p>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00059">59</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00066">66</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
 
 </div>
 </div>
@@ -267,7 +299,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00063">63</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00070">70</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
 
 </div>
 </div>
@@ -282,7 +314,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00070">70</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8h_source.html#l00082">82</a> of file <a class="el" href="_fast_i_o_8h_source.html">FastIO.h</a>.</p>
 
 </div>
 </div>
@@ -321,7 +353,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Value read from pin </dd></dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00087">87</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00089">89</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -365,7 +397,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00071">71</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00070">70</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -392,7 +424,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Bit </dd></dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00061">61</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00060">60</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -419,7 +451,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Register </dd></dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00049">49</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00048">48</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -456,7 +488,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Register </dd></dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00033">33</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00032">32</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -507,7 +539,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00126">126</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00129">129</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -571,7 +603,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00100">100</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00102">102</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -621,7 +653,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00149">149</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00156">156</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -664,7 +696,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00214">214</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00229">229</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -701,7 +733,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00142">142</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00149">149</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -727,7 +759,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00137">137</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_fast_i_o_8cpp_source.html#l00144">144</a> of file <a class="el" href="_fast_i_o_8cpp_source.html">FastIO.cpp</a>.</p>
 
 </div>
 </div>
@@ -746,7 +778,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Feb 28 2012 19:52:02 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:17:07 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
