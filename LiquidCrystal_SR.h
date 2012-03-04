@@ -116,16 +116,6 @@ public:
     */
    virtual void send(uint8_t value, uint8_t mode);
    
-   /*!
-    @function
-    @abstract   Switch-on/off the LCD backlight.
-    @discussion Switch-on/off the LCD backlight.
-    The setBacklightPin has to be called before setting the backlight for
-    this method to work. @see setBacklightPin.
-    
-    @param      mode: backlight mode (HIGH|LOW)
-    */
-   void setBacklight ( uint8_t mode );
    
    /*!
     @function
@@ -136,7 +126,16 @@ public:
     */
    void setBacklightPin ( uint8_t pin );
    
-   
+   /*!
+    @function
+    @abstract   Switch-on/off the LCD backlight.
+    @discussion Switch-on/off the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin.
+    
+    @param      mode: backlight mode (HIGH|LOW)
+    */
+   void setBacklight ( uint8_t mode );
    
 private:
    
@@ -153,17 +152,17 @@ private:
     * @abstract takes care of shifting and the enable pulse
     */
    void shiftIt (uint8_t val);
-
+   
    uint8_t _enable_pin;  // Enable Pin
    uint8_t _two_wire;    // two wire mode
-
+   
    fio_register _srDataRegister; // Serial Data pin
    fio_bit _srDataBit;
    fio_register _srClockRegister; // Clock Pin
    fio_bit _srClockBit;
    fio_register _srEnableRegister; // Enable Pin
    fio_bit _srEnableBit;
-
+   
 };
 
 #endif

@@ -61,11 +61,11 @@ private:
     */
    void write4bits ( uint8_t );
    void _pushOut ( uint8_t );
-
+   
    // Serial Data pin
    fio_bit _srdata_bit;
    fio_register _srdata_register;
-
+   
    // Clock Pin
    fio_bit _srclock_bit;
    fio_register _srclock_register;
