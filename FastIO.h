@@ -40,6 +40,7 @@
 #include <inttypes.h>
 #include <util/delay.h>
 
+
 /*!
  @defined 
  @abstract   Enables IO digitalRead/digitalWrite fall back for non-AVR
@@ -47,6 +48,8 @@
  */
 #ifndef __AVR__
 #define FIO_FALLBACK
+#define ATOMIC_BLOCK
+#define ATOMIC_RESTORESTATE
 #endif
 
 // PUBLIC CONSTANTS DEFINITIONS
@@ -64,7 +67,7 @@ typedef uint8_t fio_bit;
 
 
 #ifndef FIO_FALLBACK
-typedef volatile uint8_t * fio_register;
+typedef volatile uint8_t *fio_register;
 #else
 // remove volatile to give optimizer a chance
 typedef uint8_t fio_register;

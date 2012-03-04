@@ -27,7 +27,7 @@
 // (https://github.com/chipKIT32/chipKIT32-MAX/blob/master/hardware/pic32/
 //   cores/pic32/wiring_digital.c)
 // ---------------------------------------------------------------------------
-
+#include <util/atomic.h> // for critical section management
 #include "FastIO.h"
 
 fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state)
@@ -73,14 +73,17 @@ void fio_digitalWrite(fio_register pinRegister, uint8_t pinBit, uint8_t value)
 #ifdef FIO_FALLBACK
 	digitalWrite(pinBit, value);
 #else
-	if(value == LOW)
+   ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
    {
-		fio_digitalWrite_LOW(pinRegister,pinBit);
-	}
-   else
-   {
-		fio_digitalWrite_HIGH(pinRegister,pinBit);
-	}
+      if(value == LOW)
+      {
+         fio_digitalWrite_LOW(pinRegister,pinBit);
+      }
+      else
+      {
+         fio_digitalWrite_HIGH(pinRegister,pinBit);
+      }
+   }
 #endif
 }
 
@@ -97,42 +100,47 @@ int fio_digitalRead(fio_register pinRegister, uint8_t pinBit)
 #endif
 }
 
-void fio_shiftOut ( fio_register dataRegister, fio_bit dataBit, fio_register clockRegister, 
-                    fio_bit clockBit, uint8_t value, uint8_t bitOrder)
+void fio_shiftOut ( fio_register dataRegister, fio_bit dataBit, 
+                    fio_register clockRegister, fio_bit clockBit, 
+                    uint8_t value, uint8_t bitOrder)
 {
 	// # disable interrupts
-	// uint8_t oldSREG = SREG;
-	// cli();
 	int8_t i;
 
-	for(i = 0; i < 8; i++)
+   ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
    {
-		if (bitOrder == LSBFIRST)
+      for(i = 0; i < 8; i++)
       {
-			fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << i)));
-		}
-      else
-      {
-			fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << (7 - i))));
-		}
-		fio_digitalWrite_HIGH (clockRegister, clockBit);
-		// Switching is a little bit faster
-		fio_digitalWrite_SWITCH (clockRegister,clockBit);
-	}
-	// # enable interrupts
-	// SREG = oldSREG;
+         if (bitOrder == LSBFIRST)
+         {
+            fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << i)));
+         }
+         else
+         {
+            fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << (7 - i))));
+         }
+         fio_digitalWrite_HIGH (clockRegister, clockBit);
+         
+         // Switching is a little bit faster
+         fio_digitalWrite_SWITCH (clockRegister,clockBit);
+      }
+   } // end critical section
 }
 
-void fio_shiftOut(fio_register dataRegister, uint8_t dataBit, fio_register clockRegister, uint8_t clockBit)
+void fio_shiftOut(fio_register dataRegister, uint8_t dataBit, 
+                  fio_register clockRegister, uint8_t clockBit)
 {
-	// shift out 0x0 (B00000000) fast, byte order is irrelevant
-	fio_digitalWrite_LOW (dataRegister, dataBit);
-
-	for(uint8_t i = 0; i<8; ++i)
+   ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
    {
-		fio_digitalWrite_HIGH (clockRegister, clockBit);
-		fio_digitalWrite_SWITCH (clockRegister, clockBit);
-	}
+      // shift out 0x0 (B00000000) fast, byte order is irrelevant
+      fio_digitalWrite_LOW (dataRegister, dataBit);
+
+      for(uint8_t i = 0; i<8; ++i)
+      {
+         fio_digitalWrite_HIGH (clockRegister, clockBit);
+         fio_digitalWrite_SWITCH (clockRegister, clockBit);
+      }
+   }
 }
 void fio_shiftOut1_init(uint8_t pin)
 {
@@ -146,10 +154,12 @@ void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit)
 	fio_digitalWrite(shift1Register,shift1Bit,HIGH);
 	delayMicroseconds(300);
 }
-void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, boolean noLatch)
+void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, 
+                   boolean noLatch)
 {
 	/*
-	 * this function are based on Shif1 protocol developed by Roman Black (http://www.romanblack.com/shift1.htm)
+	 * this function are based on Shif1 protocol developed by Roman Black 
+    *    (http://www.romanblack.com/shift1.htm)
 	 *
 	 * test sketches:
 	 * 	http://pastebin.com/raw.php?i=2hnC9v2Z
@@ -161,34 +171,37 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
     *                   arduino-one-wire-shift-register-prototype)
 	 * 	7HC595N
 	 */
-	// disable interrupts since timing is going to be critical
-	uint8_t oldSREG;
-	oldSREG = SREG;
-	cli();
 
 	// iterate but ignore last bit (is it correct now?)
 	for(int8_t i = 7; i>=0; --i)
    {
 
-		// assume that pin is HIGH (smokin' pot all day... :) - requires initialization
-		if(LOW==!!(value & (1 << i)))
+		// assume that pin is HIGH (smokin' pot all day... :) - requires 
+      // initialization
+		if(value & _BV(i))
       {
-			// LOW = 0 Bit
-			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
-			// hold pin LOW for 15us
-			delayMicroseconds(15);
-			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
-			// hold pin HIGH for 30us
-			delayMicroseconds(30);
+         ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+         {
+            // HIGH = 1 Bit
+            fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+            //hold pin LOW for 1us - done! :)
+            fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
+            //hold pin HIGH for 15us
+         } // end critical section
+         delayMicroseconds(15);
 		}
       else
       {
-			// HIGH = 1 Bit
-			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
-			//hold pin LOW for 1us - done! :)
-			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
-			//hold pin HIGH for 15us
-			delayMicroseconds(15);
+         ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+         {
+            // LOW = 0 Bit
+            fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+            // hold pin LOW for 15us
+            delayMicroseconds(15);
+            fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
+         } // end critical section
+         // hold pin HIGH for 30us
+         delayMicroseconds(30);         
 		}
 		if(!noLatch && i==1)
       {
@@ -198,19 +211,22 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
    
 	if(!noLatch)
    {
-		// send last bit (=LOW) and Latch command
-		fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
-		// Hold pin low for 200us
-		delayMicroseconds(199);
-		fio_digitalWrite_HIGH(shift1Register,shift1Bit);
-		// Hold pin high for 300us and leave it that way - using explicit HIGH here, just in case.
-		delayMicroseconds(299);
+      ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+      {
+         // send last bit (=LOW) and Latch command
+         fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+      } // end critical section
+      delayMicroseconds(199); 		// Hold pin low for 200us
+
+      ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+      {
+         fio_digitalWrite_HIGH(shift1Register,shift1Bit);
+      } // end critical section
+		delayMicroseconds(299);   // Hold pin high for 300us and leave it that 
+                                // way - using explicit HIGH here, just in case.
 	}
-
-	// enable interrupts
-	SREG = oldSREG;
-
 }
+
 void fio_shiftOut1(uint8_t pin, uint8_t value, boolean noLatch)
 {
 	fio_shiftOut1(fio_pinToOutputRegister(pin, SKIP),fio_pinToBit(pin),value, noLatch);

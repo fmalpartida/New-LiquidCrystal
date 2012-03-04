@@ -105,21 +105,21 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
 }
 
 //
-// setBackligh
-void LiquidCrystal::setBacklight ( uint8_t mode )
-{
-   if ( _backlightPin != LCD_NOBACKLIGHT )
-   {
-      digitalWrite ( _backlightPin, mode );
-   }
-}
-
-//
 // setBacklightPin
 void LiquidCrystal::setBacklightPin ( uint8_t pin )
 {
    pinMode ( pin, OUTPUT ); // Difine the backlight pin as output
    _backlightPin = pin;
+}
+
+//
+// setBackligh
+void LiquidCrystal::setBacklight ( uint8_t value )
+{
+   if ( _backlightPin != LCD_NOBACKLIGHT )
+   {
+      analogWrite ( _backlightPin, value );
+   }
 }
 
 // PRIVATE METHODS
