@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoGoogle.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.0</span></div>
+   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.1</span></div>
    <div id="projectbrief">LCD Library - LCD control class hierarchy library. Drop in replacement for the LiquidCrystal Library.</div>
   </td>
  </tr>
@@ -123,10 +123,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00128"></a>00128    
 <a name="l00141"></a>00141    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___i2_c.html#a8bf1fab7efe13e8b17b96c42d1f810b4">send</a>(uint8_t value, uint8_t mode);
 <a name="l00142"></a>00142    
-<a name="l00152"></a>00152    <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___i2_c.html#a2f248fc841812e850f29114667f41440">setBacklight</a> ( uint8_t mode );
-<a name="l00153"></a>00153    
-<a name="l00161"></a>00161    <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___i2_c.html#a715027a10c1141fe5442fe58cb3a405a">setBacklightPin</a> ( uint8_t pin );
-<a name="l00162"></a>00162    
+<a name="l00151"></a>00151    <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___i2_c.html#a3d5fd117e30ea5ceb63e976d04f6a09b">setBacklightPin</a> ( uint8_t value );
+<a name="l00152"></a>00152    
+<a name="l00162"></a>00162    <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___i2_c.html#a2f248fc841812e850f29114667f41440">setBacklight</a> ( uint8_t mode );
 <a name="l00163"></a>00163    
 <a name="l00164"></a>00164 <span class="keyword">private</span>:
 <a name="l00165"></a>00165    
@@ -138,8 +137,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00190"></a>00190    
 <a name="l00191"></a>00191    
 <a name="l00192"></a>00192    uint8_t _Addr;             <span class="comment">// I2C Address of the IO expander</span>
-<a name="l00193"></a>00193    uint8_t _backlightPin;     <span class="comment">// Backlight IO pin</span>
-<a name="l00194"></a>00194    uint8_t _backlightMask;    <span class="comment">// Backlight status mask</span>
+<a name="l00193"></a>00193    uint8_t _backlightPinMask; <span class="comment">// Backlight IO pin mask</span>
+<a name="l00194"></a>00194    uint8_t _backlightStsMask; <span class="comment">// Backlight status mask</span>
 <a name="l00195"></a>00195    <a class="code" href="class_i2_c_i_o.html">I2CIO</a>   _i2cio;            <span class="comment">// I2CIO PCF8574* expansion module driver I2CLCDextraIO</span>
 <a name="l00196"></a>00196    uint8_t _En;               <span class="comment">// LCD expander word for enable pin</span>
 <a name="l00197"></a>00197    uint8_t _Rw;               <span class="comment">// LCD expander word for R/W pin</span>
@@ -165,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Feb 28 2012 19:52:02 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:17:06 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
