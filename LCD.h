@@ -26,6 +26,9 @@
 // it has been extended to drive 4 and 8 bit mode control, LCDs and I2C extension
 // backpacks such as the I2CLCDextraIO using the PCF8574* I2C IO Expander ASIC.
 //
+// The functionality provided by this class and its base class is identical
+// to the original functionality of the Arduino LiquidCrystal library.
+//
 // @version API 1.1.0
 //
 //
@@ -156,9 +159,9 @@ public:
     initializes the LCD, therefore, it MUST be called prior to using any other
     method from this class.
     
-    This method is pure abstract, it is dependent on each derived class from
-    this base class to implement the internals of how the LCD is initialized
-    and configured.
+    This method is abstract, a base implementation is available common to all LCD
+    drivers. Should it not be compatible with some other LCD driver, a derived
+    implementation should be done on the driver specif class.
     
     @param      cols[in] the number of columns that the display has
     @param      rows[in] the number of rows that the display has
@@ -381,19 +384,6 @@ public:
    // --------------------------------------------------------------------------
    /*!
     @function
-    @abstract   Switch-on/off the LCD backlight.
-    @discussion Switch-on/off the LCD backlight.
-    The setBacklightPin has to be called before setting the backlight for
-    this method to work. @see setBacklightPin. This method is device dependent
-    and can be programmed on each subclass. An empty function call is provided
-    that does nothing.
-    
-    @param      mode: backlight mode (HIGH|LOW)
-    */
-   virtual void setBacklight ( uint8_t mode ) { };
-   
-   /*!
-    @function
     @abstract   Sets the pin to control the backlight.
     @discussion Sets the pin in the device to control the backlight.
     This method is device dependent and can be programmed on each subclass. An 
@@ -401,7 +391,42 @@ public:
     
     @param      mode: backlight mode (HIGH|LOW)
     */
-   virtual void setBacklightPin ( uint8_t pin ) { };
+   virtual void setBacklightPin ( uint8_t value ) { };
+   
+   /*!
+    @function
+    @abstract   Sets the pin to control the backlight.
+    @discussion Sets the pin in the device to control the backlight. The behaviour
+    of this method is very dependent on the device. Some controllers support
+    dimming some don't. Please read the actual header file for each individual
+    device. The setBacklightPin method has to be called before setting the backlight.
+    @see setBacklightPin.
+    
+    NOTE: The prefered methods to control the backlight are "backlight" and
+    "noBacklight".
+    
+    @param      0..255 - the value is very dependent on the LCD, however, 0
+    will be interpreted as off.
+    */
+   virtual void setBacklight ( uint8_t value ) { };
+   
+   /*!
+    @function
+    @abstract   Switch-on the LCD backlight.
+    @discussion Switch-on the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin. 
+   */
+   void backlight ( void );
+
+   /*!
+    @function
+    @abstract   Switch-off the LCD backlight.
+    @discussion Switch-off the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin. 
+    */   
+   void noBacklight ( void );
    
    /*!
     @function

@@ -50,8 +50,8 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
 {
    _Addr = lcd_Addr;
    
-   _backlightPin  = 0x0;
-   _backlightMask = LCD_NOBACKLIGHT;
+   _backlightPinMask = 0x0;
+   _backlightStsMask = LCD_NOBACKLIGHT;
    
    _En = EN;
    _Rw = RW;
@@ -69,8 +69,8 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
 {
    _Addr = lcd_Addr;
    
-   _backlightPin  = 0;
-   _backlightMask = LCD_NOBACKLIGHT;
+   _backlightPinMask = 0;
+   _backlightStsMask = LCD_NOBACKLIGHT;
    
    _En = ( 1 << En );
    _Rw = ( 1 << Rw );
@@ -89,8 +89,8 @@ LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
 {
    _Addr = lcd_Addr;
    
-   _backlightPin  = 0;
-   _backlightMask = LCD_NOBACKLIGHT;
+   _backlightPinMask = 0;
+   _backlightStsMask = LCD_NOBACKLIGHT;
 
    _En = ( 1 << En );
    _Rw = ( 1 << Rw );
@@ -118,30 +118,31 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 
 // User commands - users can expand this section
 //----------------------------------------------------------------------------
-
 // Turn the (optional) backlight off/on
-//
-// setBacklight
-void LiquidCrystal_I2C::setBacklight( uint8_t mode ) 
-{
-   if ( mode == HIGH )
-   {
-      _backlightMask = _backlightPin & LCD_BACKLIGHT;
-      
-   }
-   else 
-   {
-      _backlightMask = _backlightPin & LCD_NOBACKLIGHT;
-   }
-   _i2cio.write( _backlightMask );
-}
 
 //
 // setBacklightPin
 void LiquidCrystal_I2C::setBacklightPin ( uint8_t pin )
 {
-   _backlightPin = ( 1 << pin );
+   _backlightPinMask = ( 1 << pin );
 }
+
+//
+// setBacklight
+void LiquidCrystal_I2C::setBacklight( uint8_t value ) 
+{
+   if ( value > 0 )
+   {
+      _backlightStsMask = _backlightPinMask & LCD_BACKLIGHT;
+      
+   }
+   else 
+   {
+      _backlightStsMask = _backlightPinMask & LCD_NOBACKLIGHT;
+   }
+   _i2cio.write( _backlightStsMask );
+}
+
 
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
@@ -203,7 +204,7 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
       mode = _Rs;
    }
    
-   pinMapValue |= mode | _backlightMask;
+   pinMapValue |= mode | _backlightStsMask;
    _i2cio.write ( pinMapValue );
    pulseEnable ( pinMapValue );
 }

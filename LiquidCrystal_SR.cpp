@@ -75,6 +75,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
+#include <util/atomic.h> // for critical section management
 
 #if (ARDUINO <  100)
 #include <WProgram.h>
@@ -89,8 +90,8 @@
 // CONSTRUCTORS
 // ---------------------------------------------------------------------------
 // Assuming 1 line 8 pixel high font
-LiquidCrystal_SR::LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, 
-                                     uint8_t enable ) 
+LiquidCrystal_SR::LiquidCrystal_SR (uint8_t srdata, uint8_t srclock, 
+                                    uint8_t enable ) 
 {
 	init ( srdata, srclock, enable, 1, 0 );
 }
@@ -101,16 +102,17 @@ LiquidCrystal_SR::LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock,
 
 //
 // init
-void LiquidCrystal_SR::init(uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, uint8_t font)
+void LiquidCrystal_SR::init(uint8_t srdata, uint8_t srclock, uint8_t enable, 
+                            uint8_t lines, uint8_t font)
 {
    // Initialise private variables
    _two_wire = 0;
-
+   
    _srDataRegister = fio_pinToOutputRegister(srdata);
    _srDataBit = fio_pinToBit(srdata);
    _srClockRegister = fio_pinToOutputRegister(srclock);
    _srClockBit = fio_pinToBit(srclock);
-
+   
    if (enable == TWO_WIRE)
    {
       _two_wire = 1;
@@ -122,13 +124,14 @@ void LiquidCrystal_SR::init(uint8_t srdata, uint8_t srclock, uint8_t enable, uin
       _srEnableRegister = fio_pinToOutputRegister(enable);
       _srEnableBit = fio_pinToBit(enable);
    }
-
+   
    // Configure control pins as outputs
    // ------------------------------------------------------------------------
-
+   
    _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x10DOTS;
 }
 
+//
 // shiftIt
 void LiquidCrystal_SR::shiftIt(uint8_t val)
 {
@@ -138,7 +141,7 @@ void LiquidCrystal_SR::shiftIt(uint8_t val)
       fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit);
    }
    fio_shiftOut(_srDataRegister, _srDataBit, _srClockRegister, _srClockBit, val, MSBFIRST);
-
+   
    // LCD ENABLE PULSE
    //
    // While this library is written with a shift register without an output
@@ -146,9 +149,12 @@ void LiquidCrystal_SR::shiftIt(uint8_t val)
    // latch. The shiftregister latch pin (STR, RCL or similar) is then
    // connected to the LCD enable pin. The LCD is (very likely) slower
    // to read the Enable pulse, and then reads the new contents of the SR.
-   fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
-   waitUsec (1);         // enable pulse must be >450ns               
-   fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit, LOW);
+   ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+   {
+      fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
+      waitUsec (1);         // enable pulse must be >450ns               
+      fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit, LOW);
+   } // end critical section
    waitUsec ( 37 );      // commands need > 37us to settle
 }
 
@@ -157,7 +163,7 @@ void LiquidCrystal_SR::shiftIt(uint8_t val)
 
 
 /************ low level data pushing commands **********/
-
+//
 // send
 void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
 {
@@ -169,10 +175,12 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
 }
 
 //
+// setBacklightPin
+void LiquidCrystal_SR::setBacklightPin ( uint8_t pin )
+{ }
+
+//
 // setBacklight
 void LiquidCrystal_SR::setBacklight ( uint8_t mode ) 
 { }
 
-
-void LiquidCrystal_SR::setBacklightPin ( uint8_t pin )
-{ }

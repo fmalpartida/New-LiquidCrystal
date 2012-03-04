@@ -20,8 +20,6 @@
 // on the Hitachi HD44780 and compatible chipsets using the parallel port of
 // the LCD (4 bit and 8 bit).
 //
-// The functionality provided by this class and its base class is identical
-// to the original functionality of the Arduino LiquidCrystal library.
 //
 //
 // @author F. Malpartida - fmalpartida@gmail.com
@@ -86,24 +84,29 @@ public:
    
    /*!
     @function
-    @abstract   Switch-on/off the LCD backlight.
-    @discussion Switch-on/off the LCD backlight.
-    The setBacklightPin has to be called before setting the backlight for
-    this method to work. @see setBacklightPin.
-    
-    @param      mode: backlight mode (HIGH|LOW)
-    */
-   void setBacklight ( uint8_t mode );
-   
-   /*!
-    @function
     @abstract   Sets the pin to control the backlight.
     @discussion Sets the pin in the device to control the backlight.
     
-    @param      mode: backlight mode (HIGH|LOW)
+    @param      pin: pin assigned to the backlight
     */
    void setBacklightPin ( uint8_t pin );
-   
+      
+   /*!
+    @function
+    @abstract   Switch-on/off the LCD backlight.
+    @discussion Switch-on/off the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin. For dimming control of the
+    backlight, the configuration pin must be a PWM output pin. Dim control
+    is achieved by passing a value from 1 to 255 as a parameter. If the
+    pin configured when calling the setBacklightPin does not support PWM,
+    then: (0..127) backlight off, (128..255) backlight on.
+    
+    @param      value: backlight value. 0: off, 1..255: dim control of the 
+    backlight. For negative logic 255: off, 254..0: dim control.
+    For non PWM pins: 0..127 - backligh off, 128..255 - backlight on.
+    */
+   void setBacklight ( uint8_t value );
    
 private:
    

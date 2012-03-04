@@ -142,6 +142,16 @@ public:
    
    /*!
     @function
+    @abstract   Sets the pin to control the backlight.
+    @discussion Sets the pin in the device to control the backlight. This device
+    doesn't support dimming backlight capability.
+    
+    @param      0: backlight off, 1..255: backlight on.
+    */
+   void setBacklightPin ( uint8_t value );
+   
+   /*!
+    @function
     @abstract   Switch-on/off the LCD backlight.
     @discussion Switch-on/off the LCD backlight.
     The setBacklightPin has to be called before setting the backlight for
@@ -150,16 +160,6 @@ public:
     @param      mode: backlight mode (HIGH|LOW)
     */
    void setBacklight ( uint8_t mode );
-   
-   /*!
-    @function
-    @abstract   Sets the pin to control the backlight.
-    @discussion Sets the pin in the device to control the backlight.
-    
-    @param      mode: backlight mode (HIGH|LOW)
-    */
-   void setBacklightPin ( uint8_t pin );
-   
    
 private:
    
@@ -190,8 +190,8 @@ private:
    
    
    uint8_t _Addr;             // I2C Address of the IO expander
-   uint8_t _backlightPin;     // Backlight IO pin
-   uint8_t _backlightMask;    // Backlight status mask
+   uint8_t _backlightPinMask; // Backlight IO pin mask
+   uint8_t _backlightStsMask; // Backlight status mask
    I2CIO   _i2cio;            // I2CIO PCF8574* expansion module driver I2CLCDextraIO
    uint8_t _En;               // LCD expander word for enable pin
    uint8_t _Rw;               // LCD expander word for R/W pin

@@ -93,7 +93,7 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    // before sending commands. Arduino can turn on way before 4.5V so we'll wait 
    // 50
    // ---------------------------------------------------------------------------
-   delayMicroseconds(100000); 
+   delay (100); // 100ms delay
       
    //put the LCD into 4 bit or 8 bit mode
    // -------------------------------------
@@ -291,6 +291,16 @@ void LCD::createChar(uint8_t location, uint8_t charmap[])
       write(charmap[i]);      // call the virtual write method
       delayMicroseconds(40);
    }
+}
+
+void LCD::backlight ( void )
+{
+   setBacklight(255);
+}
+
+void LCD::noBacklight ( void )
+{
+   setBacklight(0);
 }
 
 // General LCD commands - generic methods used by the rest of the commands
