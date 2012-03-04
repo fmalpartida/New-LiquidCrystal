@@ -103,13 +103,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
-#include <util/atomic.h> // for critical section management
 
 #if (ARDUINO <  100)
 #include <WProgram.h>
 #else
 #include <Arduino.h>
 #endif
+#include "FastIO.h"
 #include "LiquidCrystal_SR_LCD3.h"
 
 

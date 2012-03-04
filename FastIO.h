@@ -27,8 +27,8 @@
 // (https://github.com/chipKIT32/chipKIT32-MAX/blob/master/hardware/pic32/
 //   cores/pic32/wiring_digital.c)
 // ---------------------------------------------------------------------------
-#ifndef FAST_IO_H
-#define FAST_IO_H
+#ifndef _FAST_IO_H_
+#define _FAST_IO_H_
 
 #if (ARDUINO <  100)
 #include <WProgram.h>
@@ -39,6 +39,10 @@
 #include <pins_arduino.h> // pleasing sanguino core
 #include <inttypes.h>
 #include <util/delay.h>
+
+#ifdef __AVR__
+#include <util/atomic.h> // for critical section management
+#endif
 
 
 /*!
@@ -65,6 +69,11 @@
 // ---------------------------------------------------------------------------
 typedef uint8_t fio_bit;
 
+/*!
+    @typedef 
+    @abstract   Type definitions for FAST_IOs o NATIVE IDE IO
+    @field      fio_register: IO control register
+*/
 
 #ifndef FIO_FALLBACK
 typedef volatile uint8_t *fio_register;
