@@ -103,6 +103,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
+#include <util/atomic.h> // for critical section management
 
 #if (ARDUINO <  100)
 #include <WProgram.h>
@@ -120,7 +121,7 @@
 // ---------------------------------------------------------------------------
 // Assuming 1 line 8 pixel high font
 LiquidCrystal_SR_LCD3::LiquidCrystal_SR_LCD3 ( uint8_t srdata, uint8_t srclock, 
-                                               uint8_t strobe )
+                                              uint8_t strobe )
 {
 	init ( srdata, srclock, strobe, 1, 0 );
 }
@@ -132,12 +133,12 @@ LiquidCrystal_SR_LCD3::LiquidCrystal_SR_LCD3 ( uint8_t srdata, uint8_t srclock,
 //
 // init
 void LiquidCrystal_SR_LCD3::init( uint8_t srdata, uint8_t srclock, uint8_t strobe, 
-                                  uint8_t lines, uint8_t font )
+                                 uint8_t lines, uint8_t font )
 {
 	// Initialise private variables
 	// translate all pins to bits and registers
 	// pinMode to OUTPUT, Output LOW
-
+   
    _srdata_bit = fio_pinToBit(srdata);
    _srdata_register = fio_pinToOutputRegister(srdata);
    _srclock_bit = fio_pinToBit(srclock);
@@ -147,7 +148,7 @@ void LiquidCrystal_SR_LCD3::init( uint8_t srdata, uint8_t srclock, uint8_t strob
    
    // Little trick to force a pulse of the LCD enable bit and make sure it is
    // low before we start further writes since this is assumed.
-
+   
    write4bits(0);
    
    _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x10DOTS;
@@ -200,8 +201,11 @@ void LiquidCrystal_SR_LCD3::_pushOut(uint8_t nibble)
    fio_shiftOut(_srdata_register, _srdata_bit, _srclock_register, _srclock_bit, nibble, LSBFIRST);
    
    // Make new data active.
-   fio_digitalWrite_HIGH(_strobe_register, _strobe_bit);
-   waitUsec( 1 ); // strobe pulse must be >450ns (old code had 10ms)
-   fio_digitalWrite_SWITCHTO(_strobe_register, _strobe_bit,LOW);
+   ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+   {
+      fio_digitalWrite_HIGH(_strobe_register, _strobe_bit);
+      waitUsec( 1 ); // strobe pulse must be >450ns (old code had 10ms)
+      fio_digitalWrite_SWITCHTO(_strobe_register, _strobe_bit,LOW);
+   }
    waitUsec( 40 ); // commands need > 37us to settle
 }
