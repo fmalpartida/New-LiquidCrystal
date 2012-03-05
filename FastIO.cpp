@@ -156,10 +156,8 @@ void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit)
 void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, 
                    boolean noLatch)
 {
-	// disable interrupts since timing is going to be critical
-	uint8_t oldSREG;
-	oldSREG = SREG;
-	cli();
+
+   //TODO: Adapt changes from _rb
 
 	// iterate but ignore last bit (is it correct now?)
 	for(int8_t i = 7; i>=0; --i)
@@ -202,8 +200,7 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 		delayMicroseconds(110);
 	}
 
-	// enable interrupts
-	SREG = oldSREG;
+
 
 }
 void fio_shiftOut1(uint8_t pin, uint8_t value, boolean noLatch)

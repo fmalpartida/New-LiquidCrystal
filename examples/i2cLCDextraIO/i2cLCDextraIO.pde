@@ -20,7 +20,6 @@
 //
 // @author F. Malpartida
 // ---------------------------------------------------------------------------
-#include <Arduino.h>
 #include <Wire.h>
 #include <LCD.h>
 
