@@ -43,17 +43,23 @@
 #include <LiquidCrystal_SR_LCD3.h>
 #endif
 
+#ifdef _LCD_SR1_
+#include <LiquidCrystal_SR1.h>
+#endif
+
 // C runtime variables
 // -------------------
+#ifdef __AVR__
 extern unsigned int __bss_end;
 extern unsigned int __heap_start;
 extern void *__brkval;
+#endif
 
 // Constants and definitions
 // -------------------------
 // Definitions for compatibility with Arduino SDK prior to version 1.0
 #ifndef F
-#define F
+#define F(str) str
 #endif
 
 /*!
@@ -99,6 +105,12 @@ const int    CONTRAST      = 120;
 #endif
 
 #ifdef _LCD_SR_
+const int    CONTRAST_PIN  = 0; // not connected
+const int    BACKLIGHT_PIN = 0; // none
+const int    CONTRAST      = 0;
+#endif
+
+#ifdef _LCD_SR1_
 const int    CONTRAST_PIN  = 0; // not connected
 const int    BACKLIGHT_PIN = 0; // none
 const int    CONTRAST      = 0;
@@ -158,6 +170,10 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 LiquidCrystal_SR lcd(8,7,TWO_WIRE);
 #endif
 
+#ifdef _LCD_SR1_
+LiquidCrystal_SR1 lcd(2);
+#endif
+
 #ifdef _LCD_SRLCD3_
 LiquidCrystal_SR_LCD3 lcd(3, 4, 2);
 #endif
@@ -186,10 +202,11 @@ static t_benchMarks myBenchMarks[NUM_BENCHMARKS] =
  @discussion This routine returns the ammount of RAM memory available after
  initialising the C runtime.
  @param      
- @return     Free RAM available.
+ @return     Free RAM available, -1 for non AVR microcontrollers
  */
 static int freeMemory ( void ) 
 {
+#ifdef __AVR__
    int free_memory;
    
    if((int)__brkval == 0)
@@ -198,6 +215,10 @@ static int freeMemory ( void )
    free_memory = ((int)&free_memory) - ((int)__brkval);
    
    return free_memory;
+#else
+   return -1;
+#endif
+
 }
 
 /*!
@@ -363,7 +384,7 @@ long benchmark3 ( uint8_t iterations )
       for ( i = 0; i < LCD_ROWS; i++ )
       {
          lcd.setCursor ( 0, i );
-         lcd.print ( "####################" );
+         lcd.print ( F("####################") );
       }
       totalTime += ( micros() - time );
       delay ( 200 ); // it doesn't keep up with the LCD refresh rate.
@@ -412,8 +433,10 @@ long benchmark4 ( uint8_t iterations )
 void setup ()
 {
    Serial.begin ( 57600 );
-   Serial.print ("Free mem: ");
+#ifdef __AVR__
+   Serial.print ( F("Free mem: ") );
    Serial.println ( freeMemory () );
+#endif
    
    // Initialise the LCD
    LCDSetup ( CONTRAST_PIN, BACKLIGHT_PIN, LCD_COLUMNS, LCD_ROWS );
@@ -438,17 +461,20 @@ void loop ()
          Serial.println (i);
    }
    
+   float fAllWrites=0;
+   
    for ( i = 0; i < NUM_BENCHMARKS; i++ )
    {   
       Serial.print ( F("benchmark") );
       Serial.print ( i );
-      Serial.print ( ": " );
+      Serial.print ( F(": ") );
       Serial.print ( myBenchMarks[i].benchTime );
       Serial.print ( F(" us - ") );
       Serial.print ( F(" write: ") );
       Serial.print ( myBenchMarks[i].benchTime / myBenchMarks[i].numWrites );
-      Serial.println ( F(" us") ); 
-      
+      Serial.println ( F(" us") );
+      fAllWrites += myBenchMarks[i].benchTime / (float)myBenchMarks[i].numWrites;
    }
-}
-
+   Serial.print( F("avg. write: ") );
+   Serial.println( fAllWrites / (float)NUM_BENCHMARKS );
+ }
