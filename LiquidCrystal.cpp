@@ -79,11 +79,12 @@ LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
 // ---------------------------------------------------------------------------
 
 /************ low level data pushing commands **********/
-
+//
 // send
 void LiquidCrystal::send(uint8_t value, uint8_t mode) 
 {
-   digitalWrite( _rs_pin, mode );
+   // Only interested in COMMAND or DATA
+   digitalWrite( _rs_pin, ( mode == DATA ) );
    
    // if there is a RW pin indicated, set it low to Write
    // ---------------------------------------------------
@@ -92,13 +93,20 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
       digitalWrite(_rw_pin, LOW);
    }
    
-   if (_displayfunction & LCD_8BITMODE)
-   {
-      writeNbits(value, 8); 
+   if ( mode != FOUR_BITS )
+   {   
+      if ( (_displayfunction & LCD_8BITMODE ) )
+      {
+         writeNbits(value, 8); 
+      } 
+      else 
+      {
+         writeNbits ( value >> 4, 4 );
+         writeNbits ( value, 4 );
+      }
    } 
    else 
    {
-      writeNbits ( value >> 4, 4 );
       writeNbits ( value, 4 );
    }
    waitUsec ( EXEC_TIME ); // wait for the command to execute by the LCD
@@ -118,7 +126,18 @@ void LiquidCrystal::setBacklight ( uint8_t value )
 {
    if ( _backlightPin != LCD_NOBACKLIGHT )
    {
-      analogWrite ( _backlightPin, value );
+      if(digitalPinToTimer(_backlightPin) != NOT_ON_TIMER)
+      {
+         analogWrite ( _backlightPin, value );
+      }
+      else if(value)
+      {
+         digitalWrite( _backlightPin, HIGH);
+      }
+      else
+      {
+         digitalWrite( _backlightPin, LOW);
+      }
    }
 }
 
