@@ -1,3 +1,4 @@
+#include <Wire.h>
 #include <LiquidCrystal_SR1.h>
 
 LiquidCrystal_SR1 lcd(2);
@@ -15,7 +16,7 @@ void setup(){
   lcd.createChar (1, armsDown);    // load character to the LCD
 
   lcd.home ();                   // go home
-  lcd.println(F("newLiquidCrystal"));
+  lcd.println("newLiquidCrystal");
 
 }
 
@@ -30,5 +31,5 @@ void showHappyGuy(int pos){
   lcd.print(char(random(0,2))); // show one of the two custom characters
   delay(150); // wait so it can be seen
   lcd.setCursor ( pos, 1 ); // go to position again
-  lcd.print(F(" ")); // delete character
+  lcd.print(" "); // delete character
 }

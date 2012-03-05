@@ -157,31 +157,35 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
                    boolean noLatch)
 {
 
-   //TODO: Adapt changes from _rb
-
 	// iterate but ignore last bit (is it correct now?)
 	for(int8_t i = 7; i>=0; --i)
    {
 
 		// assume that pin is HIGH (smokin' pot all day... :) - requires initialization
-		if(LOW==!!(value & (1 << i)))
+      if(value & _BV(i))
       {
-			// LOW = 0 Bit
-			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
-			// hold pin LOW for ... (was 15us)
+         ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+         {
+   			// HIGH = 1 Bit
+   			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+   			//hold pin LOW for 1us - done! :)
+   			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
+   			//hold pin HIGH for ... (was 15us)
+         }
 			delayMicroseconds(6);
-			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
-			// hold pin HIGH for ... (was 30us)
-			delayMicroseconds(10);
 		}
       else
       {
-			// HIGH = 1 Bit
-			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
-			//hold pin LOW for 1us - done! :)
-			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
-			//hold pin HIGH for ... (was 15us)
-			delayMicroseconds(6);
+         ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+         {
+   			// LOW = 0 Bit
+   			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+   			// hold pin LOW for ... (was 15us)
+   			delayMicroseconds(6);
+   			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
+   			// hold pin HIGH for ... (was 30us)
+         }
+			delayMicroseconds(10);
 		}
 		if(!noLatch && i==1)
       {
@@ -192,10 +196,10 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 	if(!noLatch)
    {
 		// send last bit (=LOW) and Latch command
-		fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+	   fio_digitalWrite(shift1Register,shift1Bit,LOW);
 		// Hold pin low for ... (was 200us)
 		delayMicroseconds(96);
-		fio_digitalWrite_HIGH(shift1Register,shift1Bit);
+		fio_digitalWrite(shift1Register,shift1Bit,HIGH);
 		// Hold pin high for ... (was 300us) and leave it that way - using explicit HIGH here, just in case.
 		delayMicroseconds(110);
 	}
