@@ -176,8 +176,16 @@ void LiquidCrystal_I2C::send(uint8_t value, uint8_t mode)
    // No need to use the delay routines since the time taken to write takes
    // longer that what is needed both for toggling and enable pin an to execute
    // the command.
-   write4bits( (value >> 4), mode );
-   write4bits( (value & 0x0F), mode);
+   
+   if ( mode == FOUR_BITS )
+   {
+      write4bits( (value & 0x0F), COMMAND );
+   }
+   else 
+   {
+      write4bits( (value >> 4), mode );
+      write4bits( (value & 0x0F), mode);
+   }
 }
 
 //

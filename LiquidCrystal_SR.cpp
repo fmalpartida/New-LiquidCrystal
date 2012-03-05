@@ -168,9 +168,19 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
 {
    // Divide byte in two nibbles include the RS signal
    // and format it for shiftregister output wiring to the LCD
-   mode = mode ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
-   shiftIt(mode | SR_EN_BIT | ((value >> 1) & 0x78)); // upper nibble
-   shiftIt(mode | SR_EN_BIT | ((value << 3) & 0x78)); // lower nibble
+   // We are only interested in my COMMAND or DATA for myMode
+   uint8_t myMode = ( mode == DATA ) ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
+   
+   if ( mode != FOUR_BITS )
+   {
+      shiftIt(myMode | SR_EN_BIT | ((value >> 1) & 0x78)); // upper nibble
+      shiftIt(myMode | SR_EN_BIT | ((value << 3) & 0x78)); // lower nibble
+
+   }
+   else 
+   {
+      shiftIt(myMode | SR_EN_BIT | ((value << 3) & 0x78)); // lower nibble
+   }
 }
 
 //

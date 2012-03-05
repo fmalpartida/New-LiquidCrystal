@@ -103,19 +103,19 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
       // figure 24, pg 46
       
       // we start in 8bit mode, try to set 4 bit mode
-      command ( 0x03 );
+      send(0x03, FOUR_BITS);
       delayMicroseconds(4500); // wait min 4.1ms
       
       // second try
-      command ( 0x03 );
+      send ( 0x03, FOUR_BITS );
       delayMicroseconds(4500); // wait min 4.1ms
       
       // third go!
-      command ( 0x03 ); 
+      send( 0x03, FOUR_BITS );
       delayMicroseconds(150);
       
       // finally, set to 4-bit interface
-      command ( 0x02 ); 
+      send ( 0x02, FOUR_BITS ); 
    } 
    else 
    {
