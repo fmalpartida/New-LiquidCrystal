@@ -384,7 +384,7 @@ long benchmark3 ( uint8_t iterations )
       for ( i = 0; i < LCD_ROWS; i++ )
       {
          lcd.setCursor ( 0, i );
-         lcd.print ( F("####################") );
+         lcd.print ( "####################" );
       }
       totalTime += ( micros() - time );
       delay ( 200 ); // it doesn't keep up with the LCD refresh rate.
