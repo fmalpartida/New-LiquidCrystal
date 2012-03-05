@@ -38,7 +38,6 @@
 
 #include <pins_arduino.h> // pleasing sanguino core
 #include <inttypes.h>
-#include <util/delay.h>
 
 #ifdef __AVR__
 #include <util/atomic.h> // for critical section management
@@ -52,7 +51,7 @@
  */
 #ifndef __AVR__
 #define FIO_FALLBACK
-#define ATOMIC_BLOCK
+#define ATOMIC_BLOCK(dummy) if(true)
 #define ATOMIC_RESTORESTATE
 #endif
 
