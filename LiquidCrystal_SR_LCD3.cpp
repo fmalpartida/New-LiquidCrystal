@@ -109,7 +109,6 @@
 #else
 #include <Arduino.h>
 #endif
-#include "FastIO.h"
 #include "LiquidCrystal_SR_LCD3.h"
 
 

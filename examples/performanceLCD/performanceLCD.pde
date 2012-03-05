@@ -23,7 +23,6 @@
 // @author F. Malpartida - fmalpartida@gmail.com
 //         Contribution by flo - Florian@Fida.biz - for benchmarking SR 
 // ---------------------------------------------------------------------------
-#include <Arduino.h>
 #include <Wire.h>
 
 #define _LCD_I2C_

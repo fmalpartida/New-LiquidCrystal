@@ -11,6 +11,7 @@
 
 #include <inttypes.h>
 #include "LCD.h"
+#include "FastIO.h"
 
 
 class LiquidCrystal_SR_LCD3 : public LCD

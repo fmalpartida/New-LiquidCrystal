@@ -31,7 +31,12 @@
 #endif
 
 #include <inttypes.h>
-#include "../Wire/Wire.h"
+#if (__IN_ECLIPSE__)
+//TODO: Find a way for eclipse to play along nicer with Wire library
+#include <Wire/Wire.h>
+#else
+#include <Wire.h>
+#endif
 
 #include "I2CIO.h"
 
