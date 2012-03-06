@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoGoogle.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.0</span></div>
+   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.1</span></div>
    <div id="projectbrief">LCD Library - LCD control class hierarchy library. Drop in replacement for the LiquidCrystal Library.</div>
   </td>
  </tr>
@@ -87,6 +87,7 @@ Inheritance diagram for LCD:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">autoscroll</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#aba8867fe2210cbfa8db869208709be10">backlight</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a3f587d1cbb2d59765ef60a5216b56fea">begin</a> (uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a878b36878fa8287093964eba83aace77">blink</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#afa699e0beeeee03cce8cef87eba81c4a">clear</a> ()</td></tr>
@@ -100,6 +101,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#aad2abc99d1aca5403873579d9d72c2d4">moveCursorLeft</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a09eec0c712e54b066f5894635c1fe75c">moveCursorRight</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a96035dde40efbf73390e00b5beb00231">noAutoscroll</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a2a331b4e142734411b2f1cfaffe7a488">noBacklight</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a3b755c4b397b5985752be8c30ee1a9b5">noBlink</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#aec8ffaa1e69c7a6e13ac0cfbc29151d9">noCursor</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#af3974da6d988ba2d21c25135ada12108">noDisplay</a> ()</td></tr>
@@ -107,8 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a6f3a503055b3b8dcf0f61b2633c584f7">scrollDisplayLeft</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#abfc44b294772f09020bfa32af8a79571">scrollDisplayRight</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a> (uint8_t value, uint8_t mode)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a4660b37d1f7f4e1eb61de043988dd902">setBacklight</a> (uint8_t mode)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a2871297d458e3384538008541192af27">setBacklightPin</a> (uint8_t pin)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a3305570d7b37eb93f2cf840263c15828">setBacklight</a> (uint8_t value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a11654e9302627743730fc4e1ea157e86">setBacklightPin</a> (uint8_t value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a48220450fd152b25994eb7d0ba340e8d">setCursor</a> (uint8_t col, uint8_t row)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">write</a> (uint8_t value)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
@@ -121,7 +123,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00140">140</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00143">143</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a00bb2db1390721abc7b24ac4b8c276c8"></a><!-- doxytag: member="LCD::LCD" ref="a00bb2db1390721abc7b24ac4b8c276c8" args="()" -->
 <div class="memitem">
@@ -169,6 +171,27 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aba8867fe2210cbfa8db869208709be10"></a><!-- doxytag: member="LCD::backlight" ref="aba8867fe2210cbfa8db869208709be10" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCD::backlight </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Switch-on the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-on the <a class="el" href="class_l_c_d.html">LCD</a> backlight. The setBacklightPin has to be called before setting the backlight for this method to work. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_l_c_d.html#a11654e9302627743730fc4e1ea157e86">setBacklightPin</a>. </dd></dl>
+
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00296">296</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a3f587d1cbb2d59765ef60a5216b56fea"></a><!-- doxytag: member="LCD::begin" ref="a3f587d1cbb2d59765ef60a5216b56fea" args="(uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)" -->
 <div class="memitem">
 <div class="memproto">
@@ -200,7 +223,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 <p><a class="el" href="class_l_c_d.html">LCD</a> initialization.  Initializes the <a class="el" href="class_l_c_d.html">LCD</a> to a given size (col, row). This methods initializes the <a class="el" href="class_l_c_d.html">LCD</a>, therefore, it MUST be called prior to using any other method from this class.</p>
-<p>This method is pure abstract, it is dependent on each derived class from this base class to implement the internals of how the <a class="el" href="class_l_c_d.html">LCD</a> is initialized and configured.</p>
+<p>This method is abstract, a base implementation is available common to all <a class="el" href="class_l_c_d.html">LCD</a> drivers. Should it not be compatible with some other <a class="el" href="class_l_c_d.html">LCD</a> driver, a derived implementation should be done on the driver specif class.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">cols[in]</td><td>the number of columns that the display has </td></tr>
@@ -289,7 +312,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00298">298</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00308">308</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -512,6 +535,27 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a2a331b4e142734411b2f1cfaffe7a488"></a><!-- doxytag: member="LCD::noBacklight" ref="a2a331b4e142734411b2f1cfaffe7a488" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCD::noBacklight </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Switch-off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-off the <a class="el" href="class_l_c_d.html">LCD</a> backlight. The setBacklightPin has to be called before setting the backlight for this method to work. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_l_c_d.html#a11654e9302627743730fc4e1ea157e86">setBacklightPin</a>. </dd></dl>
+
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00301">301</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a3b755c4b397b5985752be8c30ee1a9b5"></a><!-- doxytag: member="LCD::noBlink" ref="a3b755c4b397b5985752be8c30ee1a9b5" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -702,11 +746,11 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_liquid_crystal.html#a56142f8b3753bedd133e4139e5eb5089">LiquidCrystal</a>, <a class="el" href="class_liquid_crystal___i2_c.html#a8bf1fab7efe13e8b17b96c42d1f810b4">LiquidCrystal_I2C</a>, <a class="el" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">LiquidCrystal_SR</a>, and <a class="el" href="class_liquid_crystal___s_r___l_c_d3.html#a01e75d76d80e218a5bdc28f8ce22b0e4">LiquidCrystal_SR_LCD3</a>.</p>
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00438">438</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00463">463</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4660b37d1f7f4e1eb61de043988dd902"></a><!-- doxytag: member="LCD::setBacklight" ref="a4660b37d1f7f4e1eb61de043988dd902" args="(uint8_t mode)" -->
+<a class="anchor" id="a3305570d7b37eb93f2cf840263c15828"></a><!-- doxytag: member="LCD::setBacklight" ref="a3305570d7b37eb93f2cf840263c15828" args="(uint8_t value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -714,28 +758,29 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void LCD::setBacklight </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight. The setBacklightPin has to be called before setting the backlight for this method to work. </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_l_c_d.html#a2871297d458e3384538008541192af27">setBacklightPin</a>. This method is device dependent and can be programmed on each subclass. An empty function call is provided that does nothing.</dd></dl>
+<p>Sets the pin to control the backlight.  Sets the pin in the device to control the backlight. The behaviour of this method is very dependent on the device. Some controllers support dimming some don't. Please read the actual header file for each individual device. The setBacklightPin method has to be called before setting the backlight. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_l_c_d.html#a11654e9302627743730fc4e1ea157e86">setBacklightPin</a>.</dd></dl>
+<p>NOTE: The prefered methods to control the backlight are "backlight" and "noBacklight".</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+    <tr><td class="paramname">0..255</td><td>- the value is very dependent on the <a class="el" href="class_l_c_d.html">LCD</a>, however, 0 will be interpreted as off. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_liquid_crystal.html#a170c6ed996f3e84bf63dcd5cb1471428">LiquidCrystal</a>, <a class="el" href="class_liquid_crystal___i2_c.html#a2f248fc841812e850f29114667f41440">LiquidCrystal_I2C</a>, and <a class="el" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">LiquidCrystal_SR</a>.</p>
+<p>Reimplemented in <a class="el" href="class_liquid_crystal.html#aa2b898366e1c656ac313b9007c98cebd">LiquidCrystal</a>, <a class="el" href="class_liquid_crystal___i2_c.html#a2f248fc841812e850f29114667f41440">LiquidCrystal_I2C</a>, and <a class="el" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">LiquidCrystal_SR</a>.</p>
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00393">393</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00411">411</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2871297d458e3384538008541192af27"></a><!-- doxytag: member="LCD::setBacklightPin" ref="a2871297d458e3384538008541192af27" args="(uint8_t pin)" -->
+<a class="anchor" id="a11654e9302627743730fc4e1ea157e86"></a><!-- doxytag: member="LCD::setBacklightPin" ref="a11654e9302627743730fc4e1ea157e86" args="(uint8_t value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -743,7 +788,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void LCD::setBacklightPin </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
@@ -757,9 +802,9 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_liquid_crystal.html#aa78ed97905615b34e685170c086e3d9d">LiquidCrystal</a>, <a class="el" href="class_liquid_crystal___i2_c.html#a715027a10c1141fe5442fe58cb3a405a">LiquidCrystal_I2C</a>, and <a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">LiquidCrystal_SR</a>.</p>
+<p>Reimplemented in <a class="el" href="class_liquid_crystal.html#aa78ed97905615b34e685170c086e3d9d">LiquidCrystal</a>, <a class="el" href="class_liquid_crystal___i2_c.html#a3d5fd117e30ea5ceb63e976d04f6a09b">LiquidCrystal_I2C</a>, and <a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">LiquidCrystal_SR</a>.</p>
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00404">404</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00394">394</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -823,7 +868,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00304">304</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8cpp_source.html#l00314">314</a> of file <a class="el" href="_l_c_d_8cpp_source.html">LCD.cpp</a>.</p>
 
 </div>
 </div>
@@ -839,7 +884,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00458">458</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00483">483</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -854,7 +899,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00454">454</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00479">479</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -869,7 +914,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00452">452</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00477">477</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -884,7 +929,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00456">456</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00481">481</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -899,7 +944,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00457">457</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00482">482</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -922,7 +967,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Feb 28 2012 19:52:02 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:17:07 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

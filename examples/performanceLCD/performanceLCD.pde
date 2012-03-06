@@ -49,15 +49,17 @@
 
 // C runtime variables
 // -------------------
+#ifdef __AVR__
 extern unsigned int __bss_end;
 extern unsigned int __heap_start;
 extern void *__brkval;
+#endif
 
 // Constants and definitions
 // -------------------------
 // Definitions for compatibility with Arduino SDK prior to version 1.0
 #ifndef F
-#define F
+#define F(str) str
 #endif
 
 /*!
@@ -200,10 +202,11 @@ static t_benchMarks myBenchMarks[NUM_BENCHMARKS] =
  @discussion This routine returns the ammount of RAM memory available after
  initialising the C runtime.
  @param      
- @return     Free RAM available.
+ @return     Free RAM available, -1 for non AVR microcontrollers
  */
 static int freeMemory ( void ) 
 {
+#ifdef __AVR__
    int free_memory;
    
    if((int)__brkval == 0)
@@ -212,6 +215,10 @@ static int freeMemory ( void )
    free_memory = ((int)&free_memory) - ((int)__brkval);
    
    return free_memory;
+#else
+   return -1;
+#endif
+
 }
 
 /*!
@@ -366,7 +373,7 @@ long benchmark2 ( uint8_t iterations )
 long benchmark3 ( uint8_t iterations )
 {
    unsigned long time, totalTime = 0;
-   int i, j;
+   int i;
    
    while ( iterations > 0 )
    {
@@ -401,7 +408,7 @@ long benchmark3 ( uint8_t iterations )
 long benchmark4 ( uint8_t iterations )
 {
    unsigned long time, totalTime = 0;
-   int i, j;
+   int i;
    
    while ( iterations > 0 )
    {
@@ -426,8 +433,10 @@ long benchmark4 ( uint8_t iterations )
 void setup ()
 {
    Serial.begin ( 57600 );
-   Serial.print ("Free mem: ");
+#ifdef __AVR__
+   Serial.print ( F("Free mem: ") );
    Serial.println ( freeMemory () );
+#endif
    
    // Initialise the LCD
    LCDSetup ( CONTRAST_PIN, BACKLIGHT_PIN, LCD_COLUMNS, LCD_ROWS );
@@ -458,12 +467,12 @@ void loop ()
    {   
       Serial.print ( F("benchmark") );
       Serial.print ( i );
-      Serial.print ( ": " );
+      Serial.print ( F(": ") );
       Serial.print ( myBenchMarks[i].benchTime );
       Serial.print ( F(" us - ") );
       Serial.print ( F(" write: ") );
       Serial.print ( myBenchMarks[i].benchTime / myBenchMarks[i].numWrites );
-      Serial.println ( F(" us") ); 
+      Serial.println ( F(" us") );
       fAllWrites += myBenchMarks[i].benchTime / (float)myBenchMarks[i].numWrites;
    }
    Serial.print( F("avg. write: ") );
