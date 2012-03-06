@@ -31,13 +31,8 @@
 #endif
 
 #include <inttypes.h>
-#if (__IN_ECLIPSE__)
-//TODO: Find a way for eclipse to play along nicer with Wire library
-#include <Wire/Wire.h>
-#else
-#include <Wire.h>
-#endif
 
+#include <../Wire/Wire.h>
 #include "I2CIO.h"
 
 // CLASS VARIABLES

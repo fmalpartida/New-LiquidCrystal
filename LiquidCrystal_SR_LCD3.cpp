@@ -168,18 +168,20 @@ void LiquidCrystal_SR_LCD3::init( uint8_t srdata, uint8_t srclock, uint8_t strob
 #define SR_RS_BIT B01000000   // LOW: command. HIGH: character.
 
 void LiquidCrystal_SR_LCD3::send(uint8_t value, uint8_t mode) 
-{
-   uint8_t nibble;
+{   
+   // only interested on COMMAND or DATA
+   uint8_t myMode = ( mode == DATA ) ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
    
-   mode = mode ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
-   
-   nibble = value >> 4; // Get high nibble.
-   write4bits(nibble | mode);
-   
-   //delay(1); // This was in the LCD3 code but does not seem needed -- merlin
-   
-   nibble = value & 15; // Get low nibble
-   write4bits(nibble | mode);
+   if ( mode != FOUR_BITS )
+   {
+      write4bits( ( value >> 4 ) | myMode);
+      write4bits( ( value & 0x0F ) | myMode);
+   }
+   else 
+   {
+      write4bits( ( value & 0x0F ) | myMode);
+   }
+
 }
 
 void LiquidCrystal_SR_LCD3::write4bits(uint8_t nibble) 

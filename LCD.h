@@ -131,6 +131,7 @@ inline static void waitUsec ( uint16_t uSec )
 // ---------------------------------------------------------------------------
 #define COMMAND                 0
 #define DATA                    1
+#define FOUR_BITS               2
 
 /*!
  @defined 
