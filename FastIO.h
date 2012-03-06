@@ -78,7 +78,7 @@ typedef uint8_t fio_bit;
 typedef volatile uint8_t *fio_register;
 #else
 // remove volatile to give optimizer a chance
-typedef uint8_t fio_register;
+typedef uint8_t *fio_register;
 #endif
 
 /*!
@@ -209,5 +209,15 @@ void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit);
  * @param pin[in] digital pin
  */
 void fio_shiftOut1_init(uint8_t pin);
+
+/*!
+ * @method
+ * @abstract one wire shift out - exact implementation of Roman Black's protocol
+ * @discussion protocol needs initialisation (fio_shiftOut1_init)
+ * @param shift1Register[in] pins register
+ * @param shift1Bit[in] pins bit
+ * @param value[in] value to shift out, last byte is ignored and always shifted out LOW
+ */
+void fio_shiftOut1_rb(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, boolean noLatch = false);
 
 #endif // FAST_IO_H

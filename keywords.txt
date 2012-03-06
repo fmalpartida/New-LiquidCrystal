@@ -7,10 +7,12 @@
 ###########################################
 
 LiquidCrystal_SR        KEYWORD1
-LiquidCrystal_I2C    	KEYWORD1
+LiquidCrystal_I2C     	KEYWORD1
 LiquidCrystal_SR_LCD3	KEYWORD1
-LiquidCrystal        	KEYWORD1
-LCD                  	KEYWORD1
+LiquidCrystal         	KEYWORD1
+LCD                   	KEYWORD1
+LiquidCrystal_SR1     	KEYWORD1
+LiquidCrystal_SR_LCD3 	KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)
