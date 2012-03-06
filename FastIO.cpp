@@ -152,8 +152,7 @@ void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit)
 {
 	// Make sure that capacitors are charged
 	// 300us is an educated guess...
-   
-   fio_digitalWrite(shift1Register,shift1Bit,HIGH);
+	fio_digitalWrite(shift1Register,shift1Bit,HIGH);
 	delayMicroseconds(300);
 }
 void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, 
@@ -188,8 +187,8 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
             fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
             //hold pin LOW for 1us - done! :)
             fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
-            //hold pin HIGH for 15us
          } // end critical section
+         //hold pin HIGH for 15us
          delayMicroseconds(15);
 		}
       else
@@ -202,6 +201,7 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
             delayMicroseconds(15);
             fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
          } // end critical section
+         
          // hold pin HIGH for 30us
          delayMicroseconds(30);         
 		}
