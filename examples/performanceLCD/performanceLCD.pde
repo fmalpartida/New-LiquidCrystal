@@ -373,7 +373,7 @@ long benchmark2 ( uint8_t iterations )
 long benchmark3 ( uint8_t iterations )
 {
    unsigned long time, totalTime = 0;
-   int i, j;
+   int i;
    
    while ( iterations > 0 )
    {
@@ -408,7 +408,7 @@ long benchmark3 ( uint8_t iterations )
 long benchmark4 ( uint8_t iterations )
 {
    unsigned long time, totalTime = 0;
-   int i, j;
+   int i;
    
    while ( iterations > 0 )
    {
