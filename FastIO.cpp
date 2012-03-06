@@ -152,30 +152,87 @@ void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit)
 {
 	// Make sure that capacitors are charged
 	// 300us is an educated guess...
-   
-   fio_digitalWrite(shift1Register,shift1Bit,HIGH);
+	fio_digitalWrite(shift1Register,shift1Bit,HIGH);
 	delayMicroseconds(300);
 }
 void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, 
                    boolean noLatch)
 {
-	/*
-	 * this function are based on Shif1 protocol developed by Roman Black 
-    *    (http://www.romanblack.com/shift1.htm)
-	 *
-	 * test sketches:
-	 * 	http://pastebin.com/raw.php?i=2hnC9v2Z
-	 * 	http://pastebin.com/raw.php?i=bGg4DhXQ
-	 * 	http://pastebin.com/raw.php?i=tg1ZFiM5
-	 *    http://pastebin.com/raw.php?i=93ExPDD3 - cascading
-	 * tested with:
-	 * 	TPIC6595N - seems to work fine (circuit: http://www.3guys1laser.com/
-    *                   arduino-one-wire-shift-register-prototype)
-	 * 	7HC595N
-	 */
    
 	// iterate but ignore last bit (is it correct now?)
 	for(int8_t i = 7; i>=0; --i)
+   {
+      
+		// assume that pin is HIGH (smokin' pot all day... :) - requires initialization
+      if(value & _BV(i))
+      {
+         ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+         {
+   			// HIGH = 1 Bit
+   			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+   			//hold pin LOW for 1us - done! :)
+   			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
+   			//hold pin HIGH for ... (was 15us)
+         }
+			delayMicroseconds(6);
+		}
+      else
+      {
+         ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+         {
+   			// LOW = 0 Bit
+   			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
+   			// hold pin LOW for ... (was 15us)
+   			delayMicroseconds(6);
+   			fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,HIGH);
+   			// hold pin HIGH for ... (was 30us)
+         }
+			delayMicroseconds(10);
+		}
+		if(!noLatch && i==1)
+      {
+         break;
+      }
+	}
+   
+	if(!noLatch)
+   {
+		// send last bit (=LOW) and Latch command
+	   fio_digitalWrite(shift1Register,shift1Bit,LOW);
+		// Hold pin low for ... (was 200us)
+		delayMicroseconds(96);
+		fio_digitalWrite(shift1Register,shift1Bit,HIGH);
+		// Hold pin high for ... (was 300us) and leave it that way - using explicit HIGH here, just in case.
+		delayMicroseconds(110);
+	}
+   
+   
+   
+}
+void fio_shiftOut1(uint8_t pin, uint8_t value, boolean noLatch)
+{
+	fio_shiftOut1(fio_pinToOutputRegister(pin, SKIP),fio_pinToBit(pin),value, noLatch);
+}
+
+void fio_shiftOut1_rb(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, boolean noLatch)
+{
+   /*
+	 * this function are based on Shif1 protocol developed by Roman Black 
+    *    (http://www.romanblack.com/shift1.htm)
+    *
+    * test sketches:
+    *    http://pastebin.com/raw.php?i=2hnC9v2Z
+    *    http://pastebin.com/raw.php?i=bGg4DhXQ
+    *    http://pastebin.com/raw.php?i=tg1ZFiM5
+    *    http://pastebin.com/raw.php?i=93ExPDD3 - cascading
+    * tested with:
+    *    TPIC6595N - seems to work fine (circuit: http://www.3guys1laser.com/
+    *                   arduino-one-wire-shift-register-prototype)
+    *    7HC595N
+    */
+   
+   // iterate but ignore last bit (is it correct now?)
+   for(int8_t i = 7; i>=0; --i)
    {
       
 		// assume that pin is HIGH (smokin' pot all day... :) - requires 
@@ -204,14 +261,14 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
          } // end critical section
          // hold pin HIGH for 30us
          delayMicroseconds(30);         
-		}
-		if(!noLatch && i==1)
+      }
+      if(!noLatch && i==1)
       {
          break;
       }
-	}
+   }
    
-	if(!noLatch)
+   if(!noLatch)
    {
       ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
       {
@@ -226,10 +283,6 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
       } // end critical section
 		delayMicroseconds(299);   // Hold pin high for 300us and leave it that 
       // way - using explicit HIGH here, just in case.
-	}
-}
-
-void fio_shiftOut1(uint8_t pin, uint8_t value, boolean noLatch)
-{
-	fio_shiftOut1(fio_pinToOutputRegister(pin, SKIP),fio_pinToBit(pin),value, noLatch);
+   }
+   
 }
