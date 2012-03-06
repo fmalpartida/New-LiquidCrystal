@@ -99,31 +99,33 @@ int fio_digitalRead(fio_register pinRegister, uint8_t pinBit)
 #endif
 }
 
-void fio_shiftOut ( fio_register dataRegister, fio_bit dataBit, 
-                    fio_register clockRegister, fio_bit clockBit, 
-                    uint8_t value, uint8_t bitOrder)
+void fio_shiftOut (fio_register dataRegister, fio_bit dataBit, 
+                   fio_register clockRegister, fio_bit clockBit, 
+                   uint8_t value, uint8_t bitOrder)
 {
 	// # disable interrupts
 	int8_t i;
-
-   ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+   
+   
+   for(i = 0; i < 8; i++)
    {
-      for(i = 0; i < 8; i++)
+      if (bitOrder == LSBFIRST)
       {
-         if (bitOrder == LSBFIRST)
-         {
-            fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << i)));
-         }
-         else
-         {
-            fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << (7 - i))));
-         }
+         fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << i)));
+      }
+      else
+      {
+         fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << (7 - i))));
+      }
+      ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+      {
          fio_digitalWrite_HIGH (clockRegister, clockBit);
          
          // Switching is a little bit faster
          fio_digitalWrite_SWITCH (clockRegister,clockBit);
-      }
-   } // end critical section
+      } // end critical section
+      
+   } 
 }
 
 void fio_shiftOut(fio_register dataRegister, uint8_t dataBit, 
@@ -133,7 +135,7 @@ void fio_shiftOut(fio_register dataRegister, uint8_t dataBit,
    {
       // shift out 0x0 (B00000000) fast, byte order is irrelevant
       fio_digitalWrite_LOW (dataRegister, dataBit);
-
+      
       for(uint8_t i = 0; i<8; ++i)
       {
          fio_digitalWrite_HIGH (clockRegister, clockBit);
@@ -150,7 +152,8 @@ void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit)
 {
 	// Make sure that capacitors are charged
 	// 300us is an educated guess...
-	fio_digitalWrite(shift1Register,shift1Bit,HIGH);
+   
+   fio_digitalWrite(shift1Register,shift1Bit,HIGH);
 	delayMicroseconds(300);
 }
 void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, 
@@ -170,11 +173,11 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
     *                   arduino-one-wire-shift-register-prototype)
 	 * 	7HC595N
 	 */
-
+   
 	// iterate but ignore last bit (is it correct now?)
 	for(int8_t i = 7; i>=0; --i)
    {
-
+      
 		// assume that pin is HIGH (smokin' pot all day... :) - requires 
       // initialization
 		if(value & _BV(i))
@@ -216,13 +219,13 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
          fio_digitalWrite_SWITCHTO(shift1Register,shift1Bit,LOW);
       } // end critical section
       delayMicroseconds(199); 		// Hold pin low for 200us
-
+      
       ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
       {
          fio_digitalWrite_HIGH(shift1Register,shift1Bit);
       } // end critical section
 		delayMicroseconds(299);   // Hold pin high for 300us and leave it that 
-                                // way - using explicit HIGH here, just in case.
+      // way - using explicit HIGH here, just in case.
 	}
 }
 
