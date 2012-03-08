@@ -94,7 +94,7 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    // 50
    // ---------------------------------------------------------------------------
    delay (100); // 100ms delay
-      
+   
    //put the LCD into 4 bit or 8 bit mode
    // -------------------------------------
    if (! (_displayfunction & LCD_8BITMODE)) 
@@ -185,7 +185,7 @@ void LCD::setCursor(uint8_t col, uint8_t row)
    {
       command(LCD_SETDDRAMADDR | (col + row_offsetsDef[row]));
    }
-
+   
 }
 
 // Turn the display on/off
@@ -293,11 +293,15 @@ void LCD::createChar(uint8_t location, uint8_t charmap[])
    }
 }
 
+//
+// Switch on the backlight
 void LCD::backlight ( void )
 {
    setBacklight(255);
 }
 
+//
+// Switch off the backlight
 void LCD::noBacklight ( void )
 {
    setBacklight(0);

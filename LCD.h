@@ -141,6 +141,13 @@ inline static void waitUsec ( uint16_t uSec )
  */
 #define HOME_CLEAR_EXEC      2000
 
+/*!
+ @typedef 
+ @abstract   Define backlight control polarity
+ @discussion Backlight control polarity. @see setBacklightPin.
+ */
+typedef enum { POSITIVE, NEGATIVE } t_backlighPol;
+
 class LCD : public Print 
 {
 public:
@@ -302,7 +309,7 @@ public:
     @param      none
     */   
    void moveCursorLeft();
-
+   
    
    /*!
     @function
@@ -365,7 +372,7 @@ public:
     @param      row[in] LCD row - line.
     */
    void setCursor(uint8_t col, uint8_t row);
-
+   
    
    /*!
     @function
@@ -390,9 +397,10 @@ public:
     This method is device dependent and can be programmed on each subclass. An 
     empty function call is provided that does nothing.
     
-    @param      mode: backlight mode (HIGH|LOW)
+    @param      value: pin associated to backlight control.
+    @param      pol: backlight polarity control (POSITIVE, NEGATIVE)
     */
-   virtual void setBacklightPin ( uint8_t value ) { };
+   virtual void setBacklightPin ( uint8_t value, t_backlighPol pol ) { };
    
    /*!
     @function
@@ -407,7 +415,8 @@ public:
     "noBacklight".
     
     @param      0..255 - the value is very dependent on the LCD, however, 0
-    will be interpreted as off.
+    will be interpreted as off. If backlight polarity set to negative, the
+    values will be inverted.
     */
    virtual void setBacklight ( uint8_t value ) { };
    
@@ -417,9 +426,9 @@ public:
     @discussion Switch-on the LCD backlight.
     The setBacklightPin has to be called before setting the backlight for
     this method to work. @see setBacklightPin. 
-   */
+    */
    void backlight ( void );
-
+   
    /*!
     @function
     @abstract   Switch-off the LCD backlight.
@@ -476,12 +485,13 @@ protected:
    // Internal LCD variables to control the LCD shared between all derived
    // classes.
    uint8_t _displayfunction;  // LCD_5x10DOTS or LCD_5x8DOTS, LCD_4BITMODE or 
-                              // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
+   // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
    uint8_t _displaycontrol;   // LCD base control command LCD on/off, blink, cursor
-                              // all commands are "ored" to its contents.
+   // all commands are "ored" to its contents.
    uint8_t _displaymode;      // Text entry mode to the LCD
    uint8_t _numlines;         // Number of lines of the LCD, initialized with begin()
    uint8_t _cols;             // Number of columns in the LCD
+   t_backlighPol _polarity;   // Backlight polarity
    
 private:
    

@@ -47,18 +47,19 @@
 
 // CONSTRUCTORS
 // ---------------------------------------------------------------------------
-LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
-                             uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-                             uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
-{
-   init(LCD_8BIT, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
-}
 
 LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
    init(LCD_8BIT, rs, 255, enable, d0, d1, d2, d3, d4, d5, d6, d7);
+}
+
+LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+                             uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                             uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
+{
+   init(LCD_8BIT, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
 }
 
 LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
@@ -73,7 +74,40 @@ LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
    init(LCD_4BIT, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
 }
 
+// Contructors with backlight control
+LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t enable,
+                             uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                             uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
+                             uint8_t backlightPin, t_backlighPol pol)
+{
+   init(LCD_8BIT, rs, 255, enable, d0, d1, d2, d3, d4, d5, d6, d7);
+   setBacklightPin ( backlightPin, pol );
+}
 
+LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+                             uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                             uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
+                             uint8_t backlightPin, t_backlighPol pol)
+{
+   init(LCD_8BIT, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
+   setBacklightPin ( backlightPin, pol );
+}
+
+LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+                             uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                             uint8_t backlightPin, t_backlighPol pol)
+{
+   init(LCD_4BIT, rs, rw, enable, d0, d1, d2, d3, 0, 0, 0, 0);
+   setBacklightPin ( backlightPin, pol );
+}
+
+LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t enable,
+                             uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                             uint8_t backlightPin, t_backlighPol pol)
+{
+   init(LCD_4BIT, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
+   setBacklightPin ( backlightPin, pol );
+}
 
 // PUBLIC METHODS
 // ---------------------------------------------------------------------------
@@ -114,23 +148,41 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
 
 //
 // setBacklightPin
-void LiquidCrystal::setBacklightPin ( uint8_t pin )
+void LiquidCrystal::setBacklightPin ( uint8_t pin, t_backlighPol pol )
 {
    pinMode ( pin, OUTPUT ); // Difine the backlight pin as output
    _backlightPin = pin;
+   _polarity = pol;
 }
 
 //
 // setBackligh
 void LiquidCrystal::setBacklight ( uint8_t value )
 {
+   // Check if there is a pin assigned to the backlight
+   // ---------------------------------------------------
    if ( _backlightPin != LCD_NOBACKLIGHT )
    {
+      // Check if the pin is associated to a timer, i.e. PWM
+      // ---------------------------------------------------
       if(digitalPinToTimer(_backlightPin) != NOT_ON_TIMER)
       {
-         analogWrite ( _backlightPin, value );
+         // Check for control polarity inversion
+         // ---------------------------------------------------
+         if ( _polarity == POSITIVE )
+         {
+            analogWrite ( _backlightPin, value );
+         }
+         else 
+         {
+            analogWrite ( _backlightPin, 255 - value );
+         }
       }
-      else if(value)
+      // Not a PWM pin, set the backlight pin for POSI or NEG
+      // polarity
+      // --------------------------------------------------------
+      else if (((value > 0) && (_polarity == POSITIVE)) ||
+               ((value == 0) && (_polarity == NEGATIVE)))
       {
          digitalWrite( _backlightPin, HIGH);
       }
@@ -214,6 +266,7 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
    
    // Initialise the backlight pin no nothing
    _backlightPin = LCD_NOBACKLIGHT;
+   _polarity = POSITIVE;
 }
 
 //

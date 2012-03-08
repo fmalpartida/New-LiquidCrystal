@@ -34,11 +34,11 @@
 
 
 /*!
-    @defined 
-    @abstract   Command execution time on the LCD.
-    @discussion This defines how long a command takes to execute by the LCD.
-      The time is expressed in micro-seconds.
-*/
+ @defined 
+ @abstract   Command execution time on the LCD.
+ @discussion This defines how long a command takes to execute by the LCD.
+ The time is expressed in micro-seconds.
+ */
 #define EXEC_TIME 37
 
 class LiquidCrystal : public LCD
@@ -57,6 +57,15 @@ public:
                  uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                  uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
    
+   // Constructors with backlight control
+   LiquidCrystal(uint8_t rs, uint8_t enable,
+                 uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                 uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
+                 uint8_t backlightPin, t_backlighPol pol);
+   LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+                 uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                 uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
+                 uint8_t backlightPin, t_backlighPol pol);   
    /*!
     @method     
     @abstract   4 bit LCD constructors.
@@ -68,6 +77,13 @@ public:
    LiquidCrystal(uint8_t rs, uint8_t enable,
                  uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
    
+   // Constructors with backlight control
+   LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+                 uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                 uint8_t backlightPin, t_backlighPol pol);
+   LiquidCrystal(uint8_t rs, uint8_t enable,
+                 uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                 uint8_t backlightPin, t_backlighPol pol);
    /*!
     @function
     @abstract   Send a particular value to the LCD.
@@ -88,9 +104,10 @@ public:
     @discussion Sets the pin in the device to control the backlight.
     
     @param      pin: pin assigned to the backlight
+    @param      pol: backlight pin control polarity (POSITIVE, NEGATIVE).
     */
-   void setBacklightPin ( uint8_t pin );
-      
+   void setBacklightPin ( uint8_t pin, t_backlighPol pol );
+   
    /*!
     @function
     @abstract   Switch-on/off the LCD backlight.

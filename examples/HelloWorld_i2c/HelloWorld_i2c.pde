@@ -1,9 +1,14 @@
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C lcd(0x38);  // Set the LCD I2C address
+
 
 #define BACKLIGHT_PIN     13
+
+LiquidCrystal_I2C lcd(0x38);  // Set the LCD I2C address
+
+//LiquidCrystal_I2C lcd(0x38, BACKLIGHT_PIN, POSITIVE);  // Set the LCD I2C address
+
 
 // Creat a set of new characters
 const uint8_t charBitmap[][8] = {

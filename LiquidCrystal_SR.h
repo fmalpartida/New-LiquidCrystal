@@ -121,10 +121,12 @@ public:
     @function
     @abstract   Sets the pin to control the backlight.
     @discussion Sets the pin in the device to control the backlight.
+    @warning    Currently not supported
     
     @param      mode: backlight mode (HIGH|LOW)
+    @param      pol: backlight polarity
     */
-   void setBacklightPin ( uint8_t pin );
+   void setBacklightPin ( uint8_t pin, t_backlighPol pol );
    
    /*!
     @function
