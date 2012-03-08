@@ -2,10 +2,11 @@
 #include <LiquidCrystal.h>
 
 
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 #define   CONTRAST_PIN   9
 #define   BACKLIGHT_PIN  7
 #define   CONTRAST       110
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2, BACKLIGH_PIN, POSITIVE );
+
 
 // Creat a set of new characters
 byte smiley[8] = {
@@ -49,8 +50,9 @@ void setup()
   pinMode(CONTRAST_PIN, OUTPUT);
   analogWrite ( CONTRAST_PIN, CONTRAST );
 
-  lcd.setBacklightPin ( BACKLIGHT_PIN );
-  lcd.setBacklight ( HIGH );
+  //lcd.setBacklightPin ( BACKLIGHT_PIN, POSITIVE );
+  //lcd.setBacklight ( HIGH );
+  lcd.backlight();
     
   lcd.begin(16,2);               // initialize the lcd 
 

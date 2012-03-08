@@ -34,30 +34,6 @@
 #include "I2CIO.h"
 #include "LCD.h"
 
-// Default library configuration parameters used by class constructor with
-// only the I2C address field.
-// ---------------------------------------------------------------------------
-/*!
- @defined 
- @abstract   Enable bit of the LCD
- @discussion Defines the IO of the expander connected to the LCD Enable
- */
-#define EN B01000000  // Enable bit
-
-/*!
- @defined 
- @abstract   Read/Write bit of the LCD
- @discussion Defines the IO of the expander connected to the LCD Rw pin
- */
-#define RW B00100000  // Read/Write bit
-
-/*!
- @defined 
- @abstract   Register bit of the LCD
- @discussion Defines the IO of the expander connected to the LCD Register select pin
- */
-#define RS B00010000  // Register select bit
-
 
 class LiquidCrystal_I2C : public LCD 
 {
@@ -73,6 +49,8 @@ public:
     the address can be configured using the on board jumpers.
     */
    LiquidCrystal_I2C (uint8_t lcd_Addr);
+   // Constructor with backlight control
+   LiquidCrystal_I2C (uint8_t lcd_Addr, uint8_t backlighPin, t_backlighPol pol);
    
    /*!
     @method     
@@ -87,7 +65,9 @@ public:
     @param      Rs[in] LCD Rs (Reset) pin connected to the IO extender module
     */
    LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs);
-   
+   // Constructor with backlight control
+   LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs,
+                     uint8_t backlighPin, t_backlighPol pol);   
    
    /*!
     @method     
@@ -105,9 +85,12 @@ public:
     @param      d2[in] LCD data 2 pin map on IO extender module
     @param      d3[in] LCD data 3 pin map on IO extender module
     */
-   LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+   LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
                      uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3 );
-   
+   // Constructor with backlight control
+   LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+                     uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                     uint8_t backlighPin, t_backlighPol pol);
    /*!
     @function
     @abstract   LCD initialization and associated HW.
@@ -148,7 +131,7 @@ public:
     
     @param      0: backlight off, 1..255: backlight on.
     */
-   void setBacklightPin ( uint8_t value );
+   void setBacklightPin ( uint8_t value, t_backlighPol pol );
    
    /*!
     @function

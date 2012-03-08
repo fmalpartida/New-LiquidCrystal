@@ -110,7 +110,7 @@ LiquidCrystal_I2C lcd(0x38);
 #endif
 
 #ifdef _LCD_4BIT_
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2, BACKLIGHT_PIN, POSITIVE);
 const int    CONTRAST_PIN  = 9;
 const int    CONTRAST      = 65;
 #endif
@@ -261,9 +261,12 @@ static void initHW ( void )
   analogWrite (CONTRAST_PIN, CONTRAST);
 #endif
 
+#ifdef _LCD_I2C_
    pinMode ( BACKLIGHT_PIN, OUTPUT );
    digitalWrite (BACKLIGHT_PIN, HIGH);
-   
+#else
+   myLCD->backlight();
+#endif
    pinMode ( STATUS_PIN, OUTPUT );
 
    myLCD->begin ( 20, 4 );
