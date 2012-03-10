@@ -124,10 +124,8 @@ inline static void waitUsec ( uint16_t uSec )
 #define LCD_5x10DOTS            0x04
 #define LCD_5x8DOTS             0x00
 
-#define LCD_4BIT                1
-#define LCD_8BIT                0
 
-// Define COMMAND and DATA LCD Rs
+// Define COMMAND and DATA LCD Rs (used by send method).
 // ---------------------------------------------------------------------------
 #define COMMAND                 0
 #define DATA                    1
@@ -408,15 +406,15 @@ public:
     @discussion Sets the pin in the device to control the backlight. The behaviour
     of this method is very dependent on the device. Some controllers support
     dimming some don't. Please read the actual header file for each individual
-    device. The setBacklightPin method has to be called before setting the backlight.
+    device. The setBacklightPin method has to be called before setting the backlight
+    or the adequate backlight control constructor.
     @see setBacklightPin.
     
     NOTE: The prefered methods to control the backlight are "backlight" and
     "noBacklight".
     
     @param      0..255 - the value is very dependent on the LCD, however, 0
-    will be interpreted as off. If backlight polarity set to negative, the
-    values will be inverted.
+    will be interpreted as off.
     */
    virtual void setBacklight ( uint8_t value ) { };
    
@@ -485,9 +483,9 @@ protected:
    // Internal LCD variables to control the LCD shared between all derived
    // classes.
    uint8_t _displayfunction;  // LCD_5x10DOTS or LCD_5x8DOTS, LCD_4BITMODE or 
-   // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
+                              // LCD_8BITMODE, LCD_1LINE or LCD_2LINE
    uint8_t _displaycontrol;   // LCD base control command LCD on/off, blink, cursor
-   // all commands are "ored" to its contents.
+                              // all commands are "ored" to its contents.
    uint8_t _displaymode;      // Text entry mode to the LCD
    uint8_t _numlines;         // Number of lines of the LCD, initialized with begin()
    uint8_t _cols;             // Number of columns in the LCD

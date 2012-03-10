@@ -40,7 +40,18 @@
 // ---------------------------------------------------------------------------
 
 // flags for backlight control
+/*!
+    @defined 
+    @abstract   LCD_NOBACKLIGHT
+    @discussion No BACKLIGHT MASK
+*/
 #define LCD_NOBACKLIGHT 0x00
+
+/*!
+ @defined 
+ @abstract   LCD_BACKLIGHT
+ @discussion BACKLIGHT MASK used when backlight is on
+ */
 #define LCD_BACKLIGHT   0xFF
 
 
@@ -52,149 +63,76 @@
  @abstract   Enable bit of the LCD
  @discussion Defines the IO of the expander connected to the LCD Enable
  */
-#define EN B01000000  // Enable bit
+#define EN 6  // Enable bit
 
 /*!
  @defined 
  @abstract   Read/Write bit of the LCD
  @discussion Defines the IO of the expander connected to the LCD Rw pin
  */
-#define RW B00100000  // Read/Write bit
+#define RW 5  // Read/Write bit
 
 /*!
  @defined 
  @abstract   Register bit of the LCD
  @discussion Defines the IO of the expander connected to the LCD Register select pin
  */
-#define RS B00010000  // Register select bit
+#define RS 4  // Register select bit
+
+/*!
+ @defined 
+ @abstract   LCD dataline allocation this library only supports 4 bit LCD control
+ mode.
+ @discussion D4, D5, D6, D7 LCD data lines pin mapping of the extender module
+*/
+#define D4 0
+#define D5 1
+#define D6 2
+#define D7 3
 
 
 // CONSTRUCTORS
 // ---------------------------------------------------------------------------
 LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
 {
-   _Addr = lcd_Addr;
-   
-   _backlightPinMask = 0x0;
-   _backlightStsMask = LCD_NOBACKLIGHT;
-   _polarity = POSITIVE;
-   
-   _En = EN;
-   _Rw = RW;
-   _Rs = RS;
-   
-   // Initialise default values data[0] pin 0, data[1] pin 1, ...
-   for ( uint8_t i = 0; i < 4; i++ )
-   {
-      _data_pins[i] = ( 1 << i );
-   }
+   config(lcd_Addr, EN, RW, RS, D4, D5, D6, D7);
 }
 
 
 LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t backlighPin, 
                                      t_backlighPol pol = POSITIVE)
 {
-   _Addr = lcd_Addr;
-   
-   _backlightPinMask = 0x0;
-   _backlightStsMask = LCD_NOBACKLIGHT;
-   _polarity = POSITIVE;
-   
-   _En = EN;
-   _Rw = RW;
-   _Rs = RS;
-   
-   // Initialise default values data[0] pin 0, data[1] pin 1, ...
-   for ( uint8_t i = 0; i < 4; i++ )
-   {
-      _data_pins[i] = ( 1 << i );
-   }
+   config(lcd_Addr, EN, RW, RS, D4, D5, D6, D7);
    setBacklightPin(backlighPin, pol);
 }
 
 LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
                                      uint8_t Rs)
 {
-   _Addr = lcd_Addr;
-   
-   _backlightPinMask = 0;
-   _backlightStsMask = LCD_NOBACKLIGHT;
-   _polarity = POSITIVE;
-   
-   _En = ( 1 << En );
-   _Rw = ( 1 << Rw );
-   _Rs = ( 1 << Rs );
-   
-   // Initialise default values data[0] pin 0, data[1] pin 1, ...
-   for ( uint8_t i = 0; i < 4; i++ )
-   {
-      _data_pins[i] = ( 1 << i );
-   }
+   config(lcd_Addr, En, Rw, Rs, D4, D5, D6, D7);
 }
 
 LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
                                      uint8_t Rs, uint8_t backlighPin, 
                                      t_backlighPol pol = POSITIVE)
 {
-   _Addr = lcd_Addr;
-   
-   _backlightPinMask = 0;
-   _backlightStsMask = LCD_NOBACKLIGHT;
-   _polarity = POSITIVE;
-   
-   _En = ( 1 << En );
-   _Rw = ( 1 << Rw );
-   _Rs = ( 1 << Rs );
-   
-   // Initialise default values data[0] pin 0, data[1] pin 1, ...
-   for ( uint8_t i = 0; i < 4; i++ )
-   {
-      _data_pins[i] = ( 1 << i );
-   }
+   config(lcd_Addr, En, Rw, Rs, D4, D5, D6, D7);
    setBacklightPin(backlighPin, pol);
 }
 
 LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
-                                     uint8_t Rs, uint8_t d0, uint8_t d1,
-                                     uint8_t d2, uint8_t d3 )
+                                     uint8_t Rs, uint8_t d4, uint8_t d5,
+                                     uint8_t d6, uint8_t d7 )
 {
-   _Addr = lcd_Addr;
-   
-   _backlightPinMask = 0;
-   _backlightStsMask = LCD_NOBACKLIGHT;
-   _polarity = POSITIVE;
-   
-   _En = ( 1 << En );
-   _Rw = ( 1 << Rw );
-   _Rs = ( 1 << Rs );
-   
-   // Initialise pin mapping
-   _data_pins[0] = ( 1 << d0 );
-   _data_pins[1] = ( 1 << d1 );
-   _data_pins[2] = ( 1 << d2 );
-   _data_pins[3] = ( 1 << d3 );
+   config(lcd_Addr, En, Rw, Rs, d4, d5, d6, d7);
 }
 
 LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
-                                     uint8_t Rs, uint8_t d0, uint8_t d1,
-                                     uint8_t d2, uint8_t d3, uint8_t backlighPin, 
+                                     uint8_t Rs, uint8_t d4, uint8_t d5,
+                                     uint8_t d6, uint8_t d7, uint8_t backlighPin, 
                                      t_backlighPol pol = POSITIVE )
 {
-   _Addr = lcd_Addr;
-   
-   _backlightPinMask = 0;
-   _backlightStsMask = LCD_NOBACKLIGHT;
-   _polarity = POSITIVE;
-   
-   _En = ( 1 << En );
-   _Rw = ( 1 << Rw );
-   _Rs = ( 1 << Rs );
-   
-   // Initialise pin mapping
-   _data_pins[0] = ( 1 << d0 );
-   _data_pins[1] = ( 1 << d1 );
-   _data_pins[2] = ( 1 << d2 );
-   _data_pins[3] = ( 1 << d3 );
+   config(lcd_Addr, En, Rw, Rs, d4, d5, d6, d7);
    setBacklightPin(backlighPin, pol);
 }
 
@@ -217,9 +155,9 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 
 //
 // setBacklightPin
-void LiquidCrystal_I2C::setBacklightPin ( uint8_t pin, t_backlighPol pol = POSITIVE )
+void LiquidCrystal_I2C::setBacklightPin ( uint8_t value, t_backlighPol pol = POSITIVE )
 {
-   _backlightPinMask = ( 1 << pin );
+   _backlightPinMask = ( 1 << value );
    _polarity = pol;
 }
 
@@ -268,6 +206,30 @@ int LiquidCrystal_I2C::init()
    }
    return ( status );
 }
+
+//
+// config
+void LiquidCrystal_I2C::config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+                                 uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 )
+{
+   _Addr = lcd_Addr;
+   
+   _backlightPinMask = 0;
+   _backlightStsMask = LCD_NOBACKLIGHT;
+   _polarity = POSITIVE;
+   
+   _En = ( 1 << En );
+   _Rw = ( 1 << Rw );
+   _Rs = ( 1 << Rs );
+   
+   // Initialise pin mapping
+   _data_pins[0] = ( 1 << d4 );
+   _data_pins[1] = ( 1 << d5 );
+   _data_pins[2] = ( 1 << d6 );
+   _data_pins[3] = ( 1 << d7 );   
+}
+
+
 
 // low level data pushing commands
 //----------------------------------------------------------------------------
@@ -322,8 +284,8 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
 
 //
 // pulseEnable
-void LiquidCrystal_I2C::pulseEnable (uint8_t _data)
+void LiquidCrystal_I2C::pulseEnable (uint8_t data)
 {
-   _i2cio.write (_data | _En);   // En HIGH
-   _i2cio.write (_data & ~_En);  // En LOW
+   _i2cio.write (data | _En);   // En HIGH
+   _i2cio.write (data & ~_En);  // En LOW
 }

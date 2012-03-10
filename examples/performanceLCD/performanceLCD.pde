@@ -25,7 +25,7 @@
 // ---------------------------------------------------------------------------
 #include <Wire.h>
 
-#define _LCD_I2C_
+#define _LCD_SR3W_
 
 #ifdef _LCD_I2C_
 #include <LiquidCrystal_I2C.h>
@@ -39,8 +39,8 @@
 #include <LiquidCrystal_SR.h>
 #endif
 
-#ifdef _LCD_SRLCD3_
-#include <LiquidCrystal_SR_LCD3.h>
+#ifdef _LCD_SR3W_
+#include <LiquidCrystal_SR3W.h>
 #endif
 
 #ifdef _LCD_SR1_
@@ -116,7 +116,7 @@ const int    BACKLIGHT_PIN = 0; // none
 const int    CONTRAST      = 0;
 #endif
 
-#ifdef _LCD_SRLCD3_
+#ifdef _LCD_SR3W_
 const int    CONTRAST_PIN  = 0; // none
 const int    BACKLIGHT_PIN = 5;
 const int    CONTRAST      = 0;
@@ -152,7 +152,7 @@ typedef struct
 {
    t_benchmarkOp   benchmark; /**< Function pointer associated to the benchmark */
    long            benchTime; /**< execution time for benchmark 1 in useconds */
-   uint8_t         numWrites; /**< Number of write cycles of the benchmark    */
+   uint16_t        numWrites; /**< Number of write cycles of the benchmark    */
 } t_benchMarks;
 
 
@@ -174,8 +174,8 @@ LiquidCrystal_SR lcd(8,7,TWO_WIRE);
 LiquidCrystal_SR1 lcd(2);
 #endif
 
-#ifdef _LCD_SRLCD3_
-LiquidCrystal_SR_LCD3 lcd(3, 4, 2);
+#ifdef _LCD_SR3W_
+LiquidCrystal_SR3W lcd(4, 3, 2);
 #endif
 
 // benchMarks definitions
@@ -189,7 +189,7 @@ extern long benchmark4 ( uint8_t );
 static t_benchMarks myBenchMarks[NUM_BENCHMARKS] =
 {
    { benchmark1, 0, (LCD_ROWS * LCD_COLUMNS) + 2 },
-   { benchmark2, 0, LCD_ROWS * LCD_COLUMNS * 6 },
+   { benchmark2, 0, LCD_ROWS * LCD_COLUMNS * 6 * 2 },
    { benchmark3, 0, 40 + 2 },
    { benchmark4, 0, 40 + 2 }
 };
@@ -457,11 +457,11 @@ void loop ()
    for ( i = 0; i < NUM_BENCHMARKS; i++ )
    {
       myBenchMarks[i].benchTime = 
-         myBenchMarks[i].benchmark (ITERATIONS)/ITERATIONS;
+         (myBenchMarks[i].benchmark (ITERATIONS))/ITERATIONS;
          Serial.println (i);
    }
    
-   float fAllWrites=0;
+   float fAllWrites=0.0;
    
    for ( i = 0; i < NUM_BENCHMARKS; i++ )
    {   
@@ -471,7 +471,7 @@ void loop ()
       Serial.print ( myBenchMarks[i].benchTime );
       Serial.print ( F(" us - ") );
       Serial.print ( F(" write: ") );
-      Serial.print ( myBenchMarks[i].benchTime / myBenchMarks[i].numWrites );
+      Serial.print ( myBenchMarks[i].benchTime / (float)myBenchMarks[i].numWrites );
       Serial.println ( F(" us") );
       fAllWrites += myBenchMarks[i].benchTime / (float)myBenchMarks[i].numWrites;
    }
