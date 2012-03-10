@@ -41,6 +41,10 @@
 // ---------------------------------------------------------------------------
 #define LCD_NOBACKLIGHT 0xFF
 
+// LCD driver configuration (4bit or 8bit driver control)
+#define LCD_4BIT                1
+#define LCD_8BIT                0
+
 // STATIC helper functions
 // ---------------------------------------------------------------------------
 

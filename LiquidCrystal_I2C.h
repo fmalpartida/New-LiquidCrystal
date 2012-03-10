@@ -80,16 +80,16 @@ public:
     @param      En[in] LCD En (Enable) pin connected to the IO extender module
     @param      Rw[in] LCD Rw (Read/write) pin connected to the IO extender module
     @param      Rs[in] LCD Rs (Reset) pin connected to the IO extender module
-    @param      d0[in] LCD data 0 pin map on IO extender module
-    @param      d1[in] LCD data 1 pin map on IO extender module
-    @param      d2[in] LCD data 2 pin map on IO extender module
-    @param      d3[in] LCD data 3 pin map on IO extender module
+    @param      d4[in] LCD data 0 pin map on IO extender module
+    @param      d5[in] LCD data 1 pin map on IO extender module
+    @param      d6[in] LCD data 2 pin map on IO extender module
+    @param      d7[in] LCD data 3 pin map on IO extender module
     */
    LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
-                     uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3 );
+                     uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 );
    // Constructor with backlight control
    LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
-                     uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                     uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
                      uint8_t backlighPin, t_backlighPol pol);
    /*!
     @function
@@ -140,9 +140,9 @@ public:
     The setBacklightPin has to be called before setting the backlight for
     this method to work. @see setBacklightPin.
     
-    @param      mode: backlight mode (HIGH|LOW)
+    @param      value: backlight mode (HIGH|LOW)
     */
-   void setBacklight ( uint8_t mode );
+   void setBacklight ( uint8_t value );
    
 private:
    
@@ -152,6 +152,24 @@ private:
     @discussion Initializes the LCD class and IO expansion module.
     */
    int  init();
+   
+   /*!
+    @function
+    @abstract   Initialises class private variables
+    @discussion This is the class single point for initialising private variables.
+    
+    @param      lcd_Addr[in] I2C address of the IO expansion module. For I2CLCDextraIO,
+    the address can be configured using the on board jumpers.
+    @param      En[in] LCD En (Enable) pin connected to the IO extender module
+    @param      Rw[in] LCD Rw (Read/write) pin connected to the IO extender module
+    @param      Rs[in] LCD Rs (Reset) pin connected to the IO extender module
+    @param      d4[in] LCD data 0 pin map on IO extender module
+    @param      d5[in] LCD data 1 pin map on IO extender module
+    @param      d6[in] LCD data 2 pin map on IO extender module
+    @param      d7[in] LCD data 3 pin map on IO extender module
+    */
+   void config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+                uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 );
    
    /*!
     @method     
