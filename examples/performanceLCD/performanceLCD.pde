@@ -25,7 +25,7 @@
 // ---------------------------------------------------------------------------
 #include <Wire.h>
 
-#define _LCD_SR3W_
+#define _LCD_I2C_
 
 #ifdef _LCD_I2C_
 #include <LiquidCrystal_I2C.h>
@@ -175,7 +175,7 @@ LiquidCrystal_SR1 lcd(2);
 #endif
 
 #ifdef _LCD_SR3W_
-LiquidCrystal_SR3W lcd(4, 3, 2);
+LiquidCrystal_SR3W lcd(3, 2, 4);
 #endif
 
 // benchMarks definitions
