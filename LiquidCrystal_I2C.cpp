@@ -278,7 +278,6 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
    }
    
    pinMapValue |= mode | _backlightStsMask;
-   _i2cio.write ( pinMapValue );
    pulseEnable ( pinMapValue );
 }
 
