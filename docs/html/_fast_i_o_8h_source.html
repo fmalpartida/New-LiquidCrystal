@@ -101,70 +101,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00038"></a>00038 <span class="preprocessor"></span>
 <a name="l00039"></a>00039 <span class="preprocessor">#include &lt;pins_arduino.h&gt;</span> <span class="comment">// pleasing sanguino core</span>
 <a name="l00040"></a>00040 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
-<a name="l00041"></a>00041 <span class="preprocessor">#include &lt;util/delay.h&gt;</span>
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="preprocessor">#ifdef __AVR__</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span><span class="preprocessor">#include &lt;util/atomic.h&gt;</span> <span class="comment">// for critical section management</span>
-<a name="l00045"></a>00045 <span class="preprocessor">#endif</span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span>
-<a name="l00047"></a>00047 
-<a name="l00053"></a>00053 <span class="preprocessor">#ifndef __AVR__</span>
-<a name="l00054"></a><a class="code" href="_fast_i_o_8h.html#a32f90d0ad5c1295c97cc1e79936aadd6">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define FIO_FALLBACK</span>
-<a name="l00055"></a><a class="code" href="_fast_i_o_8h.html#ad2374bbbb11bdb9abeeec0db769afd30">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define ATOMIC_BLOCK</span>
-<a name="l00056"></a><a class="code" href="_fast_i_o_8h.html#a362c18b15a09703e42e1c246c47420ef">00056</a> <span class="preprocessor"></span><span class="preprocessor">#define ATOMIC_RESTORESTATE</span>
-<a name="l00057"></a>00057 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span>
-<a name="l00059"></a>00059 <span class="comment">// PUBLIC CONSTANTS DEFINITIONS</span>
-<a name="l00060"></a>00060 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00066"></a><a class="code" href="_fast_i_o_8h.html#a688a4adbb87520a2b68681bd6bfb199e">00066</a> <span class="comment"></span><span class="preprocessor">#define SKIP 0x23</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>
-<a name="l00068"></a>00068 <span class="comment">// PUBLIC TYPE DEFINITIONS</span>
-<a name="l00069"></a>00069 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00070"></a><a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">00070</a> <span class="keyword">typedef</span> uint8_t <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a>;
-<a name="l00071"></a>00071 
-<a name="l00078"></a>00078 <span class="preprocessor">#ifndef FIO_FALLBACK</span>
-<a name="l00079"></a>00079 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">volatile</span> uint8_t *<a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a>;
-<a name="l00080"></a>00080 <span class="preprocessor">#else</span>
-<a name="l00081"></a>00081 <span class="preprocessor"></span><span class="comment">// remove volatile to give optimizer a chance</span>
-<a name="l00082"></a><a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">00082</a> <span class="keyword">typedef</span> uint8_t <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a>;
-<a name="l00083"></a>00083 <span class="preprocessor">#endif</span>
-<a name="l00084"></a>00084 <span class="preprocessor"></span>
-<a name="l00092"></a>00092 <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> <a class="code" href="_fast_i_o_8cpp.html#a04210cc785c3b4a11c86f794949c327f">fio_pinToOutputRegister</a>(uint8_t pin, uint8_t initial_state = LOW);
-<a name="l00093"></a>00093 
-<a name="l00101"></a>00101 <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> <a class="code" href="_fast_i_o_8cpp.html#afb934fc0ded94cbb5ed8ed14e2a123ed">fio_pinToInputRegister</a>(uint8_t pin);
-<a name="l00102"></a>00102 
-<a name="l00110"></a>00110 <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> <a class="code" href="_fast_i_o_8cpp.html#abe64155b836ffa8a137eb17d17995f84">fio_pinToBit</a>(uint8_t pin);
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="preprocessor">#ifdef __AVR__</span>
+<a name="l00043"></a>00043 <span class="preprocessor"></span><span class="preprocessor">#include &lt;util/atomic.h&gt;</span> <span class="comment">// for critical section management</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#endif</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span>
+<a name="l00046"></a>00046 
+<a name="l00052"></a>00052 <span class="preprocessor">#ifndef __AVR__</span>
+<a name="l00053"></a><a class="code" href="_fast_i_o_8h.html#a32f90d0ad5c1295c97cc1e79936aadd6">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define FIO_FALLBACK</span>
+<a name="l00054"></a><a class="code" href="_fast_i_o_8h.html#a04971fe5fabe4129736708c494e08e6d">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define ATOMIC_BLOCK(dummy) if(true)</span>
+<a name="l00055"></a><a class="code" href="_fast_i_o_8h.html#a362c18b15a09703e42e1c246c47420ef">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define ATOMIC_RESTORESTATE</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span>
+<a name="l00058"></a>00058 <span class="comment">// PUBLIC CONSTANTS DEFINITIONS</span>
+<a name="l00059"></a>00059 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00065"></a><a class="code" href="_fast_i_o_8h.html#a688a4adbb87520a2b68681bd6bfb199e">00065</a> <span class="comment"></span><span class="preprocessor">#define SKIP 0x23</span>
+<a name="l00066"></a>00066 <span class="preprocessor"></span>
+<a name="l00067"></a>00067 <span class="comment">// PUBLIC TYPE DEFINITIONS</span>
+<a name="l00068"></a>00068 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00069"></a><a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">00069</a> <span class="keyword">typedef</span> uint8_t <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a>;
+<a name="l00070"></a>00070 
+<a name="l00077"></a>00077 <span class="preprocessor">#ifndef FIO_FALLBACK</span>
+<a name="l00078"></a>00078 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">volatile</span> uint8_t *<a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a>;
+<a name="l00079"></a>00079 <span class="preprocessor">#else</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span><span class="comment">// remove volatile to give optimizer a chance</span>
+<a name="l00081"></a><a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">00081</a> <span class="keyword">typedef</span> uint8_t <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a>;
+<a name="l00082"></a>00082 <span class="preprocessor">#endif</span>
+<a name="l00083"></a>00083 <span class="preprocessor"></span>
+<a name="l00091"></a>00091 <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> <a class="code" href="_fast_i_o_8cpp.html#a04210cc785c3b4a11c86f794949c327f">fio_pinToOutputRegister</a>(uint8_t pin, uint8_t initial_state = LOW);
+<a name="l00092"></a>00092 
+<a name="l00100"></a>00100 <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> <a class="code" href="_fast_i_o_8cpp.html#afb934fc0ded94cbb5ed8ed14e2a123ed">fio_pinToInputRegister</a>(uint8_t pin);
+<a name="l00101"></a>00101 
+<a name="l00109"></a>00109 <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> <a class="code" href="_fast_i_o_8cpp.html#abe64155b836ffa8a137eb17d17995f84">fio_pinToBit</a>(uint8_t pin);
+<a name="l00110"></a>00110 
 <a name="l00111"></a>00111 
-<a name="l00112"></a>00112 
-<a name="l00122"></a>00122 <span class="comment">// __attribute__ ((always_inline)) /* let the optimizer decide that for now */</span>
-<a name="l00123"></a>00123 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a19962d1b3fc351693779f633a36105a8">fio_digitalWrite</a> ( <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> pinRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> pinBit, uint8_t value );
-<a name="l00124"></a>00124 
-<a name="l00131"></a>00131 <span class="preprocessor">#ifndef FIO_FALLBACK</span>
-<a name="l00132"></a>00132 <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_LOW(reg,bit) *reg &amp;= ~bit</span>
-<a name="l00133"></a>00133 <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_HIGH(reg,bit) *reg |= bit</span>
-<a name="l00134"></a>00134 <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_SWITCH(reg,bit) *reg ^= bit</span>
-<a name="l00135"></a>00135 <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_SWITCHTO(reg,bit,val) fio_digitalWrite_SWITCH(reg,bit)</span>
-<a name="l00136"></a>00136 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00137"></a>00137 <span class="preprocessor"></span><span class="comment">// reg -&gt; dummy NULL, bit -&gt; pin</span>
-<a name="l00138"></a><a class="code" href="_fast_i_o_8h.html#a89e1c62276052100c62b6c82a2e95622">00138</a> <span class="preprocessor">#define fio_digitalWrite_HIGH(reg,bit) digitalWrite(bit,HIGH)</span>
-<a name="l00139"></a><a class="code" href="_fast_i_o_8h.html#ac8f00a1bccb98109531b88fbb6e91478">00139</a> <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_LOW(reg,bit) digitalWrite(bit,LOW)</span>
-<a name="l00140"></a><a class="code" href="_fast_i_o_8h.html#a6d1dffed7f0c8f28f6c88146315f7832">00140</a> <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_SWITCH(reg,bit) digitalWrite(bit, !digitalRead(bit))</span>
-<a name="l00141"></a><a class="code" href="_fast_i_o_8h.html#accae9687fdfc5f3492fb6344d62eb190">00141</a> <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_SWITCHTO(reg,bit,val) digitalWrite(bit,val);</span>
-<a name="l00142"></a>00142 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00143"></a>00143 <span class="preprocessor"></span>
-<a name="l00153"></a>00153 <span class="keywordtype">int</span> <a class="code" href="_fast_i_o_8cpp.html#a83fc2fdc19ab3f9aade9e1a2f39e81a6">fio_digitalRead</a> ( <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> pinRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> pinBit );
-<a name="l00154"></a>00154 
-<a name="l00166"></a>00166 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>( <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> dataRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> dataBit, <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> clockRegister, 
-<a name="l00167"></a>00167                    <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> clockBit, uint8_t value, uint8_t bitOrder );
-<a name="l00168"></a>00168 
-<a name="l00179"></a>00179 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(<a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> dataRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> dataBit, <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> clockRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> clockBit);
-<a name="l00180"></a>00180 
-<a name="l00189"></a>00189 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a5b4d1684030dc620938b7c2fbdf5ced8">fio_shiftOut1</a>(<a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> shift1Register, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> shift1Bit, uint8_t value, <span class="keywordtype">boolean</span> noLatch = <span class="keyword">false</span>);
-<a name="l00197"></a>00197 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a5b4d1684030dc620938b7c2fbdf5ced8">fio_shiftOut1</a>(uint8_t pin, uint8_t value, <span class="keywordtype">boolean</span> noLatch = <span class="keyword">false</span>);
-<a name="l00205"></a>00205 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#ae4b2e099f8ade9ee674d1565669e870a">fio_shiftOut1_init</a>(<a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> shift1Register, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> shift1Bit);
-<a name="l00212"></a>00212 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#ae4b2e099f8ade9ee674d1565669e870a">fio_shiftOut1_init</a>(uint8_t pin);
-<a name="l00213"></a>00213 
-<a name="l00214"></a>00214 <span class="preprocessor">#endif // FAST_IO_H</span>
+<a name="l00121"></a>00121 <span class="comment">// __attribute__ ((always_inline)) /* let the optimizer decide that for now */</span>
+<a name="l00122"></a>00122 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a19962d1b3fc351693779f633a36105a8">fio_digitalWrite</a> ( <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> pinRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> pinBit, uint8_t value );
+<a name="l00123"></a>00123 
+<a name="l00130"></a>00130 <span class="preprocessor">#ifndef FIO_FALLBACK</span>
+<a name="l00131"></a>00131 <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_LOW(reg,bit) *reg &amp;= ~bit</span>
+<a name="l00132"></a>00132 <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_HIGH(reg,bit) *reg |= bit</span>
+<a name="l00133"></a>00133 <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_SWITCH(reg,bit) *reg ^= bit</span>
+<a name="l00134"></a>00134 <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_SWITCHTO(reg,bit,val) fio_digitalWrite_SWITCH(reg,bit)</span>
+<a name="l00135"></a>00135 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00136"></a>00136 <span class="preprocessor"></span><span class="comment">// reg -&gt; dummy NULL, bit -&gt; pin</span>
+<a name="l00137"></a><a class="code" href="_fast_i_o_8h.html#a89e1c62276052100c62b6c82a2e95622">00137</a> <span class="preprocessor">#define fio_digitalWrite_HIGH(reg,bit) digitalWrite(bit,HIGH)</span>
+<a name="l00138"></a><a class="code" href="_fast_i_o_8h.html#ac8f00a1bccb98109531b88fbb6e91478">00138</a> <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_LOW(reg,bit) digitalWrite(bit,LOW)</span>
+<a name="l00139"></a><a class="code" href="_fast_i_o_8h.html#a6d1dffed7f0c8f28f6c88146315f7832">00139</a> <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_SWITCH(reg,bit) digitalWrite(bit, !digitalRead(bit))</span>
+<a name="l00140"></a><a class="code" href="_fast_i_o_8h.html#accae9687fdfc5f3492fb6344d62eb190">00140</a> <span class="preprocessor"></span><span class="preprocessor">#define fio_digitalWrite_SWITCHTO(reg,bit,val) digitalWrite(bit,val);</span>
+<a name="l00141"></a>00141 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00142"></a>00142 <span class="preprocessor"></span>
+<a name="l00152"></a>00152 <span class="keywordtype">int</span> <a class="code" href="_fast_i_o_8cpp.html#a83fc2fdc19ab3f9aade9e1a2f39e81a6">fio_digitalRead</a> ( <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> pinRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> pinBit );
+<a name="l00153"></a>00153 
+<a name="l00165"></a>00165 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>( <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> dataRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> dataBit, <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> clockRegister, 
+<a name="l00166"></a>00166                    <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> clockBit, uint8_t value, uint8_t bitOrder );
+<a name="l00167"></a>00167 
+<a name="l00178"></a>00178 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a56c72b9f00680662229895ab22aaa743">fio_shiftOut</a>(<a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> dataRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> dataBit, <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> clockRegister, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> clockBit);
+<a name="l00179"></a>00179 
+<a name="l00188"></a>00188 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a5b4d1684030dc620938b7c2fbdf5ced8">fio_shiftOut1</a>(<a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> shift1Register, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> shift1Bit, uint8_t value, <span class="keywordtype">boolean</span> noLatch = <span class="keyword">false</span>);
+<a name="l00196"></a>00196 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#a5b4d1684030dc620938b7c2fbdf5ced8">fio_shiftOut1</a>(uint8_t pin, uint8_t value, <span class="keywordtype">boolean</span> noLatch = <span class="keyword">false</span>);
+<a name="l00204"></a>00204 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#ae4b2e099f8ade9ee674d1565669e870a">fio_shiftOut1_init</a>(<a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> shift1Register, <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> shift1Bit);
+<a name="l00211"></a>00211 <span class="keywordtype">void</span> <a class="code" href="_fast_i_o_8cpp.html#ae4b2e099f8ade9ee674d1565669e870a">fio_shiftOut1_init</a>(uint8_t pin);
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213 <span class="preprocessor">#endif // FAST_IO_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -172,7 +171,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -181,7 +180,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:17:06 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 14 2012 00:39:12 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -157,7 +157,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00094"></a>00094    <span class="comment">// 50</span>
 <a name="l00095"></a>00095    <span class="comment">// ---------------------------------------------------------------------------</span>
 <a name="l00096"></a>00096    delay (100); <span class="comment">// 100ms delay</span>
-<a name="l00097"></a>00097       
+<a name="l00097"></a>00097    
 <a name="l00098"></a>00098    <span class="comment">//put the LCD into 4 bit or 8 bit mode</span>
 <a name="l00099"></a>00099    <span class="comment">// -------------------------------------</span>
 <a name="l00100"></a>00100    <span class="keywordflow">if</span> (! (<a class="code" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a> &amp; <a class="code" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>)) 
@@ -166,19 +166,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00103"></a>00103       <span class="comment">// figure 24, pg 46</span>
 <a name="l00104"></a>00104       
 <a name="l00105"></a>00105       <span class="comment">// we start in 8bit mode, try to set 4 bit mode</span>
-<a name="l00106"></a>00106       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a> ( 0x03 );
+<a name="l00106"></a>00106       <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(0x03, <a class="code" href="_l_c_d_8h.html#aa1e30e32b6c2cf8d90a9281328472dbe">FOUR_BITS</a>);
 <a name="l00107"></a>00107       delayMicroseconds(4500); <span class="comment">// wait min 4.1ms</span>
 <a name="l00108"></a>00108       
 <a name="l00109"></a>00109       <span class="comment">// second try</span>
-<a name="l00110"></a>00110       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a> ( 0x03 );
+<a name="l00110"></a>00110       <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a> ( 0x03, <a class="code" href="_l_c_d_8h.html#aa1e30e32b6c2cf8d90a9281328472dbe">FOUR_BITS</a> );
 <a name="l00111"></a>00111       delayMicroseconds(4500); <span class="comment">// wait min 4.1ms</span>
 <a name="l00112"></a>00112       
 <a name="l00113"></a>00113       <span class="comment">// third go!</span>
-<a name="l00114"></a>00114       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a> ( 0x03 ); 
+<a name="l00114"></a>00114       <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>( 0x03, <a class="code" href="_l_c_d_8h.html#aa1e30e32b6c2cf8d90a9281328472dbe">FOUR_BITS</a> );
 <a name="l00115"></a>00115       delayMicroseconds(150);
 <a name="l00116"></a>00116       
 <a name="l00117"></a>00117       <span class="comment">// finally, set to 4-bit interface</span>
-<a name="l00118"></a>00118       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a> ( 0x02 ); 
+<a name="l00118"></a>00118       <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a> ( 0x02, <a class="code" href="_l_c_d_8h.html#aa1e30e32b6c2cf8d90a9281328472dbe">FOUR_BITS</a> ); 
 <a name="l00119"></a>00119    } 
 <a name="l00120"></a>00120    <span class="keywordflow">else</span> 
 <a name="l00121"></a>00121    {
@@ -248,7 +248,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00185"></a>00185    {
 <a name="l00186"></a>00186       <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">command</a>(<a class="code" href="_l_c_d_8h.html#a15008b832807a208d9d88c74e6751ebf">LCD_SETDDRAMADDR</a> | (col + row_offsetsDef[row]));
 <a name="l00187"></a>00187    }
-<a name="l00188"></a>00188 
+<a name="l00188"></a>00188    
 <a name="l00189"></a>00189 }
 <a name="l00190"></a>00190 
 <a name="l00191"></a>00191 <span class="comment">// Turn the display on/off</span>
@@ -356,35 +356,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00293"></a>00293    }
 <a name="l00294"></a>00294 }
 <a name="l00295"></a>00295 
-<a name="l00296"></a><a class="code" href="class_l_c_d.html#aba8867fe2210cbfa8db869208709be10">00296</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#aba8867fe2210cbfa8db869208709be10">LCD::backlight</a> ( <span class="keywordtype">void</span> )
-<a name="l00297"></a>00297 {
-<a name="l00298"></a>00298    <a class="code" href="class_l_c_d.html#a3305570d7b37eb93f2cf840263c15828">setBacklight</a>(255);
-<a name="l00299"></a>00299 }
-<a name="l00300"></a>00300 
-<a name="l00301"></a><a class="code" href="class_l_c_d.html#a2a331b4e142734411b2f1cfaffe7a488">00301</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2a331b4e142734411b2f1cfaffe7a488">LCD::noBacklight</a> ( <span class="keywordtype">void</span> )
-<a name="l00302"></a>00302 {
-<a name="l00303"></a>00303    <a class="code" href="class_l_c_d.html#a3305570d7b37eb93f2cf840263c15828">setBacklight</a>(0);
-<a name="l00304"></a>00304 }
-<a name="l00305"></a>00305 
-<a name="l00306"></a>00306 <span class="comment">// General LCD commands - generic methods used by the rest of the commands</span>
-<a name="l00307"></a>00307 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00308"></a><a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">00308</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">LCD::command</a>(uint8_t value) 
-<a name="l00309"></a>00309 {
-<a name="l00310"></a>00310    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#ab0d87e07831e7e4943caef187872123e">COMMAND</a>);
-<a name="l00311"></a>00311 }
-<a name="l00312"></a>00312 
-<a name="l00313"></a>00313 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
-<a name="l00314"></a><a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">00314</a> <span class="preprocessor"></span><span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">LCD::write</a>(uint8_t value)
-<a name="l00315"></a>00315 {
-<a name="l00316"></a>00316    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>);
-<a name="l00317"></a>00317 }
-<a name="l00318"></a>00318 <span class="preprocessor">#else</span>
-<a name="l00319"></a>00319 <span class="preprocessor"></span><span class="keywordtype">size_t</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">LCD::write</a>(uint8_t value) 
-<a name="l00320"></a>00320 {
-<a name="l00321"></a>00321    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>);
-<a name="l00322"></a>00322    <span class="keywordflow">return</span> 1;             <span class="comment">// assume OK</span>
-<a name="l00323"></a>00323 }
-<a name="l00324"></a>00324 <span class="preprocessor">#endif</span>
+<a name="l00296"></a>00296 <span class="comment">//</span>
+<a name="l00297"></a>00297 <span class="comment">// Switch on the backlight</span>
+<a name="l00298"></a><a class="code" href="class_l_c_d.html#aba8867fe2210cbfa8db869208709be10">00298</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#aba8867fe2210cbfa8db869208709be10">LCD::backlight</a> ( <span class="keywordtype">void</span> )
+<a name="l00299"></a>00299 {
+<a name="l00300"></a>00300    <a class="code" href="class_l_c_d.html#a3305570d7b37eb93f2cf840263c15828">setBacklight</a>(255);
+<a name="l00301"></a>00301 }
+<a name="l00302"></a>00302 
+<a name="l00303"></a>00303 <span class="comment">//</span>
+<a name="l00304"></a>00304 <span class="comment">// Switch off the backlight</span>
+<a name="l00305"></a><a class="code" href="class_l_c_d.html#a2a331b4e142734411b2f1cfaffe7a488">00305</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2a331b4e142734411b2f1cfaffe7a488">LCD::noBacklight</a> ( <span class="keywordtype">void</span> )
+<a name="l00306"></a>00306 {
+<a name="l00307"></a>00307    <a class="code" href="class_l_c_d.html#a3305570d7b37eb93f2cf840263c15828">setBacklight</a>(0);
+<a name="l00308"></a>00308 }
+<a name="l00309"></a>00309 
+<a name="l00310"></a>00310 <span class="comment">// General LCD commands - generic methods used by the rest of the commands</span>
+<a name="l00311"></a>00311 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00312"></a><a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">00312</a> <span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a31a0cb42497d83cdc9cb8000828f7190">LCD::command</a>(uint8_t value) 
+<a name="l00313"></a>00313 {
+<a name="l00314"></a>00314    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#ab0d87e07831e7e4943caef187872123e">COMMAND</a>);
+<a name="l00315"></a>00315 }
+<a name="l00316"></a>00316 
+<a name="l00317"></a>00317 <span class="preprocessor">#if (ARDUINO &lt;  100)</span>
+<a name="l00318"></a><a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">00318</a> <span class="preprocessor"></span><span class="keywordtype">void</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">LCD::write</a>(uint8_t value)
+<a name="l00319"></a>00319 {
+<a name="l00320"></a>00320    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>);
+<a name="l00321"></a>00321 }
+<a name="l00322"></a>00322 <span class="preprocessor">#else</span>
+<a name="l00323"></a>00323 <span class="preprocessor"></span><span class="keywordtype">size_t</span> <a class="code" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">LCD::write</a>(uint8_t value) 
+<a name="l00324"></a>00324 {
+<a name="l00325"></a>00325    <a class="code" href="class_l_c_d.html#a8a5b6f6f448a6ca6eeb3466c370d47ab">send</a>(value, <a class="code" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>);
+<a name="l00326"></a>00326    <span class="keywordflow">return</span> 1;             <span class="comment">// assume OK</span>
+<a name="l00327"></a>00327 }
+<a name="l00328"></a>00328 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -392,7 +396,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -401,7 +405,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:17:06 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 14 2012 00:39:12 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -61,6 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Defines</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">/Users/fmalpartida/development/ardWorkspace/LiquidCrystal_I2C/LiquiCrystal_I2C/LCD.h File Reference</div>  </div>
@@ -80,14 +81,13 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ab0d87e07831e7e4943caef187872123e">COMMAND</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>&#160;&#160;&#160;1</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ac707c9605a0b9ca67aa757ad23377feb">FAST_MODE</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#aa1e30e32b6c2cf8d90a9281328472dbe">FOUR_BITS</a>&#160;&#160;&#160;2</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ad25b138788d83e67f840588754e2df2f">HOME_CLEAR_EXEC</a>&#160;&#160;&#160;2000</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a8c85cf88d8af66a47c42249d81c94641">LCD_1LINE</a>&#160;&#160;&#160;0x00</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a7987e93538df2819583ba43b81ddbb25">LCD_2LINE</a>&#160;&#160;&#160;0x08</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a31e1c14e8c2845dec3301f0ebd36b43c">LCD_4BIT</a>&#160;&#160;&#160;1</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ab8c35d355d2372090c7a347e961c9224">LCD_4BITMODE</a>&#160;&#160;&#160;0x00</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#abb3210156d88d3fe18c9352eb161fe42">LCD_5x10DOTS</a>&#160;&#160;&#160;0x04</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a9ef57e724c1b846dae0f531aff6fb464">LCD_5x8DOTS</a>&#160;&#160;&#160;0x00</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a57d84af8cf61ceee4eb91db77889f071">LCD_8BIT</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a59a57ca857dae5d89eb5f2a38c4ac6f0">LCD_8BITMODE</a>&#160;&#160;&#160;0x10</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a4b28243034cec656b0ed490ba6979752">LCD_BLINKOFF</a>&#160;&#160;&#160;0x00</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ac3b19d4e6553b9bbf18a23387e439206">LCD_BLINKON</a>&#160;&#160;&#160;0x01</td></tr>
@@ -111,6 +111,11 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a154c86a887633d0f6d9988e4dbb1f419">LCD_RETURNHOME</a>&#160;&#160;&#160;0x02</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#aae6ea856879c11dee58493184582a52f">LCD_SETCGRAMADDR</a>&#160;&#160;&#160;0x40</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a15008b832807a208d9d88c74e6751ebf">LCD_SETDDRAMADDR</a>&#160;&#160;&#160;0x80</td></tr>
+<tr><td colspan="2"><h2><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bc">t_backlighPol</a> { <a class="el" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bca03d440bbbfb042afc85347f994b44fb5">POSITIVE</a>, 
+<a class="el" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bca62d66a51fa7574c652597716f7709865">NEGATIVE</a>
+ }</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> (uint16_t uSec)</td></tr>
@@ -127,7 +132,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00132">132</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00130">130</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -142,7 +147,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00133">133</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00131">131</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -162,6 +167,21 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa1e30e32b6c2cf8d90a9281328472dbe"></a><!-- doxytag: member="LCD.h::FOUR_BITS" ref="aa1e30e32b6c2cf8d90a9281328472dbe" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOUR_BITS&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00132">132</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ad25b138788d83e67f840588754e2df2f"></a><!-- doxytag: member="LCD.h::HOME_CLEAR_EXEC" ref="ad25b138788d83e67f840588754e2df2f" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +194,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 <p>Defines the duration of the home and clear commands  This constant defines the time it takes for the home and clear commands in the <a class="el" href="class_l_c_d.html">LCD</a> - Time in microseconds. </p>
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00141">141</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00140">140</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -205,21 +225,6 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00122">122</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a31e1c14e8c2845dec3301f0ebd36b43c"></a><!-- doxytag: member="LCD.h::LCD_4BIT" ref="a31e1c14e8c2845dec3301f0ebd36b43c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LCD_4BIT&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00127">127</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -265,21 +270,6 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00125">125</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a57d84af8cf61ceee4eb91db77889f071"></a><!-- doxytag: member="LCD.h::LCD_8BIT" ref="a57d84af8cf61ceee4eb91db77889f071" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LCD_8BIT&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00128">128</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -629,6 +619,30 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<hr/><h2>Enumeration Type Documentation</h2>
+<a class="anchor" id="aeeef728bf4726268aa5e99391a1502bc"></a><!-- doxytag: member="LCD.h::t_backlighPol" ref="aeeef728bf4726268aa5e99391a1502bc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bc">t_backlighPol</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="aeeef728bf4726268aa5e99391a1502bca03d440bbbfb042afc85347f994b44fb5"></a><!-- doxytag: member="POSITIVE" ref="aeeef728bf4726268aa5e99391a1502bca03d440bbbfb042afc85347f994b44fb5" args="" -->POSITIVE</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aeeef728bf4726268aa5e99391a1502bca62d66a51fa7574c652597716f7709865"></a><!-- doxytag: member="NEGATIVE" ref="aeeef728bf4726268aa5e99391a1502bca62d66a51fa7574c652597716f7709865" args="" -->NEGATIVE</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00147">147</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+
+</div>
+</div>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a6eac41e4be58d7736ac0c19de225c0dc"></a><!-- doxytag: member="LCD.h::waitUsec" ref="a6eac41e4be58d7736ac0c19de225c0dc" args="(uint16_t uSec)" -->
 <div class="memitem">
@@ -663,7 +677,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -672,7 +686,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:17:07 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 14 2012 00:39:12 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

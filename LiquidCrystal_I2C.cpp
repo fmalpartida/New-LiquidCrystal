@@ -41,10 +41,10 @@
 
 // flags for backlight control
 /*!
-    @defined 
-    @abstract   LCD_NOBACKLIGHT
-    @discussion No BACKLIGHT MASK
-*/
+ @defined 
+ @abstract   LCD_NOBACKLIGHT
+ @discussion NO BACKLIGHT MASK
+ */
 #define LCD_NOBACKLIGHT 0x00
 
 /*!
@@ -84,7 +84,7 @@
  @abstract   LCD dataline allocation this library only supports 4 bit LCD control
  mode.
  @discussion D4, D5, D6, D7 LCD data lines pin mapping of the extender module
-*/
+ */
 #define D4 0
 #define D5 1
 #define D6 2
@@ -210,7 +210,7 @@ int LiquidCrystal_I2C::init()
 //
 // config
 void LiquidCrystal_I2C::config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
-                                 uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 )
+                                uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 )
 {
    _Addr = lcd_Addr;
    

@@ -85,7 +85,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">LiquidCrystal_SR</a> (uint8_t srdata, uint8_t srclock, uint8_t enable)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">send</a> (uint8_t value, uint8_t mode)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">setBacklight</a> (uint8_t mode)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">setBacklightPin</a> (uint8_t pin)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a5bfc0dcc1f042bcb59992493a3a7231d">setBacklightPin</a> (uint8_t pin, <a class="el" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bc">t_backlighPol</a> pol)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
@@ -191,7 +191,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  Switch-on/off the <a class="el" href="class_l_c_d.html">LCD</a> backlight. The setBacklightPin has to be called before setting the backlight for this method to work. </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">setBacklightPin</a>.</dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_liquid_crystal___s_r.html#a5bfc0dcc1f042bcb59992493a3a7231d">setBacklightPin</a>.</dd></dl>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
@@ -201,11 +201,11 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_l_c_d.html#a3305570d7b37eb93f2cf840263c15828">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00183">183</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00193">193</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3025b6e19c6b9c28991b13fa16ef58c9"></a><!-- doxytag: member="LiquidCrystal_SR::setBacklightPin" ref="a3025b6e19c6b9c28991b13fa16ef58c9" args="(uint8_t pin)" -->
+<a class="anchor" id="a5bfc0dcc1f042bcb59992493a3a7231d"></a><!-- doxytag: member="LiquidCrystal_SR::setBacklightPin" ref="a5bfc0dcc1f042bcb59992493a3a7231d" args="(uint8_t pin, t_backlighPol pol)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -213,23 +213,35 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void LiquidCrystal_SR::setBacklightPin </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>pin</em></td><td>)</td>
-          <td><code> [virtual]</code></td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bc">t_backlighPol</a>&#160;</td>
+          <td class="paramname"><em>pol</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Sets the pin to control the backlight.  Sets the pin in the device to control the backlight.</p>
+<p>Sets the pin to control the backlight.  Sets the pin in the device to control the backlight. </p>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Currently not supported</dd></dl>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">mode,:</td><td>backlight mode (HIGH|LOW) </td></tr>
+    <tr><td class="paramname">pol,:</td><td>backlight polarity </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_l_c_d.html#a11654e9302627743730fc4e1ea157e86">LCD</a>.</p>
+<p>Reimplemented from <a class="el" href="class_l_c_d.html#a53f4ee9b39d9ab3d7ae4d9f8dedca3bc">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00178">178</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00188">188</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
 
 </div>
 </div>
@@ -243,7 +255,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -252,7 +264,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:17:07 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 14 2012 00:39:12 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
