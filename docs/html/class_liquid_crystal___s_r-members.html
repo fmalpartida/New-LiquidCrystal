@@ -70,6 +70,7 @@ This is the complete list of members for <a class="el" href="class_liquid_crysta
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#aef093ba3f8e1016267b40ac235a0fa0f">_displayfunction</a></td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#a726b9a68d091dd8683a18e83f3a8fd3c">_displaymode</a></td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#ac1374911fb145fea430c21092ada0c06">_numlines</a></td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_l_c_d.html#a990338759d2abe10b0fb1743b7789566">_polarity</a></td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#abb3ed88d530f6283e6159b4973e7da9e">autoscroll</a>()</td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#aba8867fe2210cbfa8db869208709be10">backlight</a>(void)</td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#a3f587d1cbb2d59765ef60a5216b56fea">begin</a>(uint8_t cols, uint8_t rows, uint8_t charsize=LCD_5x8DOTS)</td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td><code> [virtual]</code></td></tr>
@@ -95,7 +96,7 @@ This is the complete list of members for <a class="el" href="class_liquid_crysta
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#abfc44b294772f09020bfa32af8a79571">scrollDisplayRight</a>()</td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">send</a>(uint8_t value, uint8_t mode)</td><td><a class="el" href="class_liquid_crystal___s_r.html">LiquidCrystal_SR</a></td><td><code> [virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">setBacklight</a>(uint8_t mode)</td><td><a class="el" href="class_liquid_crystal___s_r.html">LiquidCrystal_SR</a></td><td><code> [virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_liquid_crystal___s_r.html#a3025b6e19c6b9c28991b13fa16ef58c9">setBacklightPin</a>(uint8_t pin)</td><td><a class="el" href="class_liquid_crystal___s_r.html">LiquidCrystal_SR</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_liquid_crystal___s_r.html#a5bfc0dcc1f042bcb59992493a3a7231d">setBacklightPin</a>(uint8_t pin, t_backlighPol pol)</td><td><a class="el" href="class_liquid_crystal___s_r.html">LiquidCrystal_SR</a></td><td><code> [virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#a48220450fd152b25994eb7d0ba340e8d">setCursor</a>(uint8_t col, uint8_t row)</td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_l_c_d.html#a2d89cc2e62f72afb5f15a7fd812900e3">write</a>(uint8_t value)</td><td><a class="el" href="class_l_c_d.html">LCD</a></td><td><code> [virtual]</code></td></tr>
 </table></div>
@@ -104,7 +105,7 @@ This is the complete list of members for <a class="el" href="class_liquid_crysta
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -113,7 +114,7 @@ This is the complete list of members for <a class="el" href="class_liquid_crysta
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:17:07 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 14 2012 00:39:12 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
