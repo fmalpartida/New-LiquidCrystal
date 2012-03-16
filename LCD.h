@@ -131,6 +131,7 @@ inline static void waitUsec ( uint16_t uSec )
 #define DATA                    1
 #define FOUR_BITS               2
 
+
 /*!
  @defined 
  @abstract   Defines the duration of the home and clear commands
@@ -138,6 +139,23 @@ inline static void waitUsec ( uint16_t uSec )
  commands in the LCD - Time in microseconds.
  */
 #define HOME_CLEAR_EXEC      2000
+
+/*!
+    @defined 
+    @abstract   Backlight off constant declaration
+    @discussion Used in combination with the setBacklight to swith off the
+ LCD backlight. @set setBacklight
+*/
+#define BACKLIGHT_OFF           0
+
+/*!
+ @defined 
+ @abstract   Backlight on constant declaration
+ @discussion Used in combination with the setBacklight to swith on the
+ LCD backlight. @set setBacklight
+ */
+#define BACKLIGHT_ON          255
+
 
 /*!
  @typedef 
@@ -371,19 +389,41 @@ public:
     */
    void setCursor(uint8_t col, uint8_t row);
    
+   /*!
+    @function
+    @abstract   Switch-on the LCD backlight.
+    @discussion Switch-on the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin. 
+    */
+   void backlight ( void );
    
    /*!
     @function
-    @abstract   Send a command to the LCD.
-    @discussion This method sends a command to the LCD by setting the Register
-    select line of the LCD.
-    
-    This command shouldn't be used to drive the LCD, only to implement any other
-    feature that is not available on this library.
-    
-    @param      value[in] Command value to send to the LCD.
+    @abstract   Switch-off the LCD backlight.
+    @discussion Switch-off the LCD backlight.
+    The setBacklightPin has to be called before setting the backlight for
+    this method to work. @see setBacklightPin. 
+    */   
+   void noBacklight ( void );
+   
+   /*!
+    @function
+    @abstract   Switch on the LCD module.
+    @discussion Switch on the LCD module, it will switch on the LCD controller
+    and the backlight. This method has the same effect of calling display and
+    backlight. @see display, @see backlight
     */
-   void command(uint8_t value);
+   void on ( void );
+
+   /*!
+    @function
+    @abstract   Switch off the LCD module.
+    @discussion Switch off the LCD module, it will switch off the LCD controller
+    and the backlight. This method has the same effect of calling noDisplay and
+    noBacklight. @see display, @see backlight
+    */   
+   void off ( void );
    
    //
    // virtual class methods
@@ -420,24 +460,6 @@ public:
    
    /*!
     @function
-    @abstract   Switch-on the LCD backlight.
-    @discussion Switch-on the LCD backlight.
-    The setBacklightPin has to be called before setting the backlight for
-    this method to work. @see setBacklightPin. 
-    */
-   void backlight ( void );
-   
-   /*!
-    @function
-    @abstract   Switch-off the LCD backlight.
-    @discussion Switch-off the LCD backlight.
-    The setBacklightPin has to be called before setting the backlight for
-    this method to work. @see setBacklightPin. 
-    */   
-   void noBacklight ( void );
-   
-   /*!
-    @function
     @abstract   Writes to the LCD.
     @discussion This method writes character to the LCD in the current cursor
     position.
@@ -451,26 +473,6 @@ public:
    virtual void write(uint8_t value);
 #else
    virtual size_t write(uint8_t value);
-#endif
-   
-   
-   /*!
-    @function
-    @abstract   Send a particular value to the LCD.
-    @discussion Sends a particular value to the LCD. This is a pure abstract
-    method, therefore, it is implementation dependent of each derived class how
-    to physically write to the LCD.
-    
-    Users should never call this method.
-    
-    @param      value[in] Value to send to the LCD.
-    @result     mode LOW - write to the LCD CGRAM, HIGH - write a command to
-    the LCD.
-    */
-#if (ARDUINO <  100)
-   virtual void send(uint8_t value, uint8_t mode) { };
-#else
-   virtual void send(uint8_t value, uint8_t mode) = 0;
 #endif
    
 #if (ARDUINO <  100)
@@ -492,6 +494,37 @@ protected:
    t_backlighPol _polarity;   // Backlight polarity
    
 private:
+   /*!
+    @function
+    @abstract   Send a command to the LCD.
+    @discussion This method sends a command to the LCD by setting the Register
+    select line of the LCD.
+    
+    This command shouldn't be used to drive the LCD, only to implement any other
+    feature that is not available on this library.
+    
+    @param      value[in] Command value to send to the LCD.
+    */
+   void command(uint8_t value);
+
+   /*!
+    @function
+    @abstract   Send a particular value to the LCD.
+    @discussion Sends a particular value to the LCD. This is a pure abstract
+    method, therefore, it is implementation dependent of each derived class how
+    to physically write to the LCD.
+    
+    Users should never call this method.
+    
+    @param      value[in] Value to send to the LCD.
+    @result     mode LOW - write to the LCD CGRAM, HIGH - write a command to
+    the LCD.
+    */
+#if (ARDUINO <  100)
+   virtual void send(uint8_t value, uint8_t mode) { };
+#else
+   virtual void send(uint8_t value, uint8_t mode) = 0;
+#endif
    
 };
 

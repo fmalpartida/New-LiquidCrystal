@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoGoogle.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.1</span></div>
+   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.0</span></div>
    <div id="projectbrief">LCD Library - LCD control class hierarchy library. Drop in replacement for the LiquidCrystal Library.</div>
   </td>
  </tr>
@@ -78,6 +78,8 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_c_d.html">LCD</a></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a0f50ae3b4bdb42dd5ad74b2c604a7515">BACKLIGHT_OFF</a>&#160;&#160;&#160;0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#aa5bad1c51f5fac029f3deacfef48c54b">BACKLIGHT_ON</a>&#160;&#160;&#160;255</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ab0d87e07831e7e4943caef187872123e">COMMAND</a>&#160;&#160;&#160;0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#aad9ae913bdfab20dd94ad04ee2d5b045">DATA</a>&#160;&#160;&#160;1</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#ac707c9605a0b9ca67aa757ad23377feb">FAST_MODE</a></td></tr>
@@ -121,6 +123,38 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_c_d_8h.html#a6eac41e4be58d7736ac0c19de225c0dc">waitUsec</a> (uint16_t uSec)</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="a0f50ae3b4bdb42dd5ad74b2c604a7515"></a><!-- doxytag: member="LCD.h::BACKLIGHT_OFF" ref="a0f50ae3b4bdb42dd5ad74b2c604a7515" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BACKLIGHT_OFF&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Backlight off constant declaration  Used in combination with the setBacklight to swith off the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  setBacklight </p>
+
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00149">149</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa5bad1c51f5fac029f3deacfef48c54b"></a><!-- doxytag: member="LCD.h::BACKLIGHT_ON" ref="aa5bad1c51f5fac029f3deacfef48c54b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BACKLIGHT_ON&#160;&#160;&#160;255</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Backlight on constant declaration  Used in combination with the setBacklight to swith on the <a class="el" href="class_l_c_d.html">LCD</a> backlight.  setBacklight </p>
+
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00157">157</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ab0d87e07831e7e4943caef187872123e"></a><!-- doxytag: member="LCD.h::COMMAND" ref="ab0d87e07831e7e4943caef187872123e" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +228,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 <p>Defines the duration of the home and clear commands  This constant defines the time it takes for the home and clear commands in the <a class="el" href="class_l_c_d.html">LCD</a> - Time in microseconds. </p>
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00140">140</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00141">141</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -639,7 +673,7 @@ Functions</h2></td></tr>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00147">147</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
+<p>Definition at line <a class="el" href="_l_c_d_8h_source.html#l00165">165</a> of file <a class="el" href="_l_c_d_8h_source.html">LCD.h</a>.</p>
 
 </div>
 </div>
@@ -686,7 +720,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 14 2012 00:39:12 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Mar 16 2012 21:24:40 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

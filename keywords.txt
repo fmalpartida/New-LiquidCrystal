@@ -8,14 +8,13 @@
 
 LiquidCrystal_SR        KEYWORD1
 LiquidCrystal_I2C    	KEYWORD1
-LiquidCrystal_SR_LCD3	KEYWORD1
+LiquidCrystal_SR3W      KEYWORD1
 LiquidCrystal        	KEYWORD1
 LCD                  	KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)
 ###########################################
-init                 KEYWORD2
 begin                KEYWORD2
 clear                KEYWORD2
 home                 KEYWORD2
@@ -38,6 +37,16 @@ setCursor            KEYWORD2
 print                KEYWORD2
 write                KEYWORD2
 println              KEYWORD2
+backlight            KEYWORD2
+noBacklight          KEYWORD2
+on                   KEYWORD2
+off                  KEYWORD2
+setBacklightPin      KEYWORD2
+setBacklight         KEYWORD2
 ###########################################
 # Constants (LITERAL1)
 ###########################################
+POSITIVE             LITERAL1
+NEGATIVE             LITERAL1
+BACKLIGHT_ON         LITERAL1
+BACKLIGHT_OFF        LITERAL1
