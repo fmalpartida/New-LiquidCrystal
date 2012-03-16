@@ -171,6 +171,7 @@ void LiquidCrystal_SR3W::setBacklightPin ( uint8_t value, t_backlighPol pol = PO
    _backlightPinMask = ( 1 << value );
    _backlightStsMask = LCD_NOBACKLIGHT;
    _polarity = pol;
+   setBacklight (BACKLIGHT_OFF);     // Set backlight to off as initial setup
 }
 
 void LiquidCrystal_SR3W::setBacklight ( uint8_t value )
@@ -266,7 +267,6 @@ void LiquidCrystal_SR3W::loadSR(uint8_t value)
    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
    {
       fio_digitalWrite_HIGH(_strobe_reg, _strobe);
-      waitUsec( 1 ); // strobe pulse must be >450ns
       fio_digitalWrite_SWITCHTO(_strobe_reg, _strobe, LOW);
    }
    waitUsec( 40 ); // commands need > 37us to settle

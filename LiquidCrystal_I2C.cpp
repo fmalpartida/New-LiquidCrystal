@@ -159,6 +159,7 @@ void LiquidCrystal_I2C::setBacklightPin ( uint8_t value, t_backlighPol pol = POS
 {
    _backlightPinMask = ( 1 << value );
    _polarity = pol;
+   setBacklight(BACKLIGHT_OFF);
 }
 
 //

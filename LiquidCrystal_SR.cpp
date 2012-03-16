@@ -150,8 +150,7 @@ void LiquidCrystal_SR::shiftIt(uint8_t val)
    // to read the Enable pulse, and then reads the new contents of the SR.
    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
    {
-      fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
-      waitUsec (1);         // enable pulse must be >450ns               
+      fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);            
       fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit, LOW);
    } // end critical section
    waitUsec ( 37 );      // commands need > 37us to settle
