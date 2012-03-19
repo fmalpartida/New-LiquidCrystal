@@ -38,14 +38,16 @@
 //        |             |             |
 //   +----+-------------+-------------+-----------+
 //   |    Strobe        Data          Clock       |
-//   |          8-bit shift/latch register        |
-//   |    Qa   Qb   Qc   Qd   Qe   Qf   Qg   Qh   |
+//   |          8-bit shift/latch register        | 74HC595N
+//   |    Qa0  Qb1  Qc2  Qd3  Qe4  Qf5  Qg6  Qh7  |
 //   +----+----+----+----+----+----+----+----+----+
 //        |    |    |    |    |    |    |    
-//        |11  |12  |13  |14  |6   |5   |4    (LCD pins)
+//        |11  |12  |13  |14  |6   |5   |4   (LCD pins)
 //   +----+----+----+----+----+----+----+----+----+
 //   |    DB4  DB5  DB6  DB7  E    Rw   RS        |
 //   |                 LCD Module                 |
+//
+// NOTE: Rw is not used by the driver so it can be connected to GND.
 //
 // The functionality provided by this class and its base class is identical
 // to the original functionality of the Arduino LiquidCrystal library.

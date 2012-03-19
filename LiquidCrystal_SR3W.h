@@ -38,14 +38,16 @@
 //        |             |             |
 //   +----+-------------+-------------+-----------+
 //   |    Strobe        Data          Clock       |
-//   |          8-bit shift/latch register        |
-//   |    Qa   Qb   Qc   Qd   Qe   Qf   Qg   Qh   |
+//   |          8-bit shift/latch register        | 74HC595N
+//   |    Qa0  Qb1  Qc2  Qd3  Qe4  Qf5  Qg6  Qh7  |
 //   +----+----+----+----+----+----+----+----+----+
-//        |    |    |    |    |    |        
-//        |11  |12  |13  |14  |6   |4   
+//        |    |    |    |    |    |    |    
+//        |11  |12  |13  |14  |6   |5   |4   (LCD pins)
 //   +----+----+----+----+----+----+----+----+----+
-//   |    DB4  DB5  DB6  DB7  E    RS   Rw        |
+//   |    DB4  DB5  DB6  DB7  E    Rw   RS        |
 //   |                 LCD Module                 |
+//
+// NOTE: Rw is not used by the driver so it can be connected to GND.
 //
 // The functionality provided by this class and its base class is identical
 // to the original functionality of the Arduino LiquidCrystal library.
@@ -71,18 +73,19 @@ public:
     @discussion Initializes class variables and defines the IO driving the 
     shift register. The constructor does not initialize the LCD.
     Default configuration:
-    Shift register      LCD
-    QA                  DB4
-    QB                  DB5
-    QC                  DB6
-    QD                  DB7
-    QE                  E
-    QF                  Rs
-    GND                 Rw
+       Shift register      LCD
+       QA - 0              DB4
+       QB - 1              DB5
+       QC - 2              DB6
+       QD - 3              DB7
+       QE - 4              E
+       QF - 5              
+       QG - 6              Rs
+       GND                 Rw
     
-    @param      strobe[in] shiftregister strobe pin.
-    @param      data[in] shiftregister data pin.
-    @param      clk[in] shiftregister clock pin.
+    @param      strobe[in] digital IO connected to shiftregister strobe pin.
+    @param      data[in] digital IO connected to the shiftregister data pin.
+    @param      clk[in] digital IO connected to the shiftregister clock pin.
     */
    LiquidCrystal_SR3W(uint8_t data, uint8_t clk, uint8_t strobe);
    // Constructor with backlight control
@@ -95,16 +98,16 @@ public:
     @discussion Initializes class variables and defines the control lines of
     the LCD and the shiftregister. The constructor does not initialize the LCD.
     
-    @param      strobe[in] shiftregister strobe pin.
-    @param      data[in] shiftregister data pin.
-    @param      clk[in] shiftregister clock pin.
-    @param      En[in] LCD En (Enable) pin connected to the IO extender module
-    @param      Rw[in] LCD Rw (Read/write) pin connected to the IO extender module
-    @param      Rs[in] LCD Rs (Reg Select) pin connected to the IO extender module
-    @param      d0[in] LCD data 0 pin map on IO extender module
-    @param      d1[in] LCD data 1 pin map on IO extender module
-    @param      d2[in] LCD data 2 pin map on IO extender module
-    @param      d3[in] LCD data 3 pin map on IO extender module
+    @param      strobe[in] digital IO connected to shiftregister strobe pin.
+    @param      data[in] digital IO connected to shiftregister data pin.
+    @param      clk[in] digital IO connected to shiftregister clock pin.
+    @param      En[in] LCD En (Enable) pin connected to SR output pin.
+    @param      Rw[in] LCD Rw (Read/write) pin connected to SR output pin.
+    @param      Rs[in] LCD Rs (Reg Select) pin connected to SR output pin.
+    @param      d4[in] LCD data 4 pin map to the SR output pin.
+    @param      d5[in] LCD data 5 pin map to the SR output pin.
+    @param      d6[in] LCD data 6 pin map to the SR output pin.
+    @param      d7[in] LCD data 7 pin map to the SR output pin.
     */
    LiquidCrystal_SR3W(uint8_t data, uint8_t clk, uint8_t strobe, 
                       uint8_t En, uint8_t Rw, uint8_t Rs, 
