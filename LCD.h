@@ -55,7 +55,9 @@
  operations. If fast digitalIO operations, comment this line out or undefine
  the mode.
  */
+#ifdef __AVR__
 #define FAST_MODE
+#endif
 
 /*!
  @function
@@ -189,6 +191,7 @@ public:
     
     @param      cols[in] the number of columns that the display has
     @param      rows[in] the number of rows that the display has
+    @param      charsize[in] character size, default==LCD_5x8DOTS
     */
    virtual void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);
    
