@@ -22,12 +22,15 @@
 //
 // @author Florian Fida -
 //
+// 2012-03-16 bperrybap updated fio_shiftout() to be smaller & faster
+//
 // @todo:
 //  support chipkit:
 // (https://github.com/chipKIT32/chipKIT32-MAX/blob/master/hardware/pic32/
 //   cores/pic32/wiring_digital.c)
 // ---------------------------------------------------------------------------
 #include "FastIO.h"
+
 
 fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state)
 {
@@ -45,6 +48,7 @@ fio_register fio_pinToOutputRegister(uint8_t pin, uint8_t initial_state)
 #endif
 }
 
+
 fio_register fio_pinToInputRegister(uint8_t pin)
 {
 	pinMode(pin, INPUT);
@@ -57,7 +61,8 @@ fio_register fio_pinToInputRegister(uint8_t pin)
 #endif
 }
 
-uint8_t fio_pinToBit(uint8_t pin)
+
+fio_bit fio_pinToBit(uint8_t pin)
 {
 #ifdef FIO_FALLBACK
 	// (ab)use the bit variable to store the pin
@@ -67,7 +72,8 @@ uint8_t fio_pinToBit(uint8_t pin)
 #endif
 }
 
-void fio_digitalWrite(fio_register pinRegister, uint8_t pinBit, uint8_t value) 
+
+void fio_digitalWrite(fio_register pinRegister, fio_bit pinBit, uint8_t value) 
 {
 #ifdef FIO_FALLBACK
 	digitalWrite(pinBit, value);
@@ -106,30 +112,52 @@ void fio_shiftOut (fio_register dataRegister, fio_bit dataBit,
 	// # disable interrupts
 	int8_t i;
    
-   
-   for(i = 0; i < 8; i++)
-   {
-      if (bitOrder == LSBFIRST)
-      {
-         fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << i)));
-      }
-      else
-      {
-         fio_digitalWrite(dataRegister, dataBit, !!(value & (1 << (7 - i))));
-      }
-      ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-      {
-         fio_digitalWrite_HIGH (clockRegister, clockBit);
-         
-         // Switching is a little bit faster
-         fio_digitalWrite_SWITCH (clockRegister,clockBit);
-      } // end critical section
+	if(bitOrder == LSBFIRST)
+	{
+		for(i = 0; i < 8; i++)
+		{
+			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+			{
+				if(value & 1)
+            {
+               fio_digitalWrite_HIGH(dataRegister, dataBit);
+				}
+            else
+            {
+               fio_digitalWrite_LOW(dataRegister, dataBit);
+            }
+            value >>= 1;
+				fio_digitalWrite_HIGH (clockRegister, clockBit);
+				fio_digitalWrite_LOW (clockRegister,clockBit);
+			}
+		}
       
-   } 
+	}
+	else
+	{
+		for(i = 0; i < 8; i++)
+		{
+			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+			{
+				if(value & 0x80)
+            {
+               fio_digitalWrite_HIGH(dataRegister, dataBit);
+				}
+            else
+            {
+               fio_digitalWrite_LOW(dataRegister, dataBit);
+            }
+				value <<= 1;
+				fio_digitalWrite_HIGH (clockRegister, clockBit);
+				fio_digitalWrite_LOW (clockRegister,clockBit);
+			}
+		}
+	}
 }
 
-void fio_shiftOut(fio_register dataRegister, uint8_t dataBit, 
-                  fio_register clockRegister, uint8_t clockBit)
+
+void fio_shiftOut(fio_register dataRegister, fio_bit dataBit, 
+                  fio_register clockRegister, fio_bit clockBit)
 {
    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
    {
@@ -143,6 +171,8 @@ void fio_shiftOut(fio_register dataRegister, uint8_t dataBit,
       }
    }
 }
+
+
 void fio_shiftOut1_init(uint8_t pin)
 {
 	fio_shiftOut1_init(fio_pinToOutputRegister(pin,HIGH),fio_pinToBit(pin));
@@ -155,6 +185,8 @@ void fio_shiftOut1_init(fio_register shift1Register, fio_bit shift1Bit)
 	fio_digitalWrite(shift1Register,shift1Bit,HIGH);
 	delayMicroseconds(300);
 }
+
+
 void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value, 
                    boolean noLatch)
 {

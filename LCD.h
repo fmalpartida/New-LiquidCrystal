@@ -456,8 +456,9 @@ public:
     NOTE: The prefered methods to control the backlight are "backlight" and
     "noBacklight".
     
-    @param      0..255 - the value is very dependent on the LCD, however, 0
-    will be interpreted as off.
+    @param      0..255 - the value is very dependent on the LCD. However, 
+    BACKLIGHT_OFF will be interpreted as off and BACKLIGHT_ON will drive the
+    backlight on.
     */
    virtual void setBacklight ( uint8_t value ) { };
    
@@ -506,7 +507,8 @@ private:
     This command shouldn't be used to drive the LCD, only to implement any other
     feature that is not available on this library.
     
-    @param      value[in] Command value to send to the LCD.
+    @param      value[in] Command value to send to the LCD (COMMAND, DATA or
+    FOUR_BITS).
     */
    void command(uint8_t value);
 
