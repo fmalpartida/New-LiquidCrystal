@@ -53,6 +53,15 @@
 // to the original functionality of the Arduino LiquidCrystal library.
 //
 //
+// History
+// 2012.03.29 bperrybap - fixed constructors not properly using Rs
+//                        Fixed incorrect use of 5x10 for default font 
+//                        - now matches original LQ library.
+//                        moved delay to send() so it is per cmd/write vs shiftout()
+//                        NOTE: delay is on hairy edge of working when FAST_MODE is on.
+//                        because of waitUsec().
+//                        There is margin at 16Mhz AVR but might fail on 20Mhz AVRs.
+//                        
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
 // flags for backlight control
@@ -90,21 +99,21 @@
 /*!
  @defined 
  @abstract   Enable bit of the LCD
- @discussion Defines the IO of the expander connected to the LCD Enable
+ @discussion Defines the IO of the expander connected to the LCD's Enable
  */
 #define EN 4  // Enable bit
 
 /*!
  @defined 
  @abstract   Read/Write bit of the LCD
- @discussion Defines the IO of the expander connected to the LCD Rw pin
+ @discussion Defines the IO of the expander connected to the LCD's Rw pin
  */
 #define RW 5  // Read/Write bit
 
 /*!
  @defined 
  @abstract   Register bit of the LCD
- @discussion Defines the IO of the expander connected to the LCD Register select pin
+ @discussion Defines the IO of the expander connected to the LCD's Register select pin
  */
 #define RS 6  // Register select bit
 
@@ -137,7 +146,7 @@ LiquidCrystal_SR3W::LiquidCrystal_SR3W(uint8_t data, uint8_t clk, uint8_t strobe
                                        uint8_t En, uint8_t Rw, uint8_t Rs, 
                                        uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 )
 {
-   init( data, clk, strobe, En, Rw, En, d4, d5, d6, d7 );
+   init( data, clk, strobe, Rs, Rw, En, d4, d5, d6, d7 );
 }
 
 LiquidCrystal_SR3W::LiquidCrystal_SR3W(uint8_t data, uint8_t clk, uint8_t strobe, 
@@ -145,26 +154,29 @@ LiquidCrystal_SR3W::LiquidCrystal_SR3W(uint8_t data, uint8_t clk, uint8_t strobe
                                        uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
                                        uint8_t backlighPin, t_backlighPol pol)
 {
-   init( data, clk, strobe, En, Rw, En, d4, d5, d6, d7 );
+   init( data, clk, strobe, Rs, Rw, En, d4, d5, d6, d7 );
    setBacklightPin(backlighPin, pol);
 }
 
 
 void LiquidCrystal_SR3W::send(uint8_t value, uint8_t mode)
 {
-   // No need to use the delay routines since the time taken to write takes
-   // longer that what is needed both for toggling and enable pin an to execute
-   // the command.
    
-   if ( mode == FOUR_BITS )
+   if ( mode != FOUR_BITS )
    {
-      write4bits( (value & 0x0F), COMMAND );
-   }
-   else 
-   {
-      write4bits( (value >> 4), mode );
-      write4bits( (value & 0x0F), mode);
+      write4bits( (value >> 4), mode ); // upper nibble
    }   
+   write4bits( (value & 0x0F), mode); // lower nibble
+
+
+#if (F_CPU <= 16000000)
+   // No need to use the delay routines on AVR since the time taken to write
+   // on AVR with SR pin mapping even with fio is longer than LCD command execution.
+   waitUsec(37); //goes away on AVRs
+#else
+   delayMicroseconds ( 37 );      // commands & data writes need > 37us to complete
+#endif
+
 }
 
 
@@ -227,7 +239,7 @@ int LiquidCrystal_SR3W::init(uint8_t data, uint8_t clk, uint8_t strobe,
    _data_pins[2] = ( 1 << d6 );
    _data_pins[3] = ( 1 << d7 );
    
-   _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x10DOTS;
+   _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
    
    return (1);
 }
@@ -249,14 +261,11 @@ void LiquidCrystal_SR3W::write4bits(uint8_t value, uint8_t mode)
    
    // Is it a command or data
    // -----------------------
-   if ( mode == DATA )
-   {
-      mode = _Rs;
-   }
+   mode = ( mode == DATA ) ? _Rs : 0;
    
    pinMapValue |= mode | _backlightStsMask;
    loadSR ( pinMapValue | _En );  // Send with enable high
-   loadSR ( pinMapValue & ~_En ); // Send with enable low
+   loadSR ( pinMapValue); // Send with enable low
 }
 
 
@@ -271,5 +280,4 @@ void LiquidCrystal_SR3W::loadSR(uint8_t value)
       fio_digitalWrite_HIGH(_strobe_reg, _strobe);
       fio_digitalWrite_SWITCHTO(_strobe_reg, _strobe, LOW);
    }
-   waitUsec( 40 ); // commands need > 37us to settle
 }

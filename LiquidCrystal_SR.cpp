@@ -47,6 +47,12 @@
 //
 //
 // History
+// 2012.03.29  bperrybap - Added delays for faster fio shiftout (it got too fast)
+//             AVR needed delay. cmd/write delays are based on CPU speed so it works on pic32.
+//             Added code to support indicating two wire mode by using enable=data pin
+//             (documentation indicated this as working)
+//             Fixed incorrect use of 5x10 for default font - now matches original LQ library.
+//             can now eliminate enable pin in constructor for two wire mode.
 // 2012.01.16  Florian Fida - faster digitalWrite/shiftOut
 // 2011.10.29  fmalpartida - adaption of the library to the LCD class hierarchy.
 // 2011.07.02  Fixed a minor flaw in setCursor function. No functional change, 
@@ -112,7 +118,7 @@ void LiquidCrystal_SR::init(uint8_t srdata, uint8_t srclock, uint8_t enable,
    _srClockRegister = fio_pinToOutputRegister(srclock);
    _srClockBit = fio_pinToBit(srclock);
    
-   if (enable == TWO_WIRE)
+   if ((enable == TWO_WIRE) || (enable == srdata))
    {
       _two_wire = 1;
       _srEnableRegister = _srDataRegister;
@@ -127,7 +133,7 @@ void LiquidCrystal_SR::init(uint8_t srdata, uint8_t srclock, uint8_t enable,
    // Configure control pins as outputs
    // ------------------------------------------------------------------------
    
-   _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x10DOTS;
+   _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
 }
 
 //
@@ -173,13 +179,22 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    if ( mode != FOUR_BITS )
    {
       shiftIt(myMode | SR_EN_BIT | ((value >> 1) & 0x78)); // upper nibble
-      shiftIt(myMode | SR_EN_BIT | ((value << 3) & 0x78)); // lower nibble
+   }
 
-   }
-   else 
-   {
-      shiftIt(myMode | SR_EN_BIT | ((value << 3) & 0x78)); // lower nibble
-   }
+   shiftIt(myMode | SR_EN_BIT | ((value << 3) & 0x78)); // lower nibble
+   /*
+    * Add some delay since this code is so fast it needs some added delay
+    * even on AVRs because the shiftout is shorter than the LCD command execution time.
+    */
+#if (F_CPU <= 16000000)
+   if(_two_wire)
+   	delayMicroseconds ( 10 );
+   else
+   	delayMicroseconds ( 17 ); // 3 wire mode is faster so it must delay longer
+#else
+   delayMicroseconds ( 37 );      // commands & data writes need > 37us to complete
+#endif
+
 }
 
 //

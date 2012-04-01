@@ -192,7 +192,7 @@ void fio_shiftOut1(fio_register shift1Register, fio_bit shift1Bit, uint8_t value
 {
 	/*
 	 * this function are based on Shif1 protocol developed by Roman Black 
-    *    (http://www.romanblack.com/shift1.htm )
+    *    (http://www.romanblack.com/shift1.htm)
 	 *
 	 * test sketches:
 	 * 	http://pastebin.com/raw.php?i=2hnC9v2Z

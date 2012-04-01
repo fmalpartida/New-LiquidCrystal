@@ -21,6 +21,10 @@
 // See the corresponding SR2W header file for full details.
 //
 // History
+// 2012.03.29  bperrybap - Fixed incorrect use of 5x10 for default font 
+//                         (now matches original LQ library)
+//                         Fixed typo in SR2W mask define names
+//                         changed default backlight state to on
 // 2012.03.16  bperrybap - created/modified from SR sources to create SR2W
 // @author B. Perry - bperrybap@opensource.billsworld.billandterrie.com
 // ---------------------------------------------------------------------------
@@ -50,9 +54,9 @@ void LiquidCrystal_SR2W::init(uint8_t srdata, uint8_t srclock, t_backlighPol blp
    
 	_blPolarity = blpol;
    
-	_displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x10DOTS;
+	_displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
    
-	noBacklight(); // set default backlight state to off
+	backlight(); // set default backlight state to on
 }
 
 //
@@ -85,13 +89,16 @@ void LiquidCrystal_SR2W::loadSR(uint8_t val)
 // send
 void LiquidCrystal_SR2W::send(uint8_t value, uint8_t mode)
 {
-	uint8_t myMode = ( mode == DATA ) ? SR1W_RS_MASK : 0; 
+	uint8_t myMode = ( mode == DATA ) ? SR2W_RS_MASK : 0; 
    
+	myMode = myMode | SR2W_EN_MASK | _blMask;
+
 	if ( mode != FOUR_BITS )
-   {
-      loadSR(myMode | SR1W_EN_MASK |  _blMask | ((value >> 1) & SR1W_DATA_MASK)); // upper nibble
-   }
-	loadSR(myMode | SR1W_EN_MASK | _blMask | ((value << 3) & SR1W_DATA_MASK)); // lower nibble
+	{
+		loadSR(myMode | ((value >> 1) & SR2W_DATA_MASK)); // upper nibble
+	}
+
+	loadSR(myMode | ((value << 3) & SR2W_DATA_MASK)); // lower nibble
    
 	/*
 	 * Don't call waitUsec()
@@ -114,7 +121,7 @@ void LiquidCrystal_SR2W::setBacklight ( uint8_t value )
 	if  ( ((_blPolarity == POSITIVE) && (value > 0)) || 
         ((_blPolarity == NEGATIVE ) && ( value == 0 )) )
 	{
-		_blMask = SR1W_BL_MASK;
+		_blMask = SR2W_BL_MASK;
 	}
 	else 
 	{

@@ -37,9 +37,13 @@
 // Bit  #7   - enables the LCD enable-puls (via the diode-resistor AND "gate")
 //
 // 2 or 3 Pins required from the Arduino for Data, Clock and (optional) Enable
-// If not using Enable, the Data pin is used for the enable signal by defining
-// the same pin for Enable as for Data. Data and Clock outputs/pins goes to
-// the shiftregister.
+// If not using Enable, the Data pin will be used for the enable signal.
+// 2 wire mode can be indicated by:
+// - ommitting the enable pin in constructor
+// - defining the same pin for Enable as for Data in constructor
+// - by using the token TWO_WIRE for the enable pin.
+//
+// Data and Clock outputs/pins goes to the shiftregister.
 // LCD RW-pin hardwired to LOW (only writing to LCD).
 // Busy Flag (BF, data bit D7) is not read.
 //
@@ -47,6 +51,7 @@
 //
 //
 // History
+// 2012.03.29  bperrybap - can now eliminate enable pin in constructor for two wire mode.
 // 2011.10.29  fmalpartida - adaption of the library to the LCD class hierarchy.
 // 2011.07.02  Fixed a minor flaw in setCursor function. No functional change, 
 //             just a bit more memory efficient.
@@ -98,9 +103,9 @@ public:
     
     @param srdata[in]   pin for shiftregister data line.
     @param srclock[in]  pin for shiftregister clock line.
-    @param enable[in]   enable pin for the shiftregister.
+    @param enable[in]   optional direct enable pin for the LCD
     */
-   LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, uint8_t enable );
+   LiquidCrystal_SR ( uint8_t srdata, uint8_t srclock, uint8_t enable=TWO_WIRE );
    
    /*!
     @function
