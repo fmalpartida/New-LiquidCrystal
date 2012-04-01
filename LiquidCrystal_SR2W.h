@@ -115,6 +115,7 @@
 //
 // History
 // 2012.03.16  bperrybap - creation/adaption from SR header to create SR2W header.
+//                         Fixed typo in SR2W mask define names
 // @author B. Perry - bperrybap@opensource.billsworld.billandterrie.com
 // --------------------------------------------------------------------------------
 #ifndef _LIQUIDCRYSTAL_SR2W_
@@ -128,10 +129,10 @@
 // two-wire SR output bit constants
 // ---------------------------------------------------------------------------
 
-#define SR1W_BL_MASK 0x02
-#define SR1W_RS_MASK 0x04
-#define SR1W_DATA_MASK 0x78	// data bits are hard coded to be SR bits 6,5,4,3
-#define SR1W_EN_MASK 0x80	// cannot ever be changed
+#define SR2W_BL_MASK 0x02
+#define SR2W_RS_MASK 0x04
+#define SR2W_DATA_MASK 0x78	// data bits are hard coded to be SR bits 6,5,4,3
+#define SR2W_EN_MASK 0x80	// cannot ever be changed
 
 class LiquidCrystal_SR2W : public LCD
 {

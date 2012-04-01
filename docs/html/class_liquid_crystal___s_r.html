@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoGoogle.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.0</span></div>
+   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.1</span></div>
    <div id="projectbrief">LCD Library - LCD control class hierarchy library. Drop in replacement for the LiquidCrystal Library.</div>
   </td>
  </tr>
@@ -82,16 +82,16 @@ Inheritance diagram for LiquidCrystal_SR:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">LiquidCrystal_SR</a> (uint8_t srdata, uint8_t srclock, uint8_t enable)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#ac3fe0b48f8d4c1c941d82d1333495cfc">LiquidCrystal_SR</a> (uint8_t srdata, uint8_t srclock, uint8_t enable=TWO_WIRE)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">send</a> (uint8_t value, uint8_t mode)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">setBacklight</a> (uint8_t mode)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_liquid_crystal___s_r.html#a5bfc0dcc1f042bcb59992493a3a7231d">setBacklightPin</a> (uint8_t pin, <a class="el" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bc">t_backlighPol</a> pol)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8h_source.html#l00089">89</a> of file <a class="el" href="_liquid_crystal___s_r_8h_source.html">LiquidCrystal_SR.h</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8h_source.html#l00094">94</a> of file <a class="el" href="_liquid_crystal___s_r_8h_source.html">LiquidCrystal_SR.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a40bca9b97ad5c1e938c7dee1fd0850f2"></a><!-- doxytag: member="LiquidCrystal_SR::LiquidCrystal_SR" ref="a40bca9b97ad5c1e938c7dee1fd0850f2" args="(uint8_t srdata, uint8_t srclock, uint8_t enable)" -->
+<a class="anchor" id="ac3fe0b48f8d4c1c941d82d1333495cfc"></a><!-- doxytag: member="LiquidCrystal_SR::LiquidCrystal_SR" ref="ac3fe0b48f8d4c1c941d82d1333495cfc" args="(uint8_t srdata, uint8_t srclock, uint8_t enable=TWO_WIRE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -111,7 +111,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>enable</em>&#160;</td>
+          <td class="paramname"><em>enable</em> = <code>TWO_WIRE</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -126,12 +126,12 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">srdata[in]</td><td>pin for shiftregister data line. </td></tr>
     <tr><td class="paramname">srclock[in]</td><td>pin for shiftregister clock line. </td></tr>
-    <tr><td class="paramname">enable[in]</td><td>enable pin for the shiftregister. </td></tr>
+    <tr><td class="paramname">enable[in]</td><td>optional direct enable pin for the <a class="el" href="class_l_c_d.html">LCD</a> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00092">92</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00098">98</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
 
 </div>
 </div>
@@ -172,7 +172,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_l_c_d.html">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00166">166</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00172">172</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
 
 </div>
 </div>
@@ -201,7 +201,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_l_c_d.html#a3305570d7b37eb93f2cf840263c15828">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00192">192</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00207">207</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
 
 </div>
 </div>
@@ -241,7 +241,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_l_c_d.html#a53f4ee9b39d9ab3d7ae4d9f8dedca3bc">LCD</a>.</p>
 
-<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00187">187</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_liquid_crystal___s_r_8cpp_source.html#l00202">202</a> of file <a class="el" href="_liquid_crystal___s_r_8cpp_source.html">LiquidCrystal_SR.cpp</a>.</p>
 
 </div>
 </div>
@@ -264,7 +264,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Mar 23 2012 20:38:55 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Apr 1 2012 23:09:41 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

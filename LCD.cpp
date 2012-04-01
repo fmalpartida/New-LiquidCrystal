@@ -29,6 +29,7 @@
 //
 // @version API 1.1.0
 //
+// 2012.03.29 bperrybap - changed comparision to use LCD_5x8DOTS rather than 0
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
 #include <stdio.h>
@@ -83,7 +84,7 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    
    // for some 1 line displays you can select a 10 pixel high font
    // ------------------------------------------------------------
-   if ((dotsize != 0) && (lines == 1)) 
+   if ((dotsize != LCD_5x8DOTS) && (lines == 1)) 
    {
       _displayfunction |= LCD_5x10DOTS;
    }
@@ -148,7 +149,9 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
    _displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
    // set the entry mode
    command(LCD_ENTRYMODESET | _displaymode);
-   
+
+   backlight();
+
 }
 
 // Common LCD Commands

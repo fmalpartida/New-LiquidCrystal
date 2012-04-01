@@ -20,7 +20,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoGoogle.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.0</span></div>
+   <div id="projectname">LCD Library&#160;<span id="projectnumber">1.2.1</span></div>
    <div id="projectbrief">LCD Library - LCD control class hierarchy library. Drop in replacement for the LiquidCrystal Library.</div>
   </td>
  </tr>
@@ -100,88 +100,93 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00037"></a>00037 <span class="comment">// Bit  #7   - enables the LCD enable-puls (via the diode-resistor AND &quot;gate&quot;)</span>
 <a name="l00038"></a>00038 <span class="comment">//</span>
 <a name="l00039"></a>00039 <span class="comment">// 2 or 3 Pins required from the Arduino for Data, Clock and (optional) Enable</span>
-<a name="l00040"></a>00040 <span class="comment">// If not using Enable, the Data pin is used for the enable signal by defining</span>
-<a name="l00041"></a>00041 <span class="comment">// the same pin for Enable as for Data. Data and Clock outputs/pins goes to</span>
-<a name="l00042"></a>00042 <span class="comment">// the shiftregister.</span>
-<a name="l00043"></a>00043 <span class="comment">// LCD RW-pin hardwired to LOW (only writing to LCD).</span>
-<a name="l00044"></a>00044 <span class="comment">// Busy Flag (BF, data bit D7) is not read.</span>
+<a name="l00040"></a>00040 <span class="comment">// If not using Enable, the Data pin will be used for the enable signal.</span>
+<a name="l00041"></a>00041 <span class="comment">// 2 wire mode can be indicated by:</span>
+<a name="l00042"></a>00042 <span class="comment">// - ommitting the enable pin in constructor</span>
+<a name="l00043"></a>00043 <span class="comment">// - defining the same pin for Enable as for Data in constructor</span>
+<a name="l00044"></a>00044 <span class="comment">// - by using the token TWO_WIRE for the enable pin.</span>
 <a name="l00045"></a>00045 <span class="comment">//</span>
-<a name="l00046"></a>00046 <span class="comment">//  Original project homepage: http://code.google.com/p/arduinoshiftreglcd/</span>
-<a name="l00047"></a>00047 <span class="comment">//</span>
-<a name="l00048"></a>00048 <span class="comment">//</span>
-<a name="l00049"></a>00049 <span class="comment">// History</span>
-<a name="l00050"></a>00050 <span class="comment">// 2011.10.29  fmalpartida - adaption of the library to the LCD class hierarchy.</span>
-<a name="l00051"></a>00051 <span class="comment">// 2011.07.02  Fixed a minor flaw in setCursor function. No functional change, </span>
-<a name="l00052"></a>00052 <span class="comment">//             just a bit more memory efficient.</span>
-<a name="l00053"></a>00053 <span class="comment">//             Thanks to CapnBry (from google code and github) who noticed it.</span>
-<a name="l00054"></a>00054 <span class="comment">//             URL to his version of shiftregLCD:</span>
-<a name="l00055"></a>00055 <span class="comment">//             https://github.com/CapnBry/HeaterMeter/commit/c6beba1b46b092ab0b33bcbd0a30a201fd1f28c1</span>
-<a name="l00056"></a>00056 <span class="comment">// 2009.07.30  raron - minor corrections to the comments.</span>
-<a name="l00057"></a>00057 <span class="comment">//             Fixed timing to datasheet safe. Fixed keyword highlights.</span>
-<a name="l00058"></a>00058 <span class="comment">// 2009.07.28  Mircho / raron - a new modification to the schematics, and a</span>
-<a name="l00059"></a>00059 <span class="comment">//             more streamlined interface</span>
-<a name="l00060"></a>00060 <span class="comment">// 2009.07.27  Thanks to an excellent suggestion from mircho at the Arduiono </span>
-<a name="l00061"></a>00061 <span class="comment">//             playgrond forum, the number of wires now required is only two!</span>
-<a name="l00062"></a>00062 <span class="comment">// 2009.07.25  raron - Fixed comments. I really messed up the comments before </span>
-<a name="l00063"></a>00063 <span class="comment">//             posting this, so I had to fix it.</span>
-<a name="l00064"></a>00064 <span class="comment">//             Renamed a function, but no improvements or functional changes.</span>
-<a name="l00065"></a>00065 <span class="comment">// 2009.07.23  Incorporated some proper initialization routines</span>
-<a name="l00066"></a>00066 <span class="comment">//             inspired (lets say copy-paste-tweaked) from LiquidCrystal</span>
-<a name="l00067"></a>00067 <span class="comment">//             library improvements from LadyAda.</span>
-<a name="l00068"></a>00068 <span class="comment">// 2009.05.23  raron - first version, but based mostly (as in almost verbatim)</span>
-<a name="l00069"></a>00069 <span class="comment">//             on the &quot;official&quot; LiquidCrystal library.</span>
-<a name="l00070"></a>00070 <span class="comment">//</span>
-<a name="l00071"></a>00071 <span class="comment">//</span>
-<a name="l00072"></a>00072 <span class="comment">//</span>
-<a name="l00073"></a>00073 <span class="comment">// @author F. Malpartida - fmalpartida@gmail.com</span>
-<a name="l00074"></a>00074 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00075"></a>00075 <span class="preprocessor">#ifndef _LIQUIDCRYSTAL_SR_</span>
-<a name="l00076"></a>00076 <span class="preprocessor"></span><span class="preprocessor">#define _LIQUIDCRYSTAL_SR_</span>
-<a name="l00077"></a>00077 <span class="preprocessor"></span>
-<a name="l00078"></a>00078 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
-<a name="l00079"></a>00079 <span class="preprocessor">#include &quot;<a class="code" href="_l_c_d_8h.html">LCD.h</a>&quot;</span>
-<a name="l00080"></a>00080 <span class="preprocessor">#include &quot;<a class="code" href="_fast_i_o_8h.html">FastIO.h</a>&quot;</span>
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083 <span class="comment">// two-wire indicator constant</span>
-<a name="l00084"></a>00084 <span class="comment">// ---------------------------------------------------------------------------</span>
-<a name="l00085"></a><a class="code" href="_liquid_crystal___s_r_8h.html#a40fb1f76bc5f8ca9e6534b47bd6da27c">00085</a> <span class="preprocessor">#define TWO_WIRE  204</span>
-<a name="l00086"></a><a class="code" href="_liquid_crystal___s_r_8h.html#afdaa2bbb2cc185700864ac8d7a570ced">00086</a> <span class="preprocessor"></span><span class="preprocessor">#define SR_RS_BIT 0x04</span>
-<a name="l00087"></a><a class="code" href="_liquid_crystal___s_r_8h.html#a0075b041d82abb47f279dce482e7b087">00087</a> <span class="preprocessor"></span><span class="preprocessor">#define SR_EN_BIT 0x80</span>
-<a name="l00088"></a>00088 <span class="preprocessor"></span>
-<a name="l00089"></a><a class="code" href="class_liquid_crystal___s_r.html">00089</a> <span class="keyword">class </span><a class="code" href="class_liquid_crystal___s_r.html">LiquidCrystal_SR</a> : <span class="keyword">public</span> <a class="code" href="class_l_c_d.html">LCD</a>
-<a name="l00090"></a>00090 {
-<a name="l00091"></a>00091 <span class="keyword">public</span>:
-<a name="l00103"></a>00103    <a class="code" href="class_liquid_crystal___s_r.html#a40bca9b97ad5c1e938c7dee1fd0850f2">LiquidCrystal_SR</a> ( uint8_t srdata, uint8_t srclock, uint8_t enable );
-<a name="l00104"></a>00104    
-<a name="l00117"></a>00117    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">send</a>(uint8_t value, uint8_t mode);
-<a name="l00118"></a>00118    
-<a name="l00119"></a>00119    
-<a name="l00129"></a>00129    <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#a5bfc0dcc1f042bcb59992493a3a7231d">setBacklightPin</a> ( uint8_t pin, <a class="code" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bc">t_backlighPol</a> pol );
-<a name="l00130"></a>00130    
-<a name="l00140"></a>00140    <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">setBacklight</a> ( uint8_t mode );
-<a name="l00141"></a>00141    
-<a name="l00142"></a>00142 <span class="keyword">private</span>:
-<a name="l00143"></a>00143    
-<a name="l00149"></a>00149    <span class="keywordtype">void</span> init ( uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, 
-<a name="l00150"></a>00150               uint8_t font );
-<a name="l00151"></a>00151    
-<a name="l00156"></a>00156    <span class="keywordtype">void</span> shiftIt (uint8_t val);
-<a name="l00157"></a>00157    
-<a name="l00158"></a>00158    uint8_t _enable_pin;  <span class="comment">// Enable Pin</span>
-<a name="l00159"></a>00159    uint8_t _two_wire;    <span class="comment">// two wire mode</span>
-<a name="l00160"></a>00160    
-<a name="l00161"></a>00161    <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> _srDataRegister; <span class="comment">// Serial Data pin</span>
-<a name="l00162"></a>00162    <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> _srDataBit;
-<a name="l00163"></a>00163    <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> _srClockRegister; <span class="comment">// Clock Pin</span>
-<a name="l00164"></a>00164    <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> _srClockBit;
-<a name="l00165"></a>00165    <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> _srEnableRegister; <span class="comment">// Enable Pin</span>
-<a name="l00166"></a>00166    <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> _srEnableBit;
-<a name="l00167"></a>00167    
-<a name="l00168"></a>00168 };
-<a name="l00169"></a>00169 
-<a name="l00170"></a>00170 <span class="preprocessor">#endif</span>
-<a name="l00171"></a>00171 <span class="preprocessor"></span>
+<a name="l00046"></a>00046 <span class="comment">// Data and Clock outputs/pins goes to the shiftregister.</span>
+<a name="l00047"></a>00047 <span class="comment">// LCD RW-pin hardwired to LOW (only writing to LCD).</span>
+<a name="l00048"></a>00048 <span class="comment">// Busy Flag (BF, data bit D7) is not read.</span>
+<a name="l00049"></a>00049 <span class="comment">//</span>
+<a name="l00050"></a>00050 <span class="comment">//  Original project homepage: http://code.google.com/p/arduinoshiftreglcd/</span>
+<a name="l00051"></a>00051 <span class="comment">//</span>
+<a name="l00052"></a>00052 <span class="comment">//</span>
+<a name="l00053"></a>00053 <span class="comment">// History</span>
+<a name="l00054"></a>00054 <span class="comment">// 2012.03.29  bperrybap - can now eliminate enable pin in constructor for two wire mode.</span>
+<a name="l00055"></a>00055 <span class="comment">// 2011.10.29  fmalpartida - adaption of the library to the LCD class hierarchy.</span>
+<a name="l00056"></a>00056 <span class="comment">// 2011.07.02  Fixed a minor flaw in setCursor function. No functional change, </span>
+<a name="l00057"></a>00057 <span class="comment">//             just a bit more memory efficient.</span>
+<a name="l00058"></a>00058 <span class="comment">//             Thanks to CapnBry (from google code and github) who noticed it.</span>
+<a name="l00059"></a>00059 <span class="comment">//             URL to his version of shiftregLCD:</span>
+<a name="l00060"></a>00060 <span class="comment">//             https://github.com/CapnBry/HeaterMeter/commit/c6beba1b46b092ab0b33bcbd0a30a201fd1f28c1</span>
+<a name="l00061"></a>00061 <span class="comment">// 2009.07.30  raron - minor corrections to the comments.</span>
+<a name="l00062"></a>00062 <span class="comment">//             Fixed timing to datasheet safe. Fixed keyword highlights.</span>
+<a name="l00063"></a>00063 <span class="comment">// 2009.07.28  Mircho / raron - a new modification to the schematics, and a</span>
+<a name="l00064"></a>00064 <span class="comment">//             more streamlined interface</span>
+<a name="l00065"></a>00065 <span class="comment">// 2009.07.27  Thanks to an excellent suggestion from mircho at the Arduiono </span>
+<a name="l00066"></a>00066 <span class="comment">//             playgrond forum, the number of wires now required is only two!</span>
+<a name="l00067"></a>00067 <span class="comment">// 2009.07.25  raron - Fixed comments. I really messed up the comments before </span>
+<a name="l00068"></a>00068 <span class="comment">//             posting this, so I had to fix it.</span>
+<a name="l00069"></a>00069 <span class="comment">//             Renamed a function, but no improvements or functional changes.</span>
+<a name="l00070"></a>00070 <span class="comment">// 2009.07.23  Incorporated some proper initialization routines</span>
+<a name="l00071"></a>00071 <span class="comment">//             inspired (lets say copy-paste-tweaked) from LiquidCrystal</span>
+<a name="l00072"></a>00072 <span class="comment">//             library improvements from LadyAda.</span>
+<a name="l00073"></a>00073 <span class="comment">// 2009.05.23  raron - first version, but based mostly (as in almost verbatim)</span>
+<a name="l00074"></a>00074 <span class="comment">//             on the &quot;official&quot; LiquidCrystal library.</span>
+<a name="l00075"></a>00075 <span class="comment">//</span>
+<a name="l00076"></a>00076 <span class="comment">//</span>
+<a name="l00077"></a>00077 <span class="comment">//</span>
+<a name="l00078"></a>00078 <span class="comment">// @author F. Malpartida - fmalpartida@gmail.com</span>
+<a name="l00079"></a>00079 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00080"></a>00080 <span class="preprocessor">#ifndef _LIQUIDCRYSTAL_SR_</span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span><span class="preprocessor">#define _LIQUIDCRYSTAL_SR_</span>
+<a name="l00082"></a>00082 <span class="preprocessor"></span>
+<a name="l00083"></a>00083 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00084"></a>00084 <span class="preprocessor">#include &quot;<a class="code" href="_l_c_d_8h.html">LCD.h</a>&quot;</span>
+<a name="l00085"></a>00085 <span class="preprocessor">#include &quot;<a class="code" href="_fast_i_o_8h.html">FastIO.h</a>&quot;</span>
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088 <span class="comment">// two-wire indicator constant</span>
+<a name="l00089"></a>00089 <span class="comment">// ---------------------------------------------------------------------------</span>
+<a name="l00090"></a><a class="code" href="_liquid_crystal___s_r_8h.html#a40fb1f76bc5f8ca9e6534b47bd6da27c">00090</a> <span class="preprocessor">#define TWO_WIRE  204</span>
+<a name="l00091"></a><a class="code" href="_liquid_crystal___s_r_8h.html#afdaa2bbb2cc185700864ac8d7a570ced">00091</a> <span class="preprocessor"></span><span class="preprocessor">#define SR_RS_BIT 0x04</span>
+<a name="l00092"></a><a class="code" href="_liquid_crystal___s_r_8h.html#a0075b041d82abb47f279dce482e7b087">00092</a> <span class="preprocessor"></span><span class="preprocessor">#define SR_EN_BIT 0x80</span>
+<a name="l00093"></a>00093 <span class="preprocessor"></span>
+<a name="l00094"></a><a class="code" href="class_liquid_crystal___s_r.html">00094</a> <span class="keyword">class </span><a class="code" href="class_liquid_crystal___s_r.html">LiquidCrystal_SR</a> : <span class="keyword">public</span> <a class="code" href="class_l_c_d.html">LCD</a>
+<a name="l00095"></a>00095 {
+<a name="l00096"></a>00096 <span class="keyword">public</span>:
+<a name="l00108"></a>00108    <a class="code" href="class_liquid_crystal___s_r.html#ac3fe0b48f8d4c1c941d82d1333495cfc">LiquidCrystal_SR</a> ( uint8_t srdata, uint8_t srclock, uint8_t enable=<a class="code" href="_liquid_crystal___s_r_8h.html#a40fb1f76bc5f8ca9e6534b47bd6da27c">TWO_WIRE</a> );
+<a name="l00109"></a>00109    
+<a name="l00122"></a>00122    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#a03821351a32db07cb7e42c8c11ce8d47">send</a>(uint8_t value, uint8_t mode);
+<a name="l00123"></a>00123    
+<a name="l00124"></a>00124    
+<a name="l00134"></a>00134    <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#a5bfc0dcc1f042bcb59992493a3a7231d">setBacklightPin</a> ( uint8_t pin, <a class="code" href="_l_c_d_8h.html#aeeef728bf4726268aa5e99391a1502bc">t_backlighPol</a> pol );
+<a name="l00135"></a>00135    
+<a name="l00145"></a>00145    <span class="keywordtype">void</span> <a class="code" href="class_liquid_crystal___s_r.html#ad9f3e3f36257984c23fb508973e14535">setBacklight</a> ( uint8_t mode );
+<a name="l00146"></a>00146    
+<a name="l00147"></a>00147 <span class="keyword">private</span>:
+<a name="l00148"></a>00148    
+<a name="l00154"></a>00154    <span class="keywordtype">void</span> init ( uint8_t srdata, uint8_t srclock, uint8_t enable, uint8_t lines, 
+<a name="l00155"></a>00155               uint8_t font );
+<a name="l00156"></a>00156    
+<a name="l00161"></a>00161    <span class="keywordtype">void</span> shiftIt (uint8_t val);
+<a name="l00162"></a>00162    
+<a name="l00163"></a>00163    uint8_t _enable_pin;  <span class="comment">// Enable Pin</span>
+<a name="l00164"></a>00164    uint8_t _two_wire;    <span class="comment">// two wire mode</span>
+<a name="l00165"></a>00165    
+<a name="l00166"></a>00166    <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> _srDataRegister; <span class="comment">// Serial Data pin</span>
+<a name="l00167"></a>00167    <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> _srDataBit;
+<a name="l00168"></a>00168    <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> _srClockRegister; <span class="comment">// Clock Pin</span>
+<a name="l00169"></a>00169    <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> _srClockBit;
+<a name="l00170"></a>00170    <a class="code" href="_fast_i_o_8h.html#ae44ea3af54ef26db03f1ae2ea62f9c1f">fio_register</a> _srEnableRegister; <span class="comment">// Enable Pin</span>
+<a name="l00171"></a>00171    <a class="code" href="_fast_i_o_8h.html#a0a595a88b29bcfd1540b6fac75787937">fio_bit</a> _srEnableBit;
+<a name="l00172"></a>00172    
+<a name="l00173"></a>00173 };
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175 <span class="preprocessor">#endif</span>
+<a name="l00176"></a>00176 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -198,7 +203,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Mar 23 2012 20:38:55 for LCD Library by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Apr 1 2012 23:09:41 for LCD Library by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
