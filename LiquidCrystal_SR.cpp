@@ -157,7 +157,7 @@ void LiquidCrystal_SR::shiftIt(uint8_t val)
    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
    {
       fio_digitalWrite_HIGH(_srEnableRegister, _srEnableBit);
-      waitUsec (1);         // enable pulse must be >450ns               
+      delayMicroseconds (1);         // enable pulse must be >450ns               
       fio_digitalWrite_SWITCHTO(_srEnableRegister, _srEnableBit, LOW);
    } // end critical section
 }
