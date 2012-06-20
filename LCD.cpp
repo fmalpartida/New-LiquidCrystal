@@ -54,7 +54,7 @@ LCD::LCD ()
 // PUBLIC METHODS
 // ---------------------------------------------------------------------------
 // When the display powers up, it is configured as follows:
-//
+// 0. LCD starts in 8 bit mode
 // 1. Display clear
 // 2. Function set: 
 //    DL = 1; 8-bit interface data 
@@ -69,7 +69,7 @@ LCD::LCD ()
 //    S = 0; No shift 
 //
 // Note, however, that resetting the Arduino doesn't reset the LCD, so we
-// can't assume that its in that state when a sketch starts (and the
+// can't assume that its in that state when a application starts (and the
 // LiquidCrystal constructor is called).
 // A call to begin() will reinitialize the LCD.
 //
@@ -104,19 +104,22 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
       // figure 24, pg 46
       
       // we start in 8bit mode, try to set 4 bit mode
+      // Special case of "Function Set"
       send(0x03, FOUR_BITS);
       delayMicroseconds(4500); // wait min 4.1ms
       
       // second try
       send ( 0x03, FOUR_BITS );
-      delayMicroseconds(4500); // wait min 4.1ms
+      delayMicroseconds(150); // wait min 100us
       
       // third go!
       send( 0x03, FOUR_BITS );
-      delayMicroseconds(150);
+      delayMicroseconds(150); // wait min of 100us
       
       // finally, set to 4-bit interface
-      send ( 0x02, FOUR_BITS ); 
+      send ( 0x02, FOUR_BITS );
+      delayMicroseconds(150); // wait min of 100us
+
    } 
    else 
    {
@@ -133,10 +136,13 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
       
       // third go
       command(LCD_FUNCTIONSET | _displayfunction);
+      delayMicroseconds(150);
+
    }
    
    // finally, set # lines, font size, etc.
-   command(LCD_FUNCTIONSET | _displayfunction);  
+   command(LCD_FUNCTIONSET | _displayfunction);
+   delayMicroseconds ( 60 );  // wait more
    
    // turn the display on with no cursor or blinking default
    _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;  
