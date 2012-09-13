@@ -31,7 +31,6 @@
 #include <Arduino.h>
 #endif
 #include <inttypes.h>
-#include "Wire.h"
 #include "LiquidCrystal_I2C_ByVac.h"
 
 // CONSTRUCTORS
