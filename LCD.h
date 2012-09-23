@@ -43,6 +43,10 @@
 #include <Arduino.h>
 #endif
 
+#ifdef __AVR__
+#include <avr/pgmspace.h>
+#endif
+
 #include <inttypes.h>
 #include <Print.h>
 
@@ -380,6 +384,28 @@ public:
     @param      charmap[in] the bitmap array representing each row of the character.
     */
    void createChar(uint8_t location, uint8_t charmap[]);
+
+#ifdef __AVR__
+   /*!
+    @function
+    @abstract   Creates a custom character for use on the LCD.
+    @discussion Create a custom character (glyph) for use on the LCD.
+    Most chipsets only support up to eight characters of 5x8 pixels. Therefore,
+    this methods has been limited to locations (numbered 0 to 7).
+    
+    The appearance of each custom character is specified by an array of eight
+    bytes, one for each row. The five least significant bits of each byte
+    determine the pixels in that row. To display a custom character on screen,
+    write()/print() its number, i.e. lcd.print (char(x)); // Where x is 0..7.
+    
+    This method take the character defined in program memory.
+    
+    @param      location[in] LCD memory location of the character to create
+    (0 to 7)
+    @param      charmap[in] the bitmap array representing each row of the character.
+    */
+   void createChar(uint8_t location, const prog_uchar charmap[]);
+#endif // __AVR__
    
    /*!
     @function
