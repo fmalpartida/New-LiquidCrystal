@@ -41,6 +41,7 @@
 #else
 #include <Arduino.h>
 #endif
+
 #include "LCD.h"
 
 // CLASS CONSTRUCTORS
@@ -295,12 +296,28 @@ void LCD::createChar(uint8_t location, uint8_t charmap[])
    command(LCD_SETCGRAMADDR | (location << 3));
    delayMicroseconds(30);
    
-   for (int i=0; i<8; i++) 
+   for (uint8_t i = 0; i < 8; i++)
    {
       write(charmap[i]);      // call the virtual write method
       delayMicroseconds(40);
    }
 }
+
+#ifdef __AVR__
+void LCD::createChar(uint8_t location, const prog_uchar charmap[])
+{
+   location &= 0x7;   // we only have 8 memory locations 0-7
+   
+   command(LCD_SETCGRAMADDR | (location << 3));
+   delayMicroseconds(30);
+   
+   for (uint8_t i = 0; i < 8; i++)
+   {
+      write(pgm_read_byte_near(charmap++));
+      delayMicroseconds(40);
+   }
+}
+#endif // __AVR__
 
 //
 // Switch on the backlight
