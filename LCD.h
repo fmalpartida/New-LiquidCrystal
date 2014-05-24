@@ -53,6 +53,20 @@
 
 /*!
  @defined 
+ @abstract   Performs a bitwise shift.
+ @discussion Defines _BV bit shift which is very dependent macro defined by
+ Atmel.
+
+    \note The bit shift is performed by the compiler which then inserts the
+    result into the code. Thus, there is no run-time overhead when using
+    _BV().
+*/
+#ifndef _BV    
+#define _BV(bit) (1 << (bit))
+#endif
+
+/*!
+ @defined 
  @abstract   Enables disables fast waits for write operations for LCD
  @discussion If defined, the library will avoid doing un-necessary waits.
  this can be done, because the time taken by Arduino's slow digitalWrite
