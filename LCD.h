@@ -418,7 +418,7 @@ public:
     (0 to 7)
     @param      charmap[in] the bitmap array representing each row of the character.
                 Usage for flash defined characters:
-                const char str_pstr[] PROGMEM = {};
+                const char str_pstr[] PROGMEM = {0xc, 0x12, 0x12, 0xc, 0, 0, 0, 0};
     */
    void createChar(uint8_t location, const char *charmap);
 #endif // __AVR__
