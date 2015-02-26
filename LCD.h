@@ -403,7 +403,7 @@ public:
    /*!
     @function
     @abstract   Creates a custom character for use on the LCD.
-    @discussion Create a custom character (glyph) for use on the LCD.
+    @discussion Create a custom character (glyph) for use on t{he LCD.
     Most chipsets only support up to eight characters of 5x8 pixels. Therefore,
     this methods has been limited to locations (numbered 0 to 7).
     
@@ -417,8 +417,10 @@ public:
     @param      location[in] LCD memory location of the character to create
     (0 to 7)
     @param      charmap[in] the bitmap array representing each row of the character.
+                Usage for flash defined characters:
+                const char str_pstr[] PROGMEM = {};
     */
-   void createChar(uint8_t location, const prog_uchar charmap[]);
+   void createChar(uint8_t location, const char *charmap);
 #endif // __AVR__
    
    /*!
