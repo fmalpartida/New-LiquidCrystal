@@ -168,9 +168,20 @@ void LiquidCrystal::setBacklight ( uint8_t value )
    // ---------------------------------------------------
    if ( _backlightPin != LCD_NOBACKLIGHT )
    {
+
       // Check if the pin is associated to a timer, i.e. PWM
+      // We dont need to use != NOT_ON_TIMER hack to detect PWM and
+      // 1.5x Arduino and above has a macro to check for PWM capability
+      // on a pin.
       // ---------------------------------------------------
+#if digitalPinHasPWM
+      if(digitalPinHasPWM(_backlightPin))
+#elif digitalPinToTimer
+      // On older 1.x Arduino have to check using hack
       if(digitalPinToTimer(_backlightPin) != NOT_ON_TIMER)
+#else
+      if(0) // if neither of the above we assume no PWM
+#endif
       {
          // Check for control polarity inversion
          // ---------------------------------------------------
@@ -295,5 +306,4 @@ void LiquidCrystal::writeNbits(uint8_t value, uint8_t numBits)
    }
    pulseEnable();
 }
-
 
