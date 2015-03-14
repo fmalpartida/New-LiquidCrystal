@@ -51,7 +51,16 @@ I2CIO::I2CIO ( )
 
 // PUBLIC METHODS
 // ---------------------------------------------------------------------------
-
+  Wire.beginTransmission(DisplayI2CAddress);
+  error = Wire.endTransmission();
+  if (error==0){
+    return 1;
+    }
+  else //Some error occured
+  {
+    return 0;
+    }
+} 
 //
 // begin
 int I2CIO::begin (  uint8_t i2cAddr )
@@ -61,13 +70,15 @@ int I2CIO::begin (  uint8_t i2cAddr )
    Wire.begin ( );
       
    _initialised = Wire.requestFrom ( _i2cAddr, (uint8_t)1 );
-
-#if (ARDUINO <  100)
-   _shadow = Wire.receive ();
-#else
-   _shadow = Wire.read (); // Remove the byte read don't need it.
-#endif
    
+   if (_initialised)
+   {
+#if (ARDUINO <  100)
+      _shadow = Wire.receive ();
+#else
+      _shadow = Wire.read (); // Remove the byte read don't need it.
+#endif
+   }
    return ( _initialised );
 }
 

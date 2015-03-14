@@ -138,7 +138,9 @@ public:
     @discussion Sets the pin in the device to control the backlight. This device
     doesn't support dimming backlight capability.
     
-    @param      0: backlight off, 1..255: backlight on.
+    @param      value: pin mapped on the 74HC595N (0, .., 7) for (Qa0, .., Qh7)
+    respectively.
+    @param      pol: polarity POSITIVE|NEGATIVE.
     */
    void setBacklightPin ( uint8_t value, t_backlighPol pol );
    
