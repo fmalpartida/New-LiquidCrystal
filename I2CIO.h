@@ -142,6 +142,16 @@ private:
    uint8_t _dirMask;     // Direction mask
    uint8_t _i2cAddr;     // I2C address
    bool    _initialised; // Initialised object
+
+  /*!
+   @method
+   @abstract   Check if I2C device is available.
+   @discussion Checks to see if an I2C device is available at address i2cAddr.
+   
+   @param      i2cAddr[in] I2C address to check availability 
+   @result     true if available, false otherwise.
+   */   
+   bool isAvailable (uint8_t i2cAddr);
    
 };
 
