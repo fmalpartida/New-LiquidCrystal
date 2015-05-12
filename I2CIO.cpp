@@ -35,6 +35,8 @@
 #include <../Wire/Wire.h>
 #include "I2CIO.h"
 
+
+
 // CLASS VARIABLES
 // ---------------------------------------------------------------------------
 
@@ -51,16 +53,8 @@ I2CIO::I2CIO ( )
 
 // PUBLIC METHODS
 // ---------------------------------------------------------------------------
-  Wire.beginTransmission(DisplayI2CAddress);
-  error = Wire.endTransmission();
-  if (error==0){
-    return 1;
-    }
-  else //Some error occured
-  {
-    return 0;
-    }
-} 
+ 
+
 //
 // begin
 int I2CIO::begin (  uint8_t i2cAddr )
@@ -69,7 +63,7 @@ int I2CIO::begin (  uint8_t i2cAddr )
    
    Wire.begin ( );
       
-   _initialised = Wire.requestFrom ( _i2cAddr, (uint8_t)1 );
+   _initialised = isAvailable ( _i2cAddr );
    
    if (_initialised)
    {
@@ -207,3 +201,18 @@ int I2CIO::digitalWrite ( uint8_t pin, uint8_t level )
 //
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
+bool I2CIO::isAvailable (uint8_t i2cAddr)
+{
+   int error;
+   
+   Wire.beginTransmission( i2cAddr );
+   error = Wire.endTransmission();
+   if (error==0)
+   {
+     return true;
+   }
+   else //Some error occured
+   {
+     return false;
+   }   
+}
