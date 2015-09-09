@@ -25,10 +25,15 @@
 // ---------------------------------------------------------------------------
 #include <Wire.h>
 
-#define _LCD_I2C_
+//#define _LCD_I2C_
+#define _LCD_SI2C_
 
 #ifdef _LCD_I2C_
 #include <LiquidCrystal_I2C.h>
+#endif
+
+#ifdef _LCD_SI2C_
+#include <LiquidCrystal_SI2C.h>
 #endif
 
 #ifdef _LCD_4BIT_
@@ -98,6 +103,12 @@ const int   CONTRAST_PIN  = 0; // none
 const int   CONTRAST      = 0; // none
 #endif
 
+#ifdef _LCD_SI2C_
+const int   BACKLIGHT_PIN  = 3;
+const int   CONTRAST_PIN  = 0; // none
+const int   CONTRAST      = 0; // none
+#endif
+
 #ifdef _LCD_4BIT_
 const int    CONTRAST_PIN  = 9;
 const int    BACKLIGHT_PIN = 7;
@@ -160,6 +171,10 @@ typedef struct
 // ----------------
 #ifdef _LCD_I2C_
 LiquidCrystal_I2C lcd(0x38);  // set the LCD address to 0x20 for a 16 chars and 2 line display
+#endif
+
+#ifdef _LCD_SI2C_
+LiquidCrystal_SI2C	lcd(0x4e,2,1,0,4,5,6,7);
 #endif
 
 #ifdef _LCD_4BIT_
@@ -246,12 +261,14 @@ static void LCDSetup ( uint8_t contrasPin, uint8_t backlight, uint8_t cols, uint
       analogWrite ( contrasPin, CONTRAST );
    }
    // Setup backlight pin
-   if ( backlight != 0 ){
+   /*if ( backlight != 0 ){
      pinMode(backlight, OUTPUT);
      digitalWrite(backlight, HIGH);
-   }
+   }*/
    
    lcd.begin ( cols, rows );
+   lcd.setBacklightPin(3, POSITIVE);
+  lcd.setBacklight(HIGH);
    lcd.clear ( );
 }
 

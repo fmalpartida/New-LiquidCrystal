@@ -71,9 +71,9 @@ static char dummyvar; // dummy declaration for STUPID IDE!!!!
 //#define LCDIF_SR2W
 //#define LCDIF_SR_2W // SR in 2 wire mode
 //#define LCDIF_SR_3W // SR in 3 wire mode
-#define LCDIF_SR3W
+//#define LCDIF_SR3W
 //#define LCDIF_SR1W
-
+#define LCDIF_SI2C
 
 /*
  * Options
@@ -143,13 +143,20 @@ LiquidCrystal_SR lcd (2, 3);
                  //   d,clk,strb
 LiquidCrystal_SR lcd (2, 3,  4);
 
+#elif defined(LCDIF_SI2C)
+
+#include <LiquidCrystal_SI2C.h>
+
+LiquidCrystal_SI2C	lcd(0x4e,2,1,0,4,5,6,7);
+
 #endif
 
 void setup()
 {
 	// set up the LCD's number of columns and rows: 
 	lcd.begin(LCD_COLS, LCD_ROWS);
-
+lcd.setBacklightPin(3, POSITIVE);
+  lcd.setBacklight(HIGH);
 #ifdef BACKLIGHT_ON
 	lcd.backlight(); // make sure backlight is on with new library
 #endif
