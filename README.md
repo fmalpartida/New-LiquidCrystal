@@ -24,7 +24,15 @@ It currently supports 4 types of connections:
 
 * Please refer to the project's [wiki](https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/Home "wiki")
 
-### Contribution guidelines ###
+
+### Contributors
+The library has had the invaluable contribution of:
+* [piccaso](http://www.3guys1laser.com/blog-cheap-arduino-2-wire-lcd-display-0 "picas") - Florian Fida - Flo, thanks for testing and improving the SR library, initial version of the 1 wire interface and speed improvements.
+* B. Perry - *bperrybap@opensource.billsworld.billandterrie.com*, with his thoughtful contribution, speed improvements and development support for the SR2W library.
+* Adrian Piccioli, with his contribution to the i2c GPIO support.
+* [todbot](https://github.com/todbot "todbot") Tod E. Kurt for the [softwarei2cmaster](https://github.com/todbot/SoftI2CMaster "softwarei2cmaster") library.
+
+#### Contribution guidelines
 
 * Writing tests
 * Code review
