@@ -11,5 +11,6 @@ var files =
     [ "LiquidCrystal_SR1W.h", "_liquid_crystal___s_r1_w_8h_source.html", null ],
     [ "LiquidCrystal_SR2W.h", "_liquid_crystal___s_r2_w_8h_source.html", null ],
     [ "LiquidCrystal_SR3W.h", "_liquid_crystal___s_r3_w_8h_source.html", null ],
-    [ "SI2CIO.h", "_s_i2_c_i_o_8h_source.html", null ]
+    [ "SI2CIO.h", "_s_i2_c_i_o_8h_source.html", null ],
+    [ "SoftI2CMaster.h", "_soft_i2_c_master_8h_source.html", null ]
 ];

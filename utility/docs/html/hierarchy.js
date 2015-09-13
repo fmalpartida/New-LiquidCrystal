@@ -13,5 +13,6 @@ var hierarchy =
         [ "LiquidCrystal_SR3W", "class_liquid_crystal___s_r3_w.html", null ]
       ] ]
     ] ],
-    [ "SI2CIO", "class_s_i2_c_i_o.html", null ]
+    [ "SI2CIO", "class_s_i2_c_i_o.html", null ],
+    [ "SoftI2CMaster", "class_soft_i2_c_master.html", null ]
 ];

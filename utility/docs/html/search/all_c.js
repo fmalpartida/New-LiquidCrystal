@@ -7,5 +7,6 @@ var searchData=
   ['setbacklightpin',['setBacklightPin',['../class_l_c_d.html#a53f4ee9b39d9ab3d7ae4d9f8dedca3bc',1,'LCD::setBacklightPin()'],['../class_liquid_crystal.html#a63740dc1198d8169a39d9c6daff0efc9',1,'LiquidCrystal::setBacklightPin()'],['../class_liquid_crystal___i2_c.html#a2eaf86f62d1f169b3763b03fbf88f70b',1,'LiquidCrystal_I2C::setBacklightPin()'],['../class_liquid_crystal___s_i2_c.html#a80adc9d27907d9145ad208eba4ae2ffa',1,'LiquidCrystal_SI2C::setBacklightPin()'],['../class_liquid_crystal___s_r.html#a5bfc0dcc1f042bcb59992493a3a7231d',1,'LiquidCrystal_SR::setBacklightPin()'],['../class_liquid_crystal___s_r3_w.html#a894d0ea8ea61c1d15acd8a26d417e477',1,'LiquidCrystal_SR3W::setBacklightPin()']]],
   ['setcontrast',['setContrast',['../class_liquid_crystal___i2_c___by_vac.html#a53c79a20e8d21d2c3bc9e6d0dfc79cb4',1,'LiquidCrystal_I2C_ByVac']]],
   ['setcursor',['setCursor',['../class_l_c_d.html#a48220450fd152b25994eb7d0ba340e8d',1,'LCD']]],
-  ['si2cio',['SI2CIO',['../class_s_i2_c_i_o.html',1,'SI2CIO'],['../class_s_i2_c_i_o.html#ae27c1861e885c6ade3f3923658957edf',1,'SI2CIO::SI2CIO()']]]
+  ['si2cio',['SI2CIO',['../class_s_i2_c_i_o.html',1,'SI2CIO'],['../class_s_i2_c_i_o.html#ae27c1861e885c6ade3f3923658957edf',1,'SI2CIO::SI2CIO()']]],
+  ['softi2cmaster',['SoftI2CMaster',['../class_soft_i2_c_master.html',1,'']]]
 ];
