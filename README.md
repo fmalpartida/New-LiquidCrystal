@@ -7,10 +7,8 @@
 Welcome to the *LCD Library* for **Arduino** and **Chipkit**. It is a derivate of the original LiquidCrystal Library as sourced in the Arduino SDK. It has been developed to be compatible with the current LiquidCrystal library, 
 its performance is almost 5 times faster and fully extendable if need be. 
 
-Being faster, gives your applications more time to do more things than just controlling the LCD. So, its cool, you can do more stuff.
-
 It supports most ``Hitachi HD44780`` based LCDs, or compatible, connected to any project using: 4, 8 
-wire parallel interface, I2C IO port expander and Shift Regiter.
+wire parallel interface, I2C IO port expander (native I2C and bit bang) and Shift Regiter.
 
 It currently supports 4 types of connections:
 
