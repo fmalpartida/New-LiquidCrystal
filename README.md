@@ -37,4 +37,4 @@ It currently supports 4 types of connections:
 ### Who do I talk to? ###
 
 * Repo owner or admin
-* For SoftI2CMaster latest versions, updates and support, please refer to [[https://github.com/todbot/SoftI2CMaster|todbot]]
+* For SoftI2CMaster latest versions, updates and support, please refer to [SoftI2CMaster](https://github.com/todbot/SoftI2CMaster "todbot")
