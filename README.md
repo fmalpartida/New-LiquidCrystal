@@ -24,7 +24,7 @@ It currently supports 4 types of connections:
 
 ### How do I get set up? ###
 
-* Please refer to the project's wiki
+* Please refer to the project's [wiki](https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/Home "wiki")
 
 ### Contribution guidelines ###
 
