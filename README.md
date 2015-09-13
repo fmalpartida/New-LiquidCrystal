@@ -1,8 +1,8 @@
 # README #
 
-== Introduction ==
+## Introduction ##
 
-{{https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads/I2CLCDextraIO_assemblyProject_small.jpg|LCD library}}
+[[https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads/I2CLCDextraIO_assemblyProject_small.jpg|LCD library]]
 
 Welcome to the //LCD Library// for **Arduino** and **Chipkit**. It is a derivate of the original LiquidCrystal Library as 
 sourced in the Arduino SDK. It has been developed to be compatible with the current LiquidCrystal library, 
