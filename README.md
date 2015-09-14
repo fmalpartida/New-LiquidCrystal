@@ -32,6 +32,7 @@ The library has had the invaluable contribution of:
 * B. Perry - *bperrybap@opensource.billsworld.billandterrie.com*, with his thoughtful contribution, speed improvements and development support for the SR2W library.
 * Adrian Piccioli, with his contribution to the i2c GPIO support.
 * [todbot](https://github.com/todbot "todbot") Tod E. Kurt for the [softwarei2cmaster](https://github.com/todbot/SoftI2CMaster "softwarei2cmaster") library.
+* [felias-fogg](https://github.com/felias-fogg) - Bernhard for the [softwarei2cmaster fast](https://github.com/felias-fogg/SoftI2CMaster "softwirei2cmaster")
 
 #### Contribution guidelines
 
