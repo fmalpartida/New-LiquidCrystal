@@ -46,8 +46,9 @@
 #define SDA_PIN 1
 #define SDA_PORT PORTB
 
-#include "SoftI2CMaster.h""
 #include "SI2CIO.h"
+#include "SoftI2CMaster.h"
+
 
 // CLASS VARIABLES
 // ---------------------------------------------------------------------------

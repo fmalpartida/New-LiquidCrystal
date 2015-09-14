@@ -42,7 +42,9 @@
 #include <Arduino.h>
 #endif
 
+extern "C" void __cxa_pure_virtual() { while (1); }
 #include "LCD.h"
+
 
 // CLASS CONSTRUCTORS
 // ---------------------------------------------------------------------------
