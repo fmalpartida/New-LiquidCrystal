@@ -1,4 +1,4 @@
-
+#include <Wire.h>
 #include <LiquidCrystal_SI2C.h>
 
 LiquidCrystal_SI2C	lcd(0x4e,2,1,0,4,5,6,7);
