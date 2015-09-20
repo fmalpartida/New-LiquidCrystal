@@ -46,6 +46,7 @@
 #define SDA_PIN 1
 #define SDA_PORT PORTB
 
+#if defined (__AVR__)
 #include "SI2CIO.h"
 #include "SoftI2CMaster.h"
 
@@ -204,3 +205,6 @@ int SI2CIO::digitalWrite ( uint8_t pin, uint8_t level )
 //
 // PRIVATE METHODS
 // ---------------------------------------------------------------------------
+#else
+#error "ONLY SUPPORTED ON AVR PROCESSORS"
+#endif // __AVR__

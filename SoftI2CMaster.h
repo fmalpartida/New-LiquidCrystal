@@ -58,6 +58,8 @@
 #ifndef _SOFTI2C_H
 #define _SOFTI2C_H   1
 
+#if defined (__AVR__)
+
 // Init function. Needs to be called once in the beginning.
 // Returns false if SDA or SCL are low, which probably means 
 // a I2C bus lockup or that the lines are not pulled up.
@@ -502,6 +504,10 @@ uint8_t i2c_read(bool last)
      ); 
   return ' '; // fool the compiler!
 }
+
+#else
+#error "ONLY SUPPORTED ON AVR PROCESSORS"
+#endif // defined (__AVR__)
 
 #endif
 
