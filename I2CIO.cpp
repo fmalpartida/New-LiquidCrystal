@@ -25,14 +25,19 @@
 // @author F. Malpartida - fmalpartida@gmail.com
 // ---------------------------------------------------------------------------
 #if (ARDUINO <  100)
-#include <WProgram.h>
+   #include <WProgram.h>
 #else
-#include <Arduino.h>
+   #include <Arduino.h>
+#endif
+
+#if (ARDUINO < 10000)
+   #include <../Wire/Wire.h>
+#else
+   #include <Wire.h>
 #endif
 
 #include <inttypes.h>
 
-#include <../Wire/Wire.h>
 #include "I2CIO.h"
 
 

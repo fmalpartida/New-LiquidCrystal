@@ -30,7 +30,11 @@
 #include <inttypes.h>
 #include <Print.h>
 
-#include <../Wire/Wire.h>
+#if (ARDUINO < 10000)
+   #include <../Wire/Wire.h>
+#else
+   #include <Wire.h>
+#endif
 #include "LCD.h"
 
 
