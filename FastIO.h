@@ -85,7 +85,19 @@ static __inline__ void __iSeiParam(const uint8_t *__s)
 
 #endif // end of block to create compatible ATOMIC_BLOCK()
 
+/*!
+ @defined 
+ @abstract   Performs a bitwise shift.
+ @discussion Defines _BV bit shift which is very dependent macro defined by
+ Atmel.
 
+    \note The bit shift is performed by the compiler which then inserts the
+    result into the code. Thus, there is no run-time overhead when using
+    _BV().
+*/
+#ifndef _BV    
+#define _BV(bit) (1 << (bit))
+#endif
 
 /*!
  @function
