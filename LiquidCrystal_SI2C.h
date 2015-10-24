@@ -196,7 +196,7 @@ private:
    uint8_t _Addr;             // I2C Address of the IO expander
    uint8_t _backlightPinMask; // Backlight IO pin mask
    uint8_t _backlightStsMask; // Backlight status mask
-   SI2CIO  _i2cio;            // I2CIO PCF8574* expansion module driver I2CLCDextraIO
+   SI2CIO  _si2cio;            // I2CIO PCF8574* expansion module driver I2CLCDextraIO
    uint8_t _En;               // LCD expander word for enable pin
    uint8_t _Rw;               // LCD expander word for R/W pin
    uint8_t _Rs;               // LCD expander word for Register Select pin

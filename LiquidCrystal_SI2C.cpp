@@ -184,7 +184,7 @@ void LiquidCrystal_SI2C::setBacklight( uint8_t value )
       {
          _backlightStsMask = _backlightPinMask & LCD_NOBACKLIGHT;
       }
-      _i2cio.write( _backlightStsMask );
+      _si2cio.write( _backlightStsMask );
    }
 }
 
@@ -201,12 +201,12 @@ int LiquidCrystal_SI2C::init()
    // initialize the backpack IO expander
    // and display functions.
    // ------------------------------------------------------------------------
-   if ( _i2cio.begin ( _Addr ) == 1 )
+   if ( _si2cio.begin ( _Addr ) == 1 )
    {
-      _i2cio.portMode ( OUTPUT );  // Set the entire IO extender to OUTPUT
+      _si2cio.portMode ( OUTPUT );  // Set the entire IO extender to OUTPUT
       _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
       status = 1;
-      _i2cio.write(0);  // Set the entire port to LOW
+      _si2cio.write(0);  // Set the entire port to LOW
    }
    return ( status );
 }
@@ -216,7 +216,7 @@ int LiquidCrystal_SI2C::init()
 void LiquidCrystal_SI2C::config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
                                 uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 )
 {
-   _Addr = lcd_Addr;
+   _Addr = lcd_Addr; 
    
    _backlightPinMask = 0;
    _backlightStsMask = LCD_NOBACKLIGHT;
@@ -289,6 +289,6 @@ void LiquidCrystal_SI2C::write4bits ( uint8_t value, uint8_t mode )
 // pulseEnable
 void LiquidCrystal_SI2C::pulseEnable (uint8_t data)
 {
-   _i2cio.write (data | _En);   // En HIGH
-   _i2cio.write (data & ~_En);  // En LOW
+   _si2cio.write (data | _En);   // En HIGH
+   _si2cio.write (data & ~_En);  // En LOW
 }
