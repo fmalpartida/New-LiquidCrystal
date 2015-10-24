@@ -72,7 +72,8 @@ SI2CIO::SI2CIO ( )
 // begin
 int SI2CIO::begin (  uint8_t i2cAddr )
 {
-   _i2cAddr = i2cAddr;
+   // convert to 8 bit addresses for mapping as needed by the bitbang library
+   _i2cAddr = ( i2cAddr << 1 );
    
    i2c_init();
       
