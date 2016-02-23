@@ -31,6 +31,9 @@
 // ---------------------------------------------------------------------------
 #ifndef LiquidCrystal_SI2C_h
 #define LiquidCrystal_SI2C_h
+
+#if defined (__AVR__)
+
 #include <inttypes.h>
 #include <Print.h>
 
@@ -203,5 +206,9 @@ private:
    uint8_t _data_pins[4];     // LCD data lines
    
 };
+
+#else
+#error "ONLY SUPPORTED ON AVR PROCESSORS"
+#endif // defined (__AVR__)
 
 #endif

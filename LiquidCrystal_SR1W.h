@@ -262,6 +262,8 @@
 #ifndef _LIQUIDCRYSTAL_SR1W_
 #define _LIQUIDCRYSTAL_SR1W_
 
+#if defined (__AVR__)
+
 #include <inttypes.h>
 #include "LCD.h"
 #include "FastIO.h"
@@ -370,4 +372,9 @@ private:
    uint8_t _blPolarity;
    uint8_t _blMask;
 };
+
+#else
+#error "ONLY SUPPORTED ON AVR PROCESSORS"
+#endif // defined (__AVR__)
+
 #endif

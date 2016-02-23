@@ -32,6 +32,7 @@
 // @author  S. Erisman - arduino@serisman.com
 // ---------------------------------------------------------------------------
 
+#if defined (__AVR__)
 #include "LiquidCrystal_SR1W.h"
 
 // CONSTRUCTORS
@@ -250,3 +251,4 @@ void LiquidCrystal_SR1W::setBacklight ( uint8_t value )
 	// The seems to be safe because the LCD appears to treat this as a NOP.
 	send(0, COMMAND);
 }
+#endif // defined (__AVR__)
