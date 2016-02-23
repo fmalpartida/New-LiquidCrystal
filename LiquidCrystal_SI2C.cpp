@@ -30,6 +30,9 @@
 // @author F. Malpartida - fmalpartida@gmail.com
 // Adapted to SoftIC2 by Adrian Piccioli - adrianpiccioli@gmail.com
 // ---------------------------------------------------------------------------
+
+#if defined (__AVR__)
+
 #if (ARDUINO <  100)
 #include <WProgram.h>
 #else
@@ -292,3 +295,5 @@ void LiquidCrystal_SI2C::pulseEnable (uint8_t data)
    _si2cio.write (data | _En);   // En HIGH
    _si2cio.write (data & ~_En);  // En LOW
 }
+
+#endif // defined (__AVR__)

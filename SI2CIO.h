@@ -28,6 +28,8 @@
 #ifndef _SI2CIO_H_
 #define _SI2CIO_H_
 
+#if defined (__AVR__)
+
 #include <inttypes.h>
 
 #define _SI2CIO_VERSION "1.0.0"
@@ -145,5 +147,9 @@ private:
    bool    _initialised; // Initialised object
    
 };
+
+#else
+#error "ONLY SUPPORTED ON AVR PROCESSORS"
+#endif // defined (__AVR__)
 
 #endif
