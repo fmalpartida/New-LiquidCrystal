@@ -3,7 +3,7 @@
 // Copyright 2011 - Under creative commons license 3.0:
 //        Attribution-ShareAlike CC BY-SA
 //
-// This software is furnished "as is", without technical support, and with no 
+// This software is furnished "as is", without technical support, and with no
 // warranty, express or implied, as to its usefulness for any purpose.
 //
 // Thread Safe: No
@@ -12,8 +12,8 @@
 // @file I2CIO.h
 // This file implements a basic IO library using the PCF8574 I2C IO Expander
 // chip.
-// 
-// @brief 
+//
+// @brief
 // Implement a basic IO library to drive the PCF8574* I2C IO Expander ASIC.
 // The library implements basic IO general methods to configure IO pin direction
 // read and write uint8_t operations and basic pin level routines to set or read
@@ -30,10 +30,18 @@
    #include <Arduino.h>
 #endif
 
+#if defined(__AVR_ATtiny84__) || (__AVR_ATtiny2313__) || defined (__AVR_ATtiny85__)
+#include "TinyWireM.h" // include this if ATtiny84 or ATtiny85 or ATtiny2313
+
+#define Wire TinyWireM
+#else
+
 #if (ARDUINO < 10000)
    #include <../Wire/Wire.h>
 #else
    #include <Wire.h>
+#endif
+
 #endif
 
 #include <inttypes.h>
@@ -58,18 +66,18 @@ I2CIO::I2CIO ( )
 
 // PUBLIC METHODS
 // ---------------------------------------------------------------------------
- 
+
 
 //
 // begin
 int I2CIO::begin (  uint8_t i2cAddr )
 {
    _i2cAddr = i2cAddr;
-   
+
    Wire.begin ( );
-      
+
    _initialised = isAvailable ( _i2cAddr );
-   
+
    if (_initialised)
    {
 #if (ARDUINO <  100)
@@ -91,7 +99,7 @@ void I2CIO::pinMode ( uint8_t pin, uint8_t dir )
       {
          _dirMask &= ~( 1 << pin );
       }
-      else 
+      else
       {
          _dirMask |= ( 1 << pin );
       }
@@ -102,7 +110,7 @@ void I2CIO::pinMode ( uint8_t pin, uint8_t dir )
 // portMode
 void I2CIO::portMode ( uint8_t dir )
 {
-   
+
    if ( _initialised )
    {
       if ( dir == INPUT )
@@ -121,7 +129,7 @@ void I2CIO::portMode ( uint8_t dir )
 uint8_t I2CIO::read ( void )
 {
    uint8_t retVal = 0;
-   
+
    if ( _initialised )
    {
       Wire.requestFrom ( _i2cAddr, (uint8_t)1 );
@@ -129,8 +137,8 @@ uint8_t I2CIO::read ( void )
       retVal = ( _dirMask & Wire.receive ( ) );
 #else
       retVal = ( _dirMask & Wire.read ( ) );
-#endif      
-      
+#endif
+
    }
    return ( retVal );
 }
@@ -140,19 +148,19 @@ uint8_t I2CIO::read ( void )
 int I2CIO::write ( uint8_t value )
 {
    int status = 0;
-   
+
    if ( _initialised )
    {
       // Only write HIGH the values of the ports that have been initialised as
       // outputs updating the output shadow of the device
       _shadow = ( value & ~(_dirMask) );
-   
+
       Wire.beginTransmission ( _i2cAddr );
 #if (ARDUINO <  100)
       Wire.send ( _shadow );
 #else
       Wire.write ( _shadow );
-#endif  
+#endif
       status = Wire.endTransmission ();
    }
    return ( (status == 0) );
@@ -163,7 +171,7 @@ int I2CIO::write ( uint8_t value )
 uint8_t I2CIO::digitalRead ( uint8_t pin )
 {
    uint8_t pinVal = 0;
-   
+
    // Check if initialised and that the pin is within range of the device
    // -------------------------------------------------------------------
    if ( ( _initialised ) && ( pin <= 7 ) )
@@ -181,7 +189,7 @@ int I2CIO::digitalWrite ( uint8_t pin, uint8_t level )
 {
    uint8_t writeVal;
    int status = 0;
-   
+
    // Check if initialised and that the pin is within range of the device
    // -------------------------------------------------------------------
    if ( ( _initialised ) && ( pin <= 7 ) )
@@ -192,9 +200,9 @@ int I2CIO::digitalWrite ( uint8_t pin, uint8_t level )
       if ( level == HIGH )
       {
          _shadow |= writeVal;
-                                                      
+
       }
-      else 
+      else
       {
          _shadow &= ~writeVal;
       }
@@ -209,7 +217,7 @@ int I2CIO::digitalWrite ( uint8_t pin, uint8_t level )
 bool I2CIO::isAvailable (uint8_t i2cAddr)
 {
    int error;
-   
+
    Wire.beginTransmission( i2cAddr );
    error = Wire.endTransmission();
    if (error==0)
@@ -219,5 +227,5 @@ bool I2CIO::isAvailable (uint8_t i2cAddr)
    else //Some error occured
    {
      return false;
-   }   
+   }
 }
