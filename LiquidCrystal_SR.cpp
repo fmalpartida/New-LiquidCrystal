@@ -174,7 +174,7 @@ void LiquidCrystal_SR::send(uint8_t value, uint8_t mode)
    // Divide byte in two nibbles include the RS signal
    // and format it for shiftregister output wiring to the LCD
    // We are only interested in my COMMAND or DATA for myMode
-   uint8_t myMode = ( mode == DATA ) ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
+   uint8_t myMode = ( mode == LCD_DATA ) ? SR_RS_BIT : 0; // RS bit; LOW: command.  HIGH: character.
    
    if ( mode != FOUR_BITS )
    {

@@ -273,7 +273,7 @@ void LiquidCrystal_I2C::write4bits ( uint8_t value, uint8_t mode )
    
    // Is it a command or data
    // -----------------------
-   if ( mode == DATA )
+   if ( mode == LCD_DATA )
    {
       mode = _Rs;
    }
