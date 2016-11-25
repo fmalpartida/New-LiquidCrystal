@@ -261,7 +261,7 @@ void LiquidCrystal_SR3W::write4bits(uint8_t value, uint8_t mode)
    
    // Is it a command or data
    // -----------------------
-   mode = ( mode == DATA ) ? _Rs : 0;
+   mode = ( mode == LCD_DATA ) ? _Rs : 0;
    
    pinMapValue |= mode | _backlightStsMask;
    loadSR ( pinMapValue | _En );  // Send with enable high

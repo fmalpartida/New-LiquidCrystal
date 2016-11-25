@@ -89,7 +89,7 @@ void LiquidCrystal_SR2W::loadSR(uint8_t val)
 // send
 void LiquidCrystal_SR2W::send(uint8_t value, uint8_t mode)
 {
-	uint8_t myMode = ( mode == DATA ) ? SR2W_RS_MASK : 0; 
+	uint8_t myMode = ( mode == LCD_DATA ) ? SR2W_RS_MASK : 0;
    
 	myMode = myMode | SR2W_EN_MASK | _blMask;
 
