@@ -1,12 +1,23 @@
 // ---------------------------------------------------------------------------
 // Created by Florian Fida on 20/01/12
-// Copyright 2012 - Under creative commons license 3.0:
-//        Attribution-ShareAlike CC BY-SA
-//        http://creativecommons.org/licenses/by-sa/3.0/
+// Copyright (C) - 2018
 //
-// This software is furnished "as is", without technical support, and with no
-// warranty, express or implied, as to its usefulness for any purpose.
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License v3.0
+//    along with this program.
+//    If not, see <https://www.gnu.org/licenses/gpl-3.0.en.html>.
+// 
 // ---------------------------------------------------------------------------
+//
 // fio_shiftOut1 functions are based on Shif1 protocol developed by Roman Black 
 // (http://www.romanblack.com/shift1.htm)
 //
@@ -45,12 +56,12 @@
 #include <util/atomic.h> // for critical section management
 typedef uint8_t fio_bit;
 typedef volatile uint8_t *fio_register;
-
+// __AVR__ processor end
 
 #elif defined(__PIC32MX__)
 typedef uint32_t fio_bit;
 typedef volatile uint32_t *fio_register;
-
+// __PIC32MX__ processor end
 
 #else
 // fallback to Arduino standard digital i/o routines
@@ -59,7 +70,7 @@ typedef volatile uint32_t *fio_register;
 #define ATOMIC_RESTORESTATE
 typedef uint8_t fio_bit;
 typedef uint8_t fio_register;
-#endif
+#endif // Processor dependent fast IO definition 
 
 
 

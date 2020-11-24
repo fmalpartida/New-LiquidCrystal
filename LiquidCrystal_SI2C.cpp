@@ -1,10 +1,22 @@
 // ---------------------------------------------------------------------------
 // Created by Francisco Malpartida on 20/08/11.
-// Copyright 2011 - Under creative commons license 3.0:
-//        Attribution-ShareAlike CC BY-SA
+// Copyright (C) - 2018
 //
-// This software is furnished "as is", without technical support, and with no 
-// warranty, express or implied, as to its usefulness for any purpose.
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License v3.0
+//    along with this program.
+//    If not, see <https://www.gnu.org/licenses/gpl-3.0.en.html>.
+// 
+// ---------------------------------------------------------------------------
 //
 // Thread Safe: No
 // Extendable: Yes
@@ -106,7 +118,7 @@ LiquidCrystal_SI2C::LiquidCrystal_SI2C( uint8_t lcd_Addr )
 
 
 LiquidCrystal_SI2C::LiquidCrystal_SI2C(uint8_t lcd_Addr, uint8_t backlighPin, 
-                                     t_backlighPol pol = POSITIVE)
+                                     t_backlightPol pol = POSITIVE)
 {
    config(lcd_Addr, EN, RW, RS, D4, D5, D6, D7);
    setBacklightPin(backlighPin, pol);
@@ -120,7 +132,7 @@ LiquidCrystal_SI2C::LiquidCrystal_SI2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
 
 LiquidCrystal_SI2C::LiquidCrystal_SI2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
                                      uint8_t Rs, uint8_t backlighPin, 
-                                     t_backlighPol pol = POSITIVE)
+                                     t_backlightPol pol = POSITIVE)
 {
    config(lcd_Addr, En, Rw, Rs, D4, D5, D6, D7);
    setBacklightPin(backlighPin, pol);
@@ -136,7 +148,7 @@ LiquidCrystal_SI2C::LiquidCrystal_SI2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
 LiquidCrystal_SI2C::LiquidCrystal_SI2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
                                      uint8_t Rs, uint8_t d4, uint8_t d5,
                                      uint8_t d6, uint8_t d7, uint8_t backlighPin, 
-                                     t_backlighPol pol = POSITIVE )
+                                     t_backlightPol pol = POSITIVE )
 {
    config(lcd_Addr, En, Rw, Rs, d4, d5, d6, d7);
    setBacklightPin(backlighPin, pol);
@@ -161,7 +173,7 @@ void LiquidCrystal_SI2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
 
 //
 // setBacklightPin
-void LiquidCrystal_SI2C::setBacklightPin ( uint8_t value, t_backlighPol pol = POSITIVE )
+void LiquidCrystal_SI2C::setBacklightPin ( uint8_t value, t_backlightPol pol = POSITIVE )
 {
    _backlightPinMask = ( 1 << value );
    _polarity = pol;

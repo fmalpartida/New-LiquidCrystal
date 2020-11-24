@@ -5,9 +5,22 @@ static char dummyvar; // dummy declaration for STUPID IDE!!!!
  * LCDiSpeed - LCD Interface Speed
  *
  * Created by Bill Perry 2012-03-16
- * Copyright 2012 - Under creative commons license 3.0:
- * Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
- * license page: http://creativecommons.org/licenses/by-nc-sa/3.0/
+// Copyright (C) - 2018
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License v3.0
+//    along with this program.
+//    If not, see <https://www.gnu.org/licenses/gpl-3.0.en.html>.
+// 
+// ---------------------------------------------------------------------------
  *
  * Sketch to measure and report the speed of the interface to the LCD and
  * speed of updating the LCD.

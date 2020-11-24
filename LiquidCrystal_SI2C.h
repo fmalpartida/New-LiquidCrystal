@@ -1,10 +1,22 @@
 // ---------------------------------------------------------------------------
 // Created by Francisco Malpartida on 20/08/11.
-// Copyright 2011 - Under creative commons license 3.0:
-//        Attribution-ShareAlike CC BY-SA
+// Copyright (C) - 2018
 //
-// This software is furnished "as is", without technical support, and with no 
-// warranty, express or implied, as to its usefulness for any purpose.
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License v3.0
+//    along with this program.
+//    If not, see <https://www.gnu.org/licenses/gpl-3.0.en.html>.
+// 
+// ---------------------------------------------------------------------------
 //
 // Thread Safe: No
 // Extendable: Yes
@@ -56,7 +68,7 @@ public:
     */
    LiquidCrystal_SI2C (uint8_t lcd_Addr);
    // Constructor with backlight control
-   LiquidCrystal_SI2C (uint8_t lcd_Addr, uint8_t backlighPin, t_backlighPol pol);
+   LiquidCrystal_SI2C (uint8_t lcd_Addr, uint8_t backlighPin, t_backlightPol pol);
    
    /*!
     @method     
@@ -73,7 +85,7 @@ public:
    LiquidCrystal_SI2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs);
    // Constructor with backlight control
    LiquidCrystal_SI2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs,
-                     uint8_t backlighPin, t_backlighPol pol);   
+                     uint8_t backlighPin, t_backlightPol pol);   
    
    /*!
     @method     
@@ -96,7 +108,7 @@ public:
    // Constructor with backlight control
    LiquidCrystal_SI2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
                      uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
-                     uint8_t backlighPin, t_backlighPol pol);
+                     uint8_t backlighPin, t_backlightPol pol);
    /*!
     @function
     @abstract   LCD initialization and associated HW.
@@ -137,7 +149,7 @@ public:
     
     @param      0: backlight off, 1..255: backlight on.
     */
-   void setBacklightPin ( uint8_t value, t_backlighPol pol );
+   void setBacklightPin ( uint8_t value, t_backlightPol pol );
    
    /*!
     @function
@@ -149,6 +161,25 @@ public:
     @param      value: backlight mode (HIGH|LOW)
     */
    void setBacklight ( uint8_t value );
+
+  /*!
+   @function
+   @abstract   Initialises class private variables
+   @discussion This is the class single point for initialising private variables.
+   Making config public would enable to inherit and overload the methdo by a custom one.
+   
+   @param      lcd_Addr[in] I2C address of the IO expansion module. For I2CLCDextraIO,
+   the address can be configured using the on board jumpers.
+   @param      En[in] LCD En (Enable) pin connected to the IO extender module
+   @param      Rw[in] LCD Rw (Read/write) pin connected to the IO extender module
+   @param      Rs[in] LCD Rs (Reset) pin connected to the IO extender module
+   @param      d4[in] LCD data 0 pin map on IO extender module
+   @param      d5[in] LCD data 1 pin map on IO extender module
+   @param      d6[in] LCD data 2 pin map on IO extender module
+   @param      d7[in] LCD data 3 pin map on IO extender module
+   */
+  void config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+               uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 );
    
 private:
    
@@ -159,23 +190,6 @@ private:
     */
    int  init();
    
-   /*!
-    @function
-    @abstract   Initialises class private variables
-    @discussion This is the class single point for initialising private variables.
-    
-    @param      lcd_Addr[in] I2C address of the IO expansion module. For I2CLCDextraIO,
-    the address can be configured using the on board jumpers.
-    @param      En[in] LCD En (Enable) pin connected to the IO extender module
-    @param      Rw[in] LCD Rw (Read/write) pin connected to the IO extender module
-    @param      Rs[in] LCD Rs (Reset) pin connected to the IO extender module
-    @param      d4[in] LCD data 0 pin map on IO extender module
-    @param      d5[in] LCD data 1 pin map on IO extender module
-    @param      d6[in] LCD data 2 pin map on IO extender module
-    @param      d7[in] LCD data 3 pin map on IO extender module
-    */
-   void config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
-                uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 );
    
    /*!
     @method     

@@ -1,10 +1,22 @@
 // ---------------------------------------------------------------------------
 // Created by Francisco Malpartida on 20/08/11.
-// Copyright 2011 - Under creative commons license 3.0:
-//        Attribution-ShareAlike CC BY-SA
+// Copyright (C) - 2018
 //
-// This software is furnished "as is", without technical support, and with no 
-// warranty, express or implied, as to its usefulness for any purpose.
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License v3.0
+//    along with this program.
+//    If not, see <https://www.gnu.org/licenses/gpl-3.0.en.html>.
+// 
+// ---------------------------------------------------------------------------
 //
 // Thread Safe: No
 // Extendable: Yes
@@ -61,11 +73,11 @@ public:
    LiquidCrystal(uint8_t rs, uint8_t enable,
                  uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                  uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
-                 uint8_t backlightPin, t_backlighPol pol);
+                 uint8_t backlightPin, t_backlightPol pol);
    LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
                  uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                  uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
-                 uint8_t backlightPin, t_backlighPol pol);   
+                 uint8_t backlightPin, t_backlightPol pol);   
    /*!
     @method     
     @abstract   4 bit LCD constructors.
@@ -80,10 +92,10 @@ public:
    // Constructors with backlight control
    LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
                  uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-                 uint8_t backlightPin, t_backlighPol pol);
+                 uint8_t backlightPin, t_backlightPol pol);
    LiquidCrystal(uint8_t rs, uint8_t enable,
                  uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-                 uint8_t backlightPin, t_backlighPol pol);
+                 uint8_t backlightPin, t_backlightPol pol);
    /*!
     @function
     @abstract   Send a particular value to the LCD.
@@ -106,8 +118,23 @@ public:
     @param      pin: pin assigned to the backlight
     @param      pol: backlight pin control polarity (POSITIVE, NEGATIVE).
     */
-   void setBacklightPin ( uint8_t pin, t_backlighPol pol );
+   void setBacklightPin ( uint8_t pin, t_backlightPol pol );
    
+#if defined(ARDUINO_ARCH_ESP32)
+   /*!
+    @function
+    @abstract   Wrapper around ESP32-hal-ledcWrite.
+    @discussion The ESP32 MCU does not have the analogWrite() function.
+    This wrapper converts the analogWrite() function to the ledcWrite()
+    on an ESP32 MCU.
+
+    @param      channel: analog pin
+    @param      value: from 0 to valueMax
+    @param      valueMax: default: 255, Max: 1023
+   */
+   void analogWrite( uint8_t channel, uint32_t value, uint32_t valueMax );
+#endif
+
    /*!
     @function
     @abstract   Switch-on/off the LCD backlight.

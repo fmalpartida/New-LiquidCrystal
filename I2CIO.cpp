@@ -1,10 +1,22 @@
 // ---------------------------------------------------------------------------
 // Created by Francisco Malpartida on 20/08/11.
-// Copyright 2011 - Under creative commons license 3.0:
-//        Attribution-ShareAlike CC BY-SA
+// Copyright (C) - 2018
 //
-// This software is furnished "as is", without technical support, and with no
-// warranty, express or implied, as to its usefulness for any purpose.
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License v3.0
+//    along with this program.
+//    If not, see <https://www.gnu.org/licenses/gpl-3.0.en.html>.
+// 
+// ---------------------------------------------------------------------------
 //
 // Thread Safe: No
 // Extendable: Yes
@@ -153,7 +165,11 @@ int I2CIO::write ( uint8_t value )
    {
       // Only write HIGH the values of the ports that have been initialised as
       // outputs updating the output shadow of the device
-      _shadow = ( value & ~(_dirMask) );
+      
+      //
+      // 15-FEB-2018 - fix, all I/Os initialized as input must be written as HIGH
+      //    _shadow = ( value & ~(_dirMask) );
+      _shadow = ( value | _dirMask );
 
       Wire.beginTransmission ( _i2cAddr );
 #if (ARDUINO <  100)
@@ -197,6 +213,7 @@ int I2CIO::digitalWrite ( uint8_t pin, uint8_t level )
       // Only write to HIGH the port if the port has been configured as
       // an OUTPUT pin. Add the new state of the pin to the shadow
       writeVal = ( 1 << pin ) & ~_dirMask;
+               
       if ( level == HIGH )
       {
          _shadow |= writeVal;

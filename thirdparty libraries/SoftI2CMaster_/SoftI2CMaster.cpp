@@ -11,6 +11,8 @@
  *
  */
 
+
+#if defined (__AVR__)
 #if (ARDUINO >= 100)
 #include <Arduino.h>
 #else
@@ -326,3 +328,4 @@ uint8_t SoftI2CMaster::readLast()
 {
     return i2c_read( I2C_NAK );
 }
+#endif // __AVR__

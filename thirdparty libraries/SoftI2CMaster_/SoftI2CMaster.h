@@ -5,6 +5,7 @@
  * 2014, by Testato: update library and examples for follow Wire’s API of Arduino IDE 1.x
  *
  */
+#if defined (__AVR__)
 
 #ifndef SoftI2CMaster_h
 #define SoftI2CMaster_h
@@ -66,3 +67,4 @@ public:
 };
 
 #endif
+#endif // __AVR__

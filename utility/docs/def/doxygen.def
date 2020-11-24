@@ -1029,7 +1029,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -1216,7 +1216,7 @@ _EnD_oF_dEf_TeXt_;
       sec-mem-virt = normal;
       sec-mem-prot = protected;
       sec-mem-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = '_polarity';
       sec-mem-desc-file = '/Users/fmalpartida/development/ardWorkspace/LiquidCrystal_I2C/LiquiCrystal_I2C/LCD.h';
@@ -1638,7 +1638,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -1704,7 +1704,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -1839,7 +1839,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -1983,7 +1983,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -2087,7 +2087,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -2485,7 +2485,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -2539,7 +2539,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -2747,7 +2747,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -2876,7 +2876,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -3414,7 +3414,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -3744,7 +3744,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'blpol';
         sec-mem-param-defval = <<_EnD_oF_dEf_TeXt_
@@ -3863,7 +3863,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'blpol';
       }; /*        sec-mem-param--param */
@@ -4177,7 +4177,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -4267,7 +4267,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -4458,7 +4458,7 @@ _EnD_oF_dEf_TeXt_;
       }; /*        sec-mem-param--param */
       sec-mem-param = {
         sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
-t_backlighPol
+t_backlightPol
 _EnD_oF_dEf_TeXt_;
         sec-mem-param-declname = 'pol';
       }; /*        sec-mem-param--param */
@@ -6685,7 +6685,7 @@ _EnD_oF_dEf_TeXt_;
       enum-mem-id   = '_l_c_d_8h_1aeeef728bf4726268aa5e99391a1502bc';
       enum-mem-virt = normal;
       enum-mem-prot = public;
-      enum-mem-name = 't_backlighPol';
+      enum-mem-name = 't_backlightPol';
       enum-mem-enum = { enum-name = POSITIVE; };
       enum-mem-enum = { enum-name = NEGATIVE; };
       enum-mem-desc-file = '/Users/fmalpartida/development/ardWorkspace/LiquidCrystal_I2C/LiquiCrystal_I2C/LCD.h';

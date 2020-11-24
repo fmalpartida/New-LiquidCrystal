@@ -1,10 +1,22 @@
 // ---------------------------------------------------------------------------
 // Created by Francisco Malpartida on 20/08/11.
-// Copyright 2011 - Under creative commons license 3.0:
-//        Attribution-ShareAlike CC BY-SA
+// Copyright (C) - 2018
 //
-// This software is furnished "as is", without technical support, and with no 
-// warranty, express or implied, as to its usefulness for any purpose.
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License v3.0
+//    along with this program.
+//    If not, see <https://www.gnu.org/licenses/gpl-3.0.en.html>.
+// 
+// ---------------------------------------------------------------------------
 //
 // Thread Safe: No
 // Extendable: Yes
@@ -82,7 +94,7 @@ LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
 LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
-                             uint8_t backlightPin, t_backlighPol pol)
+                             uint8_t backlightPin, t_backlightPol pol)
 {
    init(LCD_8BIT, rs, 255, enable, d0, d1, d2, d3, d4, d5, d6, d7);
    setBacklightPin ( backlightPin, pol );
@@ -91,7 +103,7 @@ LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t enable,
 LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                              uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
-                             uint8_t backlightPin, t_backlighPol pol)
+                             uint8_t backlightPin, t_backlightPol pol)
 {
    init(LCD_8BIT, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
    setBacklightPin ( backlightPin, pol );
@@ -99,7 +111,7 @@ LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
 
 LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-                             uint8_t backlightPin, t_backlighPol pol)
+                             uint8_t backlightPin, t_backlightPol pol)
 {
    init(LCD_4BIT, rs, rw, enable, d0, d1, d2, d3, 0, 0, 0, 0);
    setBacklightPin ( backlightPin, pol );
@@ -107,7 +119,7 @@ LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
 
 LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t enable,
                              uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-                             uint8_t backlightPin, t_backlighPol pol)
+                             uint8_t backlightPin, t_backlightPol pol)
 {
    init(LCD_4BIT, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
    setBacklightPin ( backlightPin, pol );
@@ -152,13 +164,25 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode)
 
 //
 // setBacklightPin
-void LiquidCrystal::setBacklightPin ( uint8_t pin, t_backlighPol pol )
+void LiquidCrystal::setBacklightPin ( uint8_t pin, t_backlightPol pol )
 {
    pinMode ( pin, OUTPUT );       // Difine the backlight pin as output
    _backlightPin = pin;
    _polarity = pol;
    setBacklight(BACKLIGHT_OFF);   // Set the backlight low by default
 }
+
+//
+// ESP32 complains if not included
+#if defined(ARDUINO_ARCH_ESP32)
+void LiquidCrystal::analogWrite( uint8_t channel, uint32_t value, uint32_t valueMax = 255 ) {
+  // calculate duty, 8191 from 2 ^ 13 - 1
+  uint32_t duty = ( 8191 / valueMax) * min(value, valueMax );
+
+  // write duty to LEDC
+  ledcWrite( channel, duty );
+}
+#endif
 
 //
 // setBackligh
@@ -180,7 +204,7 @@ void LiquidCrystal::setBacklight ( uint8_t value )
       // On older 1.x Arduino have to check using hack
       if(digitalPinToTimer(_backlightPin) != NOT_ON_TIMER)
 #else
-      if(0) // if neither of the above we assume no PWM
+      if(false) // if neither of the above we assume no PWM
 #endif
       {
          // Check for control polarity inversion

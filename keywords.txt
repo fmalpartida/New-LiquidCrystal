@@ -8,6 +8,9 @@
 
 LiquidCrystal_SR        KEYWORD1
 LiquidCrystal_I2C    	KEYWORD1
+LiquidCrystal_SI2C    	KEYWORD1
+LiquidCrystal_SR1W      KEYWORD1
+LiquidCrystal_SR2W      KEYWORD1
 LiquidCrystal_SR3W      KEYWORD1
 LiquidCrystal        	KEYWORD1
 LCD                  	KEYWORD1
@@ -43,6 +46,7 @@ on                   KEYWORD2
 off                  KEYWORD2
 setBacklightPin      KEYWORD2
 setBacklight         KEYWORD2
+config               KEYWORD2
 ###########################################
 # Constants (LITERAL1)
 ###########################################
