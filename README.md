@@ -48,7 +48,14 @@ The library has had the invaluable contribution of:
 * For SoftI2CMaster latest versions, updates and support, please refer to [SoftI2CMaster](https://github.com/todbot/SoftI2CMaster "todbot")
 
 ## License ##
-Copyright (C) - 2018
+Lets keep this section very short.
+
+New LiquidCrystal Library by F. Malpartida is licensed under of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version: [[https://www.gnu.org/licenses/gpl-3.0.en.html|GPL v3.0]]
+
+This work was inspired on the Arduino SKD "LiquidCrystal" library and the "LiquidCrystal_I2C" library from Mario_H.
+
+Have fun!
+Copyright (C) - 2020
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
