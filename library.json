@@ -4,12 +4,12 @@
     "description": "LiquidCrystal Library is faster and extensable, compatible with the original LiquidCrystal library",
     "authors": {
         "name": "F Malpartida",
-        "url": "https://bitbucket.org/fmalpartida"
+        "url": "https://github.com/fmalpartida"
     },
     "repository":
     {
       "type": "hg",
-      "url": "https://bitbucket.org/fmalpartida/new-liquidcrystal"
+      "url": "https://github.com/fmalpartida/New-LiquidCrystal"
     },
     "version": "1.5.0",
     "exclude": ["def", "thirdparty libraries", "utility/docs", "doxygen*"],
